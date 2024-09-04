@@ -4563,6 +4563,13 @@ internal val KT_DIAGNOSTIC_CONVERTER = KaDiagnosticConverterBuilder.buildConvert
             token,
         )
     }
+    add(FirErrors.RETURN_VALUE_NOT_USED) { firDiagnostic ->
+        ReturnValueNotUsedImpl(
+            firDiagnostic.a,
+            firDiagnostic as KtPsiDiagnostic,
+            token,
+        )
+    }
     add(FirErrors.UNSAFE_CALL) { firDiagnostic ->
         UnsafeCallImpl(
             firSymbolBuilder.typeBuilder.buildKtType(firDiagnostic.a),
