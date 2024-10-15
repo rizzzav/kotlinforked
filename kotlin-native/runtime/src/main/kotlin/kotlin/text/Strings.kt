@@ -232,7 +232,6 @@ public actual fun String.toUpperCase(): String = uppercaseImpl()
  * @sample samples.text.Strings.uppercase
  */
 @SinceKotlin("1.5")
-@WasExperimental(ExperimentalStdlibApi::class)
 public actual fun String.uppercase(): String = uppercaseImpl()
 
 /**
@@ -251,7 +250,6 @@ public actual fun String.toLowerCase(): String = lowercaseImpl()
  * @sample samples.text.Strings.lowercase
  */
 @SinceKotlin("1.5")
-@WasExperimental(ExperimentalStdlibApi::class)
 public actual fun String.lowercase(): String = lowercaseImpl()
 
 /**

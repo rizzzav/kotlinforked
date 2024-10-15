@@ -142,7 +142,6 @@ public actual inline fun Int.takeLowestOneBit(): Int = Integer.lowestOneBit(this
  * `number.rotateLeft(n) == number.rotateLeft(n % 32)`
  */
 @SinceKotlin("1.6")
-@WasExperimental(ExperimentalStdlibApi::class)
 @kotlin.internal.InlineOnly
 public actual inline fun Int.rotateLeft(bitCount: Int): Int = Integer.rotateLeft(this, bitCount)
 
@@ -158,7 +157,6 @@ public actual inline fun Int.rotateLeft(bitCount: Int): Int = Integer.rotateLeft
  * `number.rotateRight(n) == number.rotateRight(n % 32)`
  */
 @SinceKotlin("1.6")
-@WasExperimental(ExperimentalStdlibApi::class)
 @kotlin.internal.InlineOnly
 public actual inline fun Int.rotateRight(bitCount: Int): Int = Integer.rotateRight(this, bitCount)
 
@@ -211,7 +209,6 @@ public actual inline fun Long.takeLowestOneBit(): Long = java.lang.Long.lowestOn
  * `number.rotateLeft(n) == number.rotateLeft(n % 64)`
  */
 @SinceKotlin("1.6")
-@WasExperimental(ExperimentalStdlibApi::class)
 @kotlin.internal.InlineOnly
 public actual inline fun Long.rotateLeft(bitCount: Int): Long = java.lang.Long.rotateLeft(this, bitCount)
 
@@ -226,7 +223,6 @@ public actual inline fun Long.rotateLeft(bitCount: Int): Long = java.lang.Long.r
  * `number.rotateRight(n) == number.rotateRight(n % 64)`
  */
 @SinceKotlin("1.6")
-@WasExperimental(ExperimentalStdlibApi::class)
 @kotlin.internal.InlineOnly
 public actual inline fun Long.rotateRight(bitCount: Int): Long = java.lang.Long.rotateRight(this, bitCount)
 

@@ -10144,7 +10144,6 @@ public inline fun UShortArray.sumOf(selector: (UShort) -> Long): Long {
 @Suppress("INAPPLICABLE_JVM_NAME")
 @kotlin.jvm.JvmName("sumOfUInt")
 @ExperimentalUnsignedTypes
-@WasExperimental(ExperimentalUnsignedTypes::class)
 @kotlin.internal.InlineOnly
 public inline fun UIntArray.sumOf(selector: (UInt) -> UInt): UInt {
     var sum: UInt = 0.toUInt()
@@ -10163,7 +10162,6 @@ public inline fun UIntArray.sumOf(selector: (UInt) -> UInt): UInt {
 @Suppress("INAPPLICABLE_JVM_NAME")
 @kotlin.jvm.JvmName("sumOfUInt")
 @ExperimentalUnsignedTypes
-@WasExperimental(ExperimentalUnsignedTypes::class)
 @kotlin.internal.InlineOnly
 public inline fun ULongArray.sumOf(selector: (ULong) -> UInt): UInt {
     var sum: UInt = 0.toUInt()
@@ -10182,7 +10180,6 @@ public inline fun ULongArray.sumOf(selector: (ULong) -> UInt): UInt {
 @Suppress("INAPPLICABLE_JVM_NAME")
 @kotlin.jvm.JvmName("sumOfUInt")
 @ExperimentalUnsignedTypes
-@WasExperimental(ExperimentalUnsignedTypes::class)
 @kotlin.internal.InlineOnly
 public inline fun UByteArray.sumOf(selector: (UByte) -> UInt): UInt {
     var sum: UInt = 0.toUInt()
@@ -10201,7 +10198,6 @@ public inline fun UByteArray.sumOf(selector: (UByte) -> UInt): UInt {
 @Suppress("INAPPLICABLE_JVM_NAME")
 @kotlin.jvm.JvmName("sumOfUInt")
 @ExperimentalUnsignedTypes
-@WasExperimental(ExperimentalUnsignedTypes::class)
 @kotlin.internal.InlineOnly
 public inline fun UShortArray.sumOf(selector: (UShort) -> UInt): UInt {
     var sum: UInt = 0.toUInt()
@@ -10220,7 +10216,6 @@ public inline fun UShortArray.sumOf(selector: (UShort) -> UInt): UInt {
 @Suppress("INAPPLICABLE_JVM_NAME")
 @kotlin.jvm.JvmName("sumOfULong")
 @ExperimentalUnsignedTypes
-@WasExperimental(ExperimentalUnsignedTypes::class)
 @kotlin.internal.InlineOnly
 public inline fun UIntArray.sumOf(selector: (UInt) -> ULong): ULong {
     var sum: ULong = 0.toULong()
@@ -10239,7 +10234,6 @@ public inline fun UIntArray.sumOf(selector: (UInt) -> ULong): ULong {
 @Suppress("INAPPLICABLE_JVM_NAME")
 @kotlin.jvm.JvmName("sumOfULong")
 @ExperimentalUnsignedTypes
-@WasExperimental(ExperimentalUnsignedTypes::class)
 @kotlin.internal.InlineOnly
 public inline fun ULongArray.sumOf(selector: (ULong) -> ULong): ULong {
     var sum: ULong = 0.toULong()
@@ -10258,7 +10252,6 @@ public inline fun ULongArray.sumOf(selector: (ULong) -> ULong): ULong {
 @Suppress("INAPPLICABLE_JVM_NAME")
 @kotlin.jvm.JvmName("sumOfULong")
 @ExperimentalUnsignedTypes
-@WasExperimental(ExperimentalUnsignedTypes::class)
 @kotlin.internal.InlineOnly
 public inline fun UByteArray.sumOf(selector: (UByte) -> ULong): ULong {
     var sum: ULong = 0.toULong()
@@ -10277,7 +10270,6 @@ public inline fun UByteArray.sumOf(selector: (UByte) -> ULong): ULong {
 @Suppress("INAPPLICABLE_JVM_NAME")
 @kotlin.jvm.JvmName("sumOfULong")
 @ExperimentalUnsignedTypes
-@WasExperimental(ExperimentalUnsignedTypes::class)
 @kotlin.internal.InlineOnly
 public inline fun UShortArray.sumOf(selector: (UShort) -> ULong): ULong {
     var sum: ULong = 0.toULong()
@@ -10672,7 +10664,6 @@ public inline fun <V> UShortArray.zip(other: UShortArray, transform: (a: UShort,
  */
 @kotlin.jvm.JvmName("sumOfUInt")
 @SinceKotlin("1.5")
-@WasExperimental(ExperimentalUnsignedTypes::class)
 public fun Array<out UInt>.sum(): UInt {
     var sum: UInt = 0u
     for (element in this) {
@@ -10686,7 +10677,6 @@ public fun Array<out UInt>.sum(): UInt {
  */
 @kotlin.jvm.JvmName("sumOfULong")
 @SinceKotlin("1.5")
-@WasExperimental(ExperimentalUnsignedTypes::class)
 public fun Array<out ULong>.sum(): ULong {
     var sum: ULong = 0uL
     for (element in this) {
@@ -10700,7 +10690,6 @@ public fun Array<out ULong>.sum(): ULong {
  */
 @kotlin.jvm.JvmName("sumOfUByte")
 @SinceKotlin("1.5")
-@WasExperimental(ExperimentalUnsignedTypes::class)
 public fun Array<out UByte>.sum(): UInt {
     var sum: UInt = 0u
     for (element in this) {
@@ -10714,7 +10703,6 @@ public fun Array<out UByte>.sum(): UInt {
  */
 @kotlin.jvm.JvmName("sumOfUShort")
 @SinceKotlin("1.5")
-@WasExperimental(ExperimentalUnsignedTypes::class)
 public fun Array<out UShort>.sum(): UInt {
     var sum: UInt = 0u
     for (element in this) {
