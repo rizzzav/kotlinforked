@@ -742,11 +742,7 @@ tasks {
     val coreLibsPublishable = coreLibProjects + listOf(":kotlin-stdlib-common")
     val coreLibsBuildable = coreLibProjects + listOf(":kotlin-stdlib-jvm-minimal-for-test", ":kotlin-stdlib-js-ir-minimal-for-test")
 
-    aggregateLibsTask("coreLibsClean", "clean",
-        (coreLibProjects + coreLibsBuildable + coreLibsPublishable).distinct() +
-            ":kotlin-stdlib:samples"
-    )
-
+    aggregateLibsTask("coreLibsClean", "clean", coreLibsBuildable + ":kotlin-stdlib:samples")
     aggregateLibsTask("coreLibsAssemble", "assemble", coreLibsBuildable)
     aggregateLibsTask("coreLibsInstall", "install", coreLibsPublishable)
     aggregateLibsTask("coreLibsPublish", "publish", coreLibsPublishable)
