@@ -19,5 +19,7 @@ val KonanTarget.presetName: String
 
 private fun evaluatePresetName(targetName: String): String {
     val nameParts = targetName.split('_').mapNotNull { it.takeIf(String::isNotEmpty) }
-    return nameParts.asSequence().drop(1).joinToString("", nameParts.firstOrNull().orEmpty()) { it.capitalize() }
+    return nameParts.asSequence().drop(1).joinToString("", nameParts.firstOrNull().orEmpty()) { part ->
+        part.replaceFirstChar { it.uppercaseChar() }
+    }
 }
