@@ -547,8 +547,10 @@ fun Project.configureKotlinCompileTasksGradleCompatibility() {
                 // check https://docs.gradle.org/current/userguide/compatibility.html#kotlin for Kotlin-Gradle versions matrix
                 @Suppress("DEPRECATION", "DEPRECATION_ERROR") // we can't use language version greater than 1.5 as minimal supported Gradle embeds Kotlin 1.4
                 languageVersion.set(KotlinVersion.KOTLIN_1_5)
-                @Suppress("DEPRECATION", "DEPRECATION_ERROR") // we can't use api version greater than 1.4 as minimal supported Gradle version uses kotlin-stdlib 1.4
-                apiVersion.set(KotlinVersion.KOTLIN_1_4)
+                @Suppress("DEPRECATION", "DEPRECATION_ERROR") // we can't use api version greater than 1.6 as minimal supported Gradle version uses kotlin-stdlib 1.7.10
+                apiVersion.set(KotlinVersion.KOTLIN_1_6)
+
+                freeCompilerArgs.add("-Xsuppress-api-version-greater-than-language-version-error")
             }
             freeCompilerArgs.addAll(
                 listOf(
