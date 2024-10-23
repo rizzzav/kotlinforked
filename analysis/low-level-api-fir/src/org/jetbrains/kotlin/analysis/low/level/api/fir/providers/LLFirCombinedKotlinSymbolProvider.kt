@@ -164,5 +164,5 @@ internal class LLFirCombinedKotlinSymbolProvider private constructor(
 /**
  * Callables are provided very rarely (compared to functions/properties individually), so it's okay to hit indices twice here.
  */
-private fun KotlinDeclarationProvider.getTopLevelCallables(callableId: CallableId): List<KtCallableDeclaration> =
+internal fun KotlinDeclarationProvider.getTopLevelCallables(callableId: CallableId): List<KtCallableDeclaration> =
     getTopLevelFunctions(callableId) + getTopLevelProperties(callableId)

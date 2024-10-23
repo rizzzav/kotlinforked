@@ -14,6 +14,7 @@ import org.jetbrains.kotlin.analysis.api.platform.packages.createPackageProvider
 import org.jetbrains.kotlin.analysis.api.platform.packages.KotlinPackageProviderBase
 import org.jetbrains.kotlin.analysis.api.platform.mergeSpecificProviders
 import org.jetbrains.kotlin.analysis.api.platform.packages.KotlinCompositePackageProvider
+import org.jetbrains.kotlin.analysis.api.platform.packages.KotlinEmptyPackageProvider
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.psi.KtFile
@@ -58,6 +59,8 @@ class KotlinStandalonePackageProviderFactory(
 class KotlinStandalonePackageProviderMerger(private val project: Project) : KotlinPackageProviderMerger {
     override fun merge(providers: List<KotlinPackageProvider>): KotlinPackageProvider =
         providers.mergeSpecificProviders<_, KotlinStandalonePackageProvider>(KotlinCompositePackageProvider.factory) { targetProviders ->
+            if (targetProviders.isEmpty()) return@mergeSpecificProviders KotlinEmptyPackageProvider
+
             val combinedScope = GlobalSearchScope.union(targetProviders.map { it.scope })
             project.createPackageProvider(combinedScope).apply {
                 check(this is KotlinStandalonePackageProvider) {

@@ -33,6 +33,7 @@ import org.jetbrains.kotlin.analysis.api.platform.declarations.KotlinDeclaration
 import org.jetbrains.kotlin.analysis.api.platform.declarations.KotlinDeclarationProviderMerger
 import org.jetbrains.kotlin.analysis.api.platform.declarations.createDeclarationProvider
 import org.jetbrains.kotlin.analysis.api.platform.declarations.KotlinCompositeDeclarationProvider
+import org.jetbrains.kotlin.analysis.api.platform.declarations.KotlinEmptyDeclarationProvider
 import org.jetbrains.kotlin.analysis.api.platform.mergeSpecificProviders
 import org.jetbrains.kotlin.analysis.api.symbols.pointers.SmartPointerIncompatiblePsiFile
 import org.jetbrains.kotlin.fileClasses.javaFileFacadeFqName
@@ -491,6 +492,8 @@ class KotlinFakeClsStubsCache {
 class KotlinStandaloneDeclarationProviderMerger(private val project: Project) : KotlinDeclarationProviderMerger {
     override fun merge(providers: List<KotlinDeclarationProvider>): KotlinDeclarationProvider =
         providers.mergeSpecificProviders<_, KotlinStandaloneDeclarationProvider>(KotlinCompositeDeclarationProvider.factory) { targetProviders ->
+            if (targetProviders.isEmpty()) return@mergeSpecificProviders KotlinEmptyDeclarationProvider
+
             val combinedScope = GlobalSearchScope.union(targetProviders.map { it.scope })
             project.createDeclarationProvider(combinedScope, contextualModule = null).apply {
                 check(this is KotlinStandaloneDeclarationProvider) {

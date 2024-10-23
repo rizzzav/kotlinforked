@@ -212,7 +212,7 @@ private val LLFirModuleWithDependenciesSymbolProvider.friendBuiltinsProvider: Fi
         if (getPackageWithoutDependencies(StandardClassIds.BASE_KOTLIN_PACKAGE) != null
             || moduleData is LLFirModuleData && moduleData.ktModule is KaBuiltinsModule
         ) {
-            return dependencyProvider.providers.find { it.session is LLFirBuiltinsAndCloneableSession }
+            return dependencyProviders.find { it.session is LLFirBuiltinsAndCloneableSession }
         }
 
         return null

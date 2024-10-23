@@ -107,7 +107,9 @@ internal class LLFirProvider(
             }
 
     @NoMutableState
-    internal inner class SymbolProvider : LLFirKotlinSymbolProvider(session) {
+    internal inner class SymbolProvider :
+        LLFirKotlinSymbolProvider(session),
+        FirClassDeclarationAwareSymbolProvider<KtClassLikeDeclaration> {
         override val declarationProvider: KotlinDeclarationProvider get() = providerHelper.declarationProvider
 
         override val packageProvider: KotlinPackageProvider get() = providerHelper.packageProvider

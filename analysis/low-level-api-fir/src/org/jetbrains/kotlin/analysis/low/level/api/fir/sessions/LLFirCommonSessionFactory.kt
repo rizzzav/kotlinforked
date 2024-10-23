@@ -19,6 +19,7 @@ import org.jetbrains.kotlin.fir.SessionConfiguration
 import org.jetbrains.kotlin.fir.backend.jvm.FirJvmTypeMapper
 import org.jetbrains.kotlin.fir.deserialization.SingleModuleDataProvider
 import org.jetbrains.kotlin.fir.java.deserialization.OptionalAnnotationClassesProvider
+import org.jetbrains.kotlin.fir.resolve.providers.DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY
 import org.jetbrains.kotlin.fir.resolve.providers.FirSymbolProvider
 import org.jetbrains.kotlin.fir.resolve.providers.firProvider
 import org.jetbrains.kotlin.fir.scopes.kotlinScopeProvider
@@ -30,18 +31,18 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 internal class LLFirCommonSessionFactory(project: Project) : LLFirAbstractSessionFactory(project) {
     override fun createSourcesSession(module: KaSourceModule): LLFirSourcesSession {
         return doCreateSourcesSession(module) { context ->
-            register(
-                FirSymbolProvider::class,
-                LLFirModuleWithDependenciesSymbolProvider(
-                    this,
-                    providers = listOfNotNull(
-                        context.firProvider.symbolProvider,
-                        context.switchableExtensionDeclarationsSymbolProvider,
-                        context.syntheticFunctionInterfaceProvider,
-                    ),
-                    context.dependencyProvider,
-                )
+            val symbolProvider = LLFirModuleWithDependenciesSymbolProvider(
+                this,
+                providers = listOfNotNull(
+                    context.firProvider.symbolProvider,
+                    context.switchableExtensionDeclarationsSymbolProvider,
+                    context.syntheticFunctionInterfaceProvider,
+                ),
+                context.computeDependencyProviders,
             )
+
+            register(FirSymbolProvider::class, symbolProvider)
+            register(DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY, symbolProvider.dependenciesSymbolProvider)
 
             registerPlatformSpecificComponentsIfAny(module)
         }
@@ -49,16 +50,16 @@ internal class LLFirCommonSessionFactory(project: Project) : LLFirAbstractSessio
 
     override fun createLibrarySession(module: KaModule): LLFirLibraryOrLibrarySourceResolvableModuleSession {
         return doCreateLibrarySession(module) { context ->
-            register(
-                FirSymbolProvider::class,
-                LLFirModuleWithDependenciesSymbolProvider(
-                    this,
-                    providers = listOf(
-                        context.firProvider.symbolProvider,
-                    ),
-                    context.dependencyProvider,
-                )
+            val symbolProvider = LLFirModuleWithDependenciesSymbolProvider(
+                this,
+                providers = listOf(
+                    context.firProvider.symbolProvider,
+                ),
+                context.computeDependencyProviders,
             )
+
+            register(FirSymbolProvider::class, symbolProvider)
+            register(DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY, symbolProvider.dependenciesSymbolProvider)
 
             registerPlatformSpecificComponentsIfAny(module)
         }
@@ -72,16 +73,16 @@ internal class LLFirCommonSessionFactory(project: Project) : LLFirAbstractSessio
 
     override fun createDanglingFileSession(module: KaDanglingFileModule, contextSession: LLFirSession): LLFirSession {
         return doCreateDanglingFileSession(module, contextSession) {
-            register(
-                FirSymbolProvider::class,
-                LLFirModuleWithDependenciesSymbolProvider(
-                    this,
-                    providers = listOf(
-                        firProvider.symbolProvider,
-                    ),
-                    dependencyProvider,
-                )
+            val symbolProvider = LLFirModuleWithDependenciesSymbolProvider(
+                this,
+                providers = listOf(
+                    firProvider.symbolProvider,
+                ),
+                computeDependencyProviders,
             )
+
+            register(FirSymbolProvider::class, symbolProvider)
+            register(DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY, symbolProvider.dependenciesSymbolProvider)
 
             registerPlatformSpecificComponentsIfAny(module)
         }

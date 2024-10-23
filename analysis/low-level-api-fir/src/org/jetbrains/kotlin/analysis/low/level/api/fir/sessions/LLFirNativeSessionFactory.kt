@@ -18,6 +18,7 @@ import org.jetbrains.kotlin.analysis.low.level.api.fir.providers.LLFirModuleWith
 import org.jetbrains.kotlin.fir.SessionConfiguration
 import org.jetbrains.kotlin.fir.deserialization.SingleModuleDataProvider
 import org.jetbrains.kotlin.fir.java.deserialization.OptionalAnnotationClassesProvider
+import org.jetbrains.kotlin.fir.resolve.providers.DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY
 import org.jetbrains.kotlin.fir.resolve.providers.FirSymbolProvider
 import org.jetbrains.kotlin.fir.scopes.FirOverrideChecker
 import org.jetbrains.kotlin.fir.scopes.impl.FirStandardOverrideChecker
@@ -31,18 +32,18 @@ internal class LLFirNativeSessionFactory(project: Project) : LLFirAbstractSessio
         return doCreateSourcesSession(module) { context ->
             registerNativeComponents()
 
-            register(
-                FirSymbolProvider::class,
-                LLFirModuleWithDependenciesSymbolProvider(
-                    this,
-                    providers = listOfNotNull(
-                        context.firProvider.symbolProvider,
-                        context.switchableExtensionDeclarationsSymbolProvider,
-                        context.syntheticFunctionInterfaceProvider,
-                    ),
-                    context.dependencyProvider,
-                )
+            val symbolProvider = LLFirModuleWithDependenciesSymbolProvider(
+                this,
+                providers = listOfNotNull(
+                    context.firProvider.symbolProvider,
+                    context.switchableExtensionDeclarationsSymbolProvider,
+                    context.syntheticFunctionInterfaceProvider,
+                ),
+                context.computeDependencyProviders,
             )
+
+            register(FirSymbolProvider::class, symbolProvider)
+            register(DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY, symbolProvider.dependenciesSymbolProvider)
         }
     }
 
@@ -52,16 +53,17 @@ internal class LLFirNativeSessionFactory(project: Project) : LLFirAbstractSessio
             // Resolvable library session for decompiled libraries can miss annotation arguments
             // necessary for correct work of the native overload checker
             register(FirOverrideChecker::class, FirStandardOverrideChecker(this))
-            register(
-                FirSymbolProvider::class,
-                LLFirModuleWithDependenciesSymbolProvider(
-                    this,
-                    providers = listOf(
-                        context.firProvider.symbolProvider,
-                    ),
-                    context.dependencyProvider,
-                )
+
+            val symbolProvider = LLFirModuleWithDependenciesSymbolProvider(
+                this,
+                providers = listOf(
+                    context.firProvider.symbolProvider,
+                ),
+                context.computeDependencyProviders,
             )
+
+            register(FirSymbolProvider::class, symbolProvider)
+            register(DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY, symbolProvider.dependenciesSymbolProvider)
         }
     }
 
@@ -75,18 +77,18 @@ internal class LLFirNativeSessionFactory(project: Project) : LLFirAbstractSessio
         return doCreateDanglingFileSession(module, contextSession) {
             registerNativeComponents()
 
-            register(
-                FirSymbolProvider::class,
-                LLFirModuleWithDependenciesSymbolProvider(
-                    this,
-                    providers = listOfNotNull(
-                        firProvider.symbolProvider,
-                        switchableExtensionDeclarationsSymbolProvider,
-                        syntheticFunctionInterfaceProvider,
-                    ),
-                    dependencyProvider,
-                )
+            val symbolProvider = LLFirModuleWithDependenciesSymbolProvider(
+                this,
+                providers = listOfNotNull(
+                    firProvider.symbolProvider,
+                    switchableExtensionDeclarationsSymbolProvider,
+                    syntheticFunctionInterfaceProvider,
+                ),
+                computeDependencyProviders,
             )
+
+            register(FirSymbolProvider::class, symbolProvider)
+            register(DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY, symbolProvider.dependenciesSymbolProvider)
         }
     }
 
