@@ -12,6 +12,7 @@ import org.jetbrains.kotlin.backend.common.phaser.PhaseDescription
 import org.jetbrains.kotlin.backend.jvm.*
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin.INLINE_CLASS_CONSTRUCTOR_SYNTHETIC_PARAMETER
 import org.jetbrains.kotlin.backend.jvm.ir.isInlineClassType
+import org.jetbrains.kotlin.backend.jvm.ir.erasedUpperBound
 import org.jetbrains.kotlin.backend.jvm.ir.shouldBeExposedByAnnotation
 import org.jetbrains.kotlin.builtins.StandardNames
 import org.jetbrains.kotlin.config.ApiVersion
@@ -295,7 +296,7 @@ internal class JvmInlineClassLowering(context: JvmBackendContext) : JvmValueClas
         }
     }
 
-    override fun createNonExposedConstructorWithMarker(constructor: IrConstructor): IrConstructor {
+    override fun addMarkerParameterToNonExposedConstructor(constructor: IrConstructor): IrConstructor {
         constructor.addValueParameter {
             name = Name.identifier("\$null")
             origin = JvmLoweredDeclarationOrigin.NON_EXPOSED_CONSTRUCTOR_SYNTHETIC_PARAMETER
@@ -324,11 +325,7 @@ internal class JvmInlineClassLowering(context: JvmBackendContext) : JvmValueClas
             body = context.createIrBuilder(this.symbol).irBlockBody(this) {
                 +irDelegatingConstructorCall(constructor).apply {
                     for ((index, param) in parameters.withIndex()) {
-                        if (param.type.isInlineClassType()) {
-                            arguments[index] = irGet(param).coerceToUnboxed()
-                        } else {
-                            arguments[index] = irGet(param)
-                        }
+                        arguments[index] = irGet(param)
                     }
                     if (addedSyntheticParameter) {
                         arguments[parameters.size] = irNull()

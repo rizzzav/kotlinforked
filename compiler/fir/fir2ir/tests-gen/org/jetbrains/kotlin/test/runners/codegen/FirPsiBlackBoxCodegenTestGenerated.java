@@ -31623,6 +31623,12 @@ public class FirPsiBlackBoxCodegenTestGenerated extends AbstractFirPsiBlackBoxCo
       public void testSimple() {
         runTest("compiler/testData/codegen/box/inlineClasses/jvmExposeBoxed/simple.kt");
       }
+
+      @Test
+      @TestMetadata("uint.kt")
+      public void testUint() {
+        runTest("compiler/testData/codegen/box/inlineClasses/jvmExposeBoxed/uint.kt");
+      }
     }
 
     @Nested

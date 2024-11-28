@@ -10,13 +10,13 @@ import org.jetbrains.kotlin.backend.common.IrElementTransformerVoidWithContext
 import org.jetbrains.kotlin.backend.common.pop
 import org.jetbrains.kotlin.backend.common.push
 import org.jetbrains.kotlin.backend.jvm.*
+import org.jetbrains.kotlin.backend.jvm.ir.isBoxedInlineClassType
 import org.jetbrains.kotlin.backend.jvm.ir.isInlineClassType
 import org.jetbrains.kotlin.backend.jvm.ir.shouldBeExposedByAnnotation
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.transformStatement
-import org.jetbrains.kotlin.ir.types.isPrimitiveType
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.load.java.JvmAbi
 import org.jetbrains.kotlin.name.Name
@@ -51,12 +51,10 @@ internal abstract class JvmValueClassAbstractLowering(
                     !function.constructedClass.isSpecificLoweringLogicApplicable()
                 ) {
                     val inlineClassParams = function.parameters.filter { it.type.isInlineClassType() }
-                    if (inlineClassParams.isNotEmpty() && inlineClassParams.all { param ->
-                            param.type.isNullable() && param.type.unboxInlineClass().let { it.isNullable() || it.isPrimitiveType() }
-                        }
-                    ) {
-                        val replacement = createNonExposedConstructorWithMarker(function) ?: return null
-                        replacement.parent = function.parent
+                    // If all inline class parameters are boxes in non-exposed constructor, we need to add an additional
+                    // parameter to non-exposed constructor to distinguish it from exposed one
+                    if (inlineClassParams.isNotEmpty() && inlineClassParams.all { it.type.isBoxedInlineClassType() }) {
+                        val replacement = addMarkerParameterToNonExposedConstructor(function) ?: return null
                         return listOfNotNull(replacement, createExposedConstructor(replacement))
                     }
                     return listOfNotNull(function, createExposedConstructor(function))
@@ -92,7 +90,7 @@ internal abstract class JvmValueClassAbstractLowering(
         }
     }
 
-    abstract fun createNonExposedConstructorWithMarker(constructor: IrConstructor): IrConstructor?
+    abstract fun addMarkerParameterToNonExposedConstructor(constructor: IrConstructor): IrConstructor?
 
     abstract fun createExposedConstructor(constructor: IrConstructor): IrConstructor?
 
