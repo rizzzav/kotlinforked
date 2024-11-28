@@ -12,6 +12,7 @@ import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Provider
 import org.gradle.process.ExecOperations
 import org.jetbrains.kotlin.build.report.metrics.BuildMetricsReporter
+import org.jetbrains.kotlin.build.report.metrics.BuildTime
 import org.jetbrains.kotlin.build.report.metrics.GradleBuildPerformanceMetric
 import org.jetbrains.kotlin.build.report.metrics.GradleBuildTime
 import org.jetbrains.kotlin.build.report.metrics.measure
@@ -24,6 +25,7 @@ import org.jetbrains.kotlin.gradle.logging.gradleLogLevel
 import org.jetbrains.kotlin.gradle.plugin.statistics.BuildFusService
 import org.jetbrains.kotlin.gradle.plugin.statistics.NativeArgumentMetrics
 import org.jetbrains.kotlin.konan.target.HostManager
+import java.io.File
 import java.io.IOException
 import java.lang.reflect.InvocationTargetException
 import java.nio.file.Files
@@ -93,20 +95,24 @@ internal abstract class KotlinNativeToolRunner @Inject constructor(
                 """.trimMargin()
                 )
 
+                val file = "/Users/Nataliya.Valtman/Development/configuration_cache_fus/report"
                 execOperations.javaexec { spec ->
                     spec.mainClass.set(toolSpec.mainClass)
                     spec.classpath = toolSpec.classpath
-                    spec.jvmArgs(toolSpec.jvmArgs.get())
+                    spec.jvmArgs(toolSpec.jvmArgs.get(), file)
                     spec.systemProperties(systemProperties)
                     spec.environment(toolSpec.environment)
                     toolSpec.environmentBlacklist.forEach { spec.environment.remove(it) }
                     spec.args(toolArgsPair.second)
                 }
+                println(File(file).readText())
+                File(file).delete()
             } finally {
                 toolArgsPair.first?.let {
                     try {
                         Files.deleteIfExists(it)
-                    } catch (_: IOException) {}
+                    } catch (_: IOException) {
+                    }
                 }
             }
         }
@@ -148,7 +154,16 @@ internal abstract class KotlinNativeToolRunner @Inject constructor(
                     ?: error("Couldn't find daemon entry point '${toolSpec.daemonEntryPoint.get()}'")
 
                 metricsReporter.measure(GradleBuildTime.RUN_ENTRY_POINT) {
-                    entryPoint.invoke(null, toolArgs.toTypedArray())
+                    val file = "/Users/Nataliya.Valtman/Development/configuration_cache_fus/report"
+                    val compilerMetricList = ArrayList<BuildTime>()
+                    GradleBuildTime.COMPILER_PERFORMANCE.children()?.let { compilerMetricList.addAll(it) }
+                    GradleBuildTime.COMPILATION_ROUND.children()?.let { compilerMetricList.addAll(it) }
+
+                    val result = entryPoint.invoke(null, toolArgs.toTypedArray(), file)
+                    println(result)
+                    println(File(file).readText())
+                    File(file).delete()
+
                 }
             } catch (t: InvocationTargetException) {
                 throw t.targetException
