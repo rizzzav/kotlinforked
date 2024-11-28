@@ -4781,6 +4781,11 @@ internal class JvmExposeBoxedRequiresNamedGetterImpl(
     token: KaLifetimeToken,
 ) : KaAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KaFirDiagnostic.JvmExposeBoxedRequiresNamedGetter
 
+internal class JvmExposeBoxedCannotBeTheSameImpl(
+    firDiagnostic: KtPsiDiagnostic,
+    token: KaLifetimeToken,
+) : KaAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KaFirDiagnostic.JvmExposeBoxedCannotBeTheSame
+
 internal class JvmExposeBoxedCannotBeTheSameAsJvmNameImpl(
     firDiagnostic: KtPsiDiagnostic,
     token: KaLifetimeToken,
