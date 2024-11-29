@@ -473,15 +473,6 @@ class JvmSymbols(
         }
     }
 
-    val jvmExposeBoxedAnnotation: IrClassSymbol = createClass(JVM_EXPOSE_BOXED_ANNOTATION_FQ_NAME, ClassKind.ANNOTATION_CLASS).apply {
-        owner.addConstructor {
-            isPrimary = true
-        }.apply {
-            addValueParameter(Name.identifier("jvmName"), irBuiltIns.stringType)
-            addValueParameter(Name.identifier("expose"), irBuiltIns.booleanType)
-        }
-    }
-
     private data class PropertyReferenceKey(
         val mutable: Boolean,
         val parameterCount: Int,
