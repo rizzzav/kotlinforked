@@ -31583,6 +31583,12 @@ public class JvmAbiConsistencyTestBoxGenerated extends AbstractJvmAbiConsistency
       }
 
       @Test
+      @TestMetadata("lambda.kt")
+      public void testLambda() {
+        runTest("compiler/testData/codegen/box/inlineClasses/jvmExposeBoxed/lambda.kt");
+      }
+
+      @Test
       @TestMetadata("method.kt")
       public void testMethod() {
         runTest("compiler/testData/codegen/box/inlineClasses/jvmExposeBoxed/method.kt");
