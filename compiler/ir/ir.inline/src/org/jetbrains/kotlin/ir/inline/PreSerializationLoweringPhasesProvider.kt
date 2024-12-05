@@ -7,6 +7,7 @@ package org.jetbrains.kotlin.ir.inline
 
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.common.LoweringContext
+import org.jetbrains.kotlin.backend.common.ir.Symbols
 import org.jetbrains.kotlin.backend.common.ir.isReifiable
 import org.jetbrains.kotlin.backend.common.lower.ArrayConstructorLowering
 import org.jetbrains.kotlin.backend.common.lower.LateinitLowering
@@ -55,6 +56,8 @@ abstract class PreSerializationLoweringPhasesProvider<Context : LoweringContext>
             CommonInlineCallableReferenceToLambdaPhase(context, privateInlineFunctionResolver(context))
         fun privateInline(context: Context) =
             FunctionInlining(context, privateInlineFunctionResolver(context), produceOuterThisFields = false)
+        fun nonPrivateInline(context: Context) =
+            FunctionInlining(context, nonPrivateInlineFunctionResolver(context), produceOuterThisFields = false)
         fun validateIrAfterInliningOnlyPrivateFunctions(context: Context) = IrValidationAfterInliningOnlyPrivateFunctionsPhase(
             context = context,
             checkInlineFunctionCallSites = { inlineFunctionUseSite ->
@@ -95,7 +98,7 @@ abstract class PreSerializationLoweringPhasesProvider<Context : LoweringContext>
             ) then performByIrFile(
                 name = "FunctionInlining",
                 createFilePhases(
-//                  { FunctionInlining(it, inlineFunctionResolver(context, InlineMode.ALL_INLINE_FUNCTIONS), produceOuterThisFields = false) },
+                    ::nonPrivateInline,
                 ),
             ) then buildModuleLoweringsPhase(
 //              validateIrAfterInliningAllFunctions
