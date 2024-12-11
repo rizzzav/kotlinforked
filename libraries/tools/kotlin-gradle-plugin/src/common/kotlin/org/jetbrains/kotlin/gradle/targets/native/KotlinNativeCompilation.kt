@@ -60,6 +60,11 @@ abstract class AbstractKotlinNativeCompilation internal constructor(
                 KonanDistribution(it)
             }, konanTarget))
 
+    @OptIn(UnsafeApi::class)
+    internal val nativeDistributionDependencies: ConfigurableFileCollection
+        get() = inferCommonizerTarget(compilation)?.let {
+            compilation.project.objects.fileCollection().from(compilation.project.getNativeDistributionDependencies(it))
+        } ?: compilation.project.objects.fileCollection()
 }
 
 open class KotlinNativeCompilation @Inject internal constructor(
