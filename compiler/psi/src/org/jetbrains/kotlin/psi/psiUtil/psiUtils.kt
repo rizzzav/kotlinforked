@@ -60,11 +60,12 @@ import kotlin.contracts.contract
  *
  * And it's traversed as: 'a', '+', 'b', '+', 'c'
  */
-fun KtVisitorVoid.visitBinaryExpressionUsingStack(expression: KtBinaryExpression) {
+fun KtVisitorVoid.visitBinaryExpressionUsingStack(expression: KtBinaryExpression, visitBinaryExpression: (KtExpression) -> Unit = {}) {
     val stack = kotlin.collections.ArrayDeque<PsiElement>().also { it.add(expression) }
     while (stack.isNotEmpty()) {
         val element = stack.removeLast()
         if (element is KtBinaryExpression) {
+            visitBinaryExpression(element)
             for (i in element.children.size - 1 downTo 0) {
                 stack.addLast(element.children[i])
             }

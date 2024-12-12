@@ -265,6 +265,7 @@ class RawFirBuilderTotalKotlinTestCase : AbstractRawFirBuilderTestCase() {
                 it is KtOperationReferenceExpression ||
                 it is KtLabelReferenceExpression ||
                 it is KtConstructorDelegationReferenceExpression ||
+                it is KtBinaryExpression ||
                 it is KtParenthesizedExpression ||
                 it is KtLabeledExpression ||
                 it is KtAnnotatedExpression ||
