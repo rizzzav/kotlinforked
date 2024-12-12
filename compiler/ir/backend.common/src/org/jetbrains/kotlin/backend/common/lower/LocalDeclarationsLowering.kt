@@ -954,7 +954,7 @@ open class LocalDeclarationsLowering(
                     return findFirstUnusedName("this\$0", usedNames) {
                         "this\$$it"
                     }
-                } else if (declaration.name.asString() == "<this>" && declaration.isExtensionReceiver()) {
+                } else if (declaration.name.asString() == "<this>" && declaration.kind == IrParameterKind.ExtensionReceiver) {
                     val parentNameSuffix = declaration.parentNameSuffixForExtensionReceiver
                     return findFirstUnusedName("\$this_$parentNameSuffix", usedNames) {
                         "\$this_$parentNameSuffix\$$it"
@@ -1001,11 +1001,6 @@ open class LocalDeclarationsLowering(
                 else ->
                     false
             }
-
-        private fun IrValueParameter.isExtensionReceiver(): Boolean {
-            val parentFun = parent as? IrFunction ?: return false
-            return parentFun.extensionReceiverParameter == this
-        }
 
         private val CAPTURED_RECEIVER_PREFIX = "\$this\$"
 
