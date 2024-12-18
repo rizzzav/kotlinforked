@@ -52,7 +52,6 @@ import org.jetbrains.kotlin.utils.addToStdlib.shouldNotBeCalled
 import org.jetbrains.kotlin.utils.exceptions.errorWithAttachment
 import org.jetbrains.kotlin.utils.exceptions.requireWithAttachment
 import org.jetbrains.kotlin.utils.exceptions.withPsiEntry
-import org.jetbrains.kotlin.utils.filterIsInstanceMapNotNullTo
 
 open class PsiRawFirBuilder(
     session: FirSession,
@@ -3042,16 +3041,16 @@ open class PsiRawFirBuilder(
         }
 
         override fun visitBinaryExpression(expression: KtBinaryExpression, data: FirElement?): FirElement {
-            val foldingStringConcatenationStack = expression.tryVisitFoldingStringConcatenation()
+            val foldingStringConcatenationArguments = expression.tryVisitFoldingStringConcatenation()
 
-            return if (foldingStringConcatenationStack != null) {
+            return if (foldingStringConcatenationArguments != null) {
+                val stringConcatenationSource = expression.toFirSourceElement()
                 buildStringConcatenationCall {
                     argumentList = buildArgumentList {
-                        foldingStringConcatenationStack.filterIsInstanceMapNotNullTo<KtStringTemplateExpression, FirExpression, MutableList<FirExpression>>(
-                            arguments
-                        ) { it.convert() }
+                        source = stringConcatenationSource
+                        foldingStringConcatenationArguments.mapTo(arguments) { it.convert() }
                     }
-                    source = expression.toFirSourceElement()
+                    source = stringConcatenationSource
                     interpolationPrefix = ""
                     isFoldedStrings = true
                 }

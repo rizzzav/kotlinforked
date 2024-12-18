@@ -214,16 +214,14 @@ public class KtVisitorVoid extends KtVisitor<Void, Void> {
      * Visits the input expression using a stack if it's a string literals concatenation expression (to prevent potential stack overflow exception),
      * otherwise visits the expression using regular recursive calls.
 
-     * If you need to handle nested binary expressions inside string literals concatenation,
+     * If you need to handle nested binary or parentheses expressions inside string literals concatenation,
      * you have to override this method and write the necessary logic there.
      */
     public void visitBinaryExpression(@NotNull KtBinaryExpression expression) {
-        @Nullable List<KtExpression> foldingStringConcatenationStack = tryVisitFoldingStringConcatenation(expression);
-        if (foldingStringConcatenationStack != null) {
-            for (KtExpression childExpression : foldingStringConcatenationStack) {
-                if (!(childExpression instanceof KtBinaryExpression)) {
-                    visitExpression(childExpression);
-                }
+        @Nullable List<KtExpression> foldingStringConcatenationArguments = tryVisitFoldingStringConcatenation(expression, false);
+        if (foldingStringConcatenationArguments != null) {
+            for (KtExpression argument : foldingStringConcatenationArguments) {
+                visitExpression(argument);
             }
         } else {
             super.visitBinaryExpression(expression, null);

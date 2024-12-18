@@ -47,10 +47,10 @@ import kotlin.contracts.contract
 // ----------- Walking children/siblings/parents -------------------------------------------------------------------------------------------
 
 /**
- * Emulates recursion using a stack to prevent StackOverflow exception on big concatenation expressions like
+ * Emulates recursion using a stack to prevent StackOverflow exception on big string concatenation expressions like
  * `val x = "a0" + "a1" + ... + "a9999"` (it's relatively common in machine-generated code)
 
- * This method traverses the provided `KtBinaryExpression`, tries to extract all string template nodes and returns
+ * This method traverses the provided @param[KtBinaryExpression], tries to extract all string template nodes and returns
  * the list of nested expressions in direct order if the input `KtBinaryExpression` matches the string literals concatenation pattern.
  * Otherwise, it returns `null`.
  * The method handles nested expressions by pushing nodes onto an input stack and processing them iteratively.
@@ -63,31 +63,43 @@ import kotlin.contracts.contract
  *  'a'        'b'
  * ```
  *
- * And traversed as: 'a', 'b', '+'(1), 'c' '+'(0)
+ *
+ * The method returns `'a', 'b', 'c'` if @param[collectAllDescendants] is `false` (default)
+ * But returns `'a', 'b', '+'(1), 'c', '+'(0)` otherwise. This is used when full-fidelity tree structure is needed (see usages).
  */
-fun KtBinaryExpression.tryVisitFoldingStringConcatenation(): List<KtExpression>? {
+fun KtBinaryExpression.tryVisitFoldingStringConcatenation(collectAllDescendants: Boolean = false): List<KtExpression>? {
+    // Optimization: don't allocate anything if the root expression doesn't match the string concatenation folding pattern
+    if (operationToken != PLUS) return null
+
     val input = mutableListOf<KtExpression?>().also { it.add(this) }
     val output = ArrayDeque<KtExpression>()
 
     while (input.isNotEmpty()) {
         var node = input.removeLast()
-        node?.let { output.addFirst(it) }
         when (node) {
             is KtBinaryExpression -> {
                 if (node.operationToken != PLUS) {
                     return null
                 }
 
+                if (collectAllDescendants) {
+                    output.addFirst(node)
+                }
                 input.add(node.left)
                 input.add(node.right)
             }
             is KtParenthesizedExpression -> {
+                if (collectAllDescendants) {
+                    output.addFirst(node)
+                }
                 input.add(node.expression)
             }
             else -> {
                 if (node !is KtStringTemplateExpression) {
                     return null
                 }
+
+                output.addFirst(node)
             }
         }
     }

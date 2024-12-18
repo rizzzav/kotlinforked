@@ -78,11 +78,13 @@ internal open class FirElementsRecorder : FirVisitor<Unit, MutableMap<KtElement,
         data: MutableMap<KtElement, FirElement>,
     ) {
         if (stringConcatenationCall.isFoldedStrings) {
-            val foldingStringConcatenationStack = (stringConcatenationCall.psi as KtBinaryExpression).tryVisitFoldingStringConcatenation()!!
-            for (child in foldingStringConcatenationStack) {
-                if (child is KtBinaryExpression) {
-                    // Associate different string plus operators with the same FIR node because there are no other intermediate FIR nodes
-                    cache(child, stringConcatenationCall, data)
+            val foldingStringConcatenationDescendants =
+                (stringConcatenationCall.psi as KtBinaryExpression).tryVisitFoldingStringConcatenation(collectAllDescendants = true)!!
+            for (descendant in foldingStringConcatenationDescendants) {
+                if (descendant !is KtStringTemplateExpression) {
+                    // Associate different string plus operators and parentheses with the same FIR node
+                    // because there are no other intermediate FIR nodes
+                    cache(descendant, stringConcatenationCall, data)
                 }
             }
             // Associate arguments in the separated pass because `foldingStringConcatenationStack` doesn't hold FIR for them
