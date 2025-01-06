@@ -300,7 +300,7 @@ class InteropCallableReferenceLowering(val context: JsIrBackendContext) : BodyLo
         }
 
         private fun IrDeclaration.asCallableReference(): IrClass? {
-            if (origin == CallableReferenceLowering.FUNCTION_REFERENCE_IMPL || origin == CallableReferenceLowering.LAMBDA_IMPL)
+            if (origin == JsCallableReferenceLowering.FUNCTION_REFERENCE_IMPL || origin == JsCallableReferenceLowering.LAMBDA_IMPL)
                 return this as? IrClass
             return null
         }
@@ -314,7 +314,7 @@ class InteropCallableReferenceLowering(val context: JsIrBackendContext) : BodyLo
         private fun replaceWithFactory(lambdaClass: IrClass): List<IrDeclaration> {
             val lambdaInfo = LambdaInfo(lambdaClass)
 
-            return if (lambdaClass.origin == CallableReferenceLowering.LAMBDA_IMPL && !lambdaInfo.isSuspendLambda) {
+            return if (lambdaClass.origin == JsCallableReferenceLowering.LAMBDA_IMPL && !lambdaInfo.isSuspendLambda) {
                 if (lambdaClass.fields.none()) {
                     // Optimization:
                     // If the lambda has no context, we lift it, i.e. instead of generating an anonymous function,
@@ -470,8 +470,8 @@ class InteropCallableReferenceLowering(val context: JsIrBackendContext) : BodyLo
             )
         return statements
             .asSequence()
+            .flatMap { if (it is IrBlock) it.statements.asSequence() else sequenceOf(it) }
             .filterIsInstance<IrSetField>()
-            .filter { it.origin == IrStatementOrigin.STATEMENT_ORIGIN_INITIALIZER_OF_FIELD_FOR_CAPTURED_VALUE }
             .mapNotNull { irSetField ->
                 remapVP(irSetField.value.cast<IrGetValue>().symbol.cast())?.let {
                     irSetField.symbol to it

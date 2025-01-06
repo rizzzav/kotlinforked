@@ -1,9 +1,9 @@
 /*
- * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
-package org.jetbrains.kotlin.ir.backend.js.lower
+package org.jetbrains.kotlin.backend.wasm.lower
 
 import org.jetbrains.kotlin.backend.common.BodyLoweringPass
 import org.jetbrains.kotlin.backend.common.compilationException
@@ -16,6 +16,9 @@ import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.ir.UNDEFINED_OFFSET
 import org.jetbrains.kotlin.ir.backend.js.JsCommonBackendContext
 import org.jetbrains.kotlin.ir.backend.js.JsStatementOrigins
+import org.jetbrains.kotlin.ir.backend.js.lower.JsCallableReferenceLowering.Companion.FUNCTION_REFERENCE_IMPL
+import org.jetbrains.kotlin.ir.backend.js.lower.JsCallableReferenceLowering.Companion.GENERATED_MEMBER_IN_CALLABLE_REFERENCE
+import org.jetbrains.kotlin.ir.backend.js.lower.JsCallableReferenceLowering.Companion.LAMBDA_IMPL
 import org.jetbrains.kotlin.ir.backend.js.utils.compileSuspendAsJsGenerator
 import org.jetbrains.kotlin.ir.builders.*
 import org.jetbrains.kotlin.ir.builders.declarations.*
@@ -77,7 +80,7 @@ import org.jetbrains.kotlin.utils.memoryOptimizedPlus
  * }
  * ```
  */
-class CallableReferenceLowering(private val context: JsCommonBackendContext) : BodyLoweringPass {
+class WasmCallableReferenceLowering(private val context: JsCommonBackendContext) : BodyLoweringPass {
 
     override fun lower(irFile: IrFile) {
         runOnFilePostfix(irFile, withLocalDeclarations = true)
@@ -521,10 +524,6 @@ class CallableReferenceLowering(private val context: JsCommonBackendContext) : B
     }
 
     companion object {
-        val LAMBDA_IMPL by IrDeclarationOriginImpl
-        val FUNCTION_REFERENCE_IMPL by IrDeclarationOriginImpl
-        val GENERATED_MEMBER_IN_CALLABLE_REFERENCE by IrDeclarationOriginImpl
-
         val BOUND_RECEIVER_NAME = Name.identifier("\$boundThis")
     }
 }

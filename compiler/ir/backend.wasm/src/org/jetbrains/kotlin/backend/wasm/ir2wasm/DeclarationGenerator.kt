@@ -6,13 +6,14 @@
 package org.jetbrains.kotlin.backend.wasm.ir2wasm
 
 import org.jetbrains.kotlin.backend.wasm.WasmBackendContext
+import org.jetbrains.kotlin.backend.wasm.lower.WasmCallableReferenceLowering
 import org.jetbrains.kotlin.backend.wasm.utils.*
 import org.jetbrains.kotlin.config.AnalysisFlags.allowFullyQualifiedNameInKClass
 import org.jetbrains.kotlin.config.languageVersionSettings
 import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.IrElement
-import org.jetbrains.kotlin.ir.backend.js.lower.CallableReferenceLowering
+import org.jetbrains.kotlin.ir.backend.js.lower.JsCallableReferenceLowering
 import org.jetbrains.kotlin.ir.backend.js.lower.originalFqName
 import org.jetbrains.kotlin.ir.backend.js.utils.*
 import org.jetbrains.kotlin.ir.declarations.*
@@ -562,7 +563,7 @@ val IrFunction.locationTarget: IrElement
         IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER -> this
         IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA -> this
         else -> when (parentClassOrNull?.origin) {
-            CallableReferenceLowering.LAMBDA_IMPL,
+            JsCallableReferenceLowering.LAMBDA_IMPL,
             IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA -> this
             else -> body ?: this
         }

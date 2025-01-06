@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.ir.backend.js.export.isAllowedFakeOverriddenDeclarat
 import org.jetbrains.kotlin.ir.backend.js.export.isExported
 import org.jetbrains.kotlin.ir.backend.js.export.isOverriddenEnumProperty
 import org.jetbrains.kotlin.ir.backend.js.export.isOverriddenExported
-import org.jetbrains.kotlin.ir.backend.js.lower.CallableReferenceLowering
+import org.jetbrains.kotlin.ir.backend.js.lower.JsCallableReferenceLowering
 import org.jetbrains.kotlin.ir.backend.js.lower.coroutines.AbstractSuspendFunctionsLowering
 import org.jetbrains.kotlin.ir.backend.js.lower.isEs6ConstructorReplacement
 import org.jetbrains.kotlin.ir.backend.js.objectGetInstanceFunction
@@ -463,10 +463,10 @@ class JsClassGenerator(private val irClass: IrClass, val context: JsGenerationCo
         }
         if (irClass.isClass) {
             when (irClass.origin) {
-                CallableReferenceLowering.LAMBDA_IMPL -> {
+                JsCallableReferenceLowering.LAMBDA_IMPL -> {
                     return backendContext.intrinsics.initMetadataForLambdaSymbol
                 }
-                CallableReferenceLowering.FUNCTION_REFERENCE_IMPL -> {
+                JsCallableReferenceLowering.FUNCTION_REFERENCE_IMPL -> {
                     return backendContext.intrinsics.initMetadataForFunctionReferenceSymbol
                 }
                 AbstractSuspendFunctionsLowering.DECLARATION_ORIGIN_COROUTINE_IMPL -> {

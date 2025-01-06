@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.UNDEFINED_OFFSET
 import org.jetbrains.kotlin.ir.backend.js.JsCommonBackendContext
-import org.jetbrains.kotlin.ir.backend.js.lower.CallableReferenceLowering
+import org.jetbrains.kotlin.ir.backend.js.lower.JsCallableReferenceLowering
 import org.jetbrains.kotlin.ir.builders.*
 import org.jetbrains.kotlin.ir.builders.declarations.buildClass
 import org.jetbrains.kotlin.ir.builders.declarations.buildConstructor
@@ -144,7 +144,7 @@ abstract class AbstractSuspendFunctionsLowering<C : JsCommonBackendContext>(val 
         private val startOffset = function.startOffset
         private val endOffset = function.endOffset
         private val isSuspendLambda = function.isOperator && function.name.asString() == "invoke" && function.parentClassOrNull
-            ?.let { it.origin === CallableReferenceLowering.Companion.LAMBDA_IMPL } == true
+            ?.let { it.origin === JsCallableReferenceLowering.LAMBDA_IMPL } == true
         private val functionParameters = if (isSuspendLambda) function.valueParameters else function.parameters
 
         private val coroutineClass: IrClass = getCoroutineClass(function)
@@ -513,7 +513,7 @@ fun getSuspendFunctionKind(
 ): SuspendFunctionKind {
 
     fun IrSimpleFunction.isSuspendLambda() =
-        name.asString() == "invoke" && parentClassOrNull?.let { it.origin === CallableReferenceLowering.Companion.LAMBDA_IMPL } == true
+        name.asString() == "invoke" && parentClassOrNull?.let { it.origin === JsCallableReferenceLowering.LAMBDA_IMPL } == true
 
     if (function.isSuspendLambda() && includeSuspendLambda)
         return SuspendFunctionKind.NEEDS_STATE_MACHINE            // Suspend lambdas always need coroutine implementation.
