@@ -104,7 +104,7 @@ abstract class InlineFunctionResolverReplacingCoroutineIntrinsics<Ctx : Lowering
 
     override fun shouldExcludeFunctionFromInlining(symbol: IrFunctionSymbol): Boolean {
         return super.shouldExcludeFunctionFromInlining(symbol) ||
-                (inlineMode == InlineMode.PRIVATE_INLINE_FUNCTIONS && !symbol.owner.isConsideredAsPrivateForInlining())
+                (inlineMode == InlineMode.PRIVATE_INLINE_FUNCTIONS && !symbol.isConsideredAsPrivateForInlining())
     }
 }
 
@@ -906,4 +906,4 @@ open class FunctionInlining(
  * - Either the function is private.
  * - Or the function is declared inside a local class.
  */
-fun IrFunction.isConsideredAsPrivateForInlining(): Boolean = isPrivate(visibility) || isLocal
+fun IrFunctionSymbol.isConsideredAsPrivateForInlining(): Boolean = this.isBound && (isPrivate(owner.visibility) || owner.isLocal)
