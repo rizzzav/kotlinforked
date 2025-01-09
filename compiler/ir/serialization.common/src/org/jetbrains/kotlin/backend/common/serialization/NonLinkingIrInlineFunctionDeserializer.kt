@@ -149,7 +149,7 @@ class NonLinkingIrInlineFunctionDeserializer(
 
         private val dummyFileSymbol = IrFileSymbolImpl().apply {
             IrFileImpl(
-                fileEntry = NaiveSourceBasedFileEntryImpl(fileProto.fileEntry.name),
+                fileEntry = NaiveSourceBasedFileEntryImpl(fileProto.fileEntry.name, fileProto.fileEntry.lineStartOffsetList.toIntArray()),
                 symbol = this,
                 packageFqName = FqName(irInterner.string(fileReader.deserializeFqName(fileProto.fqNameList)))
             )
@@ -190,10 +190,23 @@ class NonLinkingIrInlineFunctionDeserializer(
 
             val lazyDeclaration = lazy {
                 val declarationProto = fileReader.declaration(declarationId)
-                declarationDeserializer.deserializeDeclaration(declarationProto)
+                declarationDeserializer.deserializeDeclaration(declarationProto).also {
+                    it.setUpFileParent(dummyFileSymbol.owner)
+                }
             }
 
             signature to lazyDeclaration
+        }
+
+        private fun IrDeclaration.setUpFileParent(irFile: IrFile) {
+            when (val parent = this.parent) {
+                is IrFile -> return
+                is IrExternalPackageFragment -> {
+                    this.parent = irFile
+                    return
+                }
+                else -> (parent as IrDeclaration).setUpFileParent(irFile)
+            }
         }
 
         fun getTopLevelDeclarationOrNull(topLevelSignature: IdSignature): IrDeclaration? = indexWithLazyValues[topLevelSignature]?.value
