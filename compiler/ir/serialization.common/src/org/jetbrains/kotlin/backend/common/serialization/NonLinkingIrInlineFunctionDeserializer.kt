@@ -97,7 +97,9 @@ class NonLinkingIrInlineFunctionDeserializer(
         // that will be used as a substitution during copying. This step needs to be done in advance before copying.
         val symbolRemapper = object : DeepCopySymbolRemapper() {
             init {
+                functions.put(deserializedFunction.symbol as IrSimpleFunctionSymbol, function.symbol as IrSimpleFunctionSymbol)
                 valueParameters.putAll(valueParameterSymbolsToRemap)
+                typeParameters.putAll(deserializedFunction.typeParameters.map { it.symbol } zip function.typeParameters.map { it.symbol })
             }
         }
         deserializedBody.acceptVoid(symbolRemapper)
