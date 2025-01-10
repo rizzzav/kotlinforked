@@ -125,6 +125,7 @@ class NonLinkingIrInlineFunctionDeserializer(
 
         function.body = bodyWithRemappedSymbols
         function.valueParameters.forEachIndexed { index, parameter -> parameter.defaultValue = defaultValuesWithRemappedSymbols[index] }
+        function.parent = deserializedFunction.parent
     }
 
     private fun referencePublicSymbol(signature: IdSignature, symbolKind: BinarySymbolData.SymbolKind) =
@@ -190,23 +191,10 @@ class NonLinkingIrInlineFunctionDeserializer(
 
             val lazyDeclaration = lazy {
                 val declarationProto = fileReader.declaration(declarationId)
-                declarationDeserializer.deserializeDeclaration(declarationProto).also {
-                    it.setUpFileParent(dummyFileSymbol.owner)
-                }
+                declarationDeserializer.deserializeDeclaration(declarationProto)
             }
 
             signature to lazyDeclaration
-        }
-
-        private fun IrDeclaration.setUpFileParent(irFile: IrFile) {
-            when (val parent = this.parent) {
-                is IrFile -> return
-                is IrExternalPackageFragment -> {
-                    this.parent = irFile
-                    return
-                }
-                else -> (parent as IrDeclaration).setUpFileParent(irFile)
-            }
         }
 
         fun getTopLevelDeclarationOrNull(topLevelSignature: IdSignature): IrDeclaration? = indexWithLazyValues[topLevelSignature]?.value
