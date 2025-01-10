@@ -318,8 +318,12 @@ private class DeserializedDeclarationLeakagePreventingSymbolRemapper(
         override fun getReferencedVariable(symbol: IrVariableSymbol) =
             wrapped.getReferencedVariable(symbol)
 
+        // TODO maybe this can be dropped
         override fun getReferencedReturnableBlock(symbol: IrReturnableBlockSymbol) =
             wrapped.getReferencedReturnableBlock(symbol)
+
+        override fun getReferencedReturnTarget(symbol: IrReturnTargetSymbol): IrReturnTargetSymbol =
+            wrapped.getReferencedReturnTarget(symbol)
 
         override fun getReferencedValueParameter(symbol: IrValueParameterSymbol) =
             wrapped.getReferencedValueParameter(symbol)
