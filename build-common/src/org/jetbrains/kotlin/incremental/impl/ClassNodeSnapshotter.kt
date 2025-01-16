@@ -46,6 +46,7 @@ object ClassNodeSnapshotter {
         val classNode = emptyClass()
         classNode.version = classVersion // Class version is required when working with methods (without it, ASM may fail -- see KT-38857)
         classNode.methods.add(methodNode)
+        //TODO check that im not using a trace method visitor of some kind - just make sure that everything is visited
         return snapshotClass(classNode)
     }
 
@@ -60,6 +61,10 @@ object ClassNodeSnapshotter {
         classNode.methods.sortWith(compareBy({ it.name }, { it.desc }))
     }
 
+    /**
+     * Internally snapshotter uses emptyClass() a lot, so if you want to change its name, you need to update
+     * the tests with golden class snapshots - all abi hashes would shift.
+     */
     private fun emptyClass() = ClassNode().also {
         // A name is required
         it.name = "SomeClass"
