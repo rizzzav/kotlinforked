@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
@@ -42,7 +42,7 @@ abstract class AbstractKotlinCompilerTest {
             FlexibleTypeImpl.RUN_SLOW_ASSERTIONS = true
         }
 
-        val defaultConfiguration: TestConfigurationBuilder.() -> Unit = {
+        fun TestConfigurationBuilder.getDefaultConfiguration() {
             assertions = JUnit5Assertions
             useAdditionalService<TemporaryDirectoryManager>(::TemporaryDirectoryManagerImpl)
             useAdditionalService<TargetPlatformProvider>(::TargetPlatformProviderForCompilerTests)
@@ -53,11 +53,15 @@ abstract class AbstractKotlinCompilerTest {
         }
     }
 
-    protected val configuration: TestConfigurationBuilder.() -> Unit = {
-        defaultConfiguration()
+    protected fun TestConfigurationBuilder.getConfiguration() {
+        getDefaultConfiguration()
         useAdditionalService { createApplicationDisposableProvider() }
         useAdditionalService { createKotlinStandardLibrariesPathProvider() }
-        testInfo = this@AbstractKotlinCompilerTest.testInfo
+        testInfo = KotlinTestInfo(
+            className = "org.jetbrains.kotlin.test.runners.TieredFrontendJvmPsiTestGenerated\$Tests",
+            methodName = "testAbstract",
+            tags = emptySet(),
+        )
         @OptIn(TestInfrastructureInternals::class)
         configureInternal(this)
         useAfterAnalysisCheckers(::IrValidationErrorChecker)
@@ -106,7 +110,7 @@ abstract class AbstractKotlinCompilerTest {
     }
 
     open fun runTest(@TestDataFile filePath: String) {
-        testRunner(filePath, configuration).runTest(filePath)
+        testRunner(filePath, { getConfiguration() }).runTest(filePath)
     }
 
     open fun runTest(
@@ -118,7 +122,9 @@ abstract class AbstractKotlinCompilerTest {
             override fun revert(file: TestFile, actualContent: String): String = contentModifier.revertForFile(actualContent)
         }
         testRunner(filePath) {
-            configuration.invoke(this)
+            with(this) {
+                getConfiguration()
+            }
             useSourcePreprocessor(::SourceTransformer)
         }.runTest(filePath)
     }

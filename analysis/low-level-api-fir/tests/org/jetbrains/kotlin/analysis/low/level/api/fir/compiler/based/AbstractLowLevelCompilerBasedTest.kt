@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
@@ -51,7 +51,7 @@ abstract class AbstractLowLevelCompilerBasedTest : AbstractCompilerBasedTest() {
 
         FirLowLevelCompilerBasedTestConfigurator.configureTest(this, disposable)
         configure(this)
-        defaultConfiguration(this)
+        getDefaultConfiguration()(this)
         registerAnalysisApiBaseTestServices(disposable, FirLowLevelCompilerBasedTestConfigurator)
         useAdditionalServices(service<FirDiagnosticCollectorService>(::AnalysisApiFirDiagnosticCollectorService))
 
@@ -122,7 +122,7 @@ abstract class AbstractLowLevelCompilerBasedTest : AbstractCompilerBasedTest() {
     }
 
     override fun runTest(filePath: String) {
-        val configuration = testConfiguration(filePath, configuration)
+        val configuration = testConfiguration(filePath, getConfiguration())
 
         if (ignoreTest(filePath, configuration)) {
             return
