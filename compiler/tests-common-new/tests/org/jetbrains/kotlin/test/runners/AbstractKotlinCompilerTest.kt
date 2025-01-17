@@ -42,7 +42,7 @@ abstract class AbstractKotlinCompilerTest {
             FlexibleTypeImpl.RUN_SLOW_ASSERTIONS = true
         }
 
-        fun TestConfigurationBuilder.getDefaultConfiguration() {
+        val defaultConfiguration: TestConfigurationBuilder.() -> Unit = {
             assertions = JUnit5Assertions
             useAdditionalService<TemporaryDirectoryManager>(::TemporaryDirectoryManagerImpl)
             useAdditionalService<TargetPlatformProvider>(::TargetPlatformProviderForCompilerTests)
@@ -53,8 +53,8 @@ abstract class AbstractKotlinCompilerTest {
         }
     }
 
-    protected fun TestConfigurationBuilder.getConfiguration() {
-        getDefaultConfiguration()
+    protected val configuration: TestConfigurationBuilder.() -> Unit = {
+        defaultConfiguration()
         useAdditionalService { createApplicationDisposableProvider() }
         useAdditionalService { createKotlinStandardLibrariesPathProvider() }
         testInfo = KotlinTestInfo(
@@ -110,7 +110,7 @@ abstract class AbstractKotlinCompilerTest {
     }
 
     open fun runTest(@TestDataFile filePath: String) {
-        testRunner(filePath, { getConfiguration() }).runTest(filePath)
+        testRunner(filePath, configuration).runTest(filePath)
     }
 
     open fun runTest(
@@ -122,9 +122,7 @@ abstract class AbstractKotlinCompilerTest {
             override fun revert(file: TestFile, actualContent: String): String = contentModifier.revertForFile(actualContent)
         }
         testRunner(filePath) {
-            with(this) {
-                getConfiguration()
-            }
+            configuration.invoke(this)
             useSourcePreprocessor(::SourceTransformer)
         }.runTest(filePath)
     }

@@ -51,7 +51,7 @@ abstract class AbstractLowLevelCompilerBasedTest : AbstractCompilerBasedTest() {
 
         FirLowLevelCompilerBasedTestConfigurator.configureTest(this, disposable)
         configure(this)
-        getDefaultConfiguration()(this)
+        defaultConfiguration(this)
         registerAnalysisApiBaseTestServices(disposable, FirLowLevelCompilerBasedTestConfigurator)
         useAdditionalServices(service<FirDiagnosticCollectorService>(::AnalysisApiFirDiagnosticCollectorService))
 
@@ -122,7 +122,7 @@ abstract class AbstractLowLevelCompilerBasedTest : AbstractCompilerBasedTest() {
     }
 
     override fun runTest(filePath: String) {
-        val configuration = testConfiguration(filePath, getConfiguration())
+        val configuration = testConfiguration(filePath, configuration)
 
         if (ignoreTest(filePath, configuration)) {
             return

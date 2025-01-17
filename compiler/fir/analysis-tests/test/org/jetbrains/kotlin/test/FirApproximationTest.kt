@@ -48,7 +48,7 @@ class FirApproximationTest : AbstractFirPsiDiagnosticTest() {
     }
 
     private fun runWithSession(f: (FirSession) -> Unit) {
-        testRunner(emptyFilePath, { getConfiguration() }).runTest(emptyFilePath) { configuration ->
+        testRunner(emptyFilePath, configuration).runTest(emptyFilePath) { configuration ->
             val artifact = configuration.testServices.artifactsProvider
                 .let {
                     val mainModule = configuration.testServices.moduleStructure.modules.first { it.name == "main" }
