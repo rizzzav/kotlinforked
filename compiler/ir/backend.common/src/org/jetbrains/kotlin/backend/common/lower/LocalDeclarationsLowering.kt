@@ -36,7 +36,6 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.utils.addToStdlib.assignFrom
 import org.jetbrains.kotlin.utils.memoryOptimizedMap
-import org.jetbrains.kotlin.utils.memoryOptimizedPlus
 
 interface VisibilityPolicy {
     fun forClass(declaration: IrClass, inInlineFunctionScope: Boolean): DescriptorVisibility =
@@ -776,15 +775,11 @@ open class LocalDeclarationsLowering(
             newDeclaration.returnType = localFunctionContext.remapType(oldDeclaration.returnType)
             newDeclaration.copyAttributes(oldDeclaration)
 
-            newDeclaration.parameters = newDeclaration.parameters memoryOptimizedPlus createTransformedValueParameters(
+            newDeclaration.parameters = createTransformedValueParameters(
                 capturedValues, localFunctionContext, oldDeclaration, newDeclaration,
                 isExplicitLocalFunction = oldDeclaration.origin == IrDeclarationOrigin.LOCAL_FUNCTION
             )
             newDeclaration.recordTransformedValueParameters(localFunctionContext)
-            val parametersMapping = buildMap {
-                putAll(oldDeclaration.parameters zip newDeclaration.parameters)
-            }
-            context.remapMultiFieldValueClassStructure(oldDeclaration, newDeclaration, parametersMapping)
 
             newDeclaration.annotations = oldDeclaration.annotations
 
@@ -797,22 +792,22 @@ open class LocalDeclarationsLowering(
             oldDeclaration: IrFunction,
             newDeclaration: IrFunction,
             isExplicitLocalFunction: Boolean = false
-        ) = ArrayList<IrValueParameter>(
-            capturedValues.size + oldDeclaration.parameters.size
-        ).apply {
-            val generatedNames = mutableSetOf<String>()
-
-            oldDeclaration.parameters.mapTo(this) { v ->
-                v.copyTo(
+        ): List<IrValueParameter> {
+            val transformedParameters = oldDeclaration.parameters.map { param ->
+                param.copyTo(
                     newDeclaration,
-                    type = localFunctionContext.remapType(v.type),
-                    varargElementType = v.varargElementType?.let { localFunctionContext.remapType(it) },
+                    type = localFunctionContext.remapType(param.type),
+                    varargElementType = param.varargElementType?.let { localFunctionContext.remapType(it) },
                 ).also {
-                    newParameterToOld.putAbsentOrSame(it, v)
+                    newParameterToOld.putAbsentOrSame(it, param)
                 }
             }
 
-            capturedValues.mapTo(this) { capturedValue ->
+            val parametersMapping = (oldDeclaration.parameters zip transformedParameters).toMap()
+            context.remapMultiFieldValueClassStructure(oldDeclaration, newDeclaration, parametersMapping)
+
+            val generatedNames = mutableSetOf<String>()
+            val parametersForCapturedValues = capturedValues.map { capturedValue ->
                 val p = capturedValue.owner
                 buildValueParameter(newDeclaration) {
                     startOffset = p.startOffset
@@ -832,6 +827,8 @@ open class LocalDeclarationsLowering(
                     newParameterToCaptured[it] = capturedValue
                 }
             }
+
+            return parametersForCapturedValues + transformedParameters
         }
 
         private fun IrFunction.recordTransformedValueParameters(localContext: LocalContextWithClosureAsParameters) {
@@ -887,7 +884,7 @@ open class LocalDeclarationsLowering(
                 .firstOrNull { it.kind == IrParameterKind.DispatchReceiver || it.kind == IrParameterKind.ExtensionReceiver }
                 ?.run { throw AssertionError("Local class constructor can't have $kind: ${ir2string(oldDeclaration)}") }
 
-            newDeclaration.parameters = newDeclaration.parameters memoryOptimizedPlus createTransformedValueParameters(
+            newDeclaration.parameters = createTransformedValueParameters(
                 capturedValues, localClassContext, oldDeclaration, newDeclaration
             )
             newDeclaration.recordTransformedValueParameters(constructorContext)
