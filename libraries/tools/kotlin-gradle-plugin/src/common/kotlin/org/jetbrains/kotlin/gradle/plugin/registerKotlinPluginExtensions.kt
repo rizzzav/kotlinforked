@@ -186,6 +186,7 @@ internal fun Project.registerKotlinPluginExtensions() {
 
         if (isMultiplatform) {
             register(project, MultipleSourceSetRootsInCompilationChecker)
+            register(project, SwiftExportModuleNameChecker)
         }
     }
 }
