@@ -22160,6 +22160,12 @@ public class FirJsCodegenBoxWithInlinedFunInKlibTestGenerated extends AbstractFi
     }
 
     @Test
+    @TestMetadata("substitutedTypeParameter.kt")
+    public void testSubstitutedTypeParameter() {
+      runTest("compiler/testData/codegen/box/inlineClasses/substitutedTypeParameter.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
+    }
+
+    @Test
     @TestMetadata("toStringCallingPrivateFun.kt")
     public void testToStringCallingPrivateFun() {
       runTest("compiler/testData/codegen/box/inlineClasses/toStringCallingPrivateFun.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());

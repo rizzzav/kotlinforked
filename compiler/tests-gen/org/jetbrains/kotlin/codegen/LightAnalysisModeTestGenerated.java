@@ -24234,6 +24234,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
       runTest("compiler/testData/codegen/box/inlineClasses/stringPlusGeneric.kt", TransformersFunctions.getReplaceOptionalJvmInlineAnnotationWithReal());
     }
 
+    @TestMetadata("substitutedTypeParameter.kt")
+    public void testSubstitutedTypeParameter() {
+      runTest("compiler/testData/codegen/box/inlineClasses/substitutedTypeParameter.kt", TransformersFunctions.getReplaceOptionalJvmInlineAnnotationWithReal());
+    }
+
     @TestMetadata("toStringCallingPrivateFun.kt")
     public void testToStringCallingPrivateFun() {
       runTest("compiler/testData/codegen/box/inlineClasses/toStringCallingPrivateFun.kt", TransformersFunctions.getReplaceOptionalJvmInlineAnnotationWithReal());

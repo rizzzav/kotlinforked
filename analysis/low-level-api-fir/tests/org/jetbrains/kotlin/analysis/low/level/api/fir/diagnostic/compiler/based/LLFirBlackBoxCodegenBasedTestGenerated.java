@@ -29041,6 +29041,12 @@ public class LLFirBlackBoxCodegenBasedTestGenerated extends AbstractLLFirBlackBo
     }
 
     @Test
+    @TestMetadata("substitutedTypeParameter.kt")
+    public void testSubstitutedTypeParameter() {
+      runTest("compiler/testData/codegen/box/inlineClasses/substitutedTypeParameter.kt", TransformersFunctions.getReplaceOptionalJvmInlineAnnotationWithUniversal());
+    }
+
+    @Test
     @TestMetadata("toStringCallingPrivateFun.kt")
     public void testToStringCallingPrivateFun() {
       runTest("compiler/testData/codegen/box/inlineClasses/toStringCallingPrivateFun.kt", TransformersFunctions.getReplaceOptionalJvmInlineAnnotationWithUniversal());
