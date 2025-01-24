@@ -23,6 +23,7 @@ import org.jetbrains.kotlin.test.services.JUnit5Assertions.assertTrue
 import org.junit.jupiter.api.Assumptions
 import org.junit.jupiter.api.Test
 import java.io.File
+import kotlin.test.assertEquals
 import kotlin.time.Duration
 
 @ClassicPipeline()
@@ -401,6 +402,40 @@ abstract class FrameworkTestBase : AbstractNativeSimpleTest() {
         objCExportTestImpl("Static", listOf("-Xbinary=objcExportSuspendFunctionLaunchThreadRestriction=main"),
                            listOf("-D", "DISALLOW_SUSPEND_ANY_THREAD"), true, false)
     }
+
+    @Test
+    fun objCExportDumpObjcSelectorToSignatureMapping() {
+        Assumptions.assumeTrue(testRunSettings.get<KotlinNativeTargets>().testTarget.family == Family.OSX)
+        val testName = "selectorToSignatureDump"
+        val testDir = testSuiteDir.resolve(testName)
+        val dumpFile = buildDir.resolve("dump.txt")
+        val goldenFile = testDir.resolve("golden.txt")
+        val freeCompilerArgs = TestCompilerArgs(
+            listOf(
+                "-Xbinary=bundleId=$testName",
+                "-Xbinary=bundleVersion=FooBundleVersion",
+                "-Xbinary=bundleShortVersionString=FooBundleShortVersionString",
+                "-Xbinary=dumpObjcSelectorToSignatureMapping=${dumpFile.absolutePath}",
+                "-Xomit-framework-binary"
+            )
+        )
+        val testCase = generateObjCFrameworkTestCase(
+            TestKind.STANDALONE_NO_TR, extras, testName,
+            listOf(
+                testDir.resolve("main.kt"),
+            ),
+            freeCompilerArgs
+        )
+        testCompilationFactory.testCaseToObjCFrameworkCompilation(testCase, testRunSettings).result.assertSuccess()
+
+        fun File.parseDump(): List<Set<String>> =
+            readText().split("\n\n").map { it.lines().drop(1).toSet() }
+
+        val dump = dumpFile.parseDump()
+        val golden = goldenFile.parseDump()
+        assertEquals(golden, dump)
+    }
+
 
     private fun objCExportTestImpl(
         suffix: String,
