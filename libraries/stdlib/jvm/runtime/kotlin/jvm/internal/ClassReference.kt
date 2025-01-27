@@ -177,7 +177,7 @@ public class ClassReference(override val jClass: Class<*>) : KClass<Any>, ClassB
             else -> null
         }
 
-        private fun simpleNameOf(type: String) = when(type) {
+        private fun simpleNameOf(type: String) = when (type) {
             "boolean" -> "Boolean"
             "byte" -> "Byte"
             "char" -> "Char"
