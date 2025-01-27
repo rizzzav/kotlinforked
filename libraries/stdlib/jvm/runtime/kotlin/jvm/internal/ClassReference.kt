@@ -107,7 +107,7 @@ public class ClassReference(override val jClass: Class<*>) : KClass<Any>, ClassB
             ).mapIndexed { i, clazz -> clazz to i }.toMap()
 
         // See JavaToKotlinClassMap.
-        private fun classFqNameOf(type: String) = when(type) {
+        private fun classFqNameOf(type: String) = when (type) {
             "boolean" -> "kotlin.Boolean"
             "byte" -> "kotlin.Byte"
             "char" -> "kotlin.Char"
