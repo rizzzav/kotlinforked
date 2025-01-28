@@ -1,0 +1,371 @@
+RAW_FIR:
+FILE: [ResolvedTo(RAW_FIR)] lib.kt
+    public final? [ResolvedTo(RAW_FIR)] interface Iterator<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun next(): T
+
+        public? final? operator [ResolvedTo(RAW_FIR)] fun hasNext(): Boolean
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterator<[ResolvedTo(RAW_FIR)] out T> : Iterator<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun remove(): Unit
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Iterable<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterable<[ResolvedTo(RAW_FIR)] out T> : kotlin.collections.Iterable<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun iterator(): MutableIterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Collection<[ResolvedTo(RAW_FIR)] out E> : Iterable<E> {
+        public? open? override [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<E>
+
+    }
+
+FILE: [ResolvedTo(RAW_FIR)] main.kt
+    public? final? [ResolvedTo(RAW_FIR)] fun foo([ResolvedTo(RAW_FIR)] collection: Collection<String>): R|kotlin/Unit| { LAZY_BLOCK }
+
+IMPORTS:
+FILE: [ResolvedTo(RAW_FIR)] lib.kt
+    public final? [ResolvedTo(RAW_FIR)] interface Iterator<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun next(): T
+
+        public? final? operator [ResolvedTo(RAW_FIR)] fun hasNext(): Boolean
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterator<[ResolvedTo(RAW_FIR)] out T> : Iterator<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun remove(): Unit
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Iterable<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterable<[ResolvedTo(RAW_FIR)] out T> : kotlin.collections.Iterable<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun iterator(): MutableIterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Collection<[ResolvedTo(RAW_FIR)] out E> : Iterable<E> {
+        public? open? override [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<E>
+
+    }
+
+FILE: [ResolvedTo(IMPORTS)] main.kt
+    public? final? [ResolvedTo(RAW_FIR)] fun foo([ResolvedTo(RAW_FIR)] collection: Collection<String>): R|kotlin/Unit| { LAZY_BLOCK }
+
+COMPILER_REQUIRED_ANNOTATIONS:
+FILE: [ResolvedTo(RAW_FIR)] lib.kt
+    public final? [ResolvedTo(RAW_FIR)] interface Iterator<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun next(): T
+
+        public? final? operator [ResolvedTo(RAW_FIR)] fun hasNext(): Boolean
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterator<[ResolvedTo(RAW_FIR)] out T> : Iterator<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun remove(): Unit
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Iterable<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterable<[ResolvedTo(RAW_FIR)] out T> : kotlin.collections.Iterable<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun iterator(): MutableIterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Collection<[ResolvedTo(RAW_FIR)] out E> : Iterable<E> {
+        public? open? override [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<E>
+
+    }
+
+FILE: [ResolvedTo(IMPORTS)] main.kt
+    public? final? [ResolvedTo(COMPILER_REQUIRED_ANNOTATIONS)] fun foo([ResolvedTo(COMPILER_REQUIRED_ANNOTATIONS)] collection: Collection<String>): R|kotlin/Unit| { LAZY_BLOCK }
+
+COMPANION_GENERATION:
+FILE: [ResolvedTo(RAW_FIR)] lib.kt
+    public final? [ResolvedTo(RAW_FIR)] interface Iterator<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun next(): T
+
+        public? final? operator [ResolvedTo(RAW_FIR)] fun hasNext(): Boolean
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterator<[ResolvedTo(RAW_FIR)] out T> : Iterator<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun remove(): Unit
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Iterable<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterable<[ResolvedTo(RAW_FIR)] out T> : kotlin.collections.Iterable<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun iterator(): MutableIterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Collection<[ResolvedTo(RAW_FIR)] out E> : Iterable<E> {
+        public? open? override [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<E>
+
+    }
+
+FILE: [ResolvedTo(IMPORTS)] main.kt
+    public? final? [ResolvedTo(COMPANION_GENERATION)] fun foo([ResolvedTo(COMPANION_GENERATION)] collection: Collection<String>): R|kotlin/Unit| { LAZY_BLOCK }
+
+SUPER_TYPES:
+FILE: [ResolvedTo(RAW_FIR)] lib.kt
+    public final? [ResolvedTo(RAW_FIR)] interface Iterator<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun next(): T
+
+        public? final? operator [ResolvedTo(RAW_FIR)] fun hasNext(): Boolean
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterator<[ResolvedTo(RAW_FIR)] out T> : Iterator<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun remove(): Unit
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Iterable<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterable<[ResolvedTo(RAW_FIR)] out T> : kotlin.collections.Iterable<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun iterator(): MutableIterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Collection<[ResolvedTo(RAW_FIR)] out E> : Iterable<E> {
+        public? open? override [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<E>
+
+    }
+
+FILE: [ResolvedTo(IMPORTS)] main.kt
+    public? final? [ResolvedTo(SUPER_TYPES)] fun foo([ResolvedTo(SUPER_TYPES)] collection: Collection<String>): R|kotlin/Unit| { LAZY_BLOCK }
+
+TYPES:
+FILE: [ResolvedTo(RAW_FIR)] lib.kt
+    public final? [ResolvedTo(RAW_FIR)] interface Iterator<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun next(): T
+
+        public? final? operator [ResolvedTo(RAW_FIR)] fun hasNext(): Boolean
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterator<[ResolvedTo(RAW_FIR)] out T> : Iterator<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun remove(): Unit
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Iterable<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterable<[ResolvedTo(RAW_FIR)] out T> : kotlin.collections.Iterable<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun iterator(): MutableIterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Collection<[ResolvedTo(RAW_FIR)] out E> : Iterable<E> {
+        public? open? override [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<E>
+
+    }
+
+FILE: [ResolvedTo(IMPORTS)] main.kt
+    public? final? [ResolvedTo(TYPES)] fun foo([ResolvedTo(TYPES)] collection: R|kotlin/collections/Collection<java/lang/String>|): R|kotlin/Unit| { LAZY_BLOCK }
+
+STATUS:
+FILE: [ResolvedTo(RAW_FIR)] lib.kt
+    public final? [ResolvedTo(RAW_FIR)] interface Iterator<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun next(): T
+
+        public? final? operator [ResolvedTo(RAW_FIR)] fun hasNext(): Boolean
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterator<[ResolvedTo(RAW_FIR)] out T> : Iterator<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun remove(): Unit
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Iterable<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterable<[ResolvedTo(RAW_FIR)] out T> : kotlin.collections.Iterable<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun iterator(): MutableIterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Collection<[ResolvedTo(RAW_FIR)] out E> : Iterable<E> {
+        public? open? override [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<E>
+
+    }
+
+FILE: [ResolvedTo(IMPORTS)] main.kt
+    public final [ResolvedTo(STATUS)] fun foo([ResolvedTo(STATUS)] collection: R|kotlin/collections/Collection<java/lang/String>|): R|kotlin/Unit| { LAZY_BLOCK }
+
+EXPECT_ACTUAL_MATCHING:
+FILE: [ResolvedTo(RAW_FIR)] lib.kt
+    public final? [ResolvedTo(RAW_FIR)] interface Iterator<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun next(): T
+
+        public? final? operator [ResolvedTo(RAW_FIR)] fun hasNext(): Boolean
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterator<[ResolvedTo(RAW_FIR)] out T> : Iterator<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun remove(): Unit
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Iterable<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterable<[ResolvedTo(RAW_FIR)] out T> : kotlin.collections.Iterable<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun iterator(): MutableIterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Collection<[ResolvedTo(RAW_FIR)] out E> : Iterable<E> {
+        public? open? override [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<E>
+
+    }
+
+FILE: [ResolvedTo(IMPORTS)] main.kt
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun foo([ResolvedTo(EXPECT_ACTUAL_MATCHING)] collection: R|kotlin/collections/Collection<java/lang/String>|): R|kotlin/Unit| { LAZY_BLOCK }
+
+CONTRACTS:
+FILE: [ResolvedTo(RAW_FIR)] lib.kt
+    public final? [ResolvedTo(RAW_FIR)] interface Iterator<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun next(): T
+
+        public? final? operator [ResolvedTo(RAW_FIR)] fun hasNext(): Boolean
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterator<[ResolvedTo(RAW_FIR)] out T> : Iterator<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun remove(): Unit
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Iterable<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterable<[ResolvedTo(RAW_FIR)] out T> : kotlin.collections.Iterable<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun iterator(): MutableIterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Collection<[ResolvedTo(RAW_FIR)] out E> : Iterable<E> {
+        public? open? override [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<E>
+
+    }
+
+FILE: [ResolvedTo(IMPORTS)] main.kt
+    public final [ResolvedTo(CONTRACTS)] fun foo([ResolvedTo(CONTRACTS)] collection: R|kotlin/collections/Collection<java/lang/String>|): R|kotlin/Unit| { LAZY_BLOCK }
+
+IMPLICIT_TYPES_BODY_RESOLVE:
+FILE: [ResolvedTo(RAW_FIR)] lib.kt
+    public final? [ResolvedTo(RAW_FIR)] interface Iterator<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun next(): T
+
+        public? final? operator [ResolvedTo(RAW_FIR)] fun hasNext(): Boolean
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterator<[ResolvedTo(RAW_FIR)] out T> : Iterator<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun remove(): Unit
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Iterable<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterable<[ResolvedTo(RAW_FIR)] out T> : kotlin.collections.Iterable<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun iterator(): MutableIterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Collection<[ResolvedTo(RAW_FIR)] out E> : Iterable<E> {
+        public? open? override [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<E>
+
+    }
+
+FILE: [ResolvedTo(IMPORTS)] main.kt
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun foo([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] collection: R|kotlin/collections/Collection<java/lang/String>|): R|kotlin/Unit| { LAZY_BLOCK }
+
+CONSTANT_EVALUATION:
+FILE: [ResolvedTo(RAW_FIR)] lib.kt
+    public final? [ResolvedTo(RAW_FIR)] interface Iterator<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun next(): T
+
+        public? final? operator [ResolvedTo(RAW_FIR)] fun hasNext(): Boolean
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterator<[ResolvedTo(RAW_FIR)] out T> : Iterator<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun remove(): Unit
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Iterable<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterable<[ResolvedTo(RAW_FIR)] out T> : kotlin.collections.Iterable<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun iterator(): MutableIterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Collection<[ResolvedTo(RAW_FIR)] out E> : Iterable<E> {
+        public? open? override [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<E>
+
+    }
+
+FILE: [ResolvedTo(IMPORTS)] main.kt
+    public final [ResolvedTo(CONSTANT_EVALUATION)] fun foo([ResolvedTo(CONSTANT_EVALUATION)] collection: R|kotlin/collections/Collection<java/lang/String>|): R|kotlin/Unit| { LAZY_BLOCK }
+
+ANNOTATION_ARGUMENTS:
+FILE: [ResolvedTo(RAW_FIR)] lib.kt
+    public final? [ResolvedTo(RAW_FIR)] interface Iterator<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun next(): T
+
+        public? final? operator [ResolvedTo(RAW_FIR)] fun hasNext(): Boolean
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterator<[ResolvedTo(RAW_FIR)] out T> : Iterator<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun remove(): Unit
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Iterable<[ResolvedTo(RAW_FIR)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface MutableIterable<[ResolvedTo(RAW_FIR)] out T> : kotlin.collections.Iterable<T> {
+        public? final? [ResolvedTo(RAW_FIR)] fun iterator(): MutableIterator<T>
+
+    }
+    public final? [ResolvedTo(RAW_FIR)] interface Collection<[ResolvedTo(RAW_FIR)] out E> : Iterable<E> {
+        public? open? override [ResolvedTo(RAW_FIR)] fun iterator(): Iterator<E>
+
+    }
+
+FILE: [ResolvedTo(IMPORTS)] main.kt
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun foo([ResolvedTo(ANNOTATION_ARGUMENTS)] collection: R|kotlin/collections/Collection<java/lang/String>|): R|kotlin/Unit| { LAZY_BLOCK }
+
+BODY_RESOLVE:
+FILE: [ResolvedTo(IMPORTS)] lib.kt
+    public final? [ResolvedTo(TYPES)] interface Iterator<[ResolvedTo(TYPES)] out T> : R|kotlin/Any| {
+        public? final? operator [ResolvedTo(RAW_FIR)] fun next(): T
+
+        public? final? operator [ResolvedTo(RAW_FIR)] fun hasNext(): Boolean
+
+    }
+    public final? [ResolvedTo(TYPES)] interface MutableIterator<[ResolvedTo(TYPES)] out T> : R|kotlin/collections/Iterator<T>| {
+        public? final? [ResolvedTo(RAW_FIR)] fun remove(): Unit
+
+    }
+    public abstract [ResolvedTo(STATUS)] interface Iterable<[ResolvedTo(STATUS)] out T> : R|kotlin/Any| {
+        public abstract operator [ResolvedTo(STATUS)] fun iterator(): R|kotlin/collections/Iterator<T>|
+
+    }
+    public abstract [ResolvedTo(STATUS)] interface MutableIterable<[ResolvedTo(STATUS)] out T> : R|kotlin/collections/Iterable<T>| {
+        public abstract override operator [ResolvedTo(STATUS)] fun iterator(): R|kotlin/collections/MutableIterator<T>|
+
+    }
+    public abstract [ResolvedTo(STATUS)] interface Collection<[ResolvedTo(STATUS)] out E> : R|kotlin/collections/Iterable<E>| {
+        public abstract override operator [ResolvedTo(CONTRACTS)] fun iterator(): R|kotlin/collections/Iterator<E>|
+
+    }
+
+FILE: [ResolvedTo(IMPORTS)] main.kt
+    public final [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] collection: R|kotlin/collections/Collection<java/lang/String>|): R|kotlin/Unit| {
+        R|<local>/collection|.R|SubstitutionOverride<kotlin/collections/Collection.iterator: R|kotlin/collections/Iterator<java/lang/String>|>|()
+    }
+
+FILE RAW TO BODY:
+FILE: [ResolvedTo(BODY_RESOLVE)] main.kt
+    public final [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] collection: R|kotlin/collections/Collection<java/lang/String>|): R|kotlin/Unit| {
+        R|<local>/collection|.R|SubstitutionOverride<kotlin/collections/Collection.iterator: R|kotlin/collections/Iterator<java/lang/String>|>|()
+    }
