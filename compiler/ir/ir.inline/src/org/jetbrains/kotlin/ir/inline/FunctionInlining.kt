@@ -703,7 +703,7 @@ private class CallInlining(
                 substituteMap[parameter] = irGetValueWithoutLocation(variableInitializer.symbol)
             } else {
                 val (newVariable, copiedParameter) = createTemporaryVariable(
-                    parameter, variableInitializer, argument.isDefaultArg, callee
+                    parameter, variableInitializer, argument.isDefaultArg
                 )
                 container += newVariable
                 copiedParameter?.let { copiedParameters[parameter] = it }
@@ -724,8 +724,7 @@ private class CallInlining(
     private fun createTemporaryVariable(
         parameter: IrValueParameter,
         variableInitializer: IrExpression,
-        isDefaultArg: Boolean,
-        callee: IrFunction
+        isDefaultArg: Boolean
     ): Pair<IrVariable, IrVariable?> {
         val tmpVar = currentScope.scope.createTemporaryVariable(
             irExpression = IrBlockImpl(
