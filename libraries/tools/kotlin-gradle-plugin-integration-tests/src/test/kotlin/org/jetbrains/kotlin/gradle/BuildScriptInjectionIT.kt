@@ -17,6 +17,7 @@ import org.jetbrains.kotlin.gradle.testbase.*
 import org.jetbrains.kotlin.gradle.plugin.mpp.*
 import org.jetbrains.kotlin.gradle.uklibs.*
 import org.jetbrains.kotlin.gradle.testbase.useAsZipFile
+import org.junit.jupiter.api.Disabled
 import java.io.File
 import kotlin.test.*
 
