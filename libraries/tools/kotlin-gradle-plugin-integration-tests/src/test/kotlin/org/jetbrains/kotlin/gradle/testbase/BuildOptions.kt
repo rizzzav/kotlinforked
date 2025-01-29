@@ -78,7 +78,7 @@ data class BuildOptions(
      *
      * https://docs.gradle.org/current/userguide/file_system_watching.html#logging
      */
-    val verboseVfs: Boolean? = null,
+    val verboseVfsLogging: Boolean? = null,
 ) {
     enum class ConfigurationCacheValue {
 
@@ -216,8 +216,8 @@ data class BuildOptions(
             arguments.add("--no-watch-fs")
         }
 
-        if (verboseVfs != null) {
-            arguments.add("-Dorg.gradle.vfs.verbose=$verboseVfs")
+        if (verboseVfsLogging != null) {
+            arguments.add("-Dorg.gradle.vfs.verbose=$verboseVfsLogging")
         }
 
         arguments.add(if (buildCacheEnabled) "--build-cache" else "--no-build-cache")
