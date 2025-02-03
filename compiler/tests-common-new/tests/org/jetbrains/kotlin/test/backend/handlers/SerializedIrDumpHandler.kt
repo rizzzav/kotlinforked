@@ -167,6 +167,8 @@ class SerializedIrDumpHandler(
                     false
                 }
             },
+
+            printSourceOffsets = true
         )
 
         val builder = dumper.builderForModule(module.name)
