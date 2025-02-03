@@ -16,6 +16,7 @@ import org.jetbrains.kotlin.backend.common.serialization.proto.IrVarargElement.V
 import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.IrStatement
+import org.jetbrains.kotlin.ir.UNDEFINED_OFFSET
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.expressions.impl.*
@@ -278,15 +279,11 @@ class IrBodyDeserializer(
     }
 
     fun deserializeAnnotation(proto: ProtoConstructorCall): IrConstructorCall {
-        // TODO: use real coordinates
-        val startOffset = 0
-        val endOffset = 0
-
         if (settings.useNullableAnyAsAnnotationConstructorCallType)
-            return deserializeConstructorCall(proto, startOffset, endOffset, builtIns.anyNType)
+            return deserializeConstructorCall(proto, UNDEFINED_OFFSET, UNDEFINED_OFFSET, builtIns.anyNType)
         else {
             val irType = IrAnnotationType()
-            return deserializeConstructorCall(proto, startOffset, endOffset, irType).also { irType.irConstructorCall = it }
+            return deserializeConstructorCall(proto, UNDEFINED_OFFSET, UNDEFINED_OFFSET, irType).also { irType.irConstructorCall = it }
         }
     }
 
