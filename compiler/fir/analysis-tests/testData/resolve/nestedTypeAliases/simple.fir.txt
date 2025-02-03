@@ -16,4 +16,24 @@ FILE: simple.kt
             ^test R|/A.A|()
         }
 
+        public open class Nested : R|kotlin/Any| {
+            public constructor(): R|C.Nested| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+        public final typealias NestedTA = R|C.Nested|
+
+        public final class SubNested : R|{C.NestedTA=} C.Nested| {
+            public constructor(): R|C.SubNested| {
+                super<R|{C.NestedTA=} C.Nested|>()
+            }
+
+        }
+
+        public final fun test1(): R|C.Nested| {
+            ^test1 R|/C.SubNested.SubNested|()
+        }
+
     }

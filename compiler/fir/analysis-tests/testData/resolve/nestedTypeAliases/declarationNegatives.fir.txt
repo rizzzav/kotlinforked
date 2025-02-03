@@ -1,0 +1,118 @@
+FILE: declarationNegatives.kt
+    public open class Generic<T> : R|kotlin/Any| {
+        public constructor<T>(): R|Generic<T>| {
+            super<R|kotlin/Any|>()
+        }
+
+    }
+    public final class TAOwner : R|kotlin/Any| {
+        public constructor(): R|TAOwner| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final typealias DirectRecursiveTA = <ERROR TYPE REF: Loop in supertypes involving /TAOwner.DirectRecursiveTA>
+
+        public final typealias IndirectRecursiveTA = <ERROR TYPE REF: Loop in supertypes involving /TAOwner.IndirectRecursiveTA>
+
+        public final typealias IndirectRecursiveTA2 = <ERROR TYPE REF: Loop in supertypes involving /TAOwner.IndirectRecursiveTA2>
+
+        public final typealias IndirectRecursiveTA3 = <ERROR TYPE REF: Loop in supertypes involving /TAOwner.IndirectRecursiveTA3>
+
+        public final typealias TypeParamVariance<in T1, out T2> = R|kotlin/collections/List<T1>|
+
+        public final typealias Bounds<T1 : <ERROR TYPE REF: Wrong number of type arguments>> = R|kotlin/collections/List<T1>|
+
+        public final typealias FunTA = <ERROR TYPE REF: Loop in supertypes involving /TAOwner.FunTA>
+
+        public final typealias RecursiveFunTA = <ERROR TYPE REF: Loop in supertypes involving /TAOwner.RecursiveFunTA>
+
+        public final var prop: R|kotlin/String| = String()
+            public get(): R|kotlin/String| {
+                local final typealias LocalInGet = <ERROR TYPE REF: Wrong number of type arguments>
+
+                ^ this@R|/TAOwner|.F|/TAOwner.prop|
+            }
+            public set(value: R|kotlin/String|): R|kotlin/Unit|
+
+        public final fun testLocalTA(): R|kotlin/Unit| {
+            local final typealias LocalInMethod = <ERROR TYPE REF: Wrong number of type arguments>
+
+            local final class Local : R|kotlin/Any| {
+                public constructor(): R|<local>/Local| {
+                    super<R|kotlin/Any|>()
+                }
+
+                local final typealias LocalInLocalClass = <ERROR TYPE REF: Wrong number of type arguments>
+
+            }
+
+        }
+
+        init {
+            local final typealias LocalInInit = <ERROR TYPE REF: Wrong number of type arguments>
+
+        }
+
+        public final class Nested : R|kotlin/Any| {
+            public constructor(): R|TAOwner.Nested| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+        public final typealias Nested = <ERROR TYPE REF: Wrong number of type arguments>
+
+        public final inner class Inner : R|kotlin/Any| {
+            public TAOwner.constructor(): R|TAOwner.Inner| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+        public final typealias Inner = <ERROR TYPE REF: Wrong number of type arguments>
+
+        public final typealias Conflicting = <ERROR TYPE REF: Wrong number of type arguments>
+
+        public final val Conflicting: R|kotlin/String| = String()
+            public get(): R|kotlin/String|
+
+        public final typealias OverrideTA = R|kotlin/String|
+
+        public final typealias LateinitTA = R|kotlin/String|
+
+        public final typealias AbstractTa = R|kotlin/String|
+
+        public final typealias FinalTA = R|kotlin/String|
+
+        public final typealias OpenTA = R|kotlin/String|
+
+    }
+    public final class RecursiveInheritance : <ERROR TYPE REF: Loop in supertypes involving /RecursiveInheritance> {
+        public constructor(): R|RecursiveInheritance| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final typealias TA = <ERROR TYPE REF: Loop in supertypes involving /RecursiveInheritance.TA>
+
+    }
+    public final class CapturingTAOwner<T> : R|kotlin/Any| {
+        public constructor<T>(): R|CapturingTAOwner<T>| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final typealias Capturing = R|kotlin/collections/List<ERROR CLASS: Symbol not found for T>|
+
+        public final typealias Capturing2<T2> = R|kotlin/collections/Map<ERROR CLASS: Symbol not found for T, T2>|
+
+        public final inner class Inner<T, Outer(T)> : R|kotlin/Any| {
+            public CapturingTAOwner<T>.constructor<T>(): R|CapturingTAOwner.Inner<T, T>| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+        public final typealias Capturing3 = R|CapturingTAOwner.Inner<kotlin/Int, T>|
+
+        public final typealias FunTA = R|(kotlin/Int, kotlin/collections/List<ERROR CLASS: Symbol not found for T>) -> kotlin/Unit|
+
+    }

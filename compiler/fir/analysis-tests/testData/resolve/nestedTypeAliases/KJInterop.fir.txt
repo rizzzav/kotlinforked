@@ -1,0 +1,81 @@
+FILE: main.kt
+    public open class KJInteropClass : R|kotlin/Any| {
+        public constructor(): R|KJInteropClass| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final typealias JClassTA = R|JClass|
+
+        public final typealias JClassPublicInnerTA = R|JClass.PublicInner|
+
+        public final typealias JClassPublicStaticTA = R|JClass.PublicStatic|
+
+        public final typealias JGenericTA<T> = R|JGeneric<T>|
+
+        public final typealias JGenericPublicInnerTA<T> = R|JGeneric.PublicInner<T>|
+
+        public final typealias JRecordTA = R|JRecord|
+
+        public final fun testJClassTAResolution(i: R|{KJInteropClass.JClassTA=} JClass|): R|JClass| {
+            ^testJClassTAResolution R|<local>/i|
+        }
+
+        public final fun testJClassPublicInnerTAResolution(i: R|{KJInteropClass.JClassPublicInnerTA=} JClass.PublicInner|): R|JClass.PublicInner| {
+            ^testJClassPublicInnerTAResolution R|<local>/i|
+        }
+
+        public final fun testJClassPublicStaticTAResolution(i: R|{KJInteropClass.JClassPublicStaticTA=} JClass.PublicStatic|): R|JClass.PublicStatic| {
+            ^testJClassPublicStaticTAResolution R|<local>/i|
+        }
+
+        public final fun testJGenericTAResolution(i: R|{KJInteropClass.JGenericTA<KJInteropClass>=} JGeneric<KJInteropClass>|): R|JGeneric<KJInteropClass>| {
+            ^testJGenericTAResolution R|<local>/i|
+        }
+
+        public final fun testJGenericPublicInnerTAResolution(i: R|{KJInteropClass.JGenericPublicInnerTA<KJInteropClass>=} JGeneric.PublicInner<KJInteropClass>|): R|JGeneric.PublicInner<KJInteropClass>| {
+            ^testJGenericPublicInnerTAResolution R|<local>/i|
+        }
+
+    }
+    public final class KJInteropSubJClass : R|JClass| {
+        public constructor(): R|KJInteropSubJClass| {
+            super<R|JClass|>()
+        }
+
+        public final typealias PublicStatic = R|kotlin/String|
+
+        public final fun testConflictingTA(arg: R|{KJInteropSubJClass.PublicStatic=} kotlin/String|): R|kotlin/Unit| {
+            R|<local>/arg|.R|kotlin/text/uppercase|()
+        }
+
+    }
+    public final class NegativesHolder : R|kotlin/Any| {
+        public constructor(): R|NegativesHolder| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final typealias JClassProtectedInnerTA = R|JClass.ProtectedInner|
+
+        public final typealias JClassPrivateInnerTA = <ERROR TYPE REF: HIDDEN: JClass.PrivateInner is invisible>
+
+        public final typealias JClassProtectedStaticTA = R|JClass.ProtectedStatic|
+
+        public final typealias JClassPrivateStaticTA = <ERROR TYPE REF: HIDDEN: JClass.PrivateStatic is invisible>
+
+        public final typealias JGenericProtectedInnerTA<T> = R|JGeneric.ProtectedInner<T>|
+
+        public final typealias JGenericPrivateInnerTA<T> = <ERROR TYPE REF: HIDDEN: JGeneric.PrivateInner is invisible>
+
+        public final fun testJClassProtectedInnerTAResolution(i: R|{NegativesHolder.JClassProtectedInnerTA=} JClass.ProtectedInner|): R|JClass.ProtectedInner| {
+            ^testJClassProtectedInnerTAResolution R|<local>/i|
+        }
+
+        public final fun testJClassProtectedStaticTAResolution(i: R|{NegativesHolder.JClassProtectedStaticTA=} JClass.ProtectedStatic|): R|JClass.ProtectedStatic| {
+            ^testJClassProtectedStaticTAResolution R|<local>/i|
+        }
+
+        public final fun testJGenericProtectedInnerTAResolution(i: R|{NegativesHolder.JGenericProtectedInnerTA<ERROR CLASS: Wrong number of type arguments>=} JGeneric.ProtectedInner<ERROR CLASS: Wrong number of type arguments>|): R|JGeneric.ProtectedInner<ERROR CLASS: Wrong number of type arguments>| {
+            ^testJGenericProtectedInnerTAResolution R|<local>/i|
+        }
+
+    }

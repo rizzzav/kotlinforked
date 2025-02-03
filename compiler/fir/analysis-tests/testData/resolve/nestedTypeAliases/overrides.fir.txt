@@ -1,0 +1,130 @@
+FILE: overrides.kt
+    public final class TopLevelClass1 : R|kotlin/Any| {
+        public constructor(): R|TopLevelClass1| {
+            super<R|kotlin/Any|>()
+        }
+
+    }
+    public final class TopLevelClass2 : R|kotlin/Any| {
+        public constructor(): R|TopLevelClass2| {
+            super<R|kotlin/Any|>()
+        }
+
+    }
+    public final class TopLevelClass3 : R|kotlin/Any| {
+        public constructor(): R|TopLevelClass3| {
+            super<R|kotlin/Any|>()
+        }
+
+    }
+    public open class AliasHolder : R|kotlin/Any| {
+        public constructor(): R|AliasHolder| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final typealias TopLevelClassTA = R|TopLevelClass1|
+
+        public final class Nested : R|kotlin/Any| {
+            public constructor(): R|AliasHolder.Nested| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+        public final typealias NestedTA = R|AliasHolder.Nested|
+
+        public final inner class Inner : R|kotlin/Any| {
+            public AliasHolder.constructor(): R|AliasHolder.Inner| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+        public final typealias InnerTA = R|AliasHolder.Inner|
+
+        private final val testTopLevel: R|{AliasHolder.TopLevelClassTA=} TopLevelClass1| = R|/TopLevelClass1.TopLevelClass1|()
+            private get(): R|{AliasHolder.TopLevelClassTA=} TopLevelClass1|
+
+        private final val nestNested: R|{AliasHolder.NestedTA=} AliasHolder.Nested| = R|/AliasHolder.Nested.Nested|()
+            private get(): R|{AliasHolder.NestedTA=} AliasHolder.Nested|
+
+        private final val testInner: R|{AliasHolder.InnerTA=} AliasHolder.Inner| = R|/AliasHolder.AliasHolder|().R|/AliasHolder.Inner.Inner|()
+            private get(): R|{AliasHolder.InnerTA=} AliasHolder.Inner|
+
+    }
+    public open class OverridingSubAliasHolder : R|AliasHolder| {
+        public constructor(): R|OverridingSubAliasHolder| {
+            super<R|AliasHolder|>()
+        }
+
+        public final typealias TopLevelClassTA = R|TopLevelClass2|
+
+        public final class Nested2 : R|kotlin/Any| {
+            public constructor(): R|OverridingSubAliasHolder.Nested2| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+        public final typealias NestedTA = R|OverridingSubAliasHolder.Nested2|
+
+        public final inner class Inner2 : R|kotlin/Any| {
+            public OverridingSubAliasHolder.constructor(): R|OverridingSubAliasHolder.Inner2| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+        public final typealias InnerTA = R|OverridingSubAliasHolder.Inner2|
+
+        private final val testTopLevel: R|{OverridingSubAliasHolder.TopLevelClassTA=} TopLevelClass2| = R|/TopLevelClass2.TopLevelClass2|()
+            private get(): R|{OverridingSubAliasHolder.TopLevelClassTA=} TopLevelClass2|
+
+        private final val nestNested: R|{OverridingSubAliasHolder.NestedTA=} OverridingSubAliasHolder.Nested2| = R|/OverridingSubAliasHolder.Nested2.Nested2|()
+            private get(): R|{OverridingSubAliasHolder.NestedTA=} OverridingSubAliasHolder.Nested2|
+
+        private final val testInner: R|{OverridingSubAliasHolder.InnerTA=} OverridingSubAliasHolder.Inner2| = R|/OverridingSubAliasHolder.OverridingSubAliasHolder|().R|/OverridingSubAliasHolder.Inner2.Inner2|()
+            private get(): R|{OverridingSubAliasHolder.InnerTA=} OverridingSubAliasHolder.Inner2|
+
+    }
+    public open class SubAliasHolder : R|AliasHolder| {
+        public constructor(): R|SubAliasHolder| {
+            super<R|AliasHolder|>()
+        }
+
+    }
+    public open class SubSubAliasHolder : R|SubAliasHolder| {
+        public constructor(): R|SubSubAliasHolder| {
+            super<R|SubAliasHolder|>()
+        }
+
+        public final typealias TopLevelClassTA = R|TopLevelClass3|
+
+        public final class Nested3 : R|kotlin/Any| {
+            public constructor(): R|SubSubAliasHolder.Nested3| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+        public final typealias NestedTA = R|SubSubAliasHolder.Nested3|
+
+        public final inner class Inner3 : R|kotlin/Any| {
+            public SubSubAliasHolder.constructor(): R|SubSubAliasHolder.Inner3| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+        public final typealias InnerTA = R|SubSubAliasHolder.Inner3|
+
+        private final val testTopLevel: R|{SubSubAliasHolder.TopLevelClassTA=} TopLevelClass3| = R|/TopLevelClass3.TopLevelClass3|()
+            private get(): R|{SubSubAliasHolder.TopLevelClassTA=} TopLevelClass3|
+
+        private final val nestNested: R|{SubSubAliasHolder.NestedTA=} SubSubAliasHolder.Nested3| = R|/SubSubAliasHolder.Nested3.Nested3|()
+            private get(): R|{SubSubAliasHolder.NestedTA=} SubSubAliasHolder.Nested3|
+
+        private final val testInner: R|{SubSubAliasHolder.InnerTA=} SubSubAliasHolder.Inner3| = this@R|/SubSubAliasHolder|.R|/SubSubAliasHolder.Inner3.Inner3|()
+            private get(): R|{SubSubAliasHolder.InnerTA=} SubSubAliasHolder.Inner3|
+
+    }

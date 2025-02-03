@@ -1,0 +1,63 @@
+FILE: companion.kt
+    public final class Class : R|kotlin/Any| {
+        public constructor(): R|Class| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final class Nested : R|kotlin/Any| {
+            public constructor(): R|Class.Nested| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+        public final typealias NestedTA = R|Class.Nested|
+
+        public final class NestedWithCompanion : R|kotlin/Any| {
+            public constructor(): R|Class.NestedWithCompanion| {
+                super<R|kotlin/Any|>()
+            }
+
+            public final companion object Companion : R|kotlin/Any| {
+                private constructor(): R|Class.NestedWithCompanion.Companion| {
+                    super<R|kotlin/Any|>()
+                }
+
+                public final val prop1: R|kotlin/Boolean| = Boolean(true)
+                    public get(): R|kotlin/Boolean|
+
+                public final val prop2: R|kotlin/String| = String()
+                    public get(): R|kotlin/String|
+
+            }
+
+        }
+
+        public final typealias NestedWithCompanionTA = R|Class.NestedWithCompanion|
+
+        public final object Object : R|kotlin/Any| {
+            private constructor(): R|Class.Object| {
+                super<R|kotlin/Any|>()
+            }
+
+            public final val prop1: R|kotlin/Boolean| = Boolean(true)
+                public get(): R|kotlin/Boolean|
+
+            public final val prop2: R|kotlin/String| = String()
+                public get(): R|kotlin/String|
+
+        }
+
+        public final typealias ObjectTA = R|Class.Object|
+
+        public final fun test(): R|kotlin/Unit| {
+            lval companionObject: R|Class.NestedWithCompanion.Companion| = Q|Class.NestedWithCompanionTA|
+            R|<local>/companionObject|.R|/Class.NestedWithCompanion.Companion.prop1|.R|kotlin/Boolean.not|()
+            R|<local>/companionObject|.R|/Class.NestedWithCompanion.Companion.prop2|.R|kotlin/text/uppercase|()
+            lval simpleObject: R|Class.Object| = Q|Class.ObjectTA|
+            R|<local>/simpleObject|.R|/Class.Object.prop1|.R|kotlin/Boolean.not|()
+            R|<local>/simpleObject|.R|/Class.Object.prop2|.R|kotlin/text/uppercase|()
+            lval negative: R|kotlin/Unit| = Q|Class.NestedTA|
+        }
+
+    }

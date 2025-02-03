@@ -1,0 +1,159 @@
+FILE: innerRHSInGeneric.kt
+    package TAInGeneric
+
+    public final class Generic<T> : R|kotlin/Any| {
+        public constructor<T>(): R|TAInGeneric/Generic<T>| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final inner class Inner<Outer(T)> : R|kotlin/Any| {
+            public TAInGeneric/Generic<T>.constructor(): R|TAInGeneric/Generic.Inner<T>| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+        public final fun method(arg: R|T|): R|T| {
+            ^method R|<local>/arg|
+        }
+
+    }
+    public open class GenericTAOwner<TO> : R|kotlin/Any| {
+        public constructor<TO>(): R|TAInGeneric/GenericTAOwner<TO>| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final typealias TA = R|TAInGeneric/Generic<ERROR CLASS: Symbol not found for TO>|
+
+        public final typealias TA2 = R|TAInGeneric/Generic<TAInGeneric/GenericTAOwner<ERROR CLASS: Symbol not found for TO>>|
+
+        public final typealias TA3 = <ERROR TYPE REF: Symbol not found for TO>
+
+        public final typealias GenericTA = R|TAInGeneric/Generic<kotlin/Int>|
+
+        public final fun test10(arg: R|{TAInGeneric/GenericTAOwner.GenericTA=} TAInGeneric/Generic<kotlin/Int>|): R|TAInGeneric/Generic<kotlin/Int>| {
+            ^test10 R|<local>/arg|
+        }
+
+        public final typealias GenericTAWithTP<T> = R|TAInGeneric/Generic<T>|
+
+        public final fun <T> test20(): R|TAInGeneric/Generic<T>| {
+            ^test20 R|TAInGeneric/Generic.Generic|<R|T|>()
+        }
+
+        public final typealias GenericInnerTA = R|TAInGeneric/Generic.Inner<kotlin/Int>|
+
+        public final fun test40(): R|TAInGeneric/Generic.Inner<kotlin/Int>| {
+            ^test40 R|TAInGeneric/Generic.Generic|<R|kotlin/Int|>().R|TAInGeneric/Generic.Inner.Inner|()
+        }
+
+        public final typealias GenericInnerTAWithTP<T> = R|TAInGeneric/Generic.Inner<T>|
+
+        public final fun <T> test41(): R|TAInGeneric/Generic.Inner<T>| {
+            ^test41 R|TAInGeneric/Generic.Generic|<R|T|>().R|TAInGeneric/Generic.Inner.Inner|<R|T|>()
+        }
+
+        public final inner class Inner<Outer(TO)> : R|kotlin/Any| {
+            public TAInGeneric/GenericTAOwner<TO>.constructor(): R|TAInGeneric/GenericTAOwner.Inner<TO>| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+        public final typealias WrongInnerTA = R|TAInGeneric/GenericTAOwner.Inner<TO>|
+
+        public final typealias WrongInnerTA2 = R|TAInGeneric/GenericTAOwner.Inner<ERROR CLASS: Symbol not found for TO>|
+
+        public final typealias InnerTA = R|TAInGeneric/GenericTAOwner.Inner<kotlin/Int>|
+
+        public final fun test410(): R|TAInGeneric/GenericTAOwner.Inner<kotlin/Int>| {
+            ^test410 R|TAInGeneric/GenericTAOwner.GenericTAOwner|<R|kotlin/Int|>().R|TAInGeneric/GenericTAOwner.Inner.Inner|()
+        }
+
+        public final fun test411(): R|TAInGeneric/GenericTAOwner.Inner<kotlin/Int>| {
+            ^test411 this@R|TAInGeneric/GenericTAOwner|.R|TAInGeneric/GenericTAOwner.Inner.Inner<None of the following candidates is applicable because of receiver type mismatch: [TAInGeneric/GenericTAOwner.Inner.Inner]>#|()
+        }
+
+        public final fun test412(): R|TAInGeneric/GenericTAOwner.Inner<TO>| {
+            ^test412 this@R|TAInGeneric/GenericTAOwner|.R|TAInGeneric/GenericTAOwner.Inner.Inner<None of the following candidates is applicable because of receiver type mismatch: [TAInGeneric/GenericTAOwner.Inner.Inner]>#|()
+        }
+
+        public final fun test413(): R|TAInGeneric/GenericTAOwner.Inner<TO>| {
+            ^test413 R|TAInGeneric/GenericTAOwner.GenericTAOwner|<R|TO|>().R|TAInGeneric/GenericTAOwner.Inner.Inner<None of the following candidates is applicable because of receiver type mismatch: [TAInGeneric/GenericTAOwner.Inner.Inner]>#|()
+        }
+
+        public final fun test414(): R|TAInGeneric/GenericTAOwner.Inner<TO>| {
+            ^test414 this@R|TAInGeneric/GenericTAOwner|.R|TAInGeneric/GenericTAOwner.Inner.Inner<None of the following candidates is applicable because of receiver type mismatch: [TAInGeneric/GenericTAOwner.Inner.Inner]>#|()
+        }
+
+        public final fun test415(): R|TAInGeneric/GenericTAOwner.Inner<TO>| {
+            ^test415 R|TAInGeneric/GenericTAOwner.GenericTAOwner|<R|kotlin/Int|>().R|TAInGeneric/GenericTAOwner.Inner.Inner|()
+        }
+
+        public final typealias InnerTAWithTP<T> = R|TAInGeneric/GenericTAOwner.Inner<T>|
+
+        public final fun test50(): R|TAInGeneric/GenericTAOwner.Inner<TO>| {
+            ^test50 this@R|TAInGeneric/GenericTAOwner|.R|TAInGeneric/GenericTAOwner.Inner.Inner|<R|TO|>()
+        }
+
+        public final fun test51(): R|TAInGeneric/GenericTAOwner.Inner<TO>| {
+            ^test51 R|TAInGeneric/GenericTAOwner.GenericTAOwner|<R|TO|>().R|TAInGeneric/GenericTAOwner.Inner.Inner|<R|TO|>()
+        }
+
+        public final fun <T> test52(): R|TAInGeneric/GenericTAOwner.Inner<TO>| {
+            ^test52 this@R|TAInGeneric/GenericTAOwner|.R|TAInGeneric/GenericTAOwner.Inner.Inner<None of the following candidates is applicable because of receiver type mismatch: [TAInGeneric/GenericTAOwner.Inner.Inner]>#|<R|T|>()
+        }
+
+        public final fun test53(): R|TAInGeneric/GenericTAOwner.Inner<TO>| {
+            ^test53 this@R|TAInGeneric/GenericTAOwner|.R|TAInGeneric/GenericTAOwner.Inner.Inner|<R|TO|>()
+        }
+
+        public final inner class InnerGeneric<TI, Outer(TO)> : R|kotlin/Any| {
+            public TAInGeneric/GenericTAOwner<TO>.constructor<TI>(): R|TAInGeneric/GenericTAOwner.InnerGeneric<TI, TO>| {
+                super<R|kotlin/Any|>()
+            }
+
+        }
+
+        public final typealias WrongInnerGenericTA<T> = R|TAInGeneric/GenericTAOwner.InnerGeneric<T, TO>|
+
+        public final typealias WrongInnerGenericTA2<T> = R|TAInGeneric/GenericTAOwner.InnerGeneric<T, ERROR CLASS: Symbol not found for TO>|
+
+        public final typealias InnerGenericTA<T> = R|TAInGeneric/GenericTAOwner.InnerGeneric<kotlin/Int, T>|
+
+        public final fun <T> test61(): R|TAInGeneric/GenericTAOwner.InnerGeneric<kotlin/Int, T>| {
+            ^test61 R|TAInGeneric/GenericTAOwner.GenericTAOwner|<R|T|>().R|TAInGeneric/GenericTAOwner.InnerGeneric.InnerGeneric|<R|T|>()
+        }
+
+        public final fun test62(): R|TAInGeneric/GenericTAOwner.InnerGeneric<kotlin/Int, TO>| {
+            ^test62 this@R|TAInGeneric/GenericTAOwner|.R|TAInGeneric/GenericTAOwner.InnerGeneric.InnerGeneric|<R|TO|>()
+        }
+
+        public final typealias InnerGenericTA2<T> = R|TAInGeneric/GenericTAOwner.InnerGeneric<ERROR CLASS: Symbol not found for TO, T>|
+
+        public final fun <T> test71(): R|TAInGeneric/GenericTAOwner.InnerGeneric<TO, T>| {
+            ^test71 R|TAInGeneric/GenericTAOwner.GenericTAOwner|<R|T|>().R|TAInGeneric/GenericTAOwner.InnerGeneric.InnerGeneric|<R|T|>()
+        }
+
+        public final fun test72(): R|TAInGeneric/GenericTAOwner.InnerGeneric<TO, TO>| {
+            ^test72 this@R|TAInGeneric/GenericTAOwner|.R|TAInGeneric/GenericTAOwner.InnerGeneric.InnerGeneric|<R|TO|>()
+        }
+
+        public final typealias TAtoClassThatHasInnerInTypeArgument = R|TAInGeneric/Generic<TAInGeneric/GenericTAOwner.Inner<TO>>|
+
+        public final typealias TAtoClassThatHasTAtoInnerInTypeArgument = R|TAInGeneric/Generic<TAInGeneric/GenericTAOwner.WrongInnerTA>|
+
+        public final typealias TAWithExplicitParameterInTypeArgument = R|TAInGeneric/Generic<TAInGeneric/GenericTAOwner.Inner<ERROR CLASS: Symbol not found for TO>>|
+
+        public final typealias TAWithNonCapturingParameterInTypeArgument<K> = R|TAInGeneric/Generic<TAInGeneric/GenericTAOwner.Inner<K>>|
+
+        public final typealias TAtoInnerAndInnerInTypeArgument<L> = R|TAInGeneric/GenericTAOwner.InnerGeneric<TAInGeneric/GenericTAOwner.InnerGeneric<L, TO>, TO>|
+
+    }
+    public final typealias GenericTAOwnerInnerTA = R|TAInGeneric/GenericTAOwner.Inner<kotlin/Int>|
+    public final fun test(): R|kotlin/Unit| {
+        R|TAInGeneric/GenericTAOwner.GenericTAOwner|<R|kotlin/Int|>().<Unresolved name: ClassInnerTA>#()
+        R|TAInGeneric/GenericTAOwner.GenericTAOwner|<R|kotlin/Int|>().R|TAInGeneric/GenericTAOwner.Inner.Inner|()
+        R|TAInGeneric/GenericTAOwner.GenericTAOwner|<R|kotlin/Int|>().R|TAInGeneric/GenericTAOwner.Inner.Inner|()
+        R|TAInGeneric/GenericTAOwner.GenericTAOwner|<R|kotlin/Int|>().R|TAInGeneric/GenericTAOwner.Inner.Inner|<R|kotlin/Int|>()
+    }

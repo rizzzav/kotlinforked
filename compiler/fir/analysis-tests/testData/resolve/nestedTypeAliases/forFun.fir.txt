@@ -1,0 +1,38 @@
+FILE: forFun.kt
+    public final class Generic<T> : R|kotlin/Any| {
+        public constructor<T>(): R|Generic<T>| {
+            super<R|kotlin/Any|>()
+        }
+
+    }
+    public final class TAOwner : R|kotlin/Any| {
+        public constructor(): R|TAOwner| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final typealias GenericTA<T> = R|Generic<T>|
+
+        public final typealias FunTA = R|(kotlin/Int, TAOwner.GenericTA<kotlin/String>) -> kotlin/Unit|
+
+        public final typealias GenericFunTA<T> = R|(T) -> kotlin/Boolean|
+
+        public final fun testTypeAnnotationPosition(funArg: R|{TAOwner.FunTA=} (kotlin/Int, TAOwner.GenericTA<kotlin/String>) -> kotlin/Unit|, genericFunArg: R|{TAOwner.GenericFunTA<kotlin/Int>=} (kotlin/Int) -> kotlin/Boolean|): R|kotlin/Unit| {
+            R|<local>/funArg|.R|SubstitutionOverride<kotlin/Function2.invoke: R|kotlin/Unit|>|(Int(1), R|/Generic.Generic|<R|kotlin/String|>())
+            R|<local>/genericFunArg|.R|SubstitutionOverride<kotlin/Function1.invoke: R|kotlin/Boolean|>|(Int(1))
+        }
+
+        public final fun testReturnPosition(): R|{TAOwner.FunTA=} (kotlin/Int, TAOwner.GenericTA<kotlin/String>) -> kotlin/Unit| {
+            ^testReturnPosition fun <anonymous>(i: R|kotlin/Int|, s: R|{TAOwner.GenericTA<kotlin/String>=} Generic<kotlin/String>|): R|kotlin/Unit| <inline=Unknown>  {
+                ^ Unit
+            }
+
+        }
+
+        public final fun testReturnPosition2(): R|{TAOwner.GenericFunTA<kotlin/String>=} (kotlin/String) -> kotlin/Boolean| {
+            ^testReturnPosition2 fun <anonymous>(s: R|kotlin/String|): R|kotlin/Boolean| <inline=Unknown>  {
+                ^ Boolean(true)
+            }
+
+        }
+
+    }

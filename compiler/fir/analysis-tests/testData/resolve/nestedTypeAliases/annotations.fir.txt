@@ -1,0 +1,21 @@
+FILE: annotations.kt
+    @R|kotlin/annotation/Target|(allowedTargets = vararg(R|kotlin/annotation/AnnotationTarget.TYPEALIAS|)) public final annotation class TATarget : R|kotlin/Annotation| {
+        public constructor(): R|TATarget| {
+            super<R|kotlin/Any|>()
+        }
+
+    }
+    public final class Class : R|kotlin/Any| {
+        public constructor(): R|Class| {
+            super<R|kotlin/Any|>()
+        }
+
+        @R|TATarget|() public final typealias Annotated1 = R|kotlin/String|
+
+        @R|kotlin/Deprecated|(message = String(test)) public final typealias Annotated2 = R|kotlin/String|
+
+    }
+    public final fun accessAnnotatedTA(): R|kotlin/Unit| {
+        lvar instanceOfAnnotated1TA: R|kotlin/String| = Q|Class|.R|kotlin/String.String|()
+        lvar instanceOfAnnotated2TA: R|kotlin/String| = Q|Class|.R|kotlin/String.String|()
+    }
