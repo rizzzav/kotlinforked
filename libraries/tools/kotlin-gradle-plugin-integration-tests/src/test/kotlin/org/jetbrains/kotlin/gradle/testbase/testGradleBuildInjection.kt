@@ -9,18 +9,18 @@ import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.Project
 import org.gradle.api.flow.*
-import org.gradle.api.plugins.JavaPluginExtension
-import org.gradle.api.publish.PublishingExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.gradle.api.initialization.Settings
 import org.gradle.api.initialization.dsl.ScriptHandler
+import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
+import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.tasks.Input
 import org.gradle.internal.exceptions.MultiCauseException
 import org.gradle.internal.extensions.core.serviceOf
 import org.gradle.util.GradleVersion
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.extraProperties
 import java.io.File
 import java.io.ObjectInputStream
@@ -39,7 +39,7 @@ interface GradleBuildScriptInjection<T> : Serializable {
  */
 class UndispatchedInjection<Context, Target>(
     val instantiateInjectionContext: (Target) -> Context,
-    val executeInjection: Context.() -> Unit
+    val executeInjection: Context.() -> Unit,
 ) : GradleBuildScriptInjection<Target> {
     override fun inject(target: Target) = instantiateInjectionContext(target).executeInjection()
 }
@@ -100,6 +100,7 @@ class FindMatchingBuildFailureInjection<ExpectedException : Exception>(
         interface Parameters : FlowParameters {
             @get:Input
             val onBuildFinish: Property<(Throwable?) -> Unit>
+
             @get:Input
             val buildWorkResult: Property<BuildWorkResult>
         }
@@ -188,16 +189,18 @@ private fun GradleProject.enableBuildScriptInjectionsIfNecessary(
     if (buildScript.exists()) {
         if (buildScript.readText().contains(buildScriptInjectionsMarker)) return
         buildScript.modify {
-            it.insertBlockToBuildScriptAfterImports("""
-            $buildScriptInjectionsMarker
-            buildscript {
-                println("⚠️ GradleBuildScriptInjections Enabled. Classes from kotlin-gradle-plugin-integration-tests injected to buildscript")               
-                dependencies {
-                    classpath(files('$escapedInjectionClasses'))
+            it.insertBlockToBuildScriptAfterImports(
+                """
+                $buildScriptInjectionsMarker
+                buildscript {
+                    println("⚠️ GradleBuildScriptInjections Enabled. Classes from kotlin-gradle-plugin-integration-tests injected to buildscript")               
+                    dependencies {
+                        classpath(files('$escapedInjectionClasses'))
+                    }
                 }
-            }
-            
-        """.trimIndent())
+                
+                """.trimIndent()
+            )
         }
         return
     }
@@ -206,17 +209,19 @@ private fun GradleProject.enableBuildScriptInjectionsIfNecessary(
         if (buildScriptKts.readText().contains(buildScriptInjectionsMarker)) return
 
         buildScriptKts.modify {
-            it.insertBlockToBuildScriptAfterImports("""
-            $buildScriptInjectionsMarker
-            buildscript {
-                println("⚠️ GradleBuildScriptInjections Enabled. Classes from kotlin-gradle-plugin-integration-tests injected to buildscript")               
-                val classes = files("$escapedInjectionClasses")
-                dependencies {
-                    classpath(classes)
+            it.insertBlockToBuildScriptAfterImports(
+                """
+                $buildScriptInjectionsMarker
+                buildscript {
+                    println("⚠️ GradleBuildScriptInjections Enabled. Classes from kotlin-gradle-plugin-integration-tests injected to buildscript")               
+                    val classes = files("$escapedInjectionClasses")
+                    dependencies {
+                        classpath(classes)
+                    }
                 }
-            }
-
-            """.trimIndent())
+                
+                """.trimIndent()
+            )
         }
         return
     }
@@ -277,6 +282,7 @@ class GradleBuildScriptBuildscriptInjectionContext(
 )
 
 typealias BuildAction = TestProject.(buildArguments: Array<String>, buildOptions: BuildOptions) -> Unit
+
 class ReturnFromBuildScriptAfterExecution<T>(
     val returnContainingGradleProject: TestProject,
     val serializedReturnPath: File,
@@ -321,10 +327,18 @@ class ReturnFromBuildScriptAfterExecution<T>(
 
     companion object {
         val build: BuildAction = { args, options ->
-            build(*args, buildOptions = options)
+            build(
+                buildArguments = args,
+                buildOptions = options,
+                forwardBuildOutput = false,
+            )
         }
         val buildAndFail: BuildAction = { args, options ->
-            buildAndFail(*args, buildOptions = options)
+            buildAndFail(
+                buildArguments = args,
+                buildOptions = options,
+                forwardBuildOutput = false,
+            )
         }
     }
 }
@@ -339,7 +353,7 @@ class ReturnFromBuildScriptAfterExecution<T>(
  */
 internal fun <T> TestProject.buildScriptReturn(
     returnFromProject: GradleProjectBuildScriptInjectionContext.() -> T,
-) = providerBuildScriptReturn {
+): ReturnFromBuildScriptAfterExecution<T> = providerBuildScriptReturn {
     project.provider {
         returnFromProject()
     }
@@ -376,7 +390,9 @@ internal fun <T> TestProject.providerBuildScriptReturn(
 }
 
 sealed class CaughtBuildFailure<ExpectedException : Throwable> : Serializable {
-    data class Expected<ExpectedException : Throwable>(val matchedExceptions: Set<ExpectedException>) : CaughtBuildFailure<ExpectedException>()
+    data class Expected<ExpectedException : Throwable>(val matchedExceptions: Set<ExpectedException>) :
+        CaughtBuildFailure<ExpectedException>()
+
     data class Unexpected<ExpectedException : Throwable>(val stackTraceDump: String) : CaughtBuildFailure<ExpectedException>()
     class UnexpectedMissingBuildFailure<ExpectedException : Throwable> : CaughtBuildFailure<ExpectedException>()
 
@@ -533,7 +549,7 @@ fun TestProject.addAgpToBuildScriptCompilationClasspath(androidVersion: String) 
  * script classpath before plugin application
  */
 fun GradleProject.buildScriptBuildscriptBlockInjection(
-    code: GradleBuildScriptBuildscriptInjectionContext.() -> Unit
+    code: GradleBuildScriptBuildscriptInjectionContext.() -> Unit,
 ) {
     markAsUsingInjections()
     enableBuildScriptInjectionsIfNecessary(
@@ -606,6 +622,7 @@ private val buildscriptBlockStartPattern = Regex("""buildscript\s*\{.*""")
 private fun Path.prependToOrCreateBuildscriptBlock(code: String) = modify {
     it.prependToOrCreateBuildscriptBlock(code)
 }
+
 internal fun String.prependToOrCreateBuildscriptBlock(code: String): String {
     val content = this
     val match = buildscriptBlockStartPattern.find(content)
