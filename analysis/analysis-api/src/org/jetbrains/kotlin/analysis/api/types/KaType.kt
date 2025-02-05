@@ -250,7 +250,7 @@ public abstract class KaFunctionType : KaClassType(), KaContextReceiversOwner {
     /**
      * The function's value parameters, *excluding* receiver types and context receivers.
      *
-     * The parameters covered by [parameters] are exactly the same as parameters, whose types are represented by [parameterTypes]
+     * The parameters covered by [parameters] are exactly the same as the parameters, whose types are represented by [parameterTypes].
      *
      * #### Example
      *
