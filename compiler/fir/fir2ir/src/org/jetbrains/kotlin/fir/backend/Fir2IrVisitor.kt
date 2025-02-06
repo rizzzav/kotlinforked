@@ -1441,7 +1441,7 @@ class Fir2IrVisitor(
 
     private fun generateWhenSubjectVariable(whenExpression: FirWhenExpression): IrVariable? {
         val subjectVariable = whenExpression.subjectVariable
-        val subjectExpression = whenExpression.subject
+        val subjectExpression = whenExpression.subjectVariable?.initializer
         return when {
             subjectVariable != null -> subjectVariable.accept(this, null) as IrVariable
             subjectExpression != null ->
