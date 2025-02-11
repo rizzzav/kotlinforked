@@ -62,7 +62,6 @@ import org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumConstructor
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumEntry as ProtoEnumEntry
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorCallExpression as ProtoErrorCallExpression
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorExpression as ProtoErrorExpression
-import org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorType as ProtoErrorType
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression as ProtoExpression
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrField as ProtoField
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrFile as ProtoFile
@@ -376,11 +375,6 @@ open class IrFileSerializer(
         .addAllAnnotation(serializeAnnotations(type.annotations))
         .build()
 
-    private fun serializeErrorType(type: IrErrorType): ProtoErrorType = ProtoErrorType.newBuilder()
-        .addAllAnnotation(serializeAnnotations(type.annotations))
-        .build()
-
-
     private fun serializeIrTypeData(type: IrType): ProtoType {
         val proto = ProtoType.newBuilder()
         when (type) {
@@ -389,7 +383,7 @@ open class IrFileSerializer(
             is IrDynamicType ->
                 proto.dynamic = serializeDynamicType(type)
             is IrErrorType ->
-                proto.error = serializeErrorType(type)
+                error("Serialization of IrErrorType is not supported anymore")
         }
         return proto.build()
     }
@@ -397,7 +391,6 @@ open class IrFileSerializer(
     private enum class IrTypeKind {
         SIMPLE,
         DYNAMIC,
-        ERROR,
     }
 
     private enum class IrTypeArgumentKind {
@@ -444,7 +437,7 @@ open class IrFileSerializer(
                 kind = when (this) {
                     is IrSimpleType -> IrTypeKind.SIMPLE
                     is IrDynamicType -> IrTypeKind.DYNAMIC
-                    is IrErrorType -> IrTypeKind.ERROR
+                    is IrErrorType -> error("Serialization of IrErrorType is not supported anymore")
                 },
                 classifier = type.classifierOrNull,
                 nullability = (type as? IrSimpleType)?.nullability,
