@@ -22280,6 +22280,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
       runTest("compiler/testData/codegen/box/inline/redundantCoercionsCleanerKT49356.kt");
     }
 
+    @TestMetadata("reproducer.kt")
+    public void testReproducer() {
+      runTest("compiler/testData/codegen/box/inline/reproducer.kt");
+    }
+
     @TestMetadata("returnLocalClassFromBlock.kt")
     public void testReturnLocalClassFromBlock() {
       runTest("compiler/testData/codegen/box/inline/returnLocalClassFromBlock.kt");
