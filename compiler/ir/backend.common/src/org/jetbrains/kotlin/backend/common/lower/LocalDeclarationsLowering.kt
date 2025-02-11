@@ -794,10 +794,21 @@ open class LocalDeclarationsLowering(
             isExplicitLocalFunction: Boolean = false
         ): List<IrValueParameter> {
             val transformedParameters = oldDeclaration.parameters.map { param ->
+                // NB: Here the parameter's kind is transformed into origin, with kind reset to Regular.
+                // It is done only so that parameter with kind ExtensionReceiver doesn't come after some
+                // Regular parameter created below, as this is not yet supported until old API is removed (KT-73189).
+                val origin = when (param.kind) {
+                    IrParameterKind.DispatchReceiver -> IrDeclarationOrigin.MOVED_DISPATCH_RECEIVER
+                    IrParameterKind.Context -> IrDeclarationOrigin.MOVED_CONTEXT_RECEIVER
+                    IrParameterKind.ExtensionReceiver -> IrDeclarationOrigin.MOVED_EXTENSION_RECEIVER
+                    IrParameterKind.Regular -> param.origin
+                }
                 param.copyTo(
                     newDeclaration,
                     type = localFunctionContext.remapType(param.type),
                     varargElementType = param.varargElementType?.let { localFunctionContext.remapType(it) },
+                    origin = origin,
+                    kind = IrParameterKind.Regular
                 ).also {
                     newParameterToOld.putAbsentOrSame(it, param)
                 }
