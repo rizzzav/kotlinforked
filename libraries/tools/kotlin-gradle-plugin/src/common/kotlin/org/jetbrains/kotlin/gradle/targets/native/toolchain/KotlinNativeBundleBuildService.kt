@@ -117,12 +117,6 @@ internal abstract class KotlinNativeBundleBuildService : BuildService<KotlinNati
         }
     }
 
-    internal fun getNativeDistributionDependencies(
-        project: Project,
-//        task: Task,
-        commonizerTarget: CommonizerTarget,
-    ) = project.getNativeDistributionDependencies(commonizerTarget)
-
     /**
      * Downloads native dependencies for Kotlin Native based on the provided configuration.
      * @return A set of required dependencies that were downloaded.
@@ -131,7 +125,7 @@ internal abstract class KotlinNativeBundleBuildService : BuildService<KotlinNati
         bundleDir: File,
         konanDataDir: String?,
         konanTargets: Set<KonanTarget>,
-        logger: Logger,
+//        logger: Logger,
     ): Set<String> {
         val requiredDependencies = mutableSetOf<String>()
         val distribution = Distribution(bundleDir.absolutePath, konanDataDir = konanDataDir)
@@ -142,7 +136,7 @@ internal abstract class KotlinNativeBundleBuildService : BuildService<KotlinNati
                     distribution.properties,
                     distribution.dependenciesDir,
                     progressCallback = { url, currentBytes, totalBytes ->
-                        logger.info("Downloading dependency for Kotlin Native: $url (${currentBytes}/${totalBytes}). ")
+                        println("Downloading dependency for Kotlin Native: $url (${currentBytes}/${totalBytes}). ")
                     }
                 ) as KonanPropertiesLoader
 

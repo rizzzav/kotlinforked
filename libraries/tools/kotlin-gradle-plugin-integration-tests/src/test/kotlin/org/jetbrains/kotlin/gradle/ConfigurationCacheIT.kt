@@ -367,8 +367,6 @@ class ConfigurationCacheIT : AbstractConfigurationCacheIT() {
                 ),
                 konanDataDir = konanDirTemp,
             ),
-            forceOutput = true,
-            enableGradleDebug = true
         ) {
             testConfigurationCacheOf(":assemble")
         }
