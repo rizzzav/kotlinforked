@@ -115,43 +115,43 @@ class IrMonoliticLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : 
         combinedDeclarations.tableItemBytes(fileIndex, DeclarationId(index))
 
     private val combinedDeclarations: DeclarationIrMultiTableFileReader by lazy {
-        DeclarationIrMultiTableFileReader(access.realFiles {
+        DeclarationIrMultiTableFileReader(access.inPlace {
             it.irDeclarations
         })
     }
 
     private val types: IrMultiArrayFileReader by lazy {
-        IrMultiArrayFileReader(access.realFiles {
+        IrMultiArrayFileReader(access.inPlace {
             it.irTypes
         })
     }
 
     private val signatures: IrMultiArrayFileReader by lazy {
-        IrMultiArrayFileReader(access.realFiles {
+        IrMultiArrayFileReader(access.inPlace {
             it.irSignatures
         })
     }
 
     private val strings: IrMultiArrayFileReader by lazy {
-        IrMultiArrayFileReader(access.realFiles {
+        IrMultiArrayFileReader(access.inPlace {
             it.irStrings
         })
     }
 
     private val bodies: IrMultiArrayFileReader by lazy {
-        IrMultiArrayFileReader(access.realFiles {
+        IrMultiArrayFileReader(access.inPlace {
             it.irBodies
         })
     }
 
     private val debugInfos: IrMultiArrayFileReader? by lazy {
-        access.realFiles {
+        access.inPlace {
             it.irDebugInfo.let { diFile -> if (diFile.exists) IrMultiArrayFileReader(diFile) else null }
         }
     }
 
     private val files: IrArrayFileReader by lazy {
-        IrArrayFileReader(access.realFiles {
+        IrArrayFileReader(access.inPlace {
             it.irFiles
         })
     }
@@ -180,7 +180,7 @@ class IrMonoliticLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : 
 class IrPerFileLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : IrLibraryImpl(_access) {
 
     private val directories by lazy {
-        access.realFiles {
+        access.inPlace {
             it.irDir.listFiles.filter { f -> f.isDirectory && f.name.endsWith(".file") }
         }
     }
@@ -189,7 +189,7 @@ class IrPerFileLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : Ir
     override fun irDeclaration(index: Int, fileIndex: Int): ByteArray {
         val dataReader = fileToDeclarationMap.getOrPut(fileIndex) {
             val fileDirectory = directories[fileIndex]
-            DeclarationIrTableFileReader(access.realFiles {
+            DeclarationIrTableFileReader(access.inPlace {
                 it.irDeclarations(fileDirectory)
             })
         }
@@ -200,7 +200,7 @@ class IrPerFileLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : Ir
     override fun type(index: Int, fileIndex: Int): ByteArray {
         val dataReader = fileToTypeMap.getOrPut(fileIndex) {
             val fileDirectory = directories[fileIndex]
-            IrArrayFileReader(access.realFiles {
+            IrArrayFileReader(access.inPlace {
                 it.irTypes(fileDirectory)
             })
         }
@@ -210,7 +210,7 @@ class IrPerFileLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : Ir
     private fun signatureDataReader(fileIndex: Int): IrArrayFileReader {
         return fileToTypeMap.getOrPut(fileIndex) {
             val fileDirectory = directories[fileIndex]
-            IrArrayFileReader(access.realFiles {
+            IrArrayFileReader(access.inPlace {
                 it.irSignatures(fileDirectory)
             })
         }
@@ -225,7 +225,7 @@ class IrPerFileLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : Ir
     override fun string(index: Int, fileIndex: Int): ByteArray {
         val dataReader = fileToStringMap.getOrPut(fileIndex) {
             val fileDirectory = directories[fileIndex]
-            IrArrayFileReader(access.realFiles {
+            IrArrayFileReader(access.inPlace {
                 it.irStrings(fileDirectory)
             })
         }
@@ -236,7 +236,7 @@ class IrPerFileLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : Ir
     override fun body(index: Int, fileIndex: Int): ByteArray {
         val dataReader = fileToBodyMap.getOrPut(fileIndex) {
             val fileDirectory = directories[fileIndex]
-            IrArrayFileReader(access.realFiles {
+            IrArrayFileReader(access.inPlace {
                 it.irBodies(fileDirectory)
             })
         }
@@ -248,7 +248,7 @@ class IrPerFileLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : Ir
     override fun debugInfo(index: Int, fileIndex: Int): ByteArray? {
         val dataReader = fileToDebugInfoMap.getOrPut(fileIndex) {
             val fileDirectory = directories[fileIndex]
-            access.realFiles {
+            access.inPlace {
                 it.irDebugInfo(fileDirectory).let { diFile ->
                     if (diFile.exists) {
                         IrArrayFileReader(diFile)
@@ -261,7 +261,7 @@ class IrPerFileLibraryImpl(_access: IrLibraryAccess<IrKotlinLibraryLayout>) : Ir
     }
 
     override fun file(index: Int): ByteArray {
-        return access.realFiles {
+        return access.inPlace {
             it.irFile(directories[index]).readBytes()
         }
     }
