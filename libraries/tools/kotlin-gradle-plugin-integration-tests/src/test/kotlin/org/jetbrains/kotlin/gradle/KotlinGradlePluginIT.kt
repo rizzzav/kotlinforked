@@ -801,7 +801,6 @@ class KotlinGradleIT : KGPBaseTest() {
 
     @DisplayName("KT-51913: KGP should not add attributes to 'legacy' configurations")
     @GradleTest
-    @BrokenOnMacosTest
     fun noAttributesLegacyConfigurations(gradleVersion: GradleVersion) {
         project(
             "legacyConfigurationConsumer",

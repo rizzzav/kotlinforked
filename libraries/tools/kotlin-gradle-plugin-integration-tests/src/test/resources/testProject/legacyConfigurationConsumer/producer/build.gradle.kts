@@ -2,12 +2,12 @@ plugins {
     id("base")
 }
 
-val publishedFile = layout.buildDirectory.file("publication/output.txt")
-
 val producerTask by tasks.registering {
+    inputs.property("projectName",  project.name)
+    val publishedFile = layout.buildDirectory.file("publication/output.txt")
     outputs.file(publishedFile)
     doLast {
-        publishedFile.get().asFile.writeText("Hello World from ${project.name}")
+        publishedFile.get().asFile.writeText("Hello World from ${inputs.properties["projectName"]}")
     }
 }
 
