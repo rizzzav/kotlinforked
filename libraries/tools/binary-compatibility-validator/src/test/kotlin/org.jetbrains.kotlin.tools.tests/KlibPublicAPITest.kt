@@ -9,6 +9,7 @@ package org.jetbrains.kotlin.tools.tests
 
 import kotlinx.validation.ExperimentalBCVApi
 import kotlinx.validation.api.klib.*
+import kotlinx.validation.api.klib.KlibDumpFilters
 import org.junit.Assume
 import java.io.File
 import kotlin.io.path.*
@@ -24,7 +25,7 @@ class KlibPublicAPITest {
             "kotlin-stdlib-js-wasm",
             "../../stdlib/build/libs",
             listOf("kotlin-stdlib-js", "kotlin-stdlib-wasm-js", "kotlin-stdlib-wasm-wasi"),
-            KLibDumpFilters {
+            KlibDumpFilters {
                 ignoredPackages += setOf(
                     "org.w3c",
                     "org.khronos.webgl",
