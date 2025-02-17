@@ -34,12 +34,12 @@ class UnitStats(
     val backendStats: Time?,
 
     // Null in case of java or binary files not used
-    val findJavaClassStats: SideStats?,
-    val findKotlinClassStats: SideStats?,
+    val findJavaClassStats: SideStats? = null,
+    val findKotlinClassStats: SideStats? = null,
 
     // Null/empty if extended measurements are not enabled
-    val gcStats: List<GarbageCollectionStats>,
-    val jitTimeMillis: Long?,
+    val gcStats: List<GarbageCollectionStats> = listOf(),
+    val jitTimeMillis: Long? = null,
 
     // Deprecated stats (from performance counter)
     val extendedStats: List<String> = emptyList(),
