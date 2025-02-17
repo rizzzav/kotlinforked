@@ -31,6 +31,30 @@ public interface KaFunctionalTypeRenderer {
             typeRenderer: KaTypeRenderer,
             printer: PrettyPrinter,
         ) {
+            AS_FUNCTIONAL_TYPE_WITH_OPTIONAL_PARAMETER_NAMES.renderType(analysisSession, type, typeRenderer, printer, false)
+        }
+    }
+
+    @KaExperimentalApi
+    public object AS_FUNCTIONAL_TYPE_WITH_PARAMETER_NAMES : KaFunctionalTypeRenderer {
+        override fun renderType(
+            analysisSession: KaSession,
+            type: KaFunctionType,
+            typeRenderer: KaTypeRenderer,
+            printer: PrettyPrinter,
+        ) {
+            AS_FUNCTIONAL_TYPE_WITH_OPTIONAL_PARAMETER_NAMES.renderType(analysisSession, type, typeRenderer, printer, true)
+        }
+    }
+
+    private object AS_FUNCTIONAL_TYPE_WITH_OPTIONAL_PARAMETER_NAMES {
+        fun renderType(
+            analysisSession: KaSession,
+            type: KaFunctionType,
+            typeRenderer: KaTypeRenderer,
+            printer: PrettyPrinter,
+            withParameterNames: Boolean
+        ) {
             printer {
                 val annotationsRendered = checkIfPrinted {
                     typeRenderer.annotationsRenderer.renderAnnotations(analysisSession, type, this)
@@ -57,9 +81,11 @@ public interface KaFunctionalTypeRenderer {
                             printer.append('.')
                         }
                         printCollection(type.parameters, prefix = "(", postfix = ")") { valueParameter ->
-                            valueParameter.name?.let { name ->
-                                typeRenderer.typeNameRenderer.renderName(analysisSession, name, valueParameter.type, typeRenderer, this)
-                                append(": ")
+                            if (withParameterNames) {
+                                valueParameter.name?.let { name ->
+                                    typeRenderer.typeNameRenderer.renderName(analysisSession, name, valueParameter.type, typeRenderer, this)
+                                    append(": ")
+                                }
                             }
                             typeRenderer.renderType(analysisSession, valueParameter.type, this)
                         }
@@ -102,6 +128,19 @@ public interface KaFunctionalTypeRenderer {
             printer: PrettyPrinter,
         ) {
             val renderer = if (type.isReflectType) AS_CLASS_TYPE else AS_FUNCTIONAL_TYPE
+            renderer.renderType(analysisSession, type, typeRenderer, printer)
+        }
+    }
+
+    @KaExperimentalApi
+    public object AS_CLASS_TYPE_FOR_REFLECTION_TYPES_WITH_PARAMETER_NAMES : KaFunctionalTypeRenderer {
+        override fun renderType(
+            analysisSession: KaSession,
+            type: KaFunctionType,
+            typeRenderer: KaTypeRenderer,
+            printer: PrettyPrinter,
+        ) {
+            val renderer = if (type.isReflectType) AS_CLASS_TYPE else AS_FUNCTIONAL_TYPE_WITH_PARAMETER_NAMES
             renderer.renderType(analysisSession, type, typeRenderer, printer)
         }
     }
