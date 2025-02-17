@@ -69,9 +69,7 @@ public class KaDanglingFileModuleImpl(
         if (this === other) return true
 
         if (other is KaDanglingFileModuleImpl) {
-            val selfFiles = this.fileRefs.mapNotNull { it.element }
-            val otherFiles = other.fileRefs.mapNotNull { it.element }
-            return selfFiles.isNotEmpty() && selfFiles == otherFiles
+            return fileRefs == other.fileRefs
                     && contextModule == other.contextModule
                     && resolutionMode == other.resolutionMode
         }
@@ -82,7 +80,7 @@ public class KaDanglingFileModuleImpl(
     override fun hashCode(): Int {
         var result = contextModule.hashCode()
         for (fileRef in fileRefs) {
-            result = 31 * result + fileRef.element.hashCode()
+            result = 31 * result + fileRef.hashCode()
         }
         return result
     }
