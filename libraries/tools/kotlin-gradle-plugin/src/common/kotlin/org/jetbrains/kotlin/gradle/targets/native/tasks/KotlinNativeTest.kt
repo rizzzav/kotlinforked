@@ -14,8 +14,7 @@ import org.gradle.api.provider.Provider
 import org.gradle.api.provider.ProviderFactory
 import org.gradle.api.tasks.*
 import org.gradle.api.tasks.options.Option
-import org.gradle.process.ProcessForkOptions
-import org.gradle.process.internal.DefaultProcessForkOptions
+import org.gradle.process.ExecOperations
 import org.gradle.work.DisableCachingByDefault
 import org.gradle.work.NormalizeLineEndings
 import org.jetbrains.kotlin.gradle.InternalKotlinGradlePluginApi
@@ -35,8 +34,9 @@ abstract class KotlinNativeTest
 @Inject
 constructor(
     objects: ObjectFactory,
+    execOps: ExecOperations,
     private val providers: ProviderFactory,
-) : KotlinTest(objects, providers) {
+) : KotlinTest(execOps) {
 
     private val processOptions: ProcessLaunchOptions = objects.processLaunchOptions()
 
@@ -156,7 +156,7 @@ constructor(
         val cliArgs = testCommand.cliArgs("TEAMCITY", checkExitCode, includePatterns, excludePatterns, args)
 
         return TCServiceMessagesTestExecutionSpec(
-            processLaunchOpts = processOptions,
+            processLaunchOptions = processOptions,
             processArgs = cliArgs,
             checkExitCode = checkExitCode,
             clientSettings = clientSettings,
@@ -213,10 +213,12 @@ abstract class KotlinNativeHostTest
 @Inject
 constructor(
     objects: ObjectFactory,
+    execOps: ExecOperations,
     providers: ProviderFactory,
 ) : KotlinNativeTest(
-    objects,
-    providers,
+    objects = objects,
+    execOps = execOps,
+    providers = providers,
 ) {
     @get:Internal
     override val testCommand: TestCommand = object : TestCommand() {
@@ -242,10 +244,12 @@ abstract class KotlinNativeSimulatorTest
 @Inject
 constructor(
     objects: ObjectFactory,
+    execOps: ExecOperations,
     providers: ProviderFactory,
 ) : KotlinNativeTest(
-    objects,
-    providers,
+    objects = objects,
+    execOps = execOps,
+    providers = providers,
 ) {
     @Deprecated("Use the property 'device' instead")
     @get:Internal
@@ -292,7 +296,7 @@ constructor(
     override fun createTestExecutionSpec(): TCServiceMessagesTestExecutionSpec {
         val origin = super.createTestExecutionSpec()
         return NativeAppleSimulatorTCServiceMessagesTestExecutionSpec(
-            processLaunchOpts = origin.processLaunchOpts,
+            processLaunchOpts = origin.processLaunchOptions,
             processArgs = origin.processArgs,
             checkExitCode = origin.checkExitCode,
             clientSettings = origin.clientSettings,

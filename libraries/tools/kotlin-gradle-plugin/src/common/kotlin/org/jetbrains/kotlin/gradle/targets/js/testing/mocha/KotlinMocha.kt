@@ -22,8 +22,8 @@ import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin.Companion.
 import org.jetbrains.kotlin.gradle.targets.js.npm.npmProject
 import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTest
 import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTestFramework
+import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTestFramework.Companion.CREATE_TEST_EXEC_SPEC_DEPRECATION_MSG
 import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTestFramework.Companion.createTestExecutionSpecDeprecated
-import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTestFramework.Companion.createTestExecutionSpecDeprecationMsg
 import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinTestRunnerCliArgs
 import org.jetbrains.kotlin.gradle.utils.getFile
 import org.jetbrains.kotlin.gradle.utils.getValue
@@ -124,7 +124,7 @@ class KotlinMocha(
         }
 
         return TCServiceMessagesTestExecutionSpec(
-            processLaunchOpts = launchOpts,
+            processLaunchOptions = launchOpts,
             processArgs = args,
             checkExitCode = false,
             clientSettings = clientSettings,
@@ -136,7 +136,7 @@ class KotlinMocha(
         return value?.let { listOf(cli, it) } ?: emptyList()
     }
 
-    @Deprecated(message = createTestExecutionSpecDeprecationMsg)
+    @Deprecated(message = CREATE_TEST_EXEC_SPEC_DEPRECATION_MSG)
     override fun createTestExecutionSpec(
         task: KotlinJsTest,
         forkOptions: ProcessForkOptions,

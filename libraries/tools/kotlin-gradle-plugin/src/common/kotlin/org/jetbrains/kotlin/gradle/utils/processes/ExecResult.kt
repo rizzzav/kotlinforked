@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.gradle.utils.processes
 
 /**
- * The result of running an external process using [ExecHandle].
+ * The result of running an external process using [ExecAsyncHandle].
  */
 internal data class ExecResult(
     /** The exit value of the process. */

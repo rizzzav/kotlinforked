@@ -60,9 +60,10 @@ class TestCancellationIT : KGPBaseTest() {
             buildAndFail(
                 // use 'check' to run all KMP test tasks
                 "check",
-                // we want KMP test tasks to fail, and also check that one task failing doesn't interfere with
+                // we want KMP test tasks to fail, and also check that one task failing doesn't interfere with the others
                 "--continue",
-                "--configuration-cache", // for parallel tasks
+                // enable CC, for faster testing (tasks run in parallel) and to verify KGP can launch parallel processes
+                "--configuration-cache",
             ) {
                 assertEquals(
                     kmpTasksThatUseExecHandle
@@ -81,11 +82,11 @@ class TestCancellationIT : KGPBaseTest() {
 
                 assertEquals(
                     kmpTasksThatUseExecHandle
-                        .map { "[ExecHandle $it] finished with exit value 143 (state: Aborted)" }
+                        .map { "[ExecHandle $it] interrupted java.lang.InterruptedException" }
                         .sorted()
                         .joinToString("\n"),
                     output.lines()
-                        .filter { kmpTasksThatUseExecHandle.any { t -> it.startsWith("[ExecHandle $t] finished") } }
+                        .filter { kmpTasksThatUseExecHandle.any { t -> it.startsWith("[ExecHandle $t] interrupted") } }
                         .sorted()
                         .joinToString("\n"),
                     message = "All KMP tasks that use ExecHandle must be aborted $kmpTasksThatUseExecHandle.",
@@ -119,24 +120,29 @@ class TestCancellationIT : KGPBaseTest() {
                         .map { it.path }
                 }.buildAndReturn(executingProject = this)
 
-            return buildList {
+
+            val kmpTestTasks = buildList {
                 addAll(enabledKotlinNativeTestPaths)
                 addAll(enabledKotlinJsTestPaths)
-
-                require(isNotEmpty()) {
-                    "Expected some KMP task paths, but got none"
-                }
-
-                require(konanTargetPrettyNames.any { it in this }) {
-                    "Must have at least one enabled Kotlin Native test task, but found none in ${joinToString()}"
-                }
             }.sorted()
+
+            require(kmpTestTasks.isNotEmpty()) {
+                "Expected some KMP task paths, but got none"
+            }
+
+            require(konanTargetPrettyNames.any { n -> kmpTestTasks.any { n in it } }) {
+                "Must have at least one enabled Kotlin Native test task, but found none in ${kmpTestTasks.joinToString()} (Konan targets: ${konanTargetPrettyNames})"
+            }
+
+            return kmpTestTasks
         }
 
         private val konanTargetPrettyNames: List<String> =
             KonanTarget.predefinedTargets.values.map { it.prettyName }
 
         private val KonanTarget.prettyName: String
-            get() = name.split("_").joinToString { it.replaceFirstChar(Char::uppercaseChar) }
+            get() = name.split("_")
+                .joinToString("") { it.replaceFirstChar(Char::uppercaseChar) }
+                .replaceFirstChar(Char::lowercaseChar)
     }
 }

@@ -14,12 +14,10 @@ import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Provider
 import org.gradle.api.provider.ProviderFactory
 import org.gradle.internal.logging.progress.ProgressLogger
+import org.gradle.internal.logging.progress.ProgressLoggerFactory
 import org.gradle.internal.service.ServiceRegistry
 import org.gradle.process.ProcessForkOptions
-import org.jetbrains.kotlin.gradle.internal.LogType
-import org.jetbrains.kotlin.gradle.internal.TeamCityMessageStackTraceProcessor
-import org.jetbrains.kotlin.gradle.internal.operation
-import org.jetbrains.kotlin.gradle.internal.processLogMessage
+import org.jetbrains.kotlin.gradle.internal.*
 import org.jetbrains.kotlin.gradle.internal.testing.TCServiceMessagesClientSettings
 import org.jetbrains.kotlin.gradle.internal.testing.TCServiceMessagesTestExecutionSpec
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
@@ -36,13 +34,13 @@ import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin.Companion.
 import org.jetbrains.kotlin.gradle.targets.js.npm.npmProject
 import org.jetbrains.kotlin.gradle.targets.js.testing.*
 import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTestFramework.Companion.createTestExecutionSpecDeprecated
-import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTestFramework.Companion.createTestExecutionSpecDeprecationMsg
+import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTestFramework.Companion.CREATE_TEST_EXEC_SPEC_DEPRECATION_MSG
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 import org.jetbrains.kotlin.gradle.utils.appendLine
 import org.jetbrains.kotlin.gradle.utils.getFile
 import org.jetbrains.kotlin.gradle.utils.getValue
-import org.jetbrains.kotlin.gradle.utils.processes.ExecHandle
+import org.jetbrains.kotlin.gradle.utils.processes.ExecAsyncHandle
 import org.jetbrains.kotlin.gradle.utils.processes.ProcessLaunchOptions
 import org.jetbrains.kotlin.gradle.utils.processes.ProcessLaunchOptions.Companion.processLaunchOptions
 import org.jetbrains.kotlin.gradle.utils.property
@@ -469,8 +467,9 @@ class KotlinKarma(
             lateinit var progressLogger: ProgressLogger
 
             override fun wrapExecute(body: () -> Unit) {
-                services().operation("Running and building tests with karma and webpack") {
-                    progressLogger = this
+                val progressLoggerFactory = services().get(ProgressLoggerFactory::class.java)
+                progressLogger = progressLoggerFactory.newBuildOpLogger()
+                progressLogger.operation("Running and building tests with karma and webpack") {
                     body()
                 }
             }
@@ -559,7 +558,7 @@ class KotlinKarma(
                             }
                     }
 
-                    override fun testFailedMessage(execHandle: ExecHandle, exitValue: Int): String {
+                    override fun testFailedMessage(execHandle: ExecAsyncHandle, exitValue: Int): String {
                         if (failedBrowsers.isEmpty()) {
                             return super.testFailedMessage(execHandle, exitValue)
                         }
@@ -641,7 +640,7 @@ class KotlinKarma(
         appendLine()
     }
 
-    @Deprecated(message = createTestExecutionSpecDeprecationMsg)
+    @Deprecated(message = CREATE_TEST_EXEC_SPEC_DEPRECATION_MSG)
     override fun createTestExecutionSpec(
         task: KotlinJsTest,
         forkOptions: ProcessForkOptions,

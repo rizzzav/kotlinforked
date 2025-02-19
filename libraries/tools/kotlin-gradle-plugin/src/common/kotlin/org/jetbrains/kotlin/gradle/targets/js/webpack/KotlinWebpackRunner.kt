@@ -8,16 +8,18 @@ package org.jetbrains.kotlin.gradle.targets.js.webpack
 import org.gradle.api.logging.Logger
 import org.gradle.api.model.ObjectFactory
 import org.gradle.internal.logging.progress.ProgressLogger
-import org.gradle.internal.service.ServiceRegistry
+import org.gradle.internal.logging.progress.ProgressLoggerFactory
+import org.gradle.process.ExecOperations
+import org.gradle.process.ExecResult
+import org.gradle.process.ExecSpec
 import org.jetbrains.kotlin.gradle.internal.LogType
 import org.jetbrains.kotlin.gradle.internal.TeamCityMessageCommonClient
 import org.jetbrains.kotlin.gradle.internal.execWithErrorLogger
+import org.jetbrains.kotlin.gradle.internal.newBuildOpLogger
 import org.jetbrains.kotlin.gradle.internal.testing.TCServiceMessageOutputStreamHandler
 import org.jetbrains.kotlin.gradle.targets.js.npm.NpmProject
-import org.jetbrains.kotlin.gradle.utils.processes.ExecHandle
-import org.jetbrains.kotlin.gradle.utils.processes.ExecHandleBuilder
-import org.jetbrains.kotlin.gradle.utils.processes.ExecHandleBuilder.Companion.execHandleBuilder
-import org.jetbrains.kotlin.gradle.utils.processes.ExecResult
+import org.jetbrains.kotlin.gradle.utils.processes.ExecAsyncHandle
+import org.jetbrains.kotlin.gradle.utils.processes.execAsync
 import java.io.File
 
 internal data class KotlinWebpackRunner(
@@ -29,23 +31,41 @@ internal data class KotlinWebpackRunner(
     val nodeArgs: List<String>,
     val config: KotlinWebpackConfig,
     private val objects: ObjectFactory,
+    private val execOps: ExecOperations,
+    private val progressLoggerFactory: ProgressLoggerFactory,
 ) {
-    fun execute(services: ServiceRegistry): ExecResult =
-        services.execWithErrorLogger("webpack", objects = objects) { execAction, progressLogger ->
+
+    fun execute(): ExecResult {
+        val progressLogger = progressLoggerFactory.newBuildOpLogger()
+        val (standardClient, errorClient) = createTeamCityClients(progressLogger)
+
+        return execWithErrorLogger(
+            progressLogger,
+            description = "webpack",
+            execOps = execOps,
+            errorClient = errorClient,
+            standardClient = standardClient,
+        ) { execSpec ->
             configureExec(
-                execAction,
-                progressLogger
+                execSpec,
+                standardClient,
+                errorClient,
             )
         }
+    }
 
-    fun start(): ExecHandle {
-        val execHandleBuilder = objects.execHandleBuilder {
+    fun start(): ExecAsyncHandle {
+        val (standardClient, errorClient) = createTeamCityClients(null)
+
+        return execOps.execAsync(
             displayName = "webpack $tool ${npmProject.compilationName}"
-            configureExec(this, null)
+        ) { execSpec ->
+            configureExec(
+                execSpec,
+                standardClient,
+                errorClient,
+            )
         }
-        val execHandle = execHandleBuilder.build()
-        execHandle.start()
-        return execHandle
     }
 
     private fun configureClient(
@@ -62,25 +82,32 @@ internal data class KotlinWebpackRunner(
         return client
     }
 
-    private fun configureExec(
-        execHandleBuilder: ExecHandleBuilder,
-        progressLogger: ProgressLogger?,
+    private fun createTeamCityClients(
+        logger: ProgressLogger?,
     ): Pair<TeamCityMessageCommonClient, TeamCityMessageCommonClient> {
+        val infrastructureLogged = InfrastructureLogged(false)
+        val standardClient = configureClient(LogType.LOG, logger, infrastructureLogged)
+        val errorClient = configureClient(LogType.ERROR, logger, infrastructureLogged)
+
+        return standardClient to errorClient
+    }
+
+    private fun configureExec(
+        execSpec: ExecSpec,
+        errorClient: TeamCityMessageCommonClient,
+        standardClient: TeamCityMessageCommonClient,
+    ) {
         check(config.entry?.isFile == true) {
             "${this}: Entry file does not exist \"${config.entry}\""
         }
 
-        val infrastructureLogged = InfrastructureLogged(false)
-
-        val standardClient = configureClient(LogType.LOG, progressLogger, infrastructureLogged)
-        execHandleBuilder.standardOutput = TCServiceMessageOutputStreamHandler(
+        execSpec.standardOutput = TCServiceMessageOutputStreamHandler(
             client = standardClient,
             onException = { },
             logger = standardClient.log
         )
 
-        val errorClient = configureClient(LogType.ERROR, progressLogger, infrastructureLogged)
-        execHandleBuilder.errorOutput = TCServiceMessageOutputStreamHandler(
+        execSpec.errorOutput = TCServiceMessageOutputStreamHandler(
             client = errorClient,
             onException = { },
             logger = errorClient.log
@@ -91,13 +118,11 @@ internal data class KotlinWebpackRunner(
         val args = buildArgs()
 
         npmProject.useTool(
-            execHandleBuilder = execHandleBuilder,
+            exec = execSpec,
             tool = tool,
             nodeArgs = nodeArgs,
             args = args,
         )
-
-        return standardClient to errorClient
     }
 
     private fun buildArgs(): List<String> {

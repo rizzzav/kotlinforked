@@ -10,9 +10,10 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.FileCollection
-import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.tasks.TaskProvider
+import org.gradle.internal.logging.progress.ProgressLoggerFactory
+import org.gradle.process.ExecOperations
 import org.jetbrains.kotlin.gradle.InternalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.internal.ConfigurationPhaseAware
 import org.jetbrains.kotlin.gradle.logging.kotlinInfo
@@ -28,7 +29,8 @@ open class NpmExtension
 constructor(
     val project: Project,
     val nodeJsRoot: NodeJsRootExtension,
-    private val objects: ObjectFactory,
+    execOps: ExecOperations,
+    progressLoggerFactory: ProgressLoggerFactory,
 ) : ConfigurationPhaseAware<NpmEnv>(), NpmApiExtension<NpmEnvironment, Npm> {
     init {
         check(project == project.rootProject)
@@ -36,7 +38,10 @@ constructor(
     }
 
     override val packageManager: Npm by lazy {
-        Npm(objects)
+        Npm(
+            execOps = execOps,
+            progressLoggerFactory = progressLoggerFactory,
+        )
     }
 
     override val environment: NpmEnvironment by lazy {

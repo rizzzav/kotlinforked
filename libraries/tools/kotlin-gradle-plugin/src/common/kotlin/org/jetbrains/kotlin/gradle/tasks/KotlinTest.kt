@@ -7,12 +7,11 @@ package org.jetbrains.kotlin.gradle.tasks
 
 import org.gradle.api.internal.tasks.testing.TestExecuter
 import org.gradle.api.internal.tasks.testing.filter.DefaultTestFilter
-import org.gradle.api.model.ObjectFactory
-import org.gradle.api.provider.ProviderFactory
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.testing.AbstractTestTask
+import org.gradle.process.ExecOperations
 import org.gradle.work.DisableCachingByDefault
 import org.jetbrains.kotlin.gradle.InternalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.internal.testing.KotlinTestRunnerListener
@@ -26,8 +25,7 @@ abstract class KotlinTest
 @InternalKotlinGradlePluginApi
 @Inject
 constructor(
-    private val objects: ObjectFactory,
-    private val providers: ProviderFactory,
+    private val execOps: ExecOperations,
 ) : AbstractTestTask() {
     @Input
     @Optional
@@ -87,6 +85,6 @@ constructor(
             runListeners = runListeners,
             ignoreTcsmOverflow = ignoreTcsmOverflow.get(),
             ignoreRunFailures = ignoreRunFailures,
-            objects = objects,
+            execOps = execOps,
         )
 }

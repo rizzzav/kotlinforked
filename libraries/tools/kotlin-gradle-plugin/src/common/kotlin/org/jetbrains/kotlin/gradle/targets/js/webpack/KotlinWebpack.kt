@@ -20,6 +20,8 @@ import org.gradle.api.tasks.*
 import org.gradle.deployment.internal.Deployment
 import org.gradle.deployment.internal.DeploymentHandle
 import org.gradle.deployment.internal.DeploymentRegistry
+import org.gradle.internal.logging.progress.ProgressLoggerFactory
+import org.gradle.process.ExecOperations
 import org.gradle.work.NormalizeLineEndings
 import org.jetbrains.kotlin.build.report.metrics.BuildMetricsReporter
 import org.jetbrains.kotlin.build.report.metrics.BuildMetricsReporterImpl
@@ -37,7 +39,7 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.RequiresNpmDependencies
 import org.jetbrains.kotlin.gradle.targets.js.npm.npmProject
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig.Mode
 import org.jetbrains.kotlin.gradle.utils.*
-import org.jetbrains.kotlin.gradle.utils.processes.ExecHandle
+import org.jetbrains.kotlin.gradle.utils.processes.ExecAsyncHandle
 import java.io.File
 import javax.inject.Inject
 
@@ -49,6 +51,8 @@ constructor(
     @Transient
     final override val compilation: KotlinJsIrCompilation,
     private val objects: ObjectFactory,
+    private val execOps: ExecOperations,
+    private val progressLoggerFactory: ProgressLoggerFactory,
 ) : DefaultTask(), RequiresNpmDependencies, WebpackRulesDsl, UsesBuildMetricsService {
     @Transient
     private val nodeJs = project.rootProject.kotlinNodeJsRootExtension
@@ -273,14 +277,16 @@ constructor(
         }
 
         return KotlinWebpackRunner(
-            npmProject,
-            logger,
-            configFile.get(),
-            bin,
-            webpackArgs,
-            nodeArgs,
-            config,
-            objects,
+            npmProject = npmProject,
+            logger = logger,
+            configFile = configFile.get(),
+            tool = bin,
+            args = webpackArgs,
+            nodeArgs = nodeArgs,
+            config = config,
+            objects = objects,
+            execOps = execOps,
+            progressLoggerFactory = progressLoggerFactory,
         )
     }
 
@@ -309,7 +315,7 @@ constructor(
                 config = runner.config.copy(
                     progressReporter = true,
                 )
-            ).execute(services)
+            ).execute()
 
             val buildMetrics = metrics.get()
             outputDirectory.get().asFile.walkTopDown()
@@ -330,11 +336,13 @@ constructor(
         /** [KotlinWebpack.getPath], used for logging. */
         private val taskPath: String,
     ) : DeploymentHandle {
-        private var process: ExecHandle? = null
+        private var process: ExecAsyncHandle? = null
+
+//        private var thread: Thread? = null
 
         private val logger = Logging.getLogger(Handle::class.java)
 
-        override fun isRunning(): Boolean = process != null
+        override fun isRunning(): Boolean = process?.isAlive() == true
 
         override fun start(deployment: Deployment) {
             process = runner.start()
@@ -343,6 +351,8 @@ constructor(
 
         override fun stop() {
             process?.abort()
+//            process?.interrupt()
+//            process?.join()
             logger.info("[$taskPath] webpack-dev-server stopped ${process?.displayName}")
         }
     }

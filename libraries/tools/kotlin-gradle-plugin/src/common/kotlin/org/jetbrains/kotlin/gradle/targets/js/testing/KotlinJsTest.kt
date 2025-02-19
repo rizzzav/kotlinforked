@@ -11,6 +11,7 @@ import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.ProviderFactory
 import org.gradle.api.tasks.*
+import org.gradle.process.ExecOperations
 import org.gradle.work.DisableCachingByDefault
 import org.gradle.work.NormalizeLineEndings
 import org.jetbrains.kotlin.gradle.InternalKotlinGradlePluginApi
@@ -36,7 +37,8 @@ constructor(
     override var compilation: KotlinJsIrCompilation,
     private val objects: ObjectFactory,
     private val providers: ProviderFactory,
-) : KotlinTest(objects, providers),
+    execOps: ExecOperations,
+) : KotlinTest(execOps),
     RequiresNpmDependencies {
 
     @Input

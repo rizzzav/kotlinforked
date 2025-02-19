@@ -22,7 +22,7 @@ interface KotlinJsTestFramework : RequiresNpmDependencies {
 
     val executable: Provider<String>
 
-    @Deprecated(message = createTestExecutionSpecDeprecationMsg)
+    @Deprecated(message = CREATE_TEST_EXEC_SPEC_DEPRECATION_MSG)
     fun createTestExecutionSpec(
         task: KotlinJsTest,
         forkOptions: ProcessForkOptions,
@@ -39,8 +39,7 @@ interface KotlinJsTestFramework : RequiresNpmDependencies {
 
     companion object {
 
-        @Suppress("ConstPropertyName")
-        internal const val createTestExecutionSpecDeprecationMsg =
+        internal const val CREATE_TEST_EXEC_SPEC_DEPRECATION_MSG =
             "Replaced with a new method that uses ProcessLaunchOptions instead of Gradle's ProcessForkOptions."
 
         /**

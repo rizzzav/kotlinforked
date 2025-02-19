@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrCompilation
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsPlugin.Companion.kotlinNodeJsEnvSpec
 import org.jetbrains.kotlin.gradle.targets.js.npm.npmProject
 import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTestFramework.Companion.createTestExecutionSpecDeprecated
-import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTestFramework.Companion.createTestExecutionSpecDeprecationMsg
+import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTestFramework.Companion.CREATE_TEST_EXEC_SPEC_DEPRECATION_MSG
 import org.jetbrains.kotlin.gradle.targets.js.writeWasmUnitTestRunner
 import org.jetbrains.kotlin.gradle.utils.getFile
 import org.jetbrains.kotlin.gradle.utils.processes.ProcessLaunchOptions
@@ -83,7 +83,7 @@ internal class KotlinWasmNode(
         }
 
         return TCServiceMessagesTestExecutionSpec(
-            processLaunchOpts = launchOpts,
+            processLaunchOptions = launchOpts,
             processArgs = args,
             checkExitCode = false,
             clientSettings = clientSettings,
@@ -95,7 +95,7 @@ internal class KotlinWasmNode(
 
     override fun getPath(): String = "$testPath:kotlinTestFrameworkStub"
 
-    @Deprecated(message = createTestExecutionSpecDeprecationMsg)
+    @Deprecated(message = CREATE_TEST_EXEC_SPEC_DEPRECATION_MSG)
     override fun createTestExecutionSpec(
         task: KotlinJsTest,
         forkOptions: ProcessForkOptions,

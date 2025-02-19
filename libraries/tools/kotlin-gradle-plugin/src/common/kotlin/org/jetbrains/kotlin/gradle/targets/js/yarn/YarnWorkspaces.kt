@@ -8,14 +8,19 @@ package org.jetbrains.kotlin.gradle.targets.js.yarn
 import org.gradle.api.logging.Logger
 import org.gradle.api.model.ObjectFactory
 import org.gradle.internal.service.ServiceRegistry
+import org.gradle.process.ExecOperations
 import org.jetbrains.kotlin.gradle.targets.js.npm.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.resolved.PreparedKotlinCompilationNpmResolution
 import org.jetbrains.kotlin.gradle.utils.getFile
 import java.io.File
 
 class YarnWorkspaces internal constructor(
+    execOps: ExecOperations,
     objects: ObjectFactory,
-) : YarnBasics(objects) {
+) : YarnBasics(
+    execOps = execOps,
+    objects = objects,
+) {
     override fun preparedFiles(nodeJs: NodeJsEnvironment): Collection<File> {
         return listOf(
             nodeJs
@@ -70,7 +75,6 @@ class YarnWorkspaces internal constructor(
         val nodeJsWorldDir = nodeJs.rootPackageDir.getFile()
 
         yarnExec(
-            services,
             logger,
             nodeJs,
             packageManagerEnvironment,

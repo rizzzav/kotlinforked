@@ -6,16 +6,19 @@
 package org.jetbrains.kotlin.gradle.targets.js.npm
 
 import org.gradle.api.logging.Logger
-import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Provider
+import org.gradle.internal.logging.events.ProgressStartEvent
+import org.gradle.internal.logging.progress.ProgressLoggerFactory
 import org.gradle.internal.service.ServiceRegistry
+import org.gradle.process.ExecOperations
 import org.jetbrains.kotlin.gradle.internal.execWithProgress
 import org.jetbrains.kotlin.gradle.targets.js.npm.resolved.PreparedKotlinCompilationNpmResolution
 import org.jetbrains.kotlin.gradle.utils.getFile
 import java.io.File
 
 class Npm internal constructor(
-    private val objects: ObjectFactory,
+    private val execOps: ExecOperations,
+    private val progressLoggerFactory: ProgressLoggerFactory,
 ) : NpmApiExecution<NpmEnvironment> {
 
     override fun preparedFiles(nodeJs: NodeJsEnvironment): Collection<File> {
@@ -70,7 +73,7 @@ class Npm internal constructor(
         cliArgs: List<String>,
     ) {
         npmExec(
-            services = services,
+//            services = services,
             logger = logger,
             nodeJs = nodeJs,
             environment = packageManagerEnvironment,
@@ -81,27 +84,7 @@ class Npm internal constructor(
     }
 
     fun npmExec(
-        services: ServiceRegistry,
-        logger: Logger,
-        nodeJs: NodeJsEnvironment,
-        environment: NpmEnvironment,
-        dir: File,
-        description: String,
-        args: List<String>,
-    ) {
-        npmExec(
-            services = services,
-            logger = logger,
-            nodeJs = nodeJs,
-            environment = environment,
-            dir = objects.directoryProperty().fileValue(dir).asFile,
-            description = description,
-            args = args
-        )
-    }
-
-    fun npmExec(
-        services: ServiceRegistry,
+//        services: ServiceRegistry,
         logger: Logger,
         nodeJs: NodeJsEnvironment,
         environment: NpmEnvironment,
@@ -109,7 +92,8 @@ class Npm internal constructor(
         description: String,
         args: List<String>,
     ) {
-        services.execWithProgress(description, objects = objects) { exec ->
+        val progressLogger = progressLoggerFactory.newOperation(ProgressStartEvent.BUILD_OP_CATEGORY)
+        execWithProgress(progressLogger, description, execOps = execOps) { execSpec ->
             val arguments: List<String> = mutableListOf<String>().apply {
                 add("install")
                 addAll(args)
@@ -120,18 +104,15 @@ class Npm internal constructor(
             if (!environment.standalone) {
                 val nodeExecutable = nodeJs.nodeExecutable
                 val nodePath = File(nodeExecutable).parent
-                exec.launchOpts.environment.put(
-                    "PATH",
-                    "$nodePath${File.pathSeparator}${System.getenv("PATH")}",
-                )
+                execSpec.environment["PATH"] = "$nodePath${File.pathSeparator}${System.getenv("PATH")}"
             }
 
             val command = environment.executable
 
-            exec.launchOpts.executable.set(command)
-            exec.launchOpts.workingDir.fileProvider(dir)
+            execSpec.executable = command
+            execSpec.workingDir = dir.get()
 
-            exec.setArguments(arguments)
+            execSpec.setArgs(arguments)
         }
     }
 

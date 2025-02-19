@@ -330,14 +330,14 @@ class ReturnFromBuildScriptAfterExecution<T>(
             build(
                 buildArguments = args,
                 buildOptions = options,
-                forwardBuildOutput = false,
+//                forwardBuildOutput = false,
             )
         }
         val buildAndFail: BuildAction = { args, options ->
             buildAndFail(
                 buildArguments = args,
                 buildOptions = options,
-                forwardBuildOutput = false,
+//                forwardBuildOutput = false,
             )
         }
     }

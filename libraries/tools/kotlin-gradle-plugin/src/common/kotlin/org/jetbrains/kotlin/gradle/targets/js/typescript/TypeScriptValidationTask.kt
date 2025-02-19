@@ -7,13 +7,15 @@ package org.jetbrains.kotlin.gradle.targets.js.typescript
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
-import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.*
+import org.gradle.internal.logging.progress.ProgressLoggerFactory
+import org.gradle.process.ExecOperations
 import org.gradle.work.DisableCachingByDefault
 import org.gradle.work.NormalizeLineEndings
 import org.jetbrains.kotlin.gradle.InternalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.internal.execWithProgress
+import org.jetbrains.kotlin.gradle.internal.newBuildOpLogger
 import org.jetbrains.kotlin.gradle.targets.js.RequiredKotlinJsDependency
 import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinIrJsGeneratedTSValidationStrategy
 import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrCompilation
@@ -30,7 +32,8 @@ constructor(
     @Internal
     @Transient
     override val compilation: KotlinJsIrCompilation,
-    private val objects: ObjectFactory,
+    private val execOps: ExecOperations,
+    private val progressLoggerFactory: ProgressLoggerFactory,
 ) : DefaultTask(), RequiresNpmDependencies {
     private val npmProject = compilation.npmProject
 
@@ -66,7 +69,8 @@ constructor(
 
         if (files.isEmpty()) return
 
-        val result = services.execWithProgress("typescript", objects) {
+        val progressLogger = progressLoggerFactory.newBuildOpLogger()
+        val result = execWithProgress(progressLogger, "typescript", execOps) {
             npmProject.useTool(it, "typescript/bin/tsc", listOf(), listOf("--noEmit"))
         }
 

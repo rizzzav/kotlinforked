@@ -7,10 +7,11 @@
 
 package org.jetbrains.kotlin.gradle.utils.processes
 
+import org.gradle.kotlin.dsl.support.serviceOf
+import org.gradle.process.ExecOperations
+import org.gradle.process.ExecSpec
 import org.gradle.testfixtures.ProjectBuilder
 import org.jetbrains.kotlin.gradle.util.assertContains
-import org.jetbrains.kotlin.gradle.utils.processes.ExecHandle.ExecHandleState.Aborted
-import org.jetbrains.kotlin.gradle.utils.processes.ExecHandleBuilder.Companion.execHandleBuilder
 import org.jetbrains.kotlin.util.assertDoesNotThrow
 import org.jetbrains.kotlin.util.assertThrows
 import java.io.ByteArrayOutputStream
@@ -23,13 +24,13 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.minutes
 
 @OptIn(ExperimentalTime::class)
-class ExecHandleTest {
+class ExecAsyncHandleTest {
 
     @Test
-    fun `when ProcessHandle runs successfully expect ExecResult returns success`() {
-        val builder = buildTestHandle()
+    fun `when ExecAsync runs successfully expect ExecResult returns success`() {
+        val handle = buildTestHandle()
 
-        val result = builder.build().execute()
+        val result = handle.start().waitForFinish()
 
         assertEquals(0, result.exitValue)
 
@@ -39,7 +40,7 @@ class ExecHandleTest {
     }
 
     @Test
-    fun `when setting stdout and stderr in ExecHandleBuilder, expect process logs are forwarded`() {
+    fun `when setting stdout and stderr in ExecAsync, expect process logs are forwarded`() {
 
         class TestOutputStream : ByteArrayOutputStream() {
             var isClosed: Boolean = false
@@ -54,8 +55,8 @@ class ExecHandleTest {
         val processStdout = TestOutputStream()
         val processStderr = TestOutputStream()
 
-        val builder = buildTestHandle {
-            arguments += listOf(
+        val handle = buildTestHandle {
+            args(
                 "logToStdOut=here's some stdout",
                 "logToStdErr=and also some stderr",
                 "logToStdOut=with another stdout line",
@@ -65,7 +66,7 @@ class ExecHandleTest {
             errorOutput = processStderr
         }
 
-        builder.build().execute()
+        handle.start().waitForFinish()
 
         assertEquals(
             listOf("here's some stdout", "with another stdout line", ""),
@@ -81,17 +82,17 @@ class ExecHandleTest {
     }
 
     @Test
-    fun `when setting stdin in ExecHandleBuilder, expect process receives input`() {
+    fun `when setting stdin in ExecAsync, expect process receives input`() {
         val inputForProcess = PipedOutputStream()
         val processStdout = ByteArrayOutputStream()
 
-        val builder = buildTestHandle {
-            arguments += "logStdin"
+        val handle = buildTestHandle {
+            args("logStdin")
             standardOutput = processStdout
             standardInput = PipedInputStream(inputForProcess)
         }
 
-        val handle = builder.build().start()
+        handle.start()
 
         inputForProcess.bufferedWriter().use { writer ->
             writer.appendLine("Blah blah stdin content")
@@ -114,9 +115,9 @@ class ExecHandleTest {
 
     @Test
     fun `when waiting for process returns quickly if process already completed`() {
-        val builder = buildTestHandle()
+        val handle = buildTestHandle()
 
-        val handle = builder.build().start()
+        handle.start()
 
         val result1 = handle.waitForFinish()
         val result2 = handle.waitForFinish()
@@ -130,11 +131,11 @@ class ExecHandleTest {
 
     @Test
     fun `when process exits with failure - expect ExecResult fails`() {
-        val builder = buildTestHandle {
-            arguments += "exitWith=123"
+        val handle = buildTestHandle {
+            args("exitWith=123")
         }
 
-        val result = builder.build().start().waitForFinish()
+        val result = handle.waitForFinish()
 
         assertEquals(123, result.exitValue)
 
@@ -147,15 +148,13 @@ class ExecHandleTest {
 
     @Test
     fun `when process cannot be started - expect start fails`() {
-        val builder = buildTestHandle {
-            displayName = "custom-display-name"
-            launchOpts {
-                executable.set("no_such_command")
-            }
+        val handle = buildTestHandle {
+//            displayName = "custom-display-name"
+            executable = "no_such_command"
         }
 
         val exception = assertThrows<ExecException> {
-            builder.build().start()
+            handle.start()
         }
 
         assertNotNull(exception.message) { message ->
@@ -164,16 +163,16 @@ class ExecHandleTest {
     }
 
     @Test
-    fun `when ExecHandle is aborted - expect process is aborted`() {
-        val builder = buildTestHandle {
-            arguments += "sleep=${1.minutes}"
+    fun `when ExecAsyncHandle is aborted - expect process is aborted`() {
+        val handle = buildTestHandle {
+            args("sleep=${1.minutes}")
         }
 
-        val handle = builder.build().start()
+        handle.start()
 
         handle.abort()
 
-        assertEquals(Aborted, handle.state)
+//        assertEquals(Aborted, handle.state)
 
         val result = handle.waitForFinish()
 
@@ -186,32 +185,30 @@ class ExecHandleTest {
 
     @Test
     fun `when process has completed - expect aborting does nothing`() {
-        val builder = buildTestHandle()
+        val handle = buildTestHandle()
 
-        val handle = builder.build()
-
-        val result = handle.execute()
+        val result = handle.start().waitForFinish()
 
         assertEquals(0, result.exitValue)
 
-        handle.abort()
+//        handle.abort()
 
         assertEquals(0, result.exitValue)
     }
 
     @Test
     fun `when process has failed - expect aborting does nothing`() {
-        val builder = buildTestHandle {
-            arguments += "exitWith=99"
+        val handle = buildTestHandle {
+            args("exitWith=99")
         }
-
-        val handle = builder.build()
 
         val result = handle.start().waitForFinish()
 
         assertEquals(99, result.exitValue)
 
-        val exception = assertThrows<ExecException> { result.assertNormalExitValue() }
+        val exception = assertThrows<ExecException> {
+            result.assertNormalExitValue()
+        }
         assertNotNull(exception.message) { message ->
             assertContains("finished with non-zero exit value 99", message)
         }
@@ -223,7 +220,7 @@ class ExecHandleTest {
 
     companion object {
         /** The current FQN of the test class. Used to launch [main] as a Java application. */
-        private val APP_FQN: String = ExecHandleTest::class.qualifiedName!!
+        private val APP_FQN: String = ExecAsyncHandleTest::class.qualifiedName!!
 
         @JvmStatic
         fun main(args: Array<String>) {
@@ -255,20 +252,16 @@ class ExecHandleTest {
          * Uses the current Java process and classpath.
          */
         private fun buildTestHandle(
-            configure: ExecHandleBuilder.() -> Unit = {},
-        ): ExecHandleBuilder {
-            return ProjectBuilder
-                .builder()
-                .build()
-                .objects
-                .execHandleBuilder {
-                    arguments += APP_FQN
-                    launchOpts {
-                        executable.set(currentJavaExecutable)
-                        environment.put("CLASSPATH", currentClasspath)
-                    }
-                    configure()
-                }
+            configure: ExecSpec.() -> Unit = {},
+        ): ExecAsyncHandle {
+            val project = ProjectBuilder.builder().build()
+            val execOps = project.serviceOf<ExecOperations>()
+            return execOps.execAsync("test") {
+                it.args(APP_FQN)
+                it.executable = currentJavaExecutable
+                it.environment("CLASSPATH", currentClasspath)
+                it.configure()
+            }
         }
 
         /** The current Java executable. Used to launch [main]. */

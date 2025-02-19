@@ -19,7 +19,6 @@ import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsPlugin.Companion.kotl
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin.Companion.kotlinNodeJsRootExtension
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinPackageJsonTask
 import org.jetbrains.kotlin.gradle.utils.getFile
-import org.jetbrains.kotlin.gradle.utils.processes.ExecHandleBuilder
 import java.io.File
 import java.io.Serializable
 
@@ -107,16 +106,16 @@ open class NpmProject(@Transient val compilation: KotlinJsIrCompilation) : Seria
         exec.args = nodeArgs + require(tool) + args
     }
 
-    internal fun useTool(
-        execHandleBuilder: ExecHandleBuilder,
-        tool: String,
-        nodeArgs: List<String> = listOf(),
-        args: List<String>,
-    ) {
-        execHandleBuilder.launchOpts.workingDir.set(dir)
-        execHandleBuilder.launchOpts.executable.set(nodeExecutable)
-        execHandleBuilder.setArguments(nodeArgs + require(tool) + args)
-    }
+//    internal fun useTool(
+//        execHandleBuilder: ExecHandleBuilder,
+//        tool: String,
+//        nodeArgs: List<String> = listOf(),
+//        args: List<String>,
+//    ) {
+//        execHandleBuilder.launchOpts.workingDir.set(dir)
+//        execHandleBuilder.launchOpts.executable.set(nodeExecutable)
+//        execHandleBuilder.setArguments(nodeArgs + require(tool) + args)
+//    }
 
     /**
      * Require [request] nodejs module and return canonical path to it's main js file.

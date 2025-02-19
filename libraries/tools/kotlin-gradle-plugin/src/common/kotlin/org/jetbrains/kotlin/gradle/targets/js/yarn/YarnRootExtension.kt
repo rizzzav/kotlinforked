@@ -12,6 +12,8 @@ import org.gradle.api.file.FileCollection
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.tasks.TaskProvider
+import org.gradle.internal.logging.progress.ProgressLoggerFactory
+import org.gradle.process.ExecOperations
 import org.jetbrains.kotlin.gradle.InternalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.logging.kotlinInfo
 import org.jetbrains.kotlin.gradle.targets.js.AbstractSettings
@@ -33,6 +35,7 @@ constructor(
     val project: Project,
     val nodeJsRoot: NodeJsRootExtension,
     private val yarnSpec: YarnRootEnvSpec,
+    private val execOps: ExecOperations,
     private val objects: ObjectFactory,
 ) : AbstractSettings<YarnEnv>(), NpmApiExtension<YarnEnvironment, Yarn> {
     init {
@@ -44,7 +47,10 @@ constructor(
     }
 
     override val packageManager: Yarn by lazy {
-        Yarn(objects)
+        Yarn(
+            execOps = execOps,
+            objects = objects,
+        )
     }
 
     override val environment: YarnEnvironment by lazy {

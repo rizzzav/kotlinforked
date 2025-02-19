@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.gradle.utils.processes.ProcessLaunchOptions.Companio
 import java.io.File
 
 /**
- * Properties used to launch a process using [ExecHandle].
+ * Properties used to launch a process using [ExecAsyncHandle].
  *
  * A new instance can be created using [ObjectFactory] and [processLaunchOptions].
  */

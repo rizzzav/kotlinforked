@@ -8,17 +8,17 @@ package org.jetbrains.kotlin.gradle.internal.testing
 import org.gradle.api.internal.tasks.testing.TestExecuter
 import org.gradle.api.internal.tasks.testing.TestExecutionSpec
 import org.gradle.api.internal.tasks.testing.TestResultProcessor
-import org.gradle.api.model.ObjectFactory
-import org.jetbrains.kotlin.gradle.utils.processes.ExecHandle
-import org.jetbrains.kotlin.gradle.utils.processes.ExecHandleBuilder.Companion.execHandleBuilder
-import org.jetbrains.kotlin.gradle.utils.processes.ExecResult
+import org.gradle.process.ExecOperations
+import org.gradle.process.ExecResult
+import org.jetbrains.kotlin.gradle.utils.processes.ExecAsyncHandle
 import org.jetbrains.kotlin.gradle.utils.processes.ProcessLaunchOptions
+import org.jetbrains.kotlin.gradle.utils.processes.execAsync
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.OutputStream
 
 open class TCServiceMessagesTestExecutionSpec(
-    internal val processLaunchOpts: ProcessLaunchOptions,
+    internal val processLaunchOptions: ProcessLaunchOptions,
     val processArgs: List<String>,
     val checkExitCode: Boolean,
     val clientSettings: TCServiceMessagesClientSettings,
@@ -43,10 +43,10 @@ class TCServiceMessagesTestExecutor(
     val runListeners: MutableList<KotlinTestRunnerListener>,
     val ignoreTcsmOverflow: Boolean,
     val ignoreRunFailures: Boolean,
-    private val objects: ObjectFactory,
+    private val execOps: ExecOperations,
 ) : TestExecuter<TCServiceMessagesTestExecutionSpec> {
 
-    private lateinit var execHandle: ExecHandle
+    private lateinit var execHandle: ExecAsyncHandle
 
     override fun execute(
         spec: TCServiceMessagesTestExecutionSpec,
@@ -56,59 +56,51 @@ class TCServiceMessagesTestExecutor(
             val client = spec.createClient(testResultProcessor, log)
 
             if (spec.dryRunArgs != null) {
-                execHandle = objects.execHandleBuilder {
-                    displayName = "$description (dry run)"
-
-                    setArguments(spec.dryRunArgs)
-
-                    launchOpts {
-                        workingDir.set(spec.processLaunchOpts.workingDir)
-                        executable.set(spec.processLaunchOpts.executable)
-                        environment.putAll(spec.processLaunchOpts.environment)
-                    }
-
+                execHandle = execOps.execAsync("$description (dry run)") { execSpec ->
                     // get rid of redundant output during dry-run
-                    standardOutput = nullOutputStream
+                    execSpec.standardOutput = nullOutputStream
+                    execSpec.args = spec.dryRunArgs
 
-                    ignoreExitValue = true
-                }.build()
+                    execSpec.workingDir = spec.processLaunchOptions.workingDir.orNull?.asFile
+                    execSpec.environment(spec.processLaunchOptions.environment.orNull.orEmpty())
+                    execSpec.executable = spec.processLaunchOptions.executable.get()
 
-                val result = execHandle.execute()
+                    execSpec.isIgnoreExitValue = true
+                }
+
+                val result = execHandle.start().waitForFinish()
                 if (result.exitValue != 0) {
                     error(client.testFailedMessage(execHandle, result.exitValue))
                 }
             }
 
             try {
-                execHandle = objects.execHandleBuilder {
-                    displayName = description
+                execHandle = execOps.execAsync(description) { execSpec ->
+                    execSpec.args = spec.processArgs
 
-                    setArguments(spec.processArgs)
+                    execSpec.workingDir = spec.processLaunchOptions.workingDir.orNull?.asFile
+                    execSpec.environment(spec.processLaunchOptions.environment.orNull.orEmpty())
+                    execSpec.executable = spec.processLaunchOptions.executable.get()
 
-                    launchOpts {
-                        workingDir.set(spec.processLaunchOpts.workingDir)
-                        executable.set(spec.processLaunchOpts.executable)
-                        environment.putAll(spec.processLaunchOpts.environment)
-                    }
+                    execSpec.isIgnoreExitValue = true
 
-                    standardOutput = TCServiceMessageOutputStreamHandler(
+                    execSpec.standardOutput = TCServiceMessageOutputStreamHandler(
                         client,
                         { spec.showSuppressedOutput() },
                         log,
-                        ignoreTcsmOverflow
+                        ignoreTcsmOverflow,
                     )
-                    errorOutput = TCServiceMessageOutputStreamHandler(
+                    execSpec.errorOutput = TCServiceMessageOutputStreamHandler(
                         client,
                         { spec.showSuppressedOutput() },
                         log,
-                        ignoreTcsmOverflow
+                        ignoreTcsmOverflow,
                     )
-                    ignoreExitValue = true
-                }.build()
+                }
 
                 lateinit var result: ExecResult
                 client.root {
-                    result = execHandle.execute()
+                    result = execHandle.start().waitForFinish()
                 }
 
                 if (spec.checkExitCode && result.exitValue != 0) {
@@ -135,6 +127,7 @@ class TCServiceMessagesTestExecutor(
     override fun stopNow() {
         if (::execHandle.isInitialized) {
             execHandle.abort()
+//            execHandle.join()
         }
     }
 }
