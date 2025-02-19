@@ -1254,6 +1254,12 @@ public class FirSourceLazyDeclarationResolveTestGenerated extends AbstractFirSou
     }
 
     @Test
+    @TestMetadata("danglingAnnotationOnTopLevelFunction.kt")
+    public void testDanglingAnnotationOnTopLevelFunction() {
+      runTest("analysis/low-level-api-fir/testData/lazyResolve/errors/danglingAnnotationOnTopLevelFunction.kt");
+    }
+
+    @Test
     @TestMetadata("danglingAnnotationWithNestedDeclarations.kt")
     public void testDanglingAnnotationWithNestedDeclarations() {
       runTest("analysis/low-level-api-fir/testData/lazyResolve/errors/danglingAnnotationWithNestedDeclarations.kt");
