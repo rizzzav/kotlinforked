@@ -25,7 +25,9 @@ import org.junit.jupiter.api.condition.OS
 import org.junit.jupiter.api.io.TempDir
 import java.nio.file.Path
 import kotlin.io.path.Path
+import kotlin.io.path.createDirectories
 import kotlin.io.path.walk
+import kotlin.io.path.writeText
 import kotlin.test.fail
 
 
@@ -598,10 +600,30 @@ open class CommonizerIT : KGPBaseTest() {
     }
 
     @DisplayName("KT-74442: commonization should work for all known targets despite `kotlin.native.enableKlibsCrossCompilation` state")
-    @TestMetadata("commonize-KT-74442-not-supported-platforms")
+    @TestMetadata("emptyKts")
     @GradleTest
     fun testCommonizationWorksForAllTargetsDespiteCrossCompilationFlagState(gradleVersion: GradleVersion) {
-        nativeProject("commonize-KT-74442-not-supported-platforms", gradleVersion) {
+        nativeProject("emptyKts", gradleVersion) {
+            addKgpToBuildScriptCompilationClasspath()
+            buildScriptInjection {
+                project.applyMultiplatform {
+                    linuxArm64()
+                    linuxX64()
+                    macosArm64()
+                    macosX64()
+                }
+            }
+
+            kotlinSourcesDir("nativeMain").createDirectories().resolve("OnlyLinuxClass.kt").writeText(
+                //language=kotlin
+                """
+                |import platform.posix.AF_ATMPVC
+                |
+                |class OnlyLinuxClass {
+                |    val test = AF_ATMPVC
+                |}
+                """.trimMargin()
+            )
 
             buildAndFail(
                 ":compileNativeMainKotlinMetadata",
@@ -628,7 +650,6 @@ open class CommonizerIT : KGPBaseTest() {
             }
         }
     }
-
 
     private fun `test multiple cinterops with test source sets and compilations`(
         gradleVersion: GradleVersion,
