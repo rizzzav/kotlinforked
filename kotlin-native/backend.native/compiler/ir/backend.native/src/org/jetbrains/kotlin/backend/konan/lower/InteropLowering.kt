@@ -269,6 +269,10 @@ private abstract class BaseInteropIrTransformer(
         return if (getterTrampoline == null && setterTrampoline == null)
             expression
         else builder.irBlock {
+            expression.typeArguments.apply {
+                // Erase the type arguments.
+                indices.forEach { this[it] = null }
+            }
             if (getterTrampoline != null) {
                 expression.getter = getterTrampoline.symbol
                 +getterTrampoline
