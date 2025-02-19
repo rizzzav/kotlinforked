@@ -308,6 +308,7 @@ public func produce_closure() -> main.closure {
     }()
 }
 public extension main.OUTSIDE_PROTO where Self : KotlinRuntimeSupport._KotlinBridged {
+}
 public extension ExportedKotlinPackages.typealiases.inner {
     public typealias Foo = ExportedKotlinPackages.typealiases.Foo
     public typealias LargeInteger = Swift.Int64

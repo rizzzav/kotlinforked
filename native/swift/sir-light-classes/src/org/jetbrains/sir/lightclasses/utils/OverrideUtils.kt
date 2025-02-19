@@ -17,7 +17,8 @@ internal inline val <reified T : SirClassMemberDeclaration> T.overridableCandida
             .toList()
 
 
-private val SirClass.superClassDeclaration: SirClass? get() = (superClass as? SirNominalType)?.typeDeclaration as? SirClass
+internal val SirClass.superClassDeclaration: SirClass? get() = (superClass as? SirNominalType)?.typeDeclaration as? SirClass
+internal val SirProtocol.superClassDeclaration: SirClass? get() = (superClass as? SirNominalType)?.typeDeclaration as? SirClass
 
 internal fun SirType.isSubtypeOf(other: SirType): Boolean = when (this) {
     is SirOptionalType -> (other as? SirOptionalType)?.let { wrappedType.isSubtypeOf(it.wrappedType) } ?: false
@@ -129,3 +130,13 @@ public fun SirClass.calculateAllAvailableInitializers(): List<SirInit> {
 
 private val SirDeclaration.isUnsuitablyDeprecatedToOverride: Boolean
     get() = attributes.findIsInstanceAnd<SirAttribute.Available> { it.unavailable } != null
+
+internal fun SirDeclaration.declaresConformance(protocol: SirProtocol): Boolean = when (this) {
+    is SirClass -> protocols.any { it.declaresConformance(protocol) }
+            || superClassDeclaration?.declaresConformance(protocol) ?: false
+    is SirProtocol -> this == protocol
+            || protocols.any { it.declaresConformance(protocol) }
+            || superClassDeclaration?.declaresConformance(protocol) ?: false
+    is SirExtension -> protocols.any { it.declaresConformance(protocol) }
+    else -> false
+}
