@@ -81,8 +81,6 @@ internal fun IrType.getAllClassSuperTypes(): List<IrType> {
     return result.toList()
 }
 
-private fun IrFunction.isFromAny() = this.parentClassOrNull?.isAny() == true
-
 internal class InteropLowering(val generationState: NativeGenerationState) : FileLoweringPass, BodyLoweringPass {
     override fun lower(irFile: IrFile) {
         // TODO: merge these lowerings.
@@ -235,9 +233,6 @@ private abstract class BaseInteropIrTransformer(
         else builder.irBlock {
             +trampoline
             +irFunctionReference(expression.type, trampoline.symbol, expression.reflectionTarget).apply {
-                (0..<expression.typeArgumentsCount).forEach { index ->
-                    this.putTypeArgument(index, expression.getTypeArgument(index))
-                }
                 expression.arguments.forEachIndexed { index, argument ->
                     this.arguments[index] = argument
                 }
