@@ -43,40 +43,6 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.NativeStandardInteropNames.objCActionClassId
 import org.jetbrains.kotlin.native.interop.ObjCMethodInfo
 
-internal fun IrType.getAllClassSuperTypes(): List<IrType> {
-    val result = mutableListOf<IrType>()
-    val visitedTypeParameters = mutableSetOf<IrTypeParameterSymbol>()
-
-    fun collectAllClassSuperTypes(superTypes: List<IrType>) {
-        for (superType in superTypes) {
-            when (val classifier = superType.classifierOrNull) {
-                is IrClassSymbol -> {
-                    result.add(superType)
-                    collectAllClassSuperTypes(classifier.owner.superTypes)
-                }
-                is IrTypeParameterSymbol -> {
-                    if (visitedTypeParameters.add(classifier))
-                        collectAllClassSuperTypes(classifier.owner.superTypes)
-                }
-                else -> continue
-            }
-        }
-    }
-
-    when (val classifier = this.classifierOrFail) {
-        is IrClassSymbol -> {
-            result.add(this)
-            collectAllClassSuperTypes(classifier.owner.superTypes)
-        }
-        is IrTypeParameterSymbol -> {
-            visitedTypeParameters.add(classifier)
-            collectAllClassSuperTypes(classifier.owner.superTypes)
-        }
-        else -> error("Unexpected classifier: ${this::class.java}")
-    }
-    return result.toList()
-}
-
 internal class InteropLowering(val generationState: NativeGenerationState) : FileLoweringPass, BodyLoweringPass {
     override fun lower(irFile: IrFile) {
         // TODO: merge these lowerings.
