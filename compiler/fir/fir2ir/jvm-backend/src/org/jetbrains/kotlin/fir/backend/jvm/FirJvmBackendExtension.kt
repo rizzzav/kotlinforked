@@ -11,6 +11,7 @@ import org.jetbrains.kotlin.backend.jvm.ModuleMetadataSerializer
 import org.jetbrains.kotlin.backend.jvm.metadata.BuiltinsSerializer
 import org.jetbrains.kotlin.backend.jvm.metadata.MetadataSerializer
 import org.jetbrains.kotlin.codegen.serialization.JvmSerializationBindings
+import org.jetbrains.kotlin.config.LanguageVersion
 import org.jetbrains.kotlin.fir.backend.Fir2IrComponents
 import org.jetbrains.kotlin.fir.backend.FirMetadataSource
 import org.jetbrains.kotlin.fir.declarations.FirClass
@@ -59,7 +60,6 @@ class FirJvmBackendExtension(
             val fir = metadata.fir
 
             val typeApproximator = TypeApproximatorForMetadataSerializer(session)
-            // Get rid of special serializer extension after KT-57919, i.e. when we serialize all the annotations by default
             val firSerializerExtension = object : FirJvmSerializerExtension(
                 session,
                 JvmSerializationBindings(),
@@ -83,13 +83,17 @@ class FirJvmBackendExtension(
                     versionRequirementTable: MutableVersionRequirementTable,
                     childSerializer: FirElementSerializer,
                 ) {
-                    klass.serializeAnnotations(
-                        session,
-                        additionalMetadataProvider,
-                        annotationSerializer,
-                        proto,
-                        BuiltInSerializerProtocol.classAnnotation
-                    )
+                    // Before 2.2, annotations were written to the `BuiltInsProtoBuf.classAnnotation` extension.
+                    // Starting from 2.2, they are written to the `ProtoBuf.Class.annotation` field (KT-57919).
+                    if (context.config.languageVersionSettings.languageVersion < LanguageVersion.KOTLIN_2_2) {
+                        klass.serializeAnnotations(
+                            session,
+                            additionalMetadataProvider,
+                            annotationSerializer,
+                            proto,
+                            BuiltInSerializerProtocol.classAnnotation
+                        )
+                    }
                     super.serializeClass(klass, proto, versionRequirementTable, childSerializer)
                 }
             }
