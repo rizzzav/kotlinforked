@@ -45,7 +45,7 @@ internal fun Project.registerSwiftExportTask(
 
     val swiftApiModuleName = swiftExportExtension
         .moduleName
-        .orElse(project.name.normalizedSwiftExportModuleName.also { validateSwiftExportModuleName(it) })
+        .orElse(provider { project.name.normalizedSwiftExportModuleName.also { validateSwiftExportModuleName(it) } })
 
     val taskNamePrefix = lowerCamelCaseName(
         target.disambiguationClassifier ?: target.name,

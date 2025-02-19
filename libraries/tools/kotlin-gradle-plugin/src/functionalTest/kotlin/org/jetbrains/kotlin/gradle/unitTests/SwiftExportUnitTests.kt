@@ -10,6 +10,7 @@ package org.jetbrains.kotlin.gradle.unitTests
 
 import org.gradle.api.NamedDomainObjectCollection
 import org.gradle.api.internal.project.ProjectInternal
+import org.gradle.kotlin.dsl.support.uppercaseFirstChar
 import org.gradle.testfixtures.ProjectBuilder
 import org.jetbrains.kotlin.analysis.utils.collections.buildSmartList
 import org.jetbrains.kotlin.gradle.dependencyResolutionTests.configureRepositoriesForTests
@@ -530,14 +531,38 @@ class SwiftExportUnitTests {
 
     @Test
     fun `test swift export invalid project name`() {
+        val invalidName = "invalid!name"
         val project = swiftExportProject(
             projectBuilder = {
-                withName("invalid!name")
+                withName(invalidName)
             }
         )
         project.evaluate()
 
+        val swiftExportTask = project.tasks.withType(SwiftExportTask::class.java).single()
+        val name = swiftExportTask.mainModuleInput.moduleName.get()
+        assertEquals(invalidName.uppercaseFirstChar(), name)
+
         project.assertContainsDiagnostic(KotlinToolingDiagnostics.SwiftExportInvalidModuleName)
+    }
+
+    @Test
+    fun `test swift export invalid project name but valid module name`() {
+        val validName = "SharedModule"
+        val project = swiftExportProject(
+            projectBuilder = {
+                withName("invalid!name")
+            }
+        ) {
+            moduleName.set(validName)
+        }
+        project.evaluate()
+
+        val swiftExportTask = project.tasks.withType(SwiftExportTask::class.java).single()
+        val name = swiftExportTask.mainModuleInput.moduleName.get()
+        assertEquals(validName, name)
+
+        project.assertNoDiagnostics(KotlinToolingDiagnostics.SwiftExportInvalidModuleName)
     }
 }
 
