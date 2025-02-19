@@ -617,10 +617,8 @@ open class CommonizerIT : KGPBaseTest() {
             kotlinSourcesDir("nativeMain").createDirectories().resolve("OnlyLinuxClass.kt").writeText(
                 //language=kotlin
                 """
-                |import platform.posix.AF_ATMPVC
-                |
-                |class OnlyLinuxClass {
-                |    val test = AF_ATMPVC
+                |fun main() {
+                |    platform.linux.epoll_create(0)
                 |}
                 """.trimMargin()
             )
@@ -634,7 +632,7 @@ open class CommonizerIT : KGPBaseTest() {
                 )
             ) {
                 assertTasksFailed(":compileNativeMainKotlinMetadata")
-                assertOutputContains("Unresolved reference 'AF_ATMPVC'")
+                assertOutputContains("Unresolved reference 'linux'")
             }
 
             buildAndFail(
@@ -646,7 +644,7 @@ open class CommonizerIT : KGPBaseTest() {
                 )
             ) {
                 assertTasksFailed(":compileNativeMainKotlinMetadata")
-                assertOutputContains("Unresolved reference 'AF_ATMPVC'")
+                assertOutputContains("Unresolved reference 'linux'")
             }
         }
     }
