@@ -35,10 +35,6 @@ import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.util.isNullable
 import org.jetbrains.kotlin.ir.util.isSubtypeOf
-import org.jetbrains.kotlin.ir.util.isSubtypeOfClass
-import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
-import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
-import org.jetbrains.kotlin.ir.visitors.acceptVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.konan.ForeignExceptionMode
 import org.jetbrains.kotlin.konan.library.KonanLibrary
@@ -227,7 +223,7 @@ private abstract class BaseInteropIrTransformer(
         val returnType = functionType.arguments.last().typeOrNull ?: callee.returnType.erasedUpperBound.defaultType
 
         builder.at(expression)
-        val trampoline = tryBuildTrampoline(callee, parameterTypes, returnType)
+        val trampoline = tryBuildTrampoline(callee, parameterTypes, returnType, expression)
         return if (trampoline == null)
             expression
         else builder.irBlock {
@@ -265,10 +261,10 @@ private abstract class BaseInteropIrTransformer(
 
         builder.at(expression)
         val getterTrampoline = expression.getter?.let {
-            tryBuildTrampoline(it.owner, parameterTypes, propertyType)
+            tryBuildTrampoline(it.owner, parameterTypes, propertyType, expression)
         }
         val setterTrampoline = expression.setter?.let {
-            tryBuildTrampoline(it.owner, parameterTypes + listOf(propertyType), irBuiltIns.unitType)
+            tryBuildTrampoline(it.owner, parameterTypes + listOf(propertyType), irBuiltIns.unitType, expression)
         }
         return if (getterTrampoline == null && setterTrampoline == null)
             expression
@@ -285,7 +281,12 @@ private abstract class BaseInteropIrTransformer(
         }
     }
 
-    private fun tryBuildTrampoline(callee: IrFunction, parameterTypes: List<IrType>, returnType: IrType): IrSimpleFunction? {
+    private fun tryBuildTrampoline(
+            callee: IrFunction,
+            parameterTypes: List<IrType>,
+            returnType: IrType,
+            expression: IrMemberAccessExpression<*>,
+    ): IrSimpleFunction? {
         val trampoline = context.irFactory.buildFun {
             startOffset = builder.startOffset
             endOffset = builder.endOffset
@@ -302,12 +303,10 @@ private abstract class BaseInteropIrTransformer(
         val body = context.irFactory.createExpressionBody(
                 when (callee) {
                     is IrConstructor -> localBuilder.irCallConstructor(
-                            callee.symbol, typeArguments = trampoline.typeParameters.map { it.defaultType }
+                            callee.symbol, typeArguments = expression.typeArguments.filterNotNull()
                     )
                     is IrSimpleFunction -> localBuilder.irCall(callee).apply {
-                        trampoline.typeParameters.forEachIndexed { index, typeParameter ->
-                            putTypeArgument(index, typeParameter.defaultType)
-                        }
+                        expression.typeArguments.forEachIndexed { index, argument -> typeArguments[index] = argument }
                     }
                 }.apply {
                     trampoline.parameters.forEachIndexed { index, parameter ->
