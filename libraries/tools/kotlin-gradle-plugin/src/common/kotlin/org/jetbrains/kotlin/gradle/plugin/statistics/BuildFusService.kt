@@ -19,9 +19,11 @@ import org.gradle.tooling.events.task.TaskFailureResult
 import org.gradle.tooling.events.task.TaskFinishEvent
 import org.gradle.util.GradleVersion
 import org.jetbrains.kotlin.gradle.fus.BuildUidService
+import org.jetbrains.kotlin.gradle.internal.isInIdeaSync
 import org.jetbrains.kotlin.gradle.logging.kotlinDebug
 import org.jetbrains.kotlin.gradle.plugin.BuildEventsListenerRegistryHolder
 import org.jetbrains.kotlin.gradle.plugin.PropertiesProvider
+import org.jetbrains.kotlin.gradle.plugin.PropertiesProvider.Companion.kotlinPropertiesProvider
 import org.jetbrains.kotlin.gradle.plugin.internal.isConfigurationCacheEnabled
 import org.jetbrains.kotlin.gradle.plugin.internal.isConfigurationCacheRequested
 import org.jetbrains.kotlin.gradle.plugin.internal.isProjectIsolationEnabled
@@ -81,14 +83,21 @@ abstract class BuildFusService<T : BuildFusService.Parameters> :
         internal val serviceName = "${BuildFusService::class.simpleName}_${BuildFusService::class.java.classLoader.hashCode()}"
         private var buildStartTime: Long = System.currentTimeMillis()
 
+        private fun buildServiceShouldBeCreated(project: Project) =
+            !project.isInIdeaSync.get() && project.kotlinPropertiesProvider.enableFusMetricsCollection
+
         fun registerIfAbsent(project: Project, pluginVersion: String, buildUidService: Provider<BuildUidService>) =
-            registerIfAbsentImpl(project, pluginVersion, buildUidService).also { serviceProvider ->
-                SingleActionPerProject.run(project, UsesBuildFusService::class.java.name) {
-                    project.tasks.withType<UsesBuildFusService>().configureEach { task ->
-                        task.buildFusService.value(serviceProvider).disallowChanges()
-                        task.usesService(serviceProvider)
+            if (buildServiceShouldBeCreated(project)) {
+                registerIfAbsentImpl(project, pluginVersion, buildUidService).also { serviceProvider ->
+                    SingleActionPerProject.run(project, UsesBuildFusService::class.java.name) {
+                        project.tasks.withType<UsesBuildFusService>().configureEach { task ->
+                            task.buildFusService.value(serviceProvider).disallowChanges()
+                            task.usesService(serviceProvider)
+                        }
                     }
                 }
+            } else {
+                null
             }
 
         private fun registerIfAbsentImpl(
