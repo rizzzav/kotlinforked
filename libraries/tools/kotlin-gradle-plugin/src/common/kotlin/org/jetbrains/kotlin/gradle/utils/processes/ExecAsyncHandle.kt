@@ -84,6 +84,8 @@ private class ExecAsyncHandleImpl(
     private val abortTimeout: Duration,
     private val run: () -> ExecResult,
 ) : ExecAsyncHandle {
+    private val logTag: String = "[ExecAsyncHandle $displayName]"
+
     private val result: AtomicReference<ExecResult?> = AtomicReference(null)
     private val failure: AtomicReference<Exception?> = AtomicReference(null)
 
@@ -92,16 +94,18 @@ private class ExecAsyncHandleImpl(
         name = displayName,
         isDaemon = true,
         block = {
+            logger.info("$logTag started")
             try {
                 result.set(run())
+                logger.info("$logTag finished ${result.get()}")
             } catch (e: Exception) {
                 failure.set(e)
+                logger.info("$logTag failed $e")
             }
         },
     )
 
     override fun start(): ExecAsyncHandle {
-        logger.info("[ExecAsyncHandle $displayName] starting... (${thread.state})")
         thread.start()
         return this
     }
@@ -114,7 +118,7 @@ private class ExecAsyncHandleImpl(
         }
 
         return requireNotNull(result.get()) {
-            "[ExecAsyncHandle $displayName] result is null (${thread.state})"
+            "$logTag result is null"
         }
     }
 
@@ -122,24 +126,23 @@ private class ExecAsyncHandleImpl(
         waitForCompletion()
 
         return requireNotNull(failure.get()) {
-            "[ExecAsyncHandle $displayName] failure is null (${thread.state})"
+            "$logTag failure is null"
         }
+    }
+
+    override fun abort() {
+        thread.interrupt()
+        logger.info("$logTag aborted")
     }
 
     private fun waitForCompletion() {
         try {
             thread.join()
         } catch (ex: InterruptedException) {
-            logger.info("[ExecAsyncHandle $displayName] interrupted $ex (${thread.state})")
+            logger.info("$logTag interrupted $ex")
             thread.interrupt()
             thread.join(abortTimeout.toMillis())
         }
-    }
-
-    override fun abort() {
-        logger.info("[ExecAsyncHandle $displayName] aborting... (${thread.state})")
-        thread.interrupt()
-        logger.info("[ExecAsyncHandle $displayName] finished aborting (${thread.state})")
     }
 
     override fun isAlive(): Boolean = !thread.isAlive
