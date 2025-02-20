@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.gradle.internal.newBuildOpLogger
 import org.jetbrains.kotlin.gradle.internal.testing.TCServiceMessageOutputStreamHandler
 import org.jetbrains.kotlin.gradle.targets.js.npm.NpmProject
 import org.jetbrains.kotlin.gradle.utils.processes.ExecAsyncHandle
-import org.jetbrains.kotlin.gradle.utils.processes.execAsync
+import org.jetbrains.kotlin.gradle.utils.processes.ExecAsyncHandle.Companion.execAsync
 import java.io.File
 
 internal data class KotlinWebpackRunner(

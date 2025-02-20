@@ -9,10 +9,9 @@ import org.gradle.api.internal.tasks.testing.TestExecuter
 import org.gradle.api.internal.tasks.testing.TestExecutionSpec
 import org.gradle.api.internal.tasks.testing.TestResultProcessor
 import org.gradle.process.ExecOperations
-import org.gradle.process.ExecResult
 import org.jetbrains.kotlin.gradle.utils.processes.ExecAsyncHandle
+import org.jetbrains.kotlin.gradle.utils.processes.ExecAsyncHandle.Companion.execAsync
 import org.jetbrains.kotlin.gradle.utils.processes.ProcessLaunchOptions
-import org.jetbrains.kotlin.gradle.utils.processes.execAsync
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.OutputStream
@@ -68,9 +67,9 @@ class TCServiceMessagesTestExecutor(
                     execSpec.isIgnoreExitValue = true
                 }
 
-                val result = execHandle.start().waitForFinish()
-                if (result.exitValue != 0) {
-                    error(client.testFailedMessage(execHandle, result.exitValue))
+                val exitValue = execHandle.start().waitForResult()?.exitValue ?: -1
+                if (exitValue != 0) {
+                    error(client.testFailedMessage(execHandle, exitValue))
                 }
             }
 
@@ -98,13 +97,13 @@ class TCServiceMessagesTestExecutor(
                     )
                 }
 
-                lateinit var result: ExecResult
-                client.root {
-                    result = execHandle.start().waitForFinish()
-                }
+                val exitValue =
+                    client.root {
+                        execHandle.start().waitForResult()?.exitValue ?: -1
+                    }
 
-                if (spec.checkExitCode && result.exitValue != 0) {
-                    error(client.testFailedMessage(execHandle, result.exitValue))
+                if (spec.checkExitCode && exitValue != 0) {
+                    error(client.testFailedMessage(execHandle, exitValue))
                 }
             } catch (e: Throwable) {
                 spec.showSuppressedOutput()
@@ -124,6 +123,7 @@ class TCServiceMessagesTestExecutor(
         }
     }
 
+    // TODO write comment, only used in fail fast
     override fun stopNow() {
         if (::execHandle.isInitialized) {
             execHandle.abort()

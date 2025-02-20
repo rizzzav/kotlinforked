@@ -10,8 +10,10 @@ package org.jetbrains.kotlin.gradle.utils.processes
 import org.gradle.kotlin.dsl.support.serviceOf
 import org.gradle.process.ExecOperations
 import org.gradle.process.ExecSpec
+import org.gradle.process.internal.ExecException
 import org.gradle.testfixtures.ProjectBuilder
 import org.jetbrains.kotlin.gradle.util.assertContains
+import org.jetbrains.kotlin.gradle.utils.processes.ExecAsyncHandle.Companion.execAsync
 import org.jetbrains.kotlin.util.assertDoesNotThrow
 import org.jetbrains.kotlin.util.assertThrows
 import java.io.ByteArrayOutputStream
@@ -20,22 +22,20 @@ import java.io.PipedOutputStream
 import java.nio.file.FileSystems
 import kotlin.system.exitProcess
 import kotlin.test.*
-import kotlin.time.ExperimentalTime
-import kotlin.time.minutes
+import kotlin.time.Duration.Companion.seconds
 
-@OptIn(ExperimentalTime::class)
 class ExecAsyncHandleTest {
 
     @Test
     fun `when ExecAsync runs successfully expect ExecResult returns success`() {
         val handle = buildTestHandle()
 
-        val result = handle.start().waitForFinish()
+        val result = handle.start().waitForResult()
 
-        assertEquals(0, result.exitValue)
+        assertEquals(0, result?.exitValue)
 
         assertDoesNotThrow {
-            result.assertNormalExitValue()
+            result?.assertNormalExitValue()
         }
     }
 
@@ -66,7 +66,7 @@ class ExecAsyncHandleTest {
             errorOutput = processStderr
         }
 
-        handle.start().waitForFinish()
+        handle.start().waitForResult()
 
         assertEquals(
             listOf("here's some stdout", "with another stdout line", ""),
@@ -100,7 +100,7 @@ class ExecAsyncHandleTest {
 
         // Wait for process to finish reading and processing input
         inputForProcess.close()
-        handle.waitForFinish()
+        handle.waitForResult()
 
         assertEquals(
             listOf("stdin: Blah blah stdin content", ""),
@@ -119,14 +119,14 @@ class ExecAsyncHandleTest {
 
         handle.start()
 
-        val result1 = handle.waitForFinish()
-        val result2 = handle.waitForFinish()
+        val result1 = handle.waitForResult()
+        val result2 = handle.waitForResult()
 
-        assertEquals(0, result1.exitValue)
-        assertEquals(0, result2.exitValue)
+        assertEquals(0, result1?.exitValue)
+        assertEquals(0, result2?.exitValue)
 
-        assertDoesNotThrow { result1.assertNormalExitValue() }
-        assertDoesNotThrow { result2.assertNormalExitValue() }
+        assertDoesNotThrow { result1?.assertNormalExitValue() }
+        assertDoesNotThrow { result2?.assertNormalExitValue() }
     }
 
     @Test
@@ -135,11 +135,11 @@ class ExecAsyncHandleTest {
             args("exitWith=123")
         }
 
-        val result = handle.waitForFinish()
+        val result = handle.start().waitForResult()
 
-        assertEquals(123, result.exitValue)
+        assertEquals(123, result?.exitValue)
 
-        val exception = assertThrows<ExecException> { result.assertNormalExitValue() }
+        val exception = assertThrows<ExecException> { result?.assertNormalExitValue() }
 
         assertNotNull(exception.message) { message ->
             assertContains("finished with non-zero exit value 123", message)
@@ -149,34 +149,29 @@ class ExecAsyncHandleTest {
     @Test
     fun `when process cannot be started - expect start fails`() {
         val handle = buildTestHandle {
-//            displayName = "custom-display-name"
             executable = "no_such_command"
         }
 
-        val exception = assertThrows<ExecException> {
-            handle.start()
-        }
+        val exception = handle.start().waitForFailure()
 
-        assertNotNull(exception.message) { message ->
-            assertEquals("A problem occurred starting process 'custom-display-name'.", message)
+        assertNotNull(exception?.message) { message ->
+            assertEquals("A problem occurred starting process 'command 'no_such_command''", message)
         }
     }
 
     @Test
-    fun `when ExecAsyncHandle is aborted - expect process is aborted`() {
+    fun `when ExecAsyncHandle is aborted - expect result is unavailable`() {
         val handle = buildTestHandle {
-            args("sleep=${1.minutes}")
+            args("sleep=${15.seconds}")
         }
 
         handle.start()
 
         handle.abort()
 
-//        assertEquals(Aborted, handle.state)
+        val result = handle.waitForResult()
 
-        val result = handle.waitForFinish()
-
-        assertNotEquals(0, result.exitValue)
+        assertNull(result)
 
         assertDoesNotThrow("aborting an already-aborted process shouldn't do anything") {
             handle.abort()
@@ -187,13 +182,13 @@ class ExecAsyncHandleTest {
     fun `when process has completed - expect aborting does nothing`() {
         val handle = buildTestHandle()
 
-        val result = handle.start().waitForFinish()
+        val result = handle.start().waitForResult()
 
-        assertEquals(0, result.exitValue)
+        assertEquals(0, result?.exitValue)
 
-//        handle.abort()
+        handle.abort()
 
-        assertEquals(0, result.exitValue)
+        assertEquals(0, result?.exitValue)
     }
 
     @Test
@@ -202,12 +197,12 @@ class ExecAsyncHandleTest {
             args("exitWith=99")
         }
 
-        val result = handle.start().waitForFinish()
+        val result = handle.start().waitForResult()
 
-        assertEquals(99, result.exitValue)
+        assertEquals(99, result?.exitValue)
 
         val exception = assertThrows<ExecException> {
-            result.assertNormalExitValue()
+            result?.assertNormalExitValue()
         }
         assertNotNull(exception.message) { message ->
             assertContains("finished with non-zero exit value 99", message)
