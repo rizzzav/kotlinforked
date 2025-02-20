@@ -123,11 +123,16 @@ class TCServiceMessagesTestExecutor(
         }
     }
 
-    // TODO write comment, only used in fail fast
+    /**
+     * Cancel the tests.
+     *
+     * *NOTE* Currently Gradle only calls this when `--fail-fast` is enabled.
+     * KMP tests do not support `--fail-fast` KT-32108, so we expect this function is never called.
+     * It's implemented in case the Gradle implementation changes.
+     */
     override fun stopNow() {
         if (::execHandle.isInitialized) {
             execHandle.abort()
-//            execHandle.join()
         }
     }
 }
