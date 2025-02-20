@@ -26,6 +26,7 @@ inline fun <reified E : Exception> assertThrows(
         if (e is E) {
             return e
         }
+        throw AssertionError("$message, but was ${e::class.java.name}")
     }
     throw AssertionError(message)
 }
