@@ -22,7 +22,7 @@ import org.jetbrains.sir.lightclasses.utils.overridableCandidates
 import org.jetbrains.sir.lightclasses.utils.translateParameters
 import org.jetbrains.sir.lightclasses.utils.translateReturnType
 
-internal open class SirFunctionFromKtSymbol(
+internal class SirFunctionFromKtSymbol(
     override val ktSymbol: KaNamedFunctionSymbol,
     override val ktModule: KaModule,
     override val sirSession: SirSession,

@@ -67,6 +67,14 @@ internal class SirProtocolFromKtSymbol(
     }
 }
 
+/**
+ * A supporting extension declaration providing bridges for interface/protocol requirements for classes exported from kotlin.
+ * Exporting a Kotlin class to Swift can result in overridden members from an inherited interface not aligning correctly with their
+ * counterparts in the exported Swift protocol due to differences in Swift’s subtyping rules compared to Kotlin.
+ * In such cases, Swift will use definitions from this extension to satisfy the missing protocol requirements.
+ *
+ * @property targetProtocol Protocol declaration this extension belongs to.
+ */
 public class SirBridgedProtocolImplementationFromKtSymbol(
     override val ktSymbol: KaNamedClassSymbol,
     override val ktModule: KaModule,
@@ -112,6 +120,12 @@ public class SirBridgedProtocolImplementationFromKtSymbol(
     }
 }
 
+/**
+ * Relocatied function
+ * Mirrors the `source` declaration, but allows for chaning parent.
+ *
+ * @property source The original declaration
+ */
 private class SirRelocatedFunction(
     val source: SirFunction,
 ) : SirFunction() {
@@ -135,12 +149,18 @@ private class SirRelocatedFunction(
         set(newValue) { source.body = newValue }
 }
 
+/**
+ * Relocatied variable
+ * Mirrors the `source` declaration, but allows for chaning parent.
+ *
+ * @property source The original declaration
+ */
 private class SirRelocatedVariable(
     val source: SirVariable,
 ) : SirVariable() {
     override lateinit var parent: SirDeclarationParent
 
-    override val origin: SirOrigin get() = SirOrigin.Trampoline(source)
+    override val origin: SirOrigin get() = source.origin
     override val visibility: SirVisibility get() = source.visibility
     override val documentation: String? get() = source.documentation
     override val name: String get() = source.name
