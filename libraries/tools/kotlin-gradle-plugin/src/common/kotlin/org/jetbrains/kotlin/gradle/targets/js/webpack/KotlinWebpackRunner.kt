@@ -65,7 +65,7 @@ internal data class KotlinWebpackRunner(
                 standardClient,
                 errorClient,
             )
-        }
+        }.start()
     }
 
     private fun configureClient(
