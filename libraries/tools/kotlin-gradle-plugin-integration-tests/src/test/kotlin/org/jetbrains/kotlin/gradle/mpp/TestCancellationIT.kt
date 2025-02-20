@@ -27,7 +27,7 @@ class TestCancellationIT : KGPBaseTest() {
      */
     @GradleTest
     @TestMetadata("kmp-test-timeout")
-    @Timeout(value = 10, unit = TimeUnit.MINUTES)
+    @Timeout(value = 5, unit = TimeUnit.MINUTES)
     fun `when test task has timeout, expect test processes are terminated`(
         gradleVersion: GradleVersion,
     ) {
@@ -82,14 +82,14 @@ class TestCancellationIT : KGPBaseTest() {
 
                 assertEquals(
                     kmpTasksThatUseExecHandle
-                        .map { "[ExecHandle $it] interrupted java.lang.InterruptedException" }
+                        .map { "[ExecAsyncHandle $it] interrupted java.lang.InterruptedException" }
                         .sorted()
                         .joinToString("\n"),
                     output.lines()
-                        .filter { kmpTasksThatUseExecHandle.any { t -> it.startsWith("[ExecHandle $t] interrupted") } }
+                        .filter { kmpTasksThatUseExecHandle.any { t -> it.startsWith("[ExecAsyncHandle $t] interrupted") } }
                         .sorted()
                         .joinToString("\n"),
-                    message = "All KMP tasks that use ExecHandle must be aborted $kmpTasksThatUseExecHandle.",
+                    message = "All KMP tasks that use ExecAsyncHandle must be aborted $kmpTasksThatUseExecHandle.",
                 )
             }
         }
@@ -97,7 +97,7 @@ class TestCancellationIT : KGPBaseTest() {
 
     companion object {
         /**
-         * Fetch enabled KMP tasks that use ExecHandle.
+         * Fetch enabled KMP tasks that use [org.jetbrains.kotlin.gradle.utils.processes.ExecAsyncHandle].
          *
          * We must query the buildscript because test tasks are dynamically enabled based on the host machine.
          */
@@ -130,7 +130,11 @@ class TestCancellationIT : KGPBaseTest() {
                 "Expected some KMP task paths, but got none"
             }
 
-            require(konanTargetPrettyNames.any { n -> kmpTestTasks.any { n in it } }) {
+            require(
+                konanTargetPrettyNames.any { target ->
+                    kmpTestTasks.any { task -> target in task }
+                }
+            ) {
                 "Must have at least one enabled Kotlin Native test task, but found none in ${kmpTestTasks.joinToString()} (Konan targets: ${konanTargetPrettyNames})"
             }
 
