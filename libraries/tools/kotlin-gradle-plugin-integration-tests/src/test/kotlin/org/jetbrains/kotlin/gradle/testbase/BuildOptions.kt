@@ -79,6 +79,12 @@ data class BuildOptions(
      * https://docs.gradle.org/current/userguide/file_system_watching.html#logging
      */
     val verboseVfsLogging: Boolean? = null,
+    /**
+     * Enable `--continuous` build.
+     *
+     * Note that `--continuous` *disables* `--no-daemon`.
+     */
+    val continuousBuild: Boolean? = null,
 ) {
     enum class ConfigurationCacheValue {
 
@@ -218,6 +224,10 @@ data class BuildOptions(
 
         if (verboseVfsLogging != null) {
             arguments.add("-Dorg.gradle.vfs.verbose=$verboseVfsLogging")
+        }
+
+        if (continuousBuild == true) {
+            arguments.add("--continuous")
         }
 
         arguments.add(if (buildCacheEnabled) "--build-cache" else "--no-build-cache")

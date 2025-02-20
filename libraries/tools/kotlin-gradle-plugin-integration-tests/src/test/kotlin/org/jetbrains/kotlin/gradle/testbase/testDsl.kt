@@ -265,7 +265,7 @@ private fun TestProject.buildWithAction(
         }
 
         val connectSubprocessVMToDebugger =
-            runWithDebug && (environmentVariables.overridingEnvironmentVariablesInstantiationBacktrace != null || buildArguments.contains("--continuous"))
+            runWithDebug && (environmentVariables.overridingEnvironmentVariablesInstantiationBacktrace != null || buildOptions.continuousBuild == true)
         val allBuildArguments = commonBuildSetup(
             buildArguments = buildArguments,
             buildOptions = buildOptions,
