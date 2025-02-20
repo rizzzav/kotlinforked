@@ -10,6 +10,7 @@ import org.gradle.internal.os.OperatingSystem
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.util.GradleVersion
 import org.jetbrains.kotlin.commonizer.CommonizerTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.testbase.*
 import org.jetbrains.kotlin.gradle.uklibs.applyMultiplatform
 import org.jetbrains.kotlin.gradle.uklibs.include
@@ -25,6 +26,7 @@ import org.junit.jupiter.api.condition.OS
 import org.junit.jupiter.api.io.TempDir
 import java.nio.file.Path
 import kotlin.io.path.Path
+import kotlin.io.path.appendText
 import kotlin.io.path.createDirectories
 import kotlin.io.path.walk
 import kotlin.io.path.writeText
@@ -646,6 +648,79 @@ open class CommonizerIT : KGPBaseTest() {
                 assertTasksFailed(":compileNativeMainKotlinMetadata")
                 assertOutputContains("Unresolved reference 'linux'")
             }
+        }
+    }
+
+    @DisplayName("KT-74442: commonization of non-platform CInterop should work only for suppoted targets")
+    @TestMetadata("emptyKts")
+    @GradleTest
+    fun testCommonizationOfNonPlatformShouldWorkOnlyForSupportedTargets(gradleVersion: GradleVersion) {
+        nativeProject("emptyKts", gradleVersion) {
+            addKgpToBuildScriptCompilationClasspath()
+            buildScriptInjection {
+                project.applyMultiplatform {
+                    fun KotlinNativeTarget.addCInterop(name: String = "nonplatform") {
+                        compilations.getByName("main") {
+                            it.cinterops.create(name)
+                        }
+                    }
+                    linuxX64().addCInterop()
+                    linuxArm64().addCInterop()
+                    macosX64().addCInterop()
+                }
+            }
+
+            gradleProperties.appendText("\nkotlin.mpp.enableCInteropCommonization=true")
+
+            projectPath.resolve("src/nativeInterop/cinterop").createDirectories().resolve("nonplatform.def").writeText(
+                """
+                |---
+                |
+                |#ifdef __linux
+                |    void linux_only_api(void) {}
+                |#endif
+                |
+                |void sqlite_optimistically_commonized_api(void) {}    
+                """.trimMargin()
+            )
+
+            kotlinSourcesDir("nativeMain").createDirectories().resolve("OnlyLinuxClass.kt").writeText(
+                //language=kotlin
+                """
+                |import kotlinx.cinterop.ExperimentalForeignApi
+                |import nonplatform.sqlite_optimistically_commonized_api
+                |import nonplatform.linux_only_api
+                |
+                |class OnlyLinuxClass {
+                |    @OptIn(ExperimentalForeignApi::class)
+                |    fun supertfunction() {
+                |        linux_only_api()
+                |        sqlite_optimistically_commonized_api()
+                |    }
+                |}
+                """.trimMargin()
+            )
+
+
+            // It is expected to not fail here because non-platform cinterop now work only for supported targets.
+            // The behavior of these checks must change when KT-74073 is done.
+            build(
+                ":compileNativeMainKotlinMetadata",
+                buildOptions = defaultBuildOptions.copy(
+                    nativeOptions = defaultBuildOptions.nativeOptions.copy(
+                        enableKlibsCrossCompilation = false
+                    )
+                )
+            )
+
+            build(
+                ":compileNativeMainKotlinMetadata",
+                buildOptions = defaultBuildOptions.copy(
+                    nativeOptions = defaultBuildOptions.nativeOptions.copy(
+                        enableKlibsCrossCompilation = true
+                    )
+                )
+            )
         }
     }
 
