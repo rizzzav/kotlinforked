@@ -1,0 +1,109 @@
+private object DelegatedProvider {
+  internal val _a: AtomicInt
+    field = atomic(initial = 42)
+    internal get
+
+  var a: Int /* by */
+    field = <this>.<get-_a>()
+    get(): Int {
+      return <this>.#a$delegate.getValue(thisRef = <this>, property = DelegatedProvider::a)
+    }
+    set(<set-?>: Int) {
+      return <this>.#a$delegate.setValue(thisRef = <this>, property = DelegatedProvider::a, value = <set-?>)
+    }
+
+  var vInt: Int /* by */
+    field = atomic(initial = 77)
+    get(): Int {
+      return <this>.#vInt$delegate.getValue(thisRef = <this>, property = DelegatedProvider::vInt)
+    }
+    set(<set-?>: Int) {
+      return <this>.#vInt$delegate.setValue(thisRef = <this>, property = DelegatedProvider::vInt, value = <set-?>)
+    }
+
+  private constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+}
+
+private object Provider {
+  private val port: AtomicInt
+    field = atomic(initial = Default.nextInt(from = 20, until = 90).times(other = 100))
+    private get
+
+  private val _l: AtomicLong
+    field = atomic(initial = 2424920024888888848L)
+    private get
+
+  val _ref: AtomicRef<String?>
+    field = atomic<String?>(initial = null)
+    get
+
+  val _x: AtomicBoolean
+    field = atomic(initial = false)
+    get
+
+  val intArr: AtomicIntArray
+    field = AtomicIntArray(size = 10)
+    get
+
+  val longArr: AtomicLongArray
+    field = AtomicLongArray(size = 10)
+    get
+
+  val refArr: AtomicArray<Any?>
+    field = atomicArrayOfNulls<Any?>(size = 5)
+    get
+
+  private constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun getL(): Long {
+    return <this>.<get-_l>().incrementAndGet()
+  }
+
+  fun next(): Int {
+    return <this>.<get-port>().incrementAndGet()
+  }
+
+}
+
+fun box(): String {
+  testFieldInObject()
+  testDelegatedPropertiesInObject()
+  return "OK"
+}
+
+private fun testDelegatedPropertiesInObject() {
+  assertEquals<Int>(expected = 42, actual = DelegatedProvider.<get-a>())
+  DelegatedProvider.<get-_a>().compareAndSet(expect = 42, update = 56) /*~> Unit */
+  assertEquals<Int>(expected = 56, actual = DelegatedProvider.<get-a>())
+  DelegatedProvider.<set-a>(<set-?> = 77)
+  DelegatedProvider.<get-_a>().compareAndSet(expect = 77, update = 66) /*~> Unit */
+  assertEquals<Int>(expected = 66, actual = DelegatedProvider.<get-_a>().<get-value>())
+  assertEquals<Int>(expected = 66, actual = DelegatedProvider.<get-a>())
+  assertEquals<Int>(expected = 77, actual = DelegatedProvider.<get-vInt>())
+  DelegatedProvider.<set-vInt>(<set-?> = 55)
+  assertEquals<Int>(expected = 110, actual = DelegatedProvider.<get-vInt>().times(other = 2))
+}
+
+private fun testFieldInObject() {
+  val port: Int = Provider.next()
+  assertEquals<Int>(expected = port.plus(other = 1), actual = Provider.next())
+  assertEquals<Long>(expected = 2424920024888888849L, actual = Provider.getL())
+  Provider.<get-_ref>().compareAndSet(expect = null, update = "abc") /*~> Unit */
+  assertEquals<String?>(expected = "abc", actual = Provider.<get-_ref>().<get-value>())
+  assertFalse(actual = Provider.<get-_x>().<get-value>())
+  Provider.<get-intArr>().get(index = 8).<set-value>(value = 454)
+  assertEquals<Int>(expected = 455, actual = Provider.<get-intArr>().get(index = 8).incrementAndGet())
+  Provider.<get-longArr>().get(index = 8).<set-value>(value = 4544096409680468L)
+  assertEquals<Long>(expected = 4544096409680470L, actual = Provider.<get-longArr>().get(index = 8).addAndGet(delta = 2L))
+  Provider.<get-refArr>().get(index = 1).<set-value>(value = Provider.<get-_ref>().<get-value>())
+  assertEquals<Any?>(expected = "abc", actual = Provider.<get-refArr>().get(index = 1).<get-value>())
+}

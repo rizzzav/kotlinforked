@@ -1,0 +1,350 @@
+class AtomicBooleanArrayInlineExtensionTest {
+  private val booleanArr: AtomicBooleanArray
+    field = AtomicBooleanArray(size = 10)
+    private get
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  private inline fun casLoop(to: Boolean): Boolean {
+    loop(/* <this> = <this>.<get-booleanArr>().get(index = 0), */ action = local fun <anonymous>(cur: Boolean) {
+      when {
+        <this>.<get-booleanArr>().get(index = 0).compareAndSet(expect = cur, update = to) -> return <this>.<get-booleanArr>().get(index = 0).<get-value>()
+      }
+    }
+)
+  }
+
+  private inline fun casLoopExpression(to: Boolean): Boolean {
+    return loop(/* <this> = <this>.<get-booleanArr>().get(index = 3), */ action = local fun <anonymous>(cur: Boolean) {
+      when {
+        <this>.<get-booleanArr>().get(index = 3).compareAndSet(expect = cur, update = to) -> return <this>.<get-booleanArr>().get(index = 3).<get-value>()
+      }
+    }
+)
+  }
+
+  private inline fun AtomicBoolean.extensionLoop(to: Boolean): Boolean {
+    loop(/* <this> = <this>, */ action = local fun <anonymous>(cur: Boolean) {
+      when {
+        <this>.compareAndSet(expect = cur, update = to) -> return <this>.<get-value>()
+      }
+    }
+)
+  }
+
+  private inline fun AtomicBoolean.extensionLoopExpression(to: Boolean): Boolean {
+    return loop(/* <this> = <this>, */ action = local fun <anonymous>(cur: Boolean) {
+      <this>.lazySet(value = false)
+      return when {
+        <this>.compareAndSet(expect = cur, update = to) -> <this>.<get-value>()
+        else -> <this>.<get-value>().not()
+      }
+    }
+)
+  }
+
+  private inline fun AtomicBoolean.extensionLoopMixedReceivers(first: Boolean, second: Boolean, index: Int): Boolean {
+    loop(/* <this> = <this>, */ action = local fun <anonymous>(cur: Boolean) {
+      <this>.compareAndSet(expect = cur, update = first) /*~> Unit */
+      <this>.<get-booleanArr>().get(index = index).compareAndSet(expect = first, update = second) /*~> Unit */
+      return <this>.<get-value>()
+    }
+)
+  }
+
+  fun test() {
+    assertEquals<Boolean>(expected = true, actual = <this>.casLoop(to = true))
+    assertEquals<Boolean>(expected = true, actual = <this>.casLoopExpression(to = true))
+    assertEquals<Boolean>(expected = true, actual = <this>.extensionLoop(/* <this> = <this>.<get-booleanArr>().get(index = 1), */ to = true))
+    assertEquals<Boolean>(expected = true, actual = <this>.extensionLoopExpression(/* <this> = <this>.<get-booleanArr>().get(index = 1), */ to = true))
+    assertEquals<Boolean>(expected = false, actual = <this>.extensionLoopMixedReceivers(/* <this> = <this>.<get-booleanArr>().get(index = 7), */ first = true, second = false, index = 7))
+  }
+
+}
+
+class AtomicIntArrayInlineExtensionTest {
+  private val intArr: AtomicIntArray
+    field = AtomicIntArray(size = 10)
+    private get
+
+  private val a: AtomicInt
+    field = atomic(initial = 0)
+    private get
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  private inline fun AtomicInt.bar(delta: Int): Int {
+    return <this>.foo(/* <this> = <this>, */ to = <this>.<get-value>().plus(other = delta))
+  }
+
+  private inline fun casLoop(to: Int): Int {
+    loop(/* <this> = <this>.<get-intArr>().get(index = 0), */ action = local fun <anonymous>(cur: Int) {
+      when {
+        <this>.<get-intArr>().get(index = 0).compareAndSet(expect = cur, update = to) -> return <this>.<get-intArr>().get(index = 0).<get-value>()
+      }
+      return 777
+    }
+)
+  }
+
+  private inline fun casLoopExpression(to: Int): Int {
+    return loop(/* <this> = <this>.<get-intArr>().get(index = 3), */ action = local fun <anonymous>(cur: Int) {
+      when {
+        <this>.<get-intArr>().get(index = 3).compareAndSet(expect = cur, update = to) -> return <this>.<get-intArr>().get(index = 3).<get-value>()
+      }
+      return 777
+    }
+)
+  }
+
+  private inline fun AtomicInt.extensionLoop(to: Int): Int {
+    loop(/* <this> = <this>, */ action = local fun <anonymous>(cur: Int) {
+      when {
+        <this>.compareAndSet(expect = cur, update = to) -> return <this>.<get-value>()
+      }
+      return 777
+    }
+)
+  }
+
+  private inline fun AtomicInt.extensionLoopExpression(to: Int): Int {
+    return loop(/* <this> = <this>, */ action = local fun <anonymous>(cur: Int) {
+      <this>.lazySet(value = cur.plus(other = 10))
+      return when {
+        <this>.compareAndSet(expect = cur, update = to) -> <this>.<get-value>()
+        else -> <this>.incrementAndGet()
+      }
+    }
+)
+  }
+
+  private inline fun AtomicInt.extensionLoopMixedReceivers(first: Int, second: Int, index: Int): Int {
+    loop(/* <this> = <this>, */ action = local fun <anonymous>(cur: Int) {
+      <this>.compareAndSet(expect = cur, update = first) /*~> Unit */
+      <this>.<get-intArr>().get(index = index).compareAndSet(expect = first, update = second) /*~> Unit */
+      return <this>.<get-value>()
+    }
+)
+  }
+
+  private inline fun AtomicInt.extensionLoopRecursive(to: Int): Int {
+    loop(/* <this> = <this>, */ action = local fun <anonymous>(cur: Int) {
+      <this>.compareAndSet(expect = cur, update = to) /*~> Unit */
+      <this>.extensionLoop(/* <this> = <this>.<get-a>(), */ to = 5) /*~> Unit */
+      return <this>.<get-value>()
+    }
+)
+  }
+
+  private inline fun AtomicInt.foo(to: Int): Int {
+    loop(/* <this> = <this>, */ action = local fun <anonymous>(cur: Int) {
+      when {
+        <this>.compareAndSet(expect = cur, update = to) -> return 777
+        else -> return <this>.<get-value>()
+      }
+    }
+)
+  }
+
+  fun test() {
+    assertEquals<Int>(expected = 5, actual = <this>.casLoop(to = 5))
+    assertEquals<Int>(expected = 6, actual = <this>.casLoopExpression(to = 6))
+    assertEquals<Int>(expected = 66, actual = <this>.extensionLoop(/* <this> = <this>.<get-intArr>().get(index = 1), */ to = 66))
+    assertEquals<Int>(expected = 66, actual = <this>.extensionLoop(/* <this> = <this>.<get-intArr>().get(index = 2), */ to = 66))
+    assertEquals<Int>(expected = 77, actual = <this>.extensionLoopExpression(/* <this> = <this>.<get-intArr>().get(index = 1), */ to = 777))
+    assertEquals<Int>(expected = 99, actual = <this>.extensionLoopMixedReceivers(/* <this> = <this>.<get-intArr>().get(index = 1), */ first = 88, second = 99, index = 1))
+    assertEquals<Int>(expected = 100, actual = <this>.extensionLoopRecursive(/* <this> = <this>.<get-intArr>().get(index = 1), */ to = 100))
+    assertEquals<Int>(expected = 777, actual = <this>.bar(/* <this> = <this>.<get-intArr>().get(index = 1), */ delta = 100))
+  }
+
+}
+
+class AtomicLongArrayInlineExtensionTest {
+  private val longArr: AtomicLongArray
+    field = AtomicLongArray(size = 10)
+    private get
+
+  private val a: AtomicLong
+    field = atomic(initial = 0L)
+    private get
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  private inline fun AtomicLong.bar(delta: Long): Long {
+    return <this>.foo(/* <this> = <this>, */ to = <this>.<get-value>().plus(other = delta))
+  }
+
+  private inline fun casLoop(to: Long): Long {
+    loop(/* <this> = <this>.<get-longArr>().get(index = 0), */ action = local fun <anonymous>(cur: Long) {
+      when {
+        <this>.<get-longArr>().get(index = 0).compareAndSet(expect = cur, update = to) -> return <this>.<get-longArr>().get(index = 0).<get-value>()
+      }
+      return 777L
+    }
+)
+  }
+
+  private inline fun casLoopExpression(to: Long): Long {
+    return loop(/* <this> = <this>.<get-longArr>().get(index = 3), */ action = local fun <anonymous>(cur: Long) {
+      when {
+        <this>.<get-longArr>().get(index = 3).compareAndSet(expect = cur, update = to) -> return <this>.<get-longArr>().get(index = 3).<get-value>()
+      }
+      return 777L
+    }
+)
+  }
+
+  private inline fun AtomicLong.extensionLoop(to: Long): Long {
+    loop(/* <this> = <this>, */ action = local fun <anonymous>(cur: Long) {
+      when {
+        <this>.compareAndSet(expect = cur, update = to) -> return <this>.<get-value>()
+      }
+      return 777L
+    }
+)
+  }
+
+  private inline fun AtomicLong.extensionLoopExpression(to: Long): Long {
+    return loop(/* <this> = <this>, */ action = local fun <anonymous>(cur: Long) {
+      <this>.lazySet(value = cur.plus(other = 10L))
+      return when {
+        <this>.compareAndSet(expect = cur, update = to) -> <this>.<get-value>()
+        else -> <this>.incrementAndGet()
+      }
+    }
+)
+  }
+
+  private inline fun AtomicLong.extensionLoopMixedReceivers(first: Long, second: Long, index: Int): Long {
+    loop(/* <this> = <this>, */ action = local fun <anonymous>(cur: Long) {
+      <this>.compareAndSet(expect = cur, update = first) /*~> Unit */
+      <this>.<get-longArr>().get(index = index).compareAndSet(expect = first, update = second) /*~> Unit */
+      return <this>.<get-value>()
+    }
+)
+  }
+
+  private inline fun AtomicLong.extensionLoopRecursive(to: Long): Long {
+    loop(/* <this> = <this>, */ action = local fun <anonymous>(cur: Long) {
+      <this>.compareAndSet(expect = cur, update = to) /*~> Unit */
+      <this>.extensionLoop(/* <this> = <this>.<get-a>(), */ to = 5L) /*~> Unit */
+      return <this>.<get-value>()
+    }
+)
+  }
+
+  private inline fun AtomicLong.foo(to: Long): Long {
+    loop(/* <this> = <this>, */ action = local fun <anonymous>(cur: Long) {
+      when {
+        <this>.compareAndSet(expect = cur, update = to) -> return 777L
+        else -> return <this>.<get-value>()
+      }
+    }
+)
+  }
+
+  fun test() {
+    assertEquals<Long>(expected = 5L, actual = <this>.casLoop(to = 5L))
+    assertEquals<Long>(expected = 6L, actual = <this>.casLoopExpression(to = 6L))
+    assertEquals<Long>(expected = 66L, actual = <this>.extensionLoop(/* <this> = <this>.<get-longArr>().get(index = 1), */ to = 66L))
+    assertEquals<Long>(expected = 66L, actual = <this>.extensionLoop(/* <this> = <this>.<get-longArr>().get(index = 2), */ to = 66L))
+    assertEquals<Long>(expected = 77L, actual = <this>.extensionLoopExpression(/* <this> = <this>.<get-longArr>().get(index = 1), */ to = 777L))
+    assertEquals<Long>(expected = 99L, actual = <this>.extensionLoopMixedReceivers(/* <this> = <this>.<get-longArr>().get(index = 1), */ first = 88L, second = 99L, index = 1))
+    assertEquals<Long>(expected = 100L, actual = <this>.extensionLoopRecursive(/* <this> = <this>.<get-longArr>().get(index = 1), */ to = 100L))
+    assertEquals<Long>(expected = 777L, actual = <this>.bar(/* <this> = <this>.<get-longArr>().get(index = 1), */ delta = 100L))
+  }
+
+}
+
+class AtomicRefArrayInlineExtensionTest {
+  private val refArr: AtomicArray<String?>
+    field = atomicArrayOfNulls<String?>(size = 10)
+    private get
+
+  private val a: AtomicLong
+    field = atomic(initial = 0L)
+    private get
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  private inline fun casLoop(to: String): String? {
+    loop<String?>(/* <this> = <this>.<get-refArr>().get(index = 0), */ action = local fun <anonymous>(cur: String?) {
+      when {
+        <this>.<get-refArr>().get(index = 0).compareAndSet(expect = cur, update = to) -> return <this>.<get-refArr>().get(index = 0).<get-value>()
+      }
+    }
+)
+  }
+
+  private inline fun casLoopExpression(to: String): String? {
+    return loop<String?>(/* <this> = <this>.<get-refArr>().get(index = 3), */ action = local fun <anonymous>(cur: String?) {
+      when {
+        <this>.<get-refArr>().get(index = 3).compareAndSet(expect = cur, update = to) -> return <this>.<get-refArr>().get(index = 3).<get-value>()
+      }
+    }
+)
+  }
+
+  private inline fun AtomicRef<String?>.extensionLoop(to: String): String? {
+    loop<String?>(/* <this> = <this>, */ action = local fun <anonymous>(cur: String?) {
+      when {
+        <this>.compareAndSet(expect = cur, update = to) -> return <this>.<get-value>()
+        else -> "incorrect" /*~> Unit */
+      }
+    }
+)
+  }
+
+  private inline fun AtomicRef<String?>.extensionLoopExpression(to: String): String? {
+    return loop<String?>(/* <this> = <this>, */ action = local fun <anonymous>(cur: String?) {
+      <this>.lazySet(value = "aaa")
+      return when {
+        <this>.compareAndSet(expect = cur, update = to) -> <this>.<get-value>()
+        else -> "CAS_failed"
+      }
+    }
+)
+  }
+
+  private inline fun AtomicRef<String?>.extensionLoopMixedReceivers(first: String, second: String, index: Int): String? {
+    loop<String?>(/* <this> = <this>, */ action = local fun <anonymous>(cur: String?) {
+      <this>.compareAndSet(expect = cur, update = first) /*~> Unit */
+      <this>.<get-refArr>().get(index = index).compareAndSet(expect = first, update = second) /*~> Unit */
+      return <this>.<get-value>()
+    }
+)
+  }
+
+  fun test() {
+    assertEquals<String?>(expected = "aaa", actual = <this>.casLoop(to = "aaa"))
+    assertEquals<String?>(expected = "bbb", actual = <this>.casLoopExpression(to = "bbb"))
+    assertEquals<String?>(expected = "ccc", actual = <this>.extensionLoop(/* <this> = <this>.<get-refArr>().get(index = 1), */ to = "ccc"))
+    assertEquals<String?>(expected = "CAS_failed", actual = <this>.extensionLoopExpression(/* <this> = <this>.<get-refArr>().get(index = 1), */ to = "ccc"))
+    assertEquals<String?>(expected = "bbb", actual = <this>.extensionLoopMixedReceivers(/* <this> = <this>.<get-refArr>().get(index = 7), */ first = "aaa", second = "bbb", index = 7))
+  }
+
+}
+
+fun box(): String {
+  AtomicIntArrayInlineExtensionTest().test()
+  AtomicLongArrayInlineExtensionTest().test()
+  AtomicBooleanArrayInlineExtensionTest().test()
+  AtomicRefArrayInlineExtensionTest().test()
+  return "OK"
+}

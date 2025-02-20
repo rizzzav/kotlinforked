@@ -1,0 +1,524 @@
+FILE fqName:<root> fileName:/UncheckedCastTest.kt
+  PROPERTY name:topLevelS visibility:private modality:FINAL [val]
+    FIELD PROPERTY_BACKING_FIELD name:topLevelS type:kotlinx.atomicfu.AtomicRef<kotlin.Any> visibility:private [final,static]
+      EXPRESSION_BODY
+        CALL 'public final fun atomic <T> (initial: T of kotlinx.atomicfu.atomic): kotlinx.atomicfu.AtomicRef<T of kotlinx.atomicfu.atomic> declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicRef<kotlin.Any> origin=null
+          TYPE_ARG T: kotlin.Any
+          ARG initial: CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<kotlin.String> origin=null
+            TYPE_ARG T: kotlin.String
+            ARG elements: VARARG type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String
+              CONST String type=kotlin.String value="A"
+              CONST String type=kotlin.String value="B"
+    FUN DEFAULT_PROPERTY_ACCESSOR name:<get-topLevelS> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicRef<kotlin.Any>
+      correspondingProperty: PROPERTY name:topLevelS visibility:private modality:FINAL [val]
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='private final fun <get-topLevelS> (): kotlinx.atomicfu.AtomicRef<kotlin.Any> declared in <root>'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:topLevelS type:kotlinx.atomicfu.AtomicRef<kotlin.Any> visibility:private [final,static]' type=kotlinx.atomicfu.AtomicRef<kotlin.Any> origin=null
+  CLASS CLASS name:UncheckedCastTest modality:FINAL visibility:public superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:<root>.UncheckedCastTest
+    PROPERTY name:s visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:s type:kotlinx.atomicfu.AtomicRef<kotlin.Any> visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomic <T> (initial: T of kotlinx.atomicfu.atomic): kotlinx.atomicfu.AtomicRef<T of kotlinx.atomicfu.atomic> declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicRef<kotlin.Any> origin=null
+            TYPE_ARG T: kotlin.Any
+            ARG initial: CONST String type=kotlin.String value="AAA"
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-s> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicRef<kotlin.Any>
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest
+        correspondingProperty: PROPERTY name:s visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-s> (): kotlinx.atomicfu.AtomicRef<kotlin.Any> declared in <root>.UncheckedCastTest'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:s type:kotlinx.atomicfu.AtomicRef<kotlin.Any> visibility:private [final]' type=kotlinx.atomicfu.AtomicRef<kotlin.Any> origin=null
+              receiver: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.<get-s>' type=<root>.UncheckedCastTest origin=null
+    PROPERTY name:bs visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:bs type:kotlinx.atomicfu.AtomicRef<kotlin.Any?> visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomic <T> (initial: T of kotlinx.atomicfu.atomic): kotlinx.atomicfu.AtomicRef<T of kotlinx.atomicfu.atomic> declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=null
+            TYPE_ARG T: kotlin.Any?
+            ARG initial: CONST Null type=kotlin.Nothing? value=null
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-bs> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicRef<kotlin.Any?>
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest
+        correspondingProperty: PROPERTY name:bs visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-bs> (): kotlinx.atomicfu.AtomicRef<kotlin.Any?> declared in <root>.UncheckedCastTest'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:bs type:kotlinx.atomicfu.AtomicRef<kotlin.Any?> visibility:private [final]' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=null
+              receiver: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.<get-bs>' type=<root>.UncheckedCastTest origin=null
+    PROPERTY name:a visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:a type:kotlinx.atomicfu.AtomicArray<kotlin.Any?> visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomicArrayOfNulls <T> (size: kotlin.Int): kotlinx.atomicfu.AtomicArray<T of kotlinx.atomicfu.atomicArrayOfNulls?> declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicArray<kotlin.Any?> origin=null
+            TYPE_ARG T: kotlin.Any?
+            ARG size: CONST Int type=kotlin.Int value=10
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicArray<kotlin.Any?>
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest
+        correspondingProperty: PROPERTY name:a visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-a> (): kotlinx.atomicfu.AtomicArray<kotlin.Any?> declared in <root>.UncheckedCastTest'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlinx.atomicfu.AtomicArray<kotlin.Any?> visibility:private [final]' type=kotlinx.atomicfu.AtomicArray<kotlin.Any?> origin=null
+              receiver: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.<get-a>' type=<root>.UncheckedCastTest origin=null
+    CLASS CLASS name:Box modality:FINAL visibility:private [data] superTypes:[kotlin.Any]
+      thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:<root>.UncheckedCastTest.Box
+      PROPERTY name:b visibility:public modality:FINAL [val]
+        FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:private [final]
+          EXPRESSION_BODY
+            GET_VAR 'b: kotlin.Int declared in <root>.UncheckedCastTest.Box.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+        FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b> visibility:public modality:FINAL returnType:kotlin.Int
+          VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest.Box
+          correspondingProperty: PROPERTY name:b visibility:public modality:FINAL [val]
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='public final fun <get-b> (): kotlin.Int declared in <root>.UncheckedCastTest.Box'
+              GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+                receiver: GET_VAR '<this>: <root>.UncheckedCastTest.Box declared in <root>.UncheckedCastTest.Box.<get-b>' type=<root>.UncheckedCastTest.Box origin=null
+      CONSTRUCTOR visibility:public returnType:<root>.UncheckedCastTest.Box [primary]
+        VALUE_PARAMETER kind:Regular name:b index:0 type:kotlin.Int
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+          INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Box modality:FINAL visibility:private [data] superTypes:[kotlin.Any]' type=kotlin.Unit
+      FUN GENERATED_DATA_CLASS_MEMBER name:component1 visibility:public modality:FINAL returnType:kotlin.Int [operator]
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest.Box
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun component1 (): kotlin.Int declared in <root>.UncheckedCastTest.Box'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+              receiver: GET_VAR '<this>: <root>.UncheckedCastTest.Box declared in <root>.UncheckedCastTest.Box.component1' type=<root>.UncheckedCastTest.Box origin=null
+      FUN GENERATED_DATA_CLASS_MEMBER name:copy visibility:public modality:FINAL returnType:<root>.UncheckedCastTest.Box
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest.Box
+        VALUE_PARAMETER kind:Regular name:b index:1 type:kotlin.Int
+          EXPRESSION_BODY
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+              receiver: GET_VAR '<this>: <root>.UncheckedCastTest.Box declared in <root>.UncheckedCastTest.Box.copy' type=<root>.UncheckedCastTest.Box origin=null
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun copy (b: kotlin.Int): <root>.UncheckedCastTest.Box declared in <root>.UncheckedCastTest.Box'
+            CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+              ARG b: GET_VAR 'b: kotlin.Int declared in <root>.UncheckedCastTest.Box.copy' type=kotlin.Int origin=null
+      FUN GENERATED_DATA_CLASS_MEMBER name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [operator]
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest.Box
+        VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+        overridden:
+          public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+        BLOCK_BODY
+          WHEN type=kotlin.Unit origin=null
+            BRANCH
+              if: CALL 'public final fun EQEQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQEQ
+                ARG arg0: GET_VAR '<this>: <root>.UncheckedCastTest.Box declared in <root>.UncheckedCastTest.Box.equals' type=<root>.UncheckedCastTest.Box origin=null
+                ARG arg1: GET_VAR 'other: kotlin.Any? declared in <root>.UncheckedCastTest.Box.equals' type=kotlin.Any? origin=null
+              then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.UncheckedCastTest.Box'
+                CONST Boolean type=kotlin.Boolean value=true
+          WHEN type=kotlin.Unit origin=null
+            BRANCH
+              if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=<root>.UncheckedCastTest.Box
+                GET_VAR 'other: kotlin.Any? declared in <root>.UncheckedCastTest.Box.equals' type=kotlin.Any? origin=null
+              then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.UncheckedCastTest.Box'
+                CONST Boolean type=kotlin.Boolean value=false
+          VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.UncheckedCastTest.Box [val]
+            TYPE_OP type=<root>.UncheckedCastTest.Box origin=CAST typeOperand=<root>.UncheckedCastTest.Box
+              GET_VAR 'other: kotlin.Any? declared in <root>.UncheckedCastTest.Box.equals' type=kotlin.Any? origin=null
+          WHEN type=kotlin.Unit origin=null
+            BRANCH
+              if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+                ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+                  ARG arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+                    receiver: GET_VAR '<this>: <root>.UncheckedCastTest.Box declared in <root>.UncheckedCastTest.Box.equals' type=<root>.UncheckedCastTest.Box origin=null
+                  ARG arg1: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+                    receiver: GET_VAR 'val tmp_0: <root>.UncheckedCastTest.Box declared in <root>.UncheckedCastTest.Box.equals' type=<root>.UncheckedCastTest.Box origin=null
+              then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.UncheckedCastTest.Box'
+                CONST Boolean type=kotlin.Boolean value=false
+          RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.UncheckedCastTest.Box'
+            CONST Boolean type=kotlin.Boolean value=true
+      FUN GENERATED_DATA_CLASS_MEMBER name:hashCode visibility:public modality:OPEN returnType:kotlin.Int
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest.Box
+        overridden:
+          public open fun hashCode (): kotlin.Int declared in kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public open fun hashCode (): kotlin.Int declared in <root>.UncheckedCastTest.Box'
+            CALL 'public open fun hashCode (): kotlin.Int declared in kotlin.Int' type=kotlin.Int origin=null
+              ARG <this>: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+                receiver: GET_VAR '<this>: <root>.UncheckedCastTest.Box declared in <root>.UncheckedCastTest.Box.hashCode' type=<root>.UncheckedCastTest.Box origin=null
+      FUN GENERATED_DATA_CLASS_MEMBER name:toString visibility:public modality:OPEN returnType:kotlin.String
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest.Box
+        overridden:
+          public open fun toString (): kotlin.String declared in kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public open fun toString (): kotlin.String declared in <root>.UncheckedCastTest.Box'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value="Box("
+              CONST String type=kotlin.String value="b="
+              GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+                receiver: GET_VAR '<this>: <root>.UncheckedCastTest.Box declared in <root>.UncheckedCastTest.Box.toString' type=<root>.UncheckedCastTest.Box origin=null
+              CONST String type=kotlin.String value=")"
+    CONSTRUCTOR visibility:public returnType:<root>.UncheckedCastTest [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:UncheckedCastTest modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+    FUN name:getString visibility:private modality:FINAL returnType:kotlin.String [inline]
+      TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:false
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlinx.atomicfu.AtomicRef<T of <root>.UncheckedCastTest.getString>
+      annotations:
+        Suppress(names = ["NOTHING_TO_INLINE", "UNCHECKED_CAST"] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String)
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='private final fun getString <T> (<this>: kotlinx.atomicfu.AtomicRef<T of <root>.UncheckedCastTest.getString>): kotlin.String declared in <root>.UncheckedCastTest'
+          CALL 'public final fun <get-value> (): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.String origin=GET_PROPERTY
+            ARG <this>: TYPE_OP type=kotlinx.atomicfu.AtomicRef<kotlin.String> origin=CAST typeOperand=kotlinx.atomicfu.AtomicRef<kotlin.String>
+              GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicRef<T of <root>.UncheckedCastTest.getString> declared in <root>.UncheckedCastTest.getString' type=kotlinx.atomicfu.AtomicRef<T of <root>.UncheckedCastTest.getString> origin=null
+    FUN name:testArrayValueUncheckedCast visibility:public modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest
+      BLOCK_BODY
+        CALL 'public final fun <set-value> (value: T of kotlinx.atomicfu.AtomicRef): kotlin.Unit declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Unit origin=EQ
+          ARG <this>: CALL 'public final fun get (index: kotlin.Int): kotlinx.atomicfu.AtomicRef<T of kotlinx.atomicfu.AtomicArray?> declared in kotlinx.atomicfu.AtomicArray' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=GET_ARRAY_ELEMENT
+            ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicArray<kotlin.Any?> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicArray<kotlin.Any?> origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testArrayValueUncheckedCast' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+            ARG index: CONST Int type=kotlin.Int value=0
+          ARG value: CONST String type=kotlin.String value="OK"
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.String
+          ARG expected: CONST String type=kotlin.String value="OK"
+          ARG actual: CALL 'public final fun <get-value> (): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.String origin=GET_PROPERTY
+            ARG <this>: TYPE_OP type=kotlinx.atomicfu.AtomicRef<kotlin.String> origin=CAST typeOperand=kotlinx.atomicfu.AtomicRef<kotlin.String>
+              CALL 'public final fun get (index: kotlin.Int): kotlinx.atomicfu.AtomicRef<T of kotlinx.atomicfu.AtomicArray?> declared in kotlinx.atomicfu.AtomicArray' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=GET_ARRAY_ELEMENT
+                ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicArray<kotlin.Any?> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicArray<kotlin.Any?> origin=GET_PROPERTY
+                  ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testArrayValueUncheckedCast' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+                ARG index: CONST Int type=kotlin.Int value=0
+    FUN name:testArrayValueUncheckedCastInlineFunc visibility:public modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest
+      BLOCK_BODY
+        CALL 'public final fun <set-value> (value: T of kotlinx.atomicfu.AtomicRef): kotlin.Unit declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Unit origin=EQ
+          ARG <this>: CALL 'public final fun get (index: kotlin.Int): kotlinx.atomicfu.AtomicRef<T of kotlinx.atomicfu.AtomicArray?> declared in kotlinx.atomicfu.AtomicArray' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=GET_ARRAY_ELEMENT
+            ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicArray<kotlin.Any?> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicArray<kotlin.Any?> origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testArrayValueUncheckedCastInlineFunc' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+            ARG index: CONST Int type=kotlin.Int value=0
+          ARG value: CONST String type=kotlin.String value="OK"
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.String
+          ARG expected: CONST String type=kotlin.String value="OK"
+          ARG actual: CALL 'private final fun getString <T> (<this>: kotlinx.atomicfu.AtomicRef<T of <root>.UncheckedCastTest.getString>): kotlin.String declared in <root>.UncheckedCastTest' type=kotlin.String origin=null
+            TYPE_ARG T: kotlin.Any?
+            ARG <this>(index:0): GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testArrayValueUncheckedCastInlineFunc' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+            ARG <this>(index:1): CALL 'public final fun get (index: kotlin.Int): kotlinx.atomicfu.AtomicRef<T of kotlinx.atomicfu.AtomicArray?> declared in kotlinx.atomicfu.AtomicArray' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=GET_ARRAY_ELEMENT
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicArray<kotlin.Any?> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicArray<kotlin.Any?> origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testArrayValueUncheckedCastInlineFunc' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+              ARG index: CONST Int type=kotlin.Int value=0
+    FUN name:testAtomicRefUncheckedCastGetAndUpdate visibility:public modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest
+      annotations:
+        Suppress(names = ["UNCHECKED_CAST"] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String)
+      BLOCK_BODY
+        CALL 'public final fun lazySet (value: T of kotlinx.atomicfu.AtomicRef): kotlin.Unit declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Unit origin=null
+          ARG <this>: CALL 'private final fun <get-bs> (): kotlinx.atomicfu.AtomicRef<kotlin.Any?> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testAtomicRefUncheckedCastGetAndUpdate' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+          ARG value: CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=null
+            TYPE_ARG T: kotlin.Array<<root>.UncheckedCastTest.Box>
+            ARG elements: VARARG type=kotlin.Array<out kotlin.Array<<root>.UncheckedCastTest.Box>> varargElementType=kotlin.Array<<root>.UncheckedCastTest.Box>
+              CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=null
+                TYPE_ARG T: <root>.UncheckedCastTest.Box
+                ARG elements: VARARG type=kotlin.Array<out <root>.UncheckedCastTest.Box> varargElementType=<root>.UncheckedCastTest.Box
+                  CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                    ARG b: CONST Int type=kotlin.Int value=1
+                  CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                    ARG b: CONST Int type=kotlin.Int value=2
+              CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=null
+                TYPE_ARG T: <root>.UncheckedCastTest.Box
+                ARG elements: VARARG type=kotlin.Array<out <root>.UncheckedCastTest.Box> varargElementType=<root>.UncheckedCastTest.Box
+                  CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                    ARG b: CONST Int type=kotlin.Int value=3
+        VAR name:res type:kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> [val]
+          CALL 'public final fun getAndUpdate <T> (<this>: kotlinx.atomicfu.AtomicRef<T of kotlinx.atomicfu.getAndUpdate>, function: kotlin.Function1<T of kotlinx.atomicfu.getAndUpdate, T of kotlinx.atomicfu.getAndUpdate>): T of kotlinx.atomicfu.getAndUpdate declared in kotlinx.atomicfu' type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=null
+            TYPE_ARG T: kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>
+            ARG <this>: TYPE_OP type=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>> origin=CAST typeOperand=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>>
+              CALL 'private final fun <get-bs> (): kotlinx.atomicfu.AtomicRef<kotlin.Any?> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testAtomicRefUncheckedCastGetAndUpdate' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+            ARG function: FUN_EXPR type=kotlin.Function1<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>, kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>> origin=LAMBDA
+              FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>
+                VALUE_PARAMETER kind:Regular name:it index:0 type:kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>): kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> declared in <root>.UncheckedCastTest.testAtomicRefUncheckedCastGetAndUpdate'
+                    CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=null
+                      TYPE_ARG T: kotlin.Array<<root>.UncheckedCastTest.Box>
+                      ARG elements: VARARG type=kotlin.Array<out kotlin.Array<<root>.UncheckedCastTest.Box>> varargElementType=kotlin.Array<<root>.UncheckedCastTest.Box>
+                        CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=null
+                          TYPE_ARG T: <root>.UncheckedCastTest.Box
+                          ARG elements: VARARG type=kotlin.Array<out <root>.UncheckedCastTest.Box> varargElementType=<root>.UncheckedCastTest.Box
+                            CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                              ARG b: CONST Int type=kotlin.Int value=4
+                            CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                              ARG b: CONST Int type=kotlin.Int value=5
+                        CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=null
+                          TYPE_ARG T: <root>.UncheckedCastTest.Box
+                          ARG elements: VARARG type=kotlin.Array<out <root>.UncheckedCastTest.Box> varargElementType=<root>.UncheckedCastTest.Box
+                            CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                              ARG b: CONST Int type=kotlin.Int value=6
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=2
+          ARG actual: CALL 'public final fun <get-b> (): kotlin.Int declared in <root>.UncheckedCastTest.Box' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: CALL 'public final fun CHECK_NOT_NULL <T0> (arg0: T0 of kotlin.internal.ir.CHECK_NOT_NULL?): {T0 of kotlin.internal.ir.CHECK_NOT_NULL & Any} declared in kotlin.internal.ir' type=<root>.UncheckedCastTest.Box origin=EXCLEXCL
+              TYPE_ARG T0: <root>.UncheckedCastTest.Box
+              ARG arg0: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=<root>.UncheckedCastTest.Box origin=GET_ARRAY_ELEMENT
+                ARG <this>: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=GET_ARRAY_ELEMENT
+                  ARG <this>: TYPE_OP type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=CAST typeOperand=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>
+                    GET_VAR 'val res: kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> declared in <root>.UncheckedCastTest.testAtomicRefUncheckedCastGetAndUpdate' type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=null
+                  ARG index: CONST Int type=kotlin.Int value=0
+                ARG index: CONST Int type=kotlin.Int value=1
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=5
+          ARG actual: CALL 'public final fun <get-b> (): kotlin.Int declared in <root>.UncheckedCastTest.Box' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: CALL 'public final fun CHECK_NOT_NULL <T0> (arg0: T0 of kotlin.internal.ir.CHECK_NOT_NULL?): {T0 of kotlin.internal.ir.CHECK_NOT_NULL & Any} declared in kotlin.internal.ir' type=<root>.UncheckedCastTest.Box origin=EXCLEXCL
+              TYPE_ARG T0: <root>.UncheckedCastTest.Box
+              ARG arg0: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=<root>.UncheckedCastTest.Box origin=GET_ARRAY_ELEMENT
+                ARG <this>: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=GET_ARRAY_ELEMENT
+                  ARG <this>: CALL 'public final fun <get-value> (): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=GET_PROPERTY
+                    ARG <this>: TYPE_OP type=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>> origin=IMPLICIT_CAST typeOperand=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>>
+                      CALL 'private final fun <get-bs> (): kotlinx.atomicfu.AtomicRef<kotlin.Any?> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=GET_PROPERTY
+                        ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testAtomicRefUncheckedCastGetAndUpdate' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+                  ARG index: CONST Int type=kotlin.Int value=0
+                ARG index: CONST Int type=kotlin.Int value=1
+    FUN name:testAtomicRefUncheckedCastUpdate visibility:public modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest
+      annotations:
+        Suppress(names = ["UNCHECKED_CAST"] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String)
+      BLOCK_BODY
+        CALL 'public final fun lazySet (value: T of kotlinx.atomicfu.AtomicRef): kotlin.Unit declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Unit origin=null
+          ARG <this>: CALL 'private final fun <get-bs> (): kotlinx.atomicfu.AtomicRef<kotlin.Any?> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testAtomicRefUncheckedCastUpdate' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+          ARG value: CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=null
+            TYPE_ARG T: kotlin.Array<<root>.UncheckedCastTest.Box>
+            ARG elements: VARARG type=kotlin.Array<out kotlin.Array<<root>.UncheckedCastTest.Box>> varargElementType=kotlin.Array<<root>.UncheckedCastTest.Box>
+              CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=null
+                TYPE_ARG T: <root>.UncheckedCastTest.Box
+                ARG elements: VARARG type=kotlin.Array<out <root>.UncheckedCastTest.Box> varargElementType=<root>.UncheckedCastTest.Box
+                  CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                    ARG b: CONST Int type=kotlin.Int value=1
+                  CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                    ARG b: CONST Int type=kotlin.Int value=2
+              CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=null
+                TYPE_ARG T: <root>.UncheckedCastTest.Box
+                ARG elements: VARARG type=kotlin.Array<out <root>.UncheckedCastTest.Box> varargElementType=<root>.UncheckedCastTest.Box
+                  CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                    ARG b: CONST Int type=kotlin.Int value=3
+        CALL 'public final fun update <T> (<this>: kotlinx.atomicfu.AtomicRef<T of kotlinx.atomicfu.update>, function: kotlin.Function1<T of kotlinx.atomicfu.update, T of kotlinx.atomicfu.update>): kotlin.Unit declared in kotlinx.atomicfu' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>
+          ARG <this>: TYPE_OP type=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>> origin=CAST typeOperand=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>>
+            CALL 'private final fun <get-bs> (): kotlinx.atomicfu.AtomicRef<kotlin.Any?> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testAtomicRefUncheckedCastUpdate' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+          ARG function: FUN_EXPR type=kotlin.Function1<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>, kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>
+              VALUE_PARAMETER kind:Regular name:it index:0 type:kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>): kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> declared in <root>.UncheckedCastTest.testAtomicRefUncheckedCastUpdate'
+                  CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=null
+                    TYPE_ARG T: kotlin.Array<<root>.UncheckedCastTest.Box>
+                    ARG elements: VARARG type=kotlin.Array<out kotlin.Array<<root>.UncheckedCastTest.Box>> varargElementType=kotlin.Array<<root>.UncheckedCastTest.Box>
+                      CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=null
+                        TYPE_ARG T: <root>.UncheckedCastTest.Box
+                        ARG elements: VARARG type=kotlin.Array<out <root>.UncheckedCastTest.Box> varargElementType=<root>.UncheckedCastTest.Box
+                          CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                            ARG b: CONST Int type=kotlin.Int value=4
+                          CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                            ARG b: CONST Int type=kotlin.Int value=5
+                      CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=null
+                        TYPE_ARG T: <root>.UncheckedCastTest.Box
+                        ARG elements: VARARG type=kotlin.Array<out <root>.UncheckedCastTest.Box> varargElementType=<root>.UncheckedCastTest.Box
+                          CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                            ARG b: CONST Int type=kotlin.Int value=6
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=5
+          ARG actual: CALL 'public final fun <get-b> (): kotlin.Int declared in <root>.UncheckedCastTest.Box' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: CALL 'public final fun CHECK_NOT_NULL <T0> (arg0: T0 of kotlin.internal.ir.CHECK_NOT_NULL?): {T0 of kotlin.internal.ir.CHECK_NOT_NULL & Any} declared in kotlin.internal.ir' type=<root>.UncheckedCastTest.Box origin=EXCLEXCL
+              TYPE_ARG T0: <root>.UncheckedCastTest.Box
+              ARG arg0: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=<root>.UncheckedCastTest.Box origin=GET_ARRAY_ELEMENT
+                ARG <this>: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=GET_ARRAY_ELEMENT
+                  ARG <this>: CALL 'public final fun <get-value> (): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=GET_PROPERTY
+                    ARG <this>: TYPE_OP type=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>> origin=IMPLICIT_CAST typeOperand=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>>
+                      CALL 'private final fun <get-bs> (): kotlinx.atomicfu.AtomicRef<kotlin.Any?> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=GET_PROPERTY
+                        ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testAtomicRefUncheckedCastUpdate' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+                  ARG index: CONST Int type=kotlin.Int value=0
+                ARG index: CONST Int type=kotlin.Int value=1
+    FUN name:testAtomicRefUncheckedCastUpdateAndGet visibility:public modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest
+      annotations:
+        Suppress(names = ["UNCHECKED_CAST"] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String)
+      BLOCK_BODY
+        CALL 'public final fun lazySet (value: T of kotlinx.atomicfu.AtomicRef): kotlin.Unit declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Unit origin=null
+          ARG <this>: CALL 'private final fun <get-bs> (): kotlinx.atomicfu.AtomicRef<kotlin.Any?> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testAtomicRefUncheckedCastUpdateAndGet' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+          ARG value: CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=null
+            TYPE_ARG T: kotlin.Array<<root>.UncheckedCastTest.Box>
+            ARG elements: VARARG type=kotlin.Array<out kotlin.Array<<root>.UncheckedCastTest.Box>> varargElementType=kotlin.Array<<root>.UncheckedCastTest.Box>
+              CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=null
+                TYPE_ARG T: <root>.UncheckedCastTest.Box
+                ARG elements: VARARG type=kotlin.Array<out <root>.UncheckedCastTest.Box> varargElementType=<root>.UncheckedCastTest.Box
+                  CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                    ARG b: CONST Int type=kotlin.Int value=1
+                  CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                    ARG b: CONST Int type=kotlin.Int value=2
+              CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=null
+                TYPE_ARG T: <root>.UncheckedCastTest.Box
+                ARG elements: VARARG type=kotlin.Array<out <root>.UncheckedCastTest.Box> varargElementType=<root>.UncheckedCastTest.Box
+                  CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                    ARG b: CONST Int type=kotlin.Int value=3
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=2
+          ARG actual: CALL 'public final fun <get-b> (): kotlin.Int declared in <root>.UncheckedCastTest.Box' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: CALL 'public final fun CHECK_NOT_NULL <T0> (arg0: T0 of kotlin.internal.ir.CHECK_NOT_NULL?): {T0 of kotlin.internal.ir.CHECK_NOT_NULL & Any} declared in kotlin.internal.ir' type=<root>.UncheckedCastTest.Box origin=EXCLEXCL
+              TYPE_ARG T0: <root>.UncheckedCastTest.Box
+              ARG arg0: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=<root>.UncheckedCastTest.Box origin=GET_ARRAY_ELEMENT
+                ARG <this>: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=GET_ARRAY_ELEMENT
+                  ARG <this>: CALL 'public final fun <get-value> (): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=GET_PROPERTY
+                    ARG <this>: TYPE_OP type=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>> origin=CAST typeOperand=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>>
+                      CALL 'private final fun <get-bs> (): kotlinx.atomicfu.AtomicRef<kotlin.Any?> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=GET_PROPERTY
+                        ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testAtomicRefUncheckedCastUpdateAndGet' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+                  ARG index: CONST Int type=kotlin.Int value=0
+                ARG index: CONST Int type=kotlin.Int value=1
+        VAR name:res type:kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> [val]
+          CALL 'public final fun updateAndGet <T> (<this>: kotlinx.atomicfu.AtomicRef<T of kotlinx.atomicfu.updateAndGet>, function: kotlin.Function1<T of kotlinx.atomicfu.updateAndGet, T of kotlinx.atomicfu.updateAndGet>): T of kotlinx.atomicfu.updateAndGet declared in kotlinx.atomicfu' type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=null
+            TYPE_ARG T: kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>
+            ARG <this>: TYPE_OP type=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>> origin=CAST typeOperand=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>>
+              CALL 'private final fun <get-bs> (): kotlinx.atomicfu.AtomicRef<kotlin.Any?> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testAtomicRefUncheckedCastUpdateAndGet' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+            ARG function: FUN_EXPR type=kotlin.Function1<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>, kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>> origin=LAMBDA
+              FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>
+                VALUE_PARAMETER kind:Regular name:it index:0 type:kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>): kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> declared in <root>.UncheckedCastTest.testAtomicRefUncheckedCastUpdateAndGet'
+                    CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=null
+                      TYPE_ARG T: kotlin.Array<<root>.UncheckedCastTest.Box>
+                      ARG elements: VARARG type=kotlin.Array<out kotlin.Array<<root>.UncheckedCastTest.Box>> varargElementType=kotlin.Array<<root>.UncheckedCastTest.Box>
+                        CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=null
+                          TYPE_ARG T: <root>.UncheckedCastTest.Box
+                          ARG elements: VARARG type=kotlin.Array<out <root>.UncheckedCastTest.Box> varargElementType=<root>.UncheckedCastTest.Box
+                            CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                              ARG b: CONST Int type=kotlin.Int value=4
+                            CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                              ARG b: CONST Int type=kotlin.Int value=5
+                        CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=null
+                          TYPE_ARG T: <root>.UncheckedCastTest.Box
+                          ARG elements: VARARG type=kotlin.Array<out <root>.UncheckedCastTest.Box> varargElementType=<root>.UncheckedCastTest.Box
+                            CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                              ARG b: CONST Int type=kotlin.Int value=6
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=6
+          ARG actual: CALL 'public final fun <get-b> (): kotlin.Int declared in <root>.UncheckedCastTest.Box' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: CALL 'public final fun CHECK_NOT_NULL <T0> (arg0: T0 of kotlin.internal.ir.CHECK_NOT_NULL?): {T0 of kotlin.internal.ir.CHECK_NOT_NULL & Any} declared in kotlin.internal.ir' type=<root>.UncheckedCastTest.Box origin=EXCLEXCL
+              TYPE_ARG T0: <root>.UncheckedCastTest.Box
+              ARG arg0: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=<root>.UncheckedCastTest.Box origin=GET_ARRAY_ELEMENT
+                ARG <this>: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=GET_ARRAY_ELEMENT
+                  ARG <this>: TYPE_OP type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=CAST typeOperand=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>
+                    GET_VAR 'val res: kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> declared in <root>.UncheckedCastTest.testAtomicRefUncheckedCastUpdateAndGet' type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=null
+                  ARG index: CONST Int type=kotlin.Int value=1
+                ARG index: CONST Int type=kotlin.Int value=0
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=6
+          ARG actual: CALL 'public final fun <get-b> (): kotlin.Int declared in <root>.UncheckedCastTest.Box' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: CALL 'public final fun CHECK_NOT_NULL <T0> (arg0: T0 of kotlin.internal.ir.CHECK_NOT_NULL?): {T0 of kotlin.internal.ir.CHECK_NOT_NULL & Any} declared in kotlin.internal.ir' type=<root>.UncheckedCastTest.Box origin=EXCLEXCL
+              TYPE_ARG T0: <root>.UncheckedCastTest.Box
+              ARG arg0: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=<root>.UncheckedCastTest.Box origin=GET_ARRAY_ELEMENT
+                ARG <this>: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=GET_ARRAY_ELEMENT
+                  ARG <this>: CALL 'public final fun <get-value> (): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=GET_PROPERTY
+                    ARG <this>: TYPE_OP type=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>> origin=IMPLICIT_CAST typeOperand=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>>
+                      CALL 'private final fun <get-bs> (): kotlinx.atomicfu.AtomicRef<kotlin.Any?> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=GET_PROPERTY
+                        ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testAtomicRefUncheckedCastUpdateAndGet' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+                  ARG index: CONST Int type=kotlin.Int value=1
+                ARG index: CONST Int type=kotlin.Int value=0
+    FUN name:testAtomicValUncheckedCast visibility:public modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest
+      annotations:
+        Suppress(names = ["UNCHECKED_CAST"] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String)
+      BLOCK_BODY
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.String
+          ARG expected: CALL 'public final fun <get-value> (): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.String origin=GET_PROPERTY
+            ARG <this>: TYPE_OP type=kotlinx.atomicfu.AtomicRef<kotlin.String> origin=CAST typeOperand=kotlinx.atomicfu.AtomicRef<kotlin.String>
+              CALL 'private final fun <get-s> (): kotlinx.atomicfu.AtomicRef<kotlin.Any> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicRef<kotlin.Any> origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testAtomicValUncheckedCast' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+          ARG actual: CONST String type=kotlin.String value="AAA"
+        CALL 'public final fun lazySet (value: T of kotlinx.atomicfu.AtomicRef): kotlin.Unit declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Unit origin=null
+          ARG <this>: CALL 'private final fun <get-bs> (): kotlinx.atomicfu.AtomicRef<kotlin.Any?> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testAtomicValUncheckedCast' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+          ARG value: CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=null
+            TYPE_ARG T: kotlin.Array<<root>.UncheckedCastTest.Box>
+            ARG elements: VARARG type=kotlin.Array<out kotlin.Array<<root>.UncheckedCastTest.Box>> varargElementType=kotlin.Array<<root>.UncheckedCastTest.Box>
+              CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=null
+                TYPE_ARG T: <root>.UncheckedCastTest.Box
+                ARG elements: VARARG type=kotlin.Array<out <root>.UncheckedCastTest.Box> varargElementType=<root>.UncheckedCastTest.Box
+                  CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                    ARG b: CONST Int type=kotlin.Int value=1
+                  CONSTRUCTOR_CALL 'public constructor <init> (b: kotlin.Int) declared in <root>.UncheckedCastTest.Box' type=<root>.UncheckedCastTest.Box origin=null
+                    ARG b: CONST Int type=kotlin.Int value=2
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CALL 'public final fun times (other: kotlin.Int): kotlin.Int declared in kotlin.Int' type=kotlin.Int origin=MUL
+            ARG <this>: CALL 'public final fun <get-b> (): kotlin.Int declared in <root>.UncheckedCastTest.Box' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=<root>.UncheckedCastTest.Box origin=GET_ARRAY_ELEMENT
+                ARG <this>: CALL 'public final fun CHECK_NOT_NULL <T0> (arg0: T0 of kotlin.internal.ir.CHECK_NOT_NULL?): {T0 of kotlin.internal.ir.CHECK_NOT_NULL & Any} declared in kotlin.internal.ir' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=EXCLEXCL
+                  TYPE_ARG T0: kotlin.Array<<root>.UncheckedCastTest.Box>
+                  ARG arg0: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=kotlin.Array<<root>.UncheckedCastTest.Box> origin=GET_ARRAY_ELEMENT
+                    ARG <this>: CALL 'public final fun <get-value> (): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>> origin=GET_PROPERTY
+                      ARG <this>: TYPE_OP type=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>> origin=CAST typeOperand=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.Array<<root>.UncheckedCastTest.Box>>>
+                        CALL 'private final fun <get-bs> (): kotlinx.atomicfu.AtomicRef<kotlin.Any?> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicRef<kotlin.Any?> origin=GET_PROPERTY
+                          ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testAtomicValUncheckedCast' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+                    ARG index: CONST Int type=kotlin.Int value=0
+                ARG index: CONST Int type=kotlin.Int value=0
+            ARG other: CONST Int type=kotlin.Int value=10
+          ARG actual: CONST Int type=kotlin.Int value=10
+    FUN name:testInlineFunc visibility:public modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest
+      BLOCK_BODY
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.String
+          ARG expected: CONST String type=kotlin.String value="AAA"
+          ARG actual: CALL 'private final fun getString <T> (<this>: kotlinx.atomicfu.AtomicRef<T of <root>.UncheckedCastTest.getString>): kotlin.String declared in <root>.UncheckedCastTest' type=kotlin.String origin=null
+            TYPE_ARG T: kotlin.Any
+            ARG <this>(index:0): GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testInlineFunc' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+            ARG <this>(index:1): CALL 'private final fun <get-s> (): kotlinx.atomicfu.AtomicRef<kotlin.Any> declared in <root>.UncheckedCastTest' type=kotlinx.atomicfu.AtomicRef<kotlin.Any> origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.UncheckedCastTest declared in <root>.UncheckedCastTest.testInlineFunc' type=<root>.UncheckedCastTest origin=IMPLICIT_ARGUMENT
+    FUN name:testTopLevelValUnchekedCast visibility:public modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.UncheckedCastTest
+      annotations:
+        Suppress(names = ["UNCHECKED_CAST"] type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String)
+      BLOCK_BODY
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.String
+          ARG expected: CONST String type=kotlin.String value="B"
+          ARG actual: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=kotlin.String origin=GET_ARRAY_ELEMENT
+            ARG <this>: CALL 'public final fun <get-value> (): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Array<kotlin.String> origin=GET_PROPERTY
+              ARG <this>: TYPE_OP type=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.String>> origin=CAST typeOperand=kotlinx.atomicfu.AtomicRef<kotlin.Array<kotlin.String>>
+                CALL 'private final fun <get-topLevelS> (): kotlinx.atomicfu.AtomicRef<kotlin.Any> declared in <root>' type=kotlinx.atomicfu.AtomicRef<kotlin.Any> origin=GET_PROPERTY
+            ARG index: CONST Int type=kotlin.Int value=1
+  FUN name:box visibility:public modality:FINAL returnType:kotlin.String
+    BLOCK_BODY
+      VAR name:testClass type:<root>.UncheckedCastTest [val]
+        CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.UncheckedCastTest' type=<root>.UncheckedCastTest origin=null
+      CALL 'public final fun testAtomicValUncheckedCast (): kotlin.Unit declared in <root>.UncheckedCastTest' type=kotlin.Unit origin=null
+        ARG <this>: GET_VAR 'val testClass: <root>.UncheckedCastTest declared in <root>.box' type=<root>.UncheckedCastTest origin=null
+      CALL 'public final fun testTopLevelValUnchekedCast (): kotlin.Unit declared in <root>.UncheckedCastTest' type=kotlin.Unit origin=null
+        ARG <this>: GET_VAR 'val testClass: <root>.UncheckedCastTest declared in <root>.box' type=<root>.UncheckedCastTest origin=null
+      CALL 'public final fun testArrayValueUncheckedCast (): kotlin.Unit declared in <root>.UncheckedCastTest' type=kotlin.Unit origin=null
+        ARG <this>: GET_VAR 'val testClass: <root>.UncheckedCastTest declared in <root>.box' type=<root>.UncheckedCastTest origin=null
+      CALL 'public final fun testArrayValueUncheckedCastInlineFunc (): kotlin.Unit declared in <root>.UncheckedCastTest' type=kotlin.Unit origin=null
+        ARG <this>: GET_VAR 'val testClass: <root>.UncheckedCastTest declared in <root>.box' type=<root>.UncheckedCastTest origin=null
+      CALL 'public final fun testInlineFunc (): kotlin.Unit declared in <root>.UncheckedCastTest' type=kotlin.Unit origin=null
+        ARG <this>: GET_VAR 'val testClass: <root>.UncheckedCastTest declared in <root>.box' type=<root>.UncheckedCastTest origin=null
+      CALL 'public final fun testAtomicRefUncheckedCastUpdate (): kotlin.Unit declared in <root>.UncheckedCastTest' type=kotlin.Unit origin=null
+        ARG <this>: GET_VAR 'val testClass: <root>.UncheckedCastTest declared in <root>.box' type=<root>.UncheckedCastTest origin=null
+      CALL 'public final fun testAtomicRefUncheckedCastGetAndUpdate (): kotlin.Unit declared in <root>.UncheckedCastTest' type=kotlin.Unit origin=null
+        ARG <this>: GET_VAR 'val testClass: <root>.UncheckedCastTest declared in <root>.box' type=<root>.UncheckedCastTest origin=null
+      CALL 'public final fun testAtomicRefUncheckedCastUpdateAndGet (): kotlin.Unit declared in <root>.UncheckedCastTest' type=kotlin.Unit origin=null
+        ARG <this>: GET_VAR 'val testClass: <root>.UncheckedCastTest declared in <root>.box' type=<root>.UncheckedCastTest origin=null
+      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK"

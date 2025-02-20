@@ -1,0 +1,496 @@
+FILE fqName:<root> fileName:/ExtensionsTest.kt
+  CLASS CLASS name:ExtensionsTest modality:FINAL visibility:public superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:<root>.ExtensionsTest
+    PROPERTY name:a visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:a type:kotlinx.atomicfu.AtomicInt visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomic (initial: kotlin.Int): kotlinx.atomicfu.AtomicInt declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicInt origin=null
+            ARG initial: CONST Int type=kotlin.Int value=0
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicInt
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.ExtensionsTest
+        correspondingProperty: PROPERTY name:a visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlinx.atomicfu.AtomicInt visibility:private [final]' type=kotlinx.atomicfu.AtomicInt origin=null
+              receiver: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.<get-a>' type=<root>.ExtensionsTest origin=null
+    PROPERTY name:l visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:l type:kotlinx.atomicfu.AtomicLong visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomic (initial: kotlin.Long): kotlinx.atomicfu.AtomicLong declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicLong origin=null
+            ARG initial: CONST Long type=kotlin.Long value=0
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-l> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicLong
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.ExtensionsTest
+        correspondingProperty: PROPERTY name:l visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-l> (): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:l type:kotlinx.atomicfu.AtomicLong visibility:private [final]' type=kotlinx.atomicfu.AtomicLong origin=null
+              receiver: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.<get-l>' type=<root>.ExtensionsTest origin=null
+    PROPERTY name:s visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:s type:kotlinx.atomicfu.AtomicRef<kotlin.String?> visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomic <T> (initial: T of kotlinx.atomicfu.atomic): kotlinx.atomicfu.AtomicRef<T of kotlinx.atomicfu.atomic> declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=null
+            TYPE_ARG T: kotlin.String?
+            ARG initial: CONST Null type=kotlin.Nothing? value=null
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-s> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicRef<kotlin.String?>
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.ExtensionsTest
+        correspondingProperty: PROPERTY name:s visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-s> (): kotlinx.atomicfu.AtomicRef<kotlin.String?> declared in <root>.ExtensionsTest'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:s type:kotlinx.atomicfu.AtomicRef<kotlin.String?> visibility:private [final]' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=null
+              receiver: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.<get-s>' type=<root>.ExtensionsTest origin=null
+    PROPERTY name:b visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:b type:kotlinx.atomicfu.AtomicBoolean visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomic (initial: kotlin.Boolean): kotlinx.atomicfu.AtomicBoolean declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicBoolean origin=null
+            ARG initial: CONST Boolean type=kotlin.Boolean value=true
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicBoolean
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.ExtensionsTest
+        correspondingProperty: PROPERTY name:b visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-b> (): kotlinx.atomicfu.AtomicBoolean declared in <root>.ExtensionsTest'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlinx.atomicfu.AtomicBoolean visibility:private [final]' type=kotlinx.atomicfu.AtomicBoolean origin=null
+              receiver: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.<get-b>' type=<root>.ExtensionsTest origin=null
+    CONSTRUCTOR visibility:public returnType:<root>.ExtensionsTest [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:ExtensionsTest modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+    FUN name:booleanExtensionArithmetic visibility:private modality:FINAL returnType:kotlin.Unit [inline]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.ExtensionsTest
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlinx.atomicfu.AtomicBoolean
+      BLOCK_BODY
+        CALL 'public final fun <set-value> (value: kotlin.Boolean): kotlin.Unit declared in kotlinx.atomicfu.AtomicBoolean' type=kotlin.Unit origin=EQ
+          ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicBoolean declared in <root>.ExtensionsTest.booleanExtensionArithmetic' type=kotlinx.atomicfu.AtomicBoolean origin=null
+          ARG value: CONST Boolean type=kotlin.Boolean value=false
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCL
+            ARG <this>: CALL 'public final fun <get-value> (): kotlin.Boolean declared in kotlinx.atomicfu.AtomicBoolean' type=kotlin.Boolean origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicBoolean declared in <root>.ExtensionsTest.booleanExtensionArithmetic' type=kotlinx.atomicfu.AtomicBoolean origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun lazySet (value: kotlin.Boolean): kotlin.Unit declared in kotlinx.atomicfu.AtomicBoolean' type=kotlin.Unit origin=null
+          ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicBoolean declared in <root>.ExtensionsTest.booleanExtensionArithmetic' type=kotlinx.atomicfu.AtomicBoolean origin=IMPLICIT_ARGUMENT
+          ARG value: CONST Boolean type=kotlin.Boolean value=true
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun <get-value> (): kotlin.Boolean declared in kotlinx.atomicfu.AtomicBoolean' type=kotlin.Boolean origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicBoolean declared in <root>.ExtensionsTest.booleanExtensionArithmetic' type=kotlinx.atomicfu.AtomicBoolean origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun getAndSet (value: kotlin.Boolean): kotlin.Boolean declared in kotlinx.atomicfu.AtomicBoolean' type=kotlin.Boolean origin=null
+            ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicBoolean declared in <root>.ExtensionsTest.booleanExtensionArithmetic' type=kotlinx.atomicfu.AtomicBoolean origin=IMPLICIT_ARGUMENT
+            ARG value: CONST Boolean type=kotlin.Boolean value=true
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun compareAndSet (expect: kotlin.Boolean, update: kotlin.Boolean): kotlin.Boolean declared in kotlinx.atomicfu.AtomicBoolean' type=kotlin.Boolean origin=null
+            ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicBoolean declared in <root>.ExtensionsTest.booleanExtensionArithmetic' type=kotlinx.atomicfu.AtomicBoolean origin=IMPLICIT_ARGUMENT
+            ARG expect: CALL 'public final fun <get-value> (): kotlin.Boolean declared in kotlinx.atomicfu.AtomicBoolean' type=kotlin.Boolean origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicBoolean declared in <root>.ExtensionsTest.booleanExtensionArithmetic' type=kotlinx.atomicfu.AtomicBoolean origin=IMPLICIT_ARGUMENT
+            ARG update: CONST Boolean type=kotlin.Boolean value=false
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCL
+            ARG <this>: CALL 'public final fun <get-value> (): kotlin.Boolean declared in kotlinx.atomicfu.AtomicBoolean' type=kotlin.Boolean origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicBoolean declared in <root>.ExtensionsTest.booleanExtensionArithmetic' type=kotlinx.atomicfu.AtomicBoolean origin=IMPLICIT_ARGUMENT
+    FUN name:intExtensionArithmetic visibility:private modality:FINAL returnType:kotlin.Unit [inline]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.ExtensionsTest
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlinx.atomicfu.AtomicInt
+      BLOCK_BODY
+        CALL 'public final fun <set-value> (value: kotlin.Int): kotlin.Unit declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Unit origin=EQ
+          ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=null
+          ARG value: CONST Int type=kotlin.Int value=0
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=0
+        VAR name:update type:kotlin.Int [val]
+          CONST Int type=kotlin.Int value=3
+        CALL 'public final fun lazySet (value: kotlin.Int): kotlin.Unit declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Unit origin=null
+          ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+          ARG value: GET_VAR 'val update: kotlin.Int declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlin.Int origin=null
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun compareAndSet (expect: kotlin.Int, update: kotlin.Int): kotlin.Boolean declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Boolean origin=null
+            ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG expect: GET_VAR 'val update: kotlin.Int declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlin.Int origin=null
+            ARG update: CONST Int type=kotlin.Int value=8
+        CALL 'public final fun lazySet (value: kotlin.Int): kotlin.Unit declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Unit origin=null
+          ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+          ARG value: CONST Int type=kotlin.Int value=1
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=1
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun getAndSet (value: kotlin.Int): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+              ARG value: CONST Int type=kotlin.Int value=2
+            ARG arg1: CONST Int type=kotlin.Int value=1
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=2
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun getAndIncrement (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=2
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=3
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun getAndDecrement (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=3
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=2
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun getAndAdd (delta: kotlin.Int): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+              ARG delta: CONST Int type=kotlin.Int value=2
+            ARG arg1: CONST Int type=kotlin.Int value=2
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=4
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun addAndGet (delta: kotlin.Int): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+              ARG delta: CONST Int type=kotlin.Int value=3
+            ARG arg1: CONST Int type=kotlin.Int value=7
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=7
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun incrementAndGet (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=8
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=8
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun decrementAndGet (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=7
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=7
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun compareAndSet (expect: kotlin.Int, update: kotlin.Int): kotlin.Boolean declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Boolean origin=null
+            ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG expect: CONST Int type=kotlin.Int value=7
+            ARG update: CONST Int type=kotlin.Int value=10
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun compareAndSet (expect: kotlin.Int, update: kotlin.Int): kotlin.Boolean declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Boolean origin=null
+            ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG expect: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG update: CONST Int type=kotlin.Int value=55
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest.intExtensionArithmetic' type=kotlinx.atomicfu.AtomicInt origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=55
+    FUN name:longExtensionArithmetic visibility:private modality:FINAL returnType:kotlin.Unit [inline]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.ExtensionsTest
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlinx.atomicfu.AtomicLong
+      BLOCK_BODY
+        CALL 'public final fun <set-value> (value: kotlin.Long): kotlin.Unit declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Unit origin=EQ
+          ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=null
+          ARG value: CONST Long type=kotlin.Long value=2424920024888888848
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Long type=kotlin.Long value=2424920024888888848
+        CALL 'public final fun lazySet (value: kotlin.Long): kotlin.Unit declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Unit origin=null
+          ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+          ARG value: CONST Long type=kotlin.Long value=8424920024888888848
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Long type=kotlin.Long value=8424920024888888848
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun getAndSet (value: kotlin.Long): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=null
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+              ARG value: CONST Long type=kotlin.Long value=8924920024888888848
+            ARG arg1: CONST Long type=kotlin.Long value=8424920024888888848
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Long type=kotlin.Long value=8924920024888888848
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun incrementAndGet (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=null
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Long type=kotlin.Long value=8924920024888888849
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Long type=kotlin.Long value=8924920024888888849
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun getAndDecrement (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=null
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Long type=kotlin.Long value=8924920024888888849
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Long type=kotlin.Long value=8924920024888888848
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun getAndAdd (delta: kotlin.Long): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=null
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+              ARG delta: CONST Long type=kotlin.Long value=100000000000000000
+            ARG arg1: CONST Long type=kotlin.Long value=8924920024888888848
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Long type=kotlin.Long value=9024920024888888848
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun addAndGet (delta: kotlin.Long): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=null
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+              ARG delta: CONST Long type=kotlin.Long value=-9223372036854775807
+            ARG arg1: CONST Long type=kotlin.Long value=-198452011965886959
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Long type=kotlin.Long value=-198452011965886959
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun incrementAndGet (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=null
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Long type=kotlin.Long value=-198452011965886958
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Long type=kotlin.Long value=-198452011965886958
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun decrementAndGet (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=null
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Long type=kotlin.Long value=-198452011965886959
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest.longExtensionArithmetic' type=kotlinx.atomicfu.AtomicLong origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Long type=kotlin.Long value=-198452011965886959
+    FUN name:refExtension visibility:private modality:FINAL returnType:kotlin.Unit [inline]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.ExtensionsTest
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlinx.atomicfu.AtomicRef<kotlin.String?>
+      BLOCK_BODY
+        CALL 'public final fun <set-value> (value: T of kotlinx.atomicfu.AtomicRef): kotlin.Unit declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Unit origin=EQ
+          ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicRef<kotlin.String?> declared in <root>.ExtensionsTest.refExtension' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=null
+          ARG value: CONST String type=kotlin.String value="aaa"
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.String? origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicRef<kotlin.String?> declared in <root>.ExtensionsTest.refExtension' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST String type=kotlin.String value="aaa"
+        CALL 'public final fun lazySet (value: T of kotlinx.atomicfu.AtomicRef): kotlin.Unit declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Unit origin=null
+          ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicRef<kotlin.String?> declared in <root>.ExtensionsTest.refExtension' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=IMPLICIT_ARGUMENT
+          ARG value: CONST String type=kotlin.String value="bb"
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.String? origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicRef<kotlin.String?> declared in <root>.ExtensionsTest.refExtension' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST String type=kotlin.String value="bb"
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun getAndSet (value: T of kotlinx.atomicfu.AtomicRef): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.String? origin=null
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicRef<kotlin.String?> declared in <root>.ExtensionsTest.refExtension' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=IMPLICIT_ARGUMENT
+              ARG value: CONST String type=kotlin.String value="ccc"
+            ARG arg1: CONST String type=kotlin.String value="bb"
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.String? origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicRef<kotlin.String?> declared in <root>.ExtensionsTest.refExtension' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST String type=kotlin.String value="ccc"
+    FUN name:testExtension visibility:public modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.ExtensionsTest
+      BLOCK_BODY
+        CALL 'private final fun intExtensionArithmetic (<this>: kotlinx.atomicfu.AtomicInt): kotlin.Unit declared in <root>.ExtensionsTest' type=kotlin.Unit origin=null
+          ARG <this>(index:0): GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testExtension' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+          ARG <this>(index:1): CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testExtension' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+        CALL 'private final fun longExtensionArithmetic (<this>: kotlinx.atomicfu.AtomicLong): kotlin.Unit declared in <root>.ExtensionsTest' type=kotlin.Unit origin=null
+          ARG <this>(index:0): GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testExtension' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+          ARG <this>(index:1): CALL 'private final fun <get-l> (): kotlinx.atomicfu.AtomicLong declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testExtension' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+        CALL 'private final fun refExtension (<this>: kotlinx.atomicfu.AtomicRef<kotlin.String?>): kotlin.Unit declared in <root>.ExtensionsTest' type=kotlin.Unit origin=null
+          ARG <this>(index:0): GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testExtension' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+          ARG <this>(index:1): CALL 'private final fun <get-s> (): kotlinx.atomicfu.AtomicRef<kotlin.String?> declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testExtension' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+        CALL 'private final fun booleanExtensionArithmetic (<this>: kotlinx.atomicfu.AtomicBoolean): kotlin.Unit declared in <root>.ExtensionsTest' type=kotlin.Unit origin=null
+          ARG <this>(index:0): GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testExtension' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+          ARG <this>(index:1): CALL 'private final fun <get-b> (): kotlinx.atomicfu.AtomicBoolean declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicBoolean origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testExtension' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+    FUN name:testScopedFieldGetters visibility:public modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.ExtensionsTest
+      BLOCK_BODY
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=0
+        VAR name:update type:kotlin.Int [val]
+          CONST Int type=kotlin.Int value=3
+        CALL 'public final fun lazySet (value: kotlin.Int): kotlin.Unit declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Unit origin=null
+          ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+          ARG value: GET_VAR 'val update: kotlin.Int declared in <root>.ExtensionsTest.testScopedFieldGetters' type=kotlin.Int origin=null
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun compareAndSet (expect: kotlin.Int, update: kotlin.Int): kotlin.Boolean declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Boolean origin=null
+            ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+            ARG expect: GET_VAR 'val update: kotlin.Int declared in <root>.ExtensionsTest.testScopedFieldGetters' type=kotlin.Int origin=null
+            ARG update: CONST Int type=kotlin.Int value=8
+        CALL 'public final fun lazySet (value: kotlin.Int): kotlin.Unit declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Unit origin=null
+          ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+          ARG value: CONST Int type=kotlin.Int value=1
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=1
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun getAndSet (value: kotlin.Int): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+              ARG value: CONST Int type=kotlin.Int value=2
+            ARG arg1: CONST Int type=kotlin.Int value=1
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=2
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun getAndIncrement (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=2
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=3
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun getAndDecrement (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=3
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=2
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun getAndAdd (delta: kotlin.Int): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+              ARG delta: CONST Int type=kotlin.Int value=2
+            ARG arg1: CONST Int type=kotlin.Int value=2
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=4
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun addAndGet (delta: kotlin.Int): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+              ARG delta: CONST Int type=kotlin.Int value=3
+            ARG arg1: CONST Int type=kotlin.Int value=7
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=7
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun incrementAndGet (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=8
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=8
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun decrementAndGet (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=7
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+            ARG arg0: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+            ARG arg1: CONST Int type=kotlin.Int value=7
+        CALL 'public final fun check (value: kotlin.Boolean): kotlin.Unit declared in kotlin' type=kotlin.Unit origin=null
+          ARG value: CALL 'public final fun compareAndSet (expect: kotlin.Int, update: kotlin.Int): kotlin.Boolean declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Boolean origin=null
+            ARG <this>: CALL 'private final fun <get-a> (): kotlinx.atomicfu.AtomicInt declared in <root>.ExtensionsTest' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.ExtensionsTest declared in <root>.ExtensionsTest.testScopedFieldGetters' type=<root>.ExtensionsTest origin=IMPLICIT_ARGUMENT
+            ARG expect: CONST Int type=kotlin.Int value=7
+            ARG update: CONST Int type=kotlin.Int value=10
+  FUN name:box visibility:public modality:FINAL returnType:kotlin.String
+    BLOCK_BODY
+      VAR name:testClass type:<root>.ExtensionsTest [val]
+        CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.ExtensionsTest' type=<root>.ExtensionsTest origin=null
+      CALL 'public final fun testScopedFieldGetters (): kotlin.Unit declared in <root>.ExtensionsTest' type=kotlin.Unit origin=null
+        ARG <this>: GET_VAR 'val testClass: <root>.ExtensionsTest declared in <root>.box' type=<root>.ExtensionsTest origin=null
+      CALL 'public final fun testExtension (): kotlin.Unit declared in <root>.ExtensionsTest' type=kotlin.Unit origin=null
+        ARG <this>: GET_VAR 'val testClass: <root>.ExtensionsTest declared in <root>.box' type=<root>.ExtensionsTest origin=null
+      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK"

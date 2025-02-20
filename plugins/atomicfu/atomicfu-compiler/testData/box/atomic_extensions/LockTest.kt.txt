@@ -1,0 +1,38 @@
+class LockTest {
+  private val inProgressLock: AtomicBoolean
+    field = atomic(initial = false)
+    private get
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun testLock() {
+    var result: String = ""
+    when {
+      tryAcquire(/* <this> = <this>.<get-inProgressLock>() */) -> { // BLOCK
+        result = "OK"
+      }
+    }
+    assertEquals<String>(expected = "OK", actual = result)
+  }
+
+}
+
+fun box(): String {
+  val testClass: LockTest = LockTest()
+  testClass.testLock()
+  return "OK"
+}
+
+@Suppress(names = ["UNUSED_PARAMETER"])
+fun <AA : Any?, BB : Number> String.reflectionTest(mapParam: Map<in AA, BB>): List<BB> {
+  return error(message = "no impl")
+}
+
+@Suppress(names = ["NOTHING_TO_INLINE"])
+private inline fun AtomicBoolean.tryAcquire(): Boolean {
+  return <this>.compareAndSet(expect = false, update = true)
+}

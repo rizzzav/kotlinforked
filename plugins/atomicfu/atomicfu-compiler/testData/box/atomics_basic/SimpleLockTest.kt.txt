@@ -1,0 +1,49 @@
+class SimpleLock {
+  private val _locked: AtomicInt
+    field = atomic(initial = 0)
+    private get
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun <T : Any?> withLock(res: T): T {
+    try { // BLOCK
+      loop(/* <this> = <this>.<get-_locked>(), */ action = local fun <anonymous>(locked: Int) {
+        check(value = EQEQ(arg0 = locked, arg1 = 0))
+        when {
+          <this>.<get-_locked>().compareAndSet(expect = 0, update = 1).not() -> return Unit
+        }
+        return res
+      }
+)
+    }
+    finally { // BLOCK
+      <this>.<get-_locked>().<set-value>(value = 0)
+    }
+  }
+
+}
+
+class SimpleLockTest {
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun withLock() {
+    val lock: SimpleLock = SimpleLock()
+    val res: String = lock.withLock<String>(res = "OK")
+    assertEquals<String>(expected = "OK", actual = res)
+  }
+
+}
+
+fun box(): String {
+  val testClass: SimpleLockTest = SimpleLockTest()
+  testClass.withLock()
+  return "OK"
+}

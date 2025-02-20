@@ -1,0 +1,87 @@
+class LoopTest {
+  private val a: AtomicInt
+    field = atomic(initial = 10)
+    private get
+
+  private val b: AtomicInt
+    field = atomic(initial = 11)
+    private get
+
+  private val c: AtomicInt
+    field = atomic(initial = 12)
+    private get
+
+  private val r: AtomicRef<String>
+    field = atomic<String>(initial = "aaa")
+    private get
+
+  private val intArr: AtomicIntArray
+    field = AtomicIntArray(size = 10)
+    private get
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  private inline fun embeddedLoops(to: Int): Int {
+    return loop(/* <this> = <this>.<get-a>(), */ action = local fun <anonymous>(aValue: Int) {
+      loop(/* <this> = <this>.<get-b>(), */ action = local fun <anonymous>(bValue: Int) {
+        when {
+          <this>.<get-b>().compareAndSet(expect = bValue, update = to) -> return aValue.plus(other = bValue)
+        }
+      }
+)
+    }
+)
+  }
+
+  private inline fun embeddedUpdate(to: Int): Int {
+    return loop(/* <this> = <this>.<get-a>(), */ action = local fun <anonymous>(aValue: Int) {
+      <this>.<get-a>().compareAndSet(expect = aValue, update = to) /*~> Unit */
+      return updateAndGet(/* <this> = <this>.<get-a>(), */ function = local fun <anonymous>(cur: Int): Int {
+        return cur.plus(other = 100)
+      }
+)
+    }
+)
+  }
+
+  private inline fun AtomicInt.extensionEmbeddedLoops(to: Int): Int {
+    return loop(/* <this> = <this>, */ action = local fun <anonymous>(cur1: Int) {
+      <this>.compareAndSet(expect = cur1, update = to) /*~> Unit */
+      loop(/* <this> = <this>, */ action = local fun <anonymous>(cur2: Int) {
+        return cur2
+      }
+)
+    }
+)
+  }
+
+  private inline fun AtomicRef<String>.extesntionEmbeddedRefUpdate(to: String): String {
+    return loop<String>(/* <this> = <this>, */ action = local fun <anonymous>(value: String) {
+      <this>.compareAndSet(expect = value, update = to) /*~> Unit */
+      return updateAndGet<String>(/* <this> = <this>, */ function = local fun <anonymous>(cur: String): String {
+        return cur + "AAA"
+      }
+)
+    }
+)
+  }
+
+  fun test() {
+    assertEquals<Int>(expected = 21, actual = <this>.embeddedLoops(to = 12))
+    assertEquals<Int>(expected = 77, actual = <this>.extensionEmbeddedLoops(/* <this> = <this>.<get-c>(), */ to = 77))
+    assertEquals<Int>(expected = 66, actual = <this>.extensionEmbeddedLoops(/* <this> = <this>.<get-intArr>().get(index = 0), */ to = 66))
+    assertEquals<Int>(expected = 166, actual = <this>.embeddedUpdate(to = 66))
+    assertEquals<String>(expected = "bbbAAA", actual = <this>.extesntionEmbeddedRefUpdate(/* <this> = <this>.<get-r>(), */ to = "bbb"))
+  }
+
+}
+
+fun box(): String {
+  val testClass: LoopTest = LoopTest()
+  testClass.test()
+  return "OK"
+}

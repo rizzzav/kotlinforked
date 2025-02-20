@@ -1,0 +1,97 @@
+class LockFreeQueue {
+  private val head: AtomicRef<Node>
+    field = atomic<Node>(initial = Node(value = 0))
+    private get
+
+  private val tail: AtomicRef<Node>
+    field = atomic<Node>(initial = <this>.<get-head>().<get-value>())
+    private get
+
+  private class Node {
+    val value: Int
+      field = value
+      get
+
+    val next: AtomicRef<Node?>
+      field = atomic<Node?>(initial = null)
+      get
+
+    constructor(value: Int) /* primary */ {
+      super/*Any*/()
+      /* <init>() */
+
+    }
+
+  }
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun dequeue(): Int {
+    loop<Node>(/* <this> = <this>.<get-head>(), */ action = local fun <anonymous>(curHead: Node) {
+      val next: Node = { // BLOCK
+        val tmp_0: Node? = curHead.<get-next>().<get-value>()
+        when {
+          EQEQ(arg0 = tmp_0, arg1 = null) -> return -1
+          else -> tmp_0
+        }
+      }
+      when {
+        <this>.<get-head>().compareAndSet(expect = curHead, update = next) -> return next.<get-value>()
+      }
+    }
+)
+  }
+
+  fun enqueue(value: Int) {
+    val node: Node = Node(value = value)
+    loop<Node>(/* <this> = <this>.<get-tail>(), */ action = local fun <anonymous>(curTail: Node) {
+      val curNext: Node? = curTail.<get-next>().<get-value>()
+      when {
+        EQEQ(arg0 = curNext, arg1 = null).not() -> { // BLOCK
+          <this>.<get-tail>().compareAndSet(expect = curTail, update = curNext) /*~> Unit */
+          return Unit
+        }
+      }
+      when {
+        curTail.<get-next>().compareAndSet(expect = null, update = node) -> { // BLOCK
+          <this>.<get-tail>().compareAndSet(expect = curTail, update = node) /*~> Unit */
+          return Unit
+        }
+      }
+    }
+)
+  }
+
+}
+
+class LockFreeQueueTest {
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun testBasic() {
+    val q: LockFreeQueue = LockFreeQueue()
+    assertEquals<Int>(expected = -1, actual = q.dequeue())
+    q.enqueue(value = 42)
+    assertEquals<Int>(expected = 42, actual = q.dequeue())
+    assertEquals<Int>(expected = -1, actual = q.dequeue())
+    q.enqueue(value = 1)
+    q.enqueue(value = 2)
+    assertEquals<Int>(expected = 1, actual = q.dequeue())
+    assertEquals<Int>(expected = 2, actual = q.dequeue())
+    assertEquals<Int>(expected = -1, actual = q.dequeue())
+  }
+
+}
+
+fun box(): String {
+  val testClass: LockFreeQueueTest = LockFreeQueueTest()
+  testClass.testBasic()
+  return "OK"
+}

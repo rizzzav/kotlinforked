@@ -10,10 +10,7 @@ import org.jetbrains.kotlin.generators.model.annotation
 import org.jetbrains.kotlin.konan.test.abi.AbstractClassicNativeLibraryAbiReaderTest
 import org.jetbrains.kotlin.konan.test.abi.AbstractFirNativeLibraryAbiReaderTest
 import org.jetbrains.kotlin.konan.test.blackbox.AbstractNativeCodegenBoxTest
-import org.jetbrains.kotlin.konan.test.blackbox.support.ClassLevelProperty
-import org.jetbrains.kotlin.konan.test.blackbox.support.EnforcedProperty
-import org.jetbrains.kotlin.konan.test.blackbox.support.KLIB_IR_INLINER
-import org.jetbrains.kotlin.konan.test.blackbox.support.TestKind
+import org.jetbrains.kotlin.konan.test.blackbox.support.*
 import org.jetbrains.kotlin.konan.test.blackbox.support.group.ClassicPipeline
 import org.jetbrains.kotlin.konan.test.blackbox.support.group.FirPipeline
 import org.jetbrains.kotlin.konan.test.blackbox.support.group.UseExtTestCaseGroupProvider
@@ -324,6 +321,15 @@ fun main() {
                 model()
             }
         }
+
+        testGroup("plugins/atomicfu/atomicfu-compiler/test", "plugins/atomicfu/atomicfu-compiler/testData/box") {
+            testClass<AbstractClassicNativeIrTextTest>(
+                suiteTestClassName = "AtomicfuNativeIrTestGenerated",
+                annotations = listOf(*atomicfuNative(), provider<UseExtTestCaseGroupProvider>())
+            ) {
+                model()
+            }
+        }
     }
 }
 
@@ -333,6 +339,10 @@ fun frontendFir() = arrayOf(
 
 fun frontendClassic() = arrayOf(
     annotation(ClassicPipeline::class.java)
+)
+
+private fun atomicfuNative() = arrayOf(
+    annotation(Tag::class.java, "atomicfu-native")
 )
 
 private fun klib() = annotation(Tag::class.java, "klib")

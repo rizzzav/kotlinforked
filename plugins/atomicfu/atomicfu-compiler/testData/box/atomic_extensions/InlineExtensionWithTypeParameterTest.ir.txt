@@ -1,0 +1,146 @@
+FILE fqName:<root> fileName:/InlineExtensionWithTypeParameterTest.kt
+  CLASS CLASS name:InlineExtensionWithTypeParameterTest modality:FINAL visibility:public superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:<root>.InlineExtensionWithTypeParameterTest
+    PROPERTY name:sref visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:sref type:kotlinx.atomicfu.AtomicRef<<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment> visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomic <T> (initial: T of kotlinx.atomicfu.atomic): kotlinx.atomicfu.AtomicRef<T of kotlinx.atomicfu.atomic> declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicRef<<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment> origin=null
+            TYPE_ARG T: <root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment
+            ARG initial: CONSTRUCTOR_CALL 'public constructor <init> (id: kotlin.Int) declared in <root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment' type=<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment origin=null
+              ARG id: CONST Int type=kotlin.Int value=0
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-sref> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicRef<<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment>
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.InlineExtensionWithTypeParameterTest
+        correspondingProperty: PROPERTY name:sref visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-sref> (): kotlinx.atomicfu.AtomicRef<<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment> declared in <root>.InlineExtensionWithTypeParameterTest'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:sref type:kotlinx.atomicfu.AtomicRef<<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment> visibility:private [final]' type=kotlinx.atomicfu.AtomicRef<<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment> origin=null
+              receiver: GET_VAR '<this>: <root>.InlineExtensionWithTypeParameterTest declared in <root>.InlineExtensionWithTypeParameterTest.<get-sref>' type=<root>.InlineExtensionWithTypeParameterTest origin=null
+    CLASS CLASS name:Segment modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
+      thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:<root>.InlineExtensionWithTypeParameterTest.Segment<S of <root>.InlineExtensionWithTypeParameterTest.Segment>
+      TYPE_PARAMETER name:S index:0 variance: superTypes:[<root>.InlineExtensionWithTypeParameterTest.Segment<S of <root>.InlineExtensionWithTypeParameterTest.Segment>] reified:false
+      PROPERTY name:id visibility:public modality:FINAL [val]
+        FIELD PROPERTY_BACKING_FIELD name:id type:kotlin.Int visibility:private [final]
+          EXPRESSION_BODY
+            GET_VAR 'id: kotlin.Int declared in <root>.InlineExtensionWithTypeParameterTest.Segment.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+        FUN DEFAULT_PROPERTY_ACCESSOR name:<get-id> visibility:public modality:FINAL returnType:kotlin.Int
+          VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.InlineExtensionWithTypeParameterTest.Segment<S of <root>.InlineExtensionWithTypeParameterTest.Segment>
+          correspondingProperty: PROPERTY name:id visibility:public modality:FINAL [val]
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='public final fun <get-id> (): kotlin.Int declared in <root>.InlineExtensionWithTypeParameterTest.Segment'
+              GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:id type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+                receiver: GET_VAR '<this>: <root>.InlineExtensionWithTypeParameterTest.Segment<S of <root>.InlineExtensionWithTypeParameterTest.Segment> declared in <root>.InlineExtensionWithTypeParameterTest.Segment.<get-id>' type=<root>.InlineExtensionWithTypeParameterTest.Segment<S of <root>.InlineExtensionWithTypeParameterTest.Segment> origin=null
+      CONSTRUCTOR visibility:public returnType:<root>.InlineExtensionWithTypeParameterTest.Segment<S of <root>.InlineExtensionWithTypeParameterTest.Segment> [primary]
+        VALUE_PARAMETER kind:Regular name:id index:0 type:kotlin.Int
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+          INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Segment modality:ABSTRACT visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+      FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+        VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+        overridden:
+          public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+      FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+        overridden:
+          public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+        overridden:
+          public open fun toString (): kotlin.String declared in kotlin.Any
+    CLASS CLASS name:SemaphoreSegment modality:FINAL visibility:public superTypes:[<root>.InlineExtensionWithTypeParameterTest.Segment<<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment>]
+      thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment
+      CONSTRUCTOR visibility:public returnType:<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment [primary]
+        VALUE_PARAMETER kind:Regular name:id index:0 type:kotlin.Int
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (id: kotlin.Int) declared in <root>.InlineExtensionWithTypeParameterTest.Segment'
+            TYPE_ARG S: <root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment
+            ARG id: GET_VAR 'id: kotlin.Int declared in <root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment.<init>' type=kotlin.Int origin=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:SemaphoreSegment modality:FINAL visibility:public superTypes:[<root>.InlineExtensionWithTypeParameterTest.Segment<<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment>]' type=kotlin.Unit
+      FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+        VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+        overridden:
+          public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.InlineExtensionWithTypeParameterTest.Segment
+      FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+        overridden:
+          public open fun hashCode (): kotlin.Int declared in <root>.InlineExtensionWithTypeParameterTest.Segment
+      FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+        overridden:
+          public open fun toString (): kotlin.String declared in <root>.InlineExtensionWithTypeParameterTest.Segment
+      PROPERTY FAKE_OVERRIDE name:id visibility:public modality:FINAL [fake_override,val]
+        overridden:
+          public final id: kotlin.Int declared in <root>.InlineExtensionWithTypeParameterTest.Segment
+        FUN FAKE_OVERRIDE name:<get-id> visibility:public modality:FINAL returnType:kotlin.Int [fake_override]
+          VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.InlineExtensionWithTypeParameterTest.Segment<<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment>
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:id visibility:public modality:FINAL [fake_override,val]
+          overridden:
+            public final fun <get-id> (): kotlin.Int declared in <root>.InlineExtensionWithTypeParameterTest.Segment
+    CONSTRUCTOR visibility:public returnType:<root>.InlineExtensionWithTypeParameterTest [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:InlineExtensionWithTypeParameterTest modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+    FUN name:foo visibility:private modality:FINAL returnType:kotlin.Int [inline]
+      TYPE_PARAMETER name:S index:0 variance: superTypes:[<root>.InlineExtensionWithTypeParameterTest.Segment<S of <root>.InlineExtensionWithTypeParameterTest.foo>] reified:false
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.InlineExtensionWithTypeParameterTest
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlinx.atomicfu.AtomicRef<S of <root>.InlineExtensionWithTypeParameterTest.foo>
+      VALUE_PARAMETER kind:Regular name:id index:2 type:kotlin.Int
+      VALUE_PARAMETER kind:Regular name:startFrom index:3 type:S of <root>.InlineExtensionWithTypeParameterTest.foo
+      BLOCK_BODY
+        CALL 'public final fun lazySet (value: T of kotlinx.atomicfu.AtomicRef): kotlin.Unit declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Unit origin=null
+          ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicRef<S of <root>.InlineExtensionWithTypeParameterTest.foo> declared in <root>.InlineExtensionWithTypeParameterTest.foo' type=kotlinx.atomicfu.AtomicRef<S of <root>.InlineExtensionWithTypeParameterTest.foo> origin=IMPLICIT_ARGUMENT
+          ARG value: GET_VAR 'startFrom: S of <root>.InlineExtensionWithTypeParameterTest.foo declared in <root>.InlineExtensionWithTypeParameterTest.foo' type=S of <root>.InlineExtensionWithTypeParameterTest.foo origin=null
+        RETURN type=kotlin.Nothing from='private final fun foo <S> (<this>: kotlinx.atomicfu.AtomicRef<S of <root>.InlineExtensionWithTypeParameterTest.foo>, id: kotlin.Int, startFrom: S of <root>.InlineExtensionWithTypeParameterTest.foo): kotlin.Int declared in <root>.InlineExtensionWithTypeParameterTest'
+          CALL 'private final fun getSegmentId <S> (<this>: S of <root>.InlineExtensionWithTypeParameterTest.getSegmentId): kotlin.Int declared in <root>.InlineExtensionWithTypeParameterTest' type=kotlin.Int origin=null
+            TYPE_ARG S: S of <root>.InlineExtensionWithTypeParameterTest.foo
+            ARG <this>(index:0): GET_VAR '<this>(index:0): <root>.InlineExtensionWithTypeParameterTest declared in <root>.InlineExtensionWithTypeParameterTest.foo' type=<root>.InlineExtensionWithTypeParameterTest origin=IMPLICIT_ARGUMENT
+            ARG <this>(index:1): CALL 'public final fun <get-value> (): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=S of <root>.InlineExtensionWithTypeParameterTest.foo origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>(index:1): kotlinx.atomicfu.AtomicRef<S of <root>.InlineExtensionWithTypeParameterTest.foo> declared in <root>.InlineExtensionWithTypeParameterTest.foo' type=kotlinx.atomicfu.AtomicRef<S of <root>.InlineExtensionWithTypeParameterTest.foo> origin=IMPLICIT_ARGUMENT
+    FUN name:getSegmentId visibility:private modality:FINAL returnType:kotlin.Int [inline]
+      TYPE_PARAMETER name:S index:0 variance: superTypes:[<root>.InlineExtensionWithTypeParameterTest.Segment<S of <root>.InlineExtensionWithTypeParameterTest.getSegmentId>] reified:false
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.InlineExtensionWithTypeParameterTest
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:S of <root>.InlineExtensionWithTypeParameterTest.getSegmentId
+      BLOCK_BODY
+        VAR name:cur type:S of <root>.InlineExtensionWithTypeParameterTest.getSegmentId [var]
+          GET_VAR '<this>(index:1): S of <root>.InlineExtensionWithTypeParameterTest.getSegmentId declared in <root>.InlineExtensionWithTypeParameterTest.getSegmentId' type=S of <root>.InlineExtensionWithTypeParameterTest.getSegmentId origin=null
+        RETURN type=kotlin.Nothing from='private final fun getSegmentId <S> (<this>: S of <root>.InlineExtensionWithTypeParameterTest.getSegmentId): kotlin.Int declared in <root>.InlineExtensionWithTypeParameterTest'
+          CALL 'public final fun <get-id> (): kotlin.Int declared in <root>.InlineExtensionWithTypeParameterTest.Segment' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: GET_VAR 'var cur: S of <root>.InlineExtensionWithTypeParameterTest.getSegmentId declared in <root>.InlineExtensionWithTypeParameterTest.getSegmentId' type=S of <root>.InlineExtensionWithTypeParameterTest.getSegmentId origin=null
+    FUN name:testInlineExtensionWithTypeParameter visibility:public modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.InlineExtensionWithTypeParameterTest
+      BLOCK_BODY
+        VAR name:s type:<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment [val]
+          CONSTRUCTOR_CALL 'public constructor <init> (id: kotlin.Int) declared in <root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment' type=<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment origin=null
+            ARG id: CONST Int type=kotlin.Int value=77
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=77
+          ARG actual: CALL 'private final fun foo <S> (<this>: kotlinx.atomicfu.AtomicRef<S of <root>.InlineExtensionWithTypeParameterTest.foo>, id: kotlin.Int, startFrom: S of <root>.InlineExtensionWithTypeParameterTest.foo): kotlin.Int declared in <root>.InlineExtensionWithTypeParameterTest' type=kotlin.Int origin=null
+            TYPE_ARG S: <root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment
+            ARG <this>(index:0): GET_VAR '<this>: <root>.InlineExtensionWithTypeParameterTest declared in <root>.InlineExtensionWithTypeParameterTest.testInlineExtensionWithTypeParameter' type=<root>.InlineExtensionWithTypeParameterTest origin=IMPLICIT_ARGUMENT
+            ARG <this>(index:1): CALL 'private final fun <get-sref> (): kotlinx.atomicfu.AtomicRef<<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment> declared in <root>.InlineExtensionWithTypeParameterTest' type=kotlinx.atomicfu.AtomicRef<<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment> origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.InlineExtensionWithTypeParameterTest declared in <root>.InlineExtensionWithTypeParameterTest.testInlineExtensionWithTypeParameter' type=<root>.InlineExtensionWithTypeParameterTest origin=IMPLICIT_ARGUMENT
+            ARG id: CONST Int type=kotlin.Int value=0
+            ARG startFrom: GET_VAR 'val s: <root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment declared in <root>.InlineExtensionWithTypeParameterTest.testInlineExtensionWithTypeParameter' type=<root>.InlineExtensionWithTypeParameterTest.SemaphoreSegment origin=null
+  FUN name:box visibility:public modality:FINAL returnType:kotlin.String
+    BLOCK_BODY
+      VAR name:testClass type:<root>.InlineExtensionWithTypeParameterTest [val]
+        CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.InlineExtensionWithTypeParameterTest' type=<root>.InlineExtensionWithTypeParameterTest origin=null
+      CALL 'public final fun testInlineExtensionWithTypeParameter (): kotlin.Unit declared in <root>.InlineExtensionWithTypeParameterTest' type=kotlin.Unit origin=null
+        ARG <this>: GET_VAR 'val testClass: <root>.InlineExtensionWithTypeParameterTest declared in <root>.box' type=<root>.InlineExtensionWithTypeParameterTest origin=null
+      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK"

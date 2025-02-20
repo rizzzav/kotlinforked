@@ -1,0 +1,360 @@
+class LoopTest {
+  private val a: AtomicInt
+    field = atomic(initial = 0)
+    private get
+
+  private val a1: AtomicInt
+    field = atomic(initial = 1)
+    private get
+
+  private val b: AtomicBoolean
+    field = atomic(initial = true)
+    private get
+
+  private val l: AtomicLong
+    field = atomic(initial = 5000000000L)
+    private get
+
+  private val r: AtomicRef<A>
+    field = atomic<A>(initial = A(s = "aaaa"))
+    private get
+
+  private val rs: AtomicRef<String>
+    field = atomic<String>(initial = "bbbb")
+    private get
+
+  class A {
+    val s: String
+      field = s
+      get
+
+    constructor(s: String) /* primary */ {
+      super/*Any*/()
+      /* <init>() */
+
+    }
+
+  }
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun atomicfuBooleanGetAndUpdateTest() {
+    <this>.<get-b>().<set-value>(value = false)
+    val resBool: Boolean = getAndUpdate(/* <this> = <this>.<get-b>(), */ function = local fun <anonymous>(value: Boolean): Boolean {
+      return when {
+        value.not() -> { // BLOCK
+          <this>.<get-b>().compareAndSet(expect = false, update = true)
+        }
+        else -> { // BLOCK
+          true
+        }
+      }
+    }
+)
+    assertTrue(actual = resBool)
+    assertTrue(actual = <this>.<get-b>().<get-value>())
+  }
+
+  fun atomicfuBooleanLoopTest(newValue: Boolean): Boolean {
+    <this>.<get-b>().<set-value>(value = true)
+    loop(/* <this> = <this>.<get-b>(), */ action = local fun <anonymous>(cur: Boolean) {
+      when {
+        EQEQ(arg0 = cur, arg1 = false) -> { // BLOCK
+          when {
+            <this>.<get-b>().compareAndSet(expect = false, update = newValue) -> { // BLOCK
+              assertEquals<Boolean>(expected = newValue, actual = <this>.<get-b>().<get-value>())
+              return <this>.<get-b>().<get-value>()
+            }
+          }
+        }
+        else -> { // BLOCK
+          <this>.<get-b>().<set-value>(value = false)
+        }
+      }
+    }
+)
+  }
+
+  fun atomicfuBooleanUpdateAndGetTest() {
+    <this>.<get-b>().<set-value>(value = false)
+    val resBool: Boolean = updateAndGet(/* <this> = <this>.<get-b>(), */ function = local fun <anonymous>(value: Boolean): Boolean {
+      return when {
+        value.not() -> { // BLOCK
+          <this>.<get-b>().compareAndSet(expect = false, update = true)
+        }
+        else -> { // BLOCK
+          true
+        }
+      }
+    }
+)
+    assertTrue(actual = resBool)
+    assertTrue(actual = <this>.<get-b>().<get-value>())
+  }
+
+  fun atomicfuBooleanUpdateTest() {
+    <this>.<get-b>().<set-value>(value = false)
+    update(/* <this> = <this>.<get-b>(), */ function = local fun <anonymous>(value: Boolean): Boolean {
+      return when {
+        value.not() -> { // BLOCK
+          <this>.<get-b>().compareAndSet(expect = false, update = true)
+        }
+        else -> { // BLOCK
+          true
+        }
+      }
+    }
+)
+    assertEquals<Boolean>(expected = true, actual = <this>.<get-b>().<get-value>())
+    assertTrue(actual = <this>.<get-b>().<get-value>())
+  }
+
+  fun atomicfuGetAndUpdateTest() {
+    <this>.atomicfuIntGetAndUpdateTest()
+    <this>.atomicfuBooleanGetAndUpdateTest()
+    <this>.atomicfuLongGetAndUpdateTest()
+    <this>.atomicfuRefGetAndUpdateTest()
+  }
+
+  fun atomicfuIntGetAndUpdateTest() {
+    <this>.<get-a>().<set-value>(value = 0)
+    val resInt: Int = getAndUpdate(/* <this> = <this>.<get-a>(), */ function = local fun <anonymous>(value: Int): Int {
+      return when {
+        less(arg0 = value, arg1 = 10) -> { // BLOCK
+          <this>.<get-a>().incrementAndGet()
+        }
+        else -> { // BLOCK
+          Companion.<get-MAX_VALUE>()
+        }
+      }
+    }
+)
+    assertEquals<Int>(expected = 10, actual = resInt)
+    assertEquals<Int>(expected = Companion.<get-MAX_VALUE>(), actual = <this>.<get-a>().<get-value>())
+  }
+
+  fun atomicfuIntLoopTest(newValue: Int): Int {
+    <this>.<get-a>().<set-value>(value = 0)
+    loop(/* <this> = <this>.<get-a>(), */ action = local fun <anonymous>(cur: Int) {
+      when {
+        EQEQ(arg0 = cur, arg1 = 10) -> { // BLOCK
+          <this>.<get-a>().compareAndSet(expect = 10, update = newValue) /*~> Unit */
+          assertEquals<Int>(expected = newValue, actual = <this>.<get-a>().<get-value>())
+          return <this>.<get-a>().<get-value>()
+        }
+        else -> { // BLOCK
+          <this>.<get-a>().incrementAndGet() /*~> Unit */
+        }
+      }
+    }
+)
+  }
+
+  fun atomicfuIntUpdateAndGetTest() {
+    <this>.<get-a>().<set-value>(value = 0)
+    val resInt: Int = updateAndGet(/* <this> = <this>.<get-a>(), */ function = local fun <anonymous>(value: Int): Int {
+      return when {
+        less(arg0 = value, arg1 = 10) -> { // BLOCK
+          <this>.<get-a>().incrementAndGet()
+        }
+        else -> { // BLOCK
+          Companion.<get-MAX_VALUE>()
+        }
+      }
+    }
+)
+    assertEquals<Int>(expected = Companion.<get-MAX_VALUE>(), actual = resInt)
+    assertEquals<Int>(expected = Companion.<get-MAX_VALUE>(), actual = <this>.<get-a>().<get-value>())
+  }
+
+  fun atomicfuIntUpdateTest() {
+    <this>.<get-a>().<set-value>(value = 0)
+    update(/* <this> = <this>.<get-a>(), */ function = local fun <anonymous>(value: Int): Int {
+      return when {
+        less(arg0 = value, arg1 = 10) -> { // BLOCK
+          <this>.<get-a>().incrementAndGet()
+        }
+        else -> { // BLOCK
+          Companion.<get-MAX_VALUE>()
+        }
+      }
+    }
+)
+    assertEquals<Int>(expected = Companion.<get-MAX_VALUE>(), actual = <this>.<get-a>().<get-value>())
+  }
+
+  fun atomicfuLongGetAndUpdateTest() {
+    <this>.<get-l>().<set-value>(value = 0L)
+    val resLong: Long = getAndUpdate(/* <this> = <this>.<get-l>(), */ function = local fun <anonymous>(value: Long): Long {
+      return when {
+        less(arg0 = value, arg1 = 10.toLong()) -> { // BLOCK
+          <this>.<get-l>().incrementAndGet()
+        }
+        else -> { // BLOCK
+          Companion.<get-MAX_VALUE>()
+        }
+      }
+    }
+)
+    assertEquals<Long>(expected = Companion.<get-MAX_VALUE>(), actual = <this>.<get-l>().<get-value>())
+    assertEquals<Long>(expected = 10L, actual = resLong)
+  }
+
+  fun atomicfuLongLoopTest(newValue: Long): Long {
+    <this>.<get-l>().<set-value>(value = 5000000000L)
+    loop(/* <this> = <this>.<get-l>(), */ action = local fun <anonymous>(cur: Long) {
+      when {
+        EQEQ(arg0 = cur, arg1 = 5000000010L) -> { // BLOCK
+          when {
+            <this>.<get-l>().compareAndSet(expect = 5000000010L, update = newValue) -> { // BLOCK
+              assertEquals<Long>(expected = newValue, actual = <this>.<get-l>().<get-value>())
+              return <this>.<get-l>().<get-value>()
+            }
+          }
+        }
+        else -> { // BLOCK
+          <this>.<get-l>().incrementAndGet() /*~> Unit */
+        }
+      }
+    }
+)
+  }
+
+  fun atomicfuLongUpdateAndGetTest() {
+    <this>.<get-l>().<set-value>(value = 0L)
+    val resLong: Long = updateAndGet(/* <this> = <this>.<get-l>(), */ function = local fun <anonymous>(value: Long): Long {
+      return when {
+        less(arg0 = value, arg1 = 10.toLong()) -> { // BLOCK
+          <this>.<get-l>().incrementAndGet()
+        }
+        else -> { // BLOCK
+          Companion.<get-MAX_VALUE>()
+        }
+      }
+    }
+)
+    assertEquals<Long>(expected = Companion.<get-MAX_VALUE>(), actual = <this>.<get-l>().<get-value>())
+    assertEquals<Long>(expected = Companion.<get-MAX_VALUE>(), actual = resLong)
+  }
+
+  fun atomicfuLongUpdateTest() {
+    <this>.<get-l>().<set-value>(value = 0L)
+    update(/* <this> = <this>.<get-l>(), */ function = local fun <anonymous>(value: Long): Long {
+      return when {
+        less(arg0 = value, arg1 = 10.toLong()) -> { // BLOCK
+          <this>.<get-l>().incrementAndGet()
+        }
+        else -> { // BLOCK
+          Companion.<get-MAX_VALUE>()
+        }
+      }
+    }
+)
+    assertEquals<Long>(expected = Companion.<get-MAX_VALUE>(), actual = <this>.<get-l>().<get-value>())
+  }
+
+  fun atomicfuLoopTest() {
+    assertEquals<Int>(expected = 777, actual = <this>.atomicfuIntLoopTest(newValue = 777))
+    assertFalse(actual = <this>.atomicfuBooleanLoopTest(newValue = false))
+    assertEquals<Long>(expected = 9000000000L, actual = <this>.atomicfuLongLoopTest(newValue = 9000000000L))
+    assertEquals<String>(expected = "bbbb", actual = <this>.atomicfuRefLoopTest(newValue = A(s = "bbbb")).<get-s>())
+  }
+
+  fun atomicfuRefGetAndUpdateTest() {
+    <this>.<get-r>().lazySet(value = A(s = "aaaa"))
+    val resRef: A = getAndUpdate<A>(/* <this> = <this>.<get-r>(), */ function = local fun <anonymous>(value: A): A {
+      return when {
+        EQEQ(arg0 = value.<get-s>(), arg1 = "aaaa") -> { // BLOCK
+          <this>.<get-r>().<set-value>(value = A(s = "bbbb"))
+          <this>.<get-r>().<get-value>()
+        }
+        else -> { // BLOCK
+          A(s = "cccc" + value.<get-s>())
+        }
+      }
+    }
+)
+    assertEquals<String>(expected = "bbbb", actual = resRef.<get-s>())
+    assertEquals<String>(expected = "ccccbbbb", actual = <this>.<get-r>().<get-value>().<get-s>())
+  }
+
+  fun atomicfuRefLoopTest(newValue: A): A {
+    <this>.<get-r>().<set-value>(value = A(s = "aaa"))
+    loop<A>(/* <this> = <this>.<get-r>(), */ action = local fun <anonymous>(cur: A) {
+      when {
+        EQEQ(arg0 = cur.<get-s>(), arg1 = "bbb") -> { // BLOCK
+          <this>.<get-r>().compareAndSet(expect = cur, update = newValue) /*~> Unit */
+          assertEquals<String>(expected = newValue.<get-s>(), actual = <this>.<get-r>().<get-value>().<get-s>())
+          return <this>.<get-r>().<get-value>()
+        }
+        else -> { // BLOCK
+          <this>.<get-r>().<set-value>(value = A(s = "bbb"))
+        }
+      }
+    }
+)
+  }
+
+  fun atomicfuRefUpdateAndGetTest() {
+    <this>.<get-r>().lazySet(value = A(s = "aaaa"))
+    val resRef: A = updateAndGet<A>(/* <this> = <this>.<get-r>(), */ function = local fun <anonymous>(value: A): A {
+      return when {
+        EQEQ(arg0 = value.<get-s>(), arg1 = "aaaa") -> { // BLOCK
+          <this>.<get-r>().<set-value>(value = A(s = "bbbb"))
+          <this>.<get-r>().<get-value>()
+        }
+        else -> { // BLOCK
+          A(s = "cccc" + value.<get-s>())
+        }
+      }
+    }
+)
+    assertEquals<String>(expected = "ccccbbbb", actual = resRef.<get-s>())
+    assertEquals<String>(expected = "ccccbbbb", actual = <this>.<get-r>().<get-value>().<get-s>())
+  }
+
+  fun atomicfuRefUpdateTest() {
+    <this>.<get-r>().lazySet(value = A(s = "aaaa"))
+    update<A>(/* <this> = <this>.<get-r>(), */ function = local fun <anonymous>(value: A): A {
+      return when {
+        EQEQ(arg0 = value.<get-s>(), arg1 = "aaaa") -> { // BLOCK
+          <this>.<get-r>().<set-value>(value = A(s = "bbbb"))
+          <this>.<get-r>().<get-value>()
+        }
+        else -> { // BLOCK
+          A(s = "cccc" + value.<get-s>())
+        }
+      }
+    }
+)
+    assertEquals<String>(expected = "ccccbbbb", actual = <this>.<get-r>().<get-value>().<get-s>())
+  }
+
+  fun atomicfuUpdateAndGetTest() {
+    <this>.atomicfuIntUpdateAndGetTest()
+    <this>.atomicfuBooleanUpdateAndGetTest()
+    <this>.atomicfuLongUpdateAndGetTest()
+    <this>.atomicfuRefUpdateAndGetTest()
+  }
+
+  fun atomicfuUpdateTest() {
+    <this>.atomicfuIntUpdateTest()
+    <this>.atomicfuBooleanUpdateTest()
+    <this>.atomicfuLongUpdateTest()
+    <this>.atomicfuRefUpdateTest()
+  }
+
+}
+
+fun box(): String {
+  val testClass: LoopTest = LoopTest()
+  testClass.atomicfuLoopTest()
+  testClass.atomicfuUpdateTest()
+  testClass.atomicfuUpdateAndGetTest()
+  testClass.atomicfuGetAndUpdateTest()
+  return "OK"
+}

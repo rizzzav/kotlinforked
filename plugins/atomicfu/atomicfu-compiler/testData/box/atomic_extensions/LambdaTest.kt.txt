@@ -1,0 +1,74 @@
+class LambdaTest {
+  private val a: AtomicInt
+    field = atomic(initial = 0)
+    private get
+
+  private val rs: AtomicRef<String>
+    field = atomic<String>(initial = "bbbb")
+    private get
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  private inline fun <T : Any?> inlineLambda(arg: T, crossinline block: Function1<T, Unit>) {
+    return block.invoke(p1 = arg)
+  }
+
+  fun loopInLambda1(to: Int) {
+    return <this>.inlineLambda<Int>(arg = to, block = local fun <anonymous>(arg: Int) {
+      loop(/* <this> = <this>.<get-a>(), */ action = local fun <anonymous>(value: Int) {
+        <this>.<get-a>().compareAndSet(expect = value, update = arg) /*~> Unit */
+        return Unit
+      }
+)
+    }
+)
+  }
+
+  fun loopInLambda2(to: Int) {
+    return <this>.inlineLambda<Int>(arg = to, block = local fun <anonymous>(arg1: Int) {
+      <this>.inlineLambda<Int>(arg = arg1, block = local fun <anonymous>(arg2: Int) {
+        loop(/* <this> = <this>.<get-a>(), */ action = local fun <anonymous>(value: Int) {
+          <this>.<get-a>().compareAndSet(expect = value, update = arg2) /*~> Unit */
+          return Unit
+        }
+)
+      }
+)
+    }
+)
+  }
+
+  fun loopInLambda2Ref(to: String) {
+    return <this>.inlineLambda<String>(arg = to, block = local fun <anonymous>(arg1: String) {
+      <this>.inlineLambda<String>(arg = arg1, block = local fun <anonymous>(arg2: String) {
+        loop<String>(/* <this> = <this>.<get-rs>(), */ action = local fun <anonymous>(value: String) {
+          <this>.<get-rs>().compareAndSet(expect = value, update = arg2) /*~> Unit */
+          return Unit
+        }
+)
+      }
+)
+    }
+)
+  }
+
+  fun test() {
+    <this>.loopInLambda1(to = 34)
+    assertEquals<Int>(expected = 34, actual = <this>.<get-a>().<get-value>())
+    <this>.loopInLambda1(to = 77)
+    assertEquals<Int>(expected = 77, actual = <this>.<get-a>().<get-value>())
+    <this>.loopInLambda2Ref(to = "bbb")
+    assertEquals<String>(expected = "bbb", actual = <this>.<get-rs>().<get-value>())
+  }
+
+}
+
+fun box(): String {
+  val testClass: LambdaTest = LambdaTest()
+  testClass.test()
+  return "OK"
+}

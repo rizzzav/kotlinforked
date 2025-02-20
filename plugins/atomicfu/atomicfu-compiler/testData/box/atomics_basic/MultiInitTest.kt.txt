@@ -1,0 +1,59 @@
+class MultiInit {
+  private val a: AtomicInt
+    field = atomic(initial = 0)
+    private get
+
+  private val b: AtomicInt
+    field = atomic(initial = 0)
+    private get
+
+  companion object Companion {
+    private constructor() /* primary */ {
+      super/*Any*/()
+      /* <init>() */
+
+    }
+
+    fun foo() {
+    }
+
+  }
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun incA(): Int {
+    return <this>.<get-a>().incrementAndGet()
+  }
+
+  fun incB(): Int {
+    return <this>.<get-b>().incrementAndGet()
+  }
+
+}
+
+class MultiInitTest {
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun testBasic() {
+    val t: MultiInit = MultiInit()
+    check(value = EQEQ(arg0 = t.incA(), arg1 = 1))
+    check(value = EQEQ(arg0 = t.incA(), arg1 = 2))
+    check(value = EQEQ(arg0 = t.incB(), arg1 = 1))
+    check(value = EQEQ(arg0 = t.incB(), arg1 = 2))
+  }
+
+}
+
+fun box(): String {
+  val testClass: MultiInitTest = MultiInitTest()
+  testClass.testBasic()
+  return "OK"
+}

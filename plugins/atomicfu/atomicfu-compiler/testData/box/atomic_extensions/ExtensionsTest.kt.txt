@@ -1,0 +1,129 @@
+class ExtensionsTest {
+  private val a: AtomicInt
+    field = atomic(initial = 0)
+    private get
+
+  private val l: AtomicLong
+    field = atomic(initial = 0L)
+    private get
+
+  private val s: AtomicRef<String?>
+    field = atomic<String?>(initial = null)
+    private get
+
+  private val b: AtomicBoolean
+    field = atomic(initial = true)
+    private get
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  private inline fun AtomicBoolean.booleanExtensionArithmetic() {
+    <this>.<set-value>(value = false)
+    check(value = <this>.<get-value>().not())
+    <this>.lazySet(value = true)
+    check(value = <this>.<get-value>())
+    check(value = <this>.getAndSet(value = true))
+    check(value = <this>.compareAndSet(expect = <this>.<get-value>(), update = false))
+    check(value = <this>.<get-value>().not())
+  }
+
+  private inline fun AtomicInt.intExtensionArithmetic() {
+    <this>.<set-value>(value = 0)
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = 0))
+    val update: Int = 3
+    <this>.lazySet(value = update)
+    check(value = <this>.compareAndSet(expect = update, update = 8))
+    <this>.lazySet(value = 1)
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = 1))
+    check(value = EQEQ(arg0 = <this>.getAndSet(value = 2), arg1 = 1))
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = 2))
+    check(value = EQEQ(arg0 = <this>.getAndIncrement(), arg1 = 2))
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = 3))
+    check(value = EQEQ(arg0 = <this>.getAndDecrement(), arg1 = 3))
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = 2))
+    check(value = EQEQ(arg0 = <this>.getAndAdd(delta = 2), arg1 = 2))
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = 4))
+    check(value = EQEQ(arg0 = <this>.addAndGet(delta = 3), arg1 = 7))
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = 7))
+    check(value = EQEQ(arg0 = <this>.incrementAndGet(), arg1 = 8))
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = 8))
+    check(value = EQEQ(arg0 = <this>.decrementAndGet(), arg1 = 7))
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = 7))
+    check(value = <this>.compareAndSet(expect = 7, update = 10))
+    check(value = <this>.compareAndSet(expect = <this>.<get-value>(), update = 55))
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = 55))
+  }
+
+  private inline fun AtomicLong.longExtensionArithmetic() {
+    <this>.<set-value>(value = 2424920024888888848L)
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = 2424920024888888848L))
+    <this>.lazySet(value = 8424920024888888848L)
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = 8424920024888888848L))
+    check(value = EQEQ(arg0 = <this>.getAndSet(value = 8924920024888888848L), arg1 = 8424920024888888848L))
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = 8924920024888888848L))
+    check(value = EQEQ(arg0 = <this>.incrementAndGet(), arg1 = 8924920024888888849L))
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = 8924920024888888849L))
+    check(value = EQEQ(arg0 = <this>.getAndDecrement(), arg1 = 8924920024888888849L))
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = 8924920024888888848L))
+    check(value = EQEQ(arg0 = <this>.getAndAdd(delta = 100000000000000000L), arg1 = 8924920024888888848L))
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = 9024920024888888848L))
+    check(value = EQEQ(arg0 = <this>.addAndGet(delta = -9223372036854775807L), arg1 = -198452011965886959L))
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = -198452011965886959L))
+    check(value = EQEQ(arg0 = <this>.incrementAndGet(), arg1 = -198452011965886958L))
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = -198452011965886958L))
+    check(value = EQEQ(arg0 = <this>.decrementAndGet(), arg1 = -198452011965886959L))
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = -198452011965886959L))
+  }
+
+  private inline fun AtomicRef<String?>.refExtension() {
+    <this>.<set-value>(value = "aaa")
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = "aaa"))
+    <this>.lazySet(value = "bb")
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = "bb"))
+    check(value = EQEQ(arg0 = <this>.getAndSet(value = "ccc"), arg1 = "bb"))
+    check(value = EQEQ(arg0 = <this>.<get-value>(), arg1 = "ccc"))
+  }
+
+  fun testExtension() {
+    <this>.intExtensionArithmetic(/* <this> = <this>.<get-a>() */)
+    <this>.longExtensionArithmetic(/* <this> = <this>.<get-l>() */)
+    <this>.refExtension(/* <this> = <this>.<get-s>() */)
+    <this>.booleanExtensionArithmetic(/* <this> = <this>.<get-b>() */)
+  }
+
+  fun testScopedFieldGetters() {
+    check(value = EQEQ(arg0 = <this>.<get-a>().<get-value>(), arg1 = 0))
+    val update: Int = 3
+    <this>.<get-a>().lazySet(value = update)
+    check(value = <this>.<get-a>().compareAndSet(expect = update, update = 8))
+    <this>.<get-a>().lazySet(value = 1)
+    check(value = EQEQ(arg0 = <this>.<get-a>().<get-value>(), arg1 = 1))
+    check(value = EQEQ(arg0 = <this>.<get-a>().getAndSet(value = 2), arg1 = 1))
+    check(value = EQEQ(arg0 = <this>.<get-a>().<get-value>(), arg1 = 2))
+    check(value = EQEQ(arg0 = <this>.<get-a>().getAndIncrement(), arg1 = 2))
+    check(value = EQEQ(arg0 = <this>.<get-a>().<get-value>(), arg1 = 3))
+    check(value = EQEQ(arg0 = <this>.<get-a>().getAndDecrement(), arg1 = 3))
+    check(value = EQEQ(arg0 = <this>.<get-a>().<get-value>(), arg1 = 2))
+    check(value = EQEQ(arg0 = <this>.<get-a>().getAndAdd(delta = 2), arg1 = 2))
+    check(value = EQEQ(arg0 = <this>.<get-a>().<get-value>(), arg1 = 4))
+    check(value = EQEQ(arg0 = <this>.<get-a>().addAndGet(delta = 3), arg1 = 7))
+    check(value = EQEQ(arg0 = <this>.<get-a>().<get-value>(), arg1 = 7))
+    check(value = EQEQ(arg0 = <this>.<get-a>().incrementAndGet(), arg1 = 8))
+    check(value = EQEQ(arg0 = <this>.<get-a>().<get-value>(), arg1 = 8))
+    check(value = EQEQ(arg0 = <this>.<get-a>().decrementAndGet(), arg1 = 7))
+    check(value = EQEQ(arg0 = <this>.<get-a>().<get-value>(), arg1 = 7))
+    check(value = <this>.<get-a>().compareAndSet(expect = 7, update = 10))
+  }
+
+}
+
+fun box(): String {
+  val testClass: ExtensionsTest = ExtensionsTest()
+  testClass.testScopedFieldGetters()
+  testClass.testExtension()
+  return "OK"
+}

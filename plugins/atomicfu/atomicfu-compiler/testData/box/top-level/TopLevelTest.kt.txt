@@ -1,0 +1,374 @@
+private val a: AtomicInt
+  field = atomic(initial = 0)
+  private get
+
+private val b: AtomicLong
+  field = atomic(initial = 2424920024888888848L)
+  private get
+
+private val c: AtomicBoolean
+  field = atomic(initial = true)
+  private get
+
+private val abcNode: AtomicRef<ANode<BNode<CNode>>>
+  field = atomic<ANode<BNode<CNode>>>(initial = ANode<BNode<CNode>>(b = BNode<CNode>(c = CNode(d = 8))))
+  private get
+
+private val any: AtomicRef<Any?>
+  field = atomic<Any?>(initial = null)
+  private get
+
+internal val a_internal: AtomicInt
+  field = atomic(initial = 0)
+  internal get
+
+internal val b_internal: AtomicLong
+  field = atomic(initial = 2424920024888888848L)
+  internal get
+
+internal val c_internal: AtomicBoolean
+  field = atomic(initial = true)
+  internal get
+
+internal val abcNode_internal: AtomicRef<ANode<BNode<CNode>>>
+  field = atomic<ANode<BNode<CNode>>>(initial = ANode<BNode<CNode>>(b = BNode<CNode>(c = CNode(d = 8))))
+  internal get
+
+internal val any_internal: AtomicRef<Any?>
+  field = atomic<Any?>(initial = null)
+  internal get
+
+private val intArr: AtomicIntArray
+  field = AtomicIntArray(size = 3)
+  private get
+
+private val longArr: AtomicLongArray
+  field = AtomicLongArray(size = 5)
+  private get
+
+private val booleanArr: AtomicBooleanArray
+  field = AtomicBooleanArray(size = 4)
+  private get
+
+private val refArr: AtomicArray<ANode<BNode<CNode>>?>
+  field = atomicArrayOfNulls<ANode<BNode<CNode>>>(size = 5)
+  private get
+
+private val anyRefArr: AtomicArray<Any?>
+  field = atomicArrayOfNulls<Any>(size = 10)
+  private get
+
+private val stringAtomicNullArr: AtomicArray<String?>
+  field = atomicArrayOfNulls<String>(size = 10)
+  private get
+
+data class ANode<T : Any?> {
+  val b: T
+    field = b
+    get
+
+  constructor(b: T) /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  operator fun component1(): T {
+    return <this>.#b
+  }
+
+  fun copy(b: T = <this>.#b): ANode<T> {
+    return ANode<T>(b = b)
+  }
+
+  override operator fun equals(other: Any?): Boolean {
+    when {
+      EQEQEQ(arg0 = <this>, arg1 = other) -> return true
+    }
+    when {
+      other !is ANode<T> -> return false
+    }
+    val tmp_0: ANode<T> = other as ANode<T>
+    when {
+      EQEQ(arg0 = <this>.#b, arg1 = tmp_0.#b).not() -> return false
+    }
+    return true
+  }
+
+  override fun hashCode(): Int {
+    return when {
+      EQEQ(arg0 = <this>.#b, arg1 = null) -> 0
+      else -> <this>.#b.hashCode()
+    }
+  }
+
+  override fun toString(): String {
+    return "ANode(" + "b=" + <this>.#b + ")"
+  }
+
+}
+
+data class BNode<T : Any?> {
+  val c: T
+    field = c
+    get
+
+  constructor(c: T) /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  operator fun component1(): T {
+    return <this>.#c
+  }
+
+  fun copy(c: T = <this>.#c): BNode<T> {
+    return BNode<T>(c = c)
+  }
+
+  override operator fun equals(other: Any?): Boolean {
+    when {
+      EQEQEQ(arg0 = <this>, arg1 = other) -> return true
+    }
+    when {
+      other !is BNode<T> -> return false
+    }
+    val tmp_1: BNode<T> = other as BNode<T>
+    when {
+      EQEQ(arg0 = <this>.#c, arg1 = tmp_1.#c).not() -> return false
+    }
+    return true
+  }
+
+  override fun hashCode(): Int {
+    return when {
+      EQEQ(arg0 = <this>.#c, arg1 = null) -> 0
+      else -> <this>.#c.hashCode()
+    }
+  }
+
+  override fun toString(): String {
+    return "BNode(" + "c=" + <this>.#c + ")"
+  }
+
+}
+
+data class CNode {
+  val d: Int
+    field = d
+    get
+
+  constructor(d: Int) /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  operator fun component1(): Int {
+    return <this>.#d
+  }
+
+  fun copy(d: Int = <this>.#d): CNode {
+    return CNode(d = d)
+  }
+
+  override operator fun equals(other: Any?): Boolean {
+    when {
+      EQEQEQ(arg0 = <this>, arg1 = other) -> return true
+    }
+    when {
+      other !is CNode -> return false
+    }
+    val tmp_2: CNode = other as CNode
+    when {
+      EQEQ(arg0 = <this>.#d, arg1 = tmp_2.#d).not() -> return false
+    }
+    return true
+  }
+
+  override fun hashCode(): Int {
+    return <this>.#d.hashCode()
+  }
+
+  override fun toString(): String {
+    return "CNode(" + "d=" + <this>.#d + ")"
+  }
+
+}
+
+class TopLevelArrayTest {
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun testBooleanArray() {
+    assertFalse(actual = <get-booleanArr>().get(index = 1).<get-value>())
+    <get-booleanArr>().get(index = 1).compareAndSet(expect = false, update = true) /*~> Unit */
+    <get-booleanArr>().get(index = 0).lazySet(value = true)
+    assertFalse(actual = <get-booleanArr>().get(index = 2).getAndSet(value = true))
+    assertTrue(actual = when {
+      when {
+        <get-booleanArr>().get(index = 0).<get-value>() -> <get-booleanArr>().get(index = 1).<get-value>()
+        else -> false
+      } -> <get-booleanArr>().get(index = 2).<get-value>()
+      else -> false
+    })
+  }
+
+  fun testIntArray() {
+    assertTrue(actual = <get-intArr>().get(index = 0).compareAndSet(expect = 0, update = 3))
+    assertEquals<Int>(expected = 0, actual = <get-intArr>().get(index = 1).<get-value>())
+    <get-intArr>().get(index = 0).lazySet(value = 5)
+    assertEquals<Int>(expected = 5, actual = <get-intArr>().get(index = 0).<get-value>().plus(other = <get-intArr>().get(index = 1).<get-value>()).plus(other = <get-intArr>().get(index = 2).<get-value>()))
+    assertTrue(actual = <get-intArr>().get(index = 0).compareAndSet(expect = 5, update = 10))
+    assertEquals<Int>(expected = 10, actual = <get-intArr>().get(index = 0).getAndDecrement())
+    assertEquals<Int>(expected = 9, actual = <get-intArr>().get(index = 0).<get-value>())
+    <get-intArr>().get(index = 2).<set-value>(value = 2)
+    assertEquals<Int>(expected = 2, actual = <get-intArr>().get(index = 2).<get-value>())
+    assertTrue(actual = <get-intArr>().get(index = 2).compareAndSet(expect = 2, update = 34))
+    assertEquals<Int>(expected = 34, actual = <get-intArr>().get(index = 2).<get-value>())
+  }
+
+  fun testLongArray() {
+    <get-longArr>().get(index = 0).<set-value>(value = 2424920024888888848L)
+    assertEquals<Long>(expected = 2424920024888888848L, actual = <get-longArr>().get(index = 0).<get-value>())
+    <get-longArr>().get(index = 0).lazySet(value = 8424920024888888848L)
+    assertEquals<Long>(expected = 8424920024888888848L, actual = <get-longArr>().get(index = 0).<get-value>())
+    val ac: Long = <get-longArr>().get(index = 0).<get-value>()
+    <get-longArr>().get(index = 3).<set-value>(value = ac)
+    assertEquals<Long>(expected = 8424920024888888848L, actual = <get-longArr>().get(index = 3).getAndSet(value = 8924920024888888848L))
+    assertEquals<Long>(expected = 8924920024888888848L, actual = <get-longArr>().get(index = 3).<get-value>())
+    val ac1: Long = <get-longArr>().get(index = 3).<get-value>()
+    <get-longArr>().get(index = 4).<set-value>(value = ac1)
+    assertEquals<Long>(expected = 8924920024888888849L, actual = <get-longArr>().get(index = 4).incrementAndGet())
+    assertEquals<Long>(expected = 8924920024888888849L, actual = <get-longArr>().get(index = 4).<get-value>())
+    assertEquals<Long>(expected = 8924920024888888849L, actual = <get-longArr>().get(index = 4).getAndDecrement())
+    assertEquals<Long>(expected = 8924920024888888848L, actual = <get-longArr>().get(index = 4).<get-value>())
+    <get-longArr>().get(index = 4).<set-value>(value = 8924920024888888848L)
+    assertEquals<Long>(expected = 8924920024888888848L, actual = <get-longArr>().get(index = 4).getAndAdd(delta = 100000000000000000L))
+    val ac2: Long = <get-longArr>().get(index = 4).<get-value>()
+    <get-longArr>().get(index = 1).<set-value>(value = ac2)
+    assertEquals<Long>(expected = 9024920024888888848L, actual = <get-longArr>().get(index = 1).<get-value>())
+    assertEquals<Long>(expected = -198452011965886959L, actual = <get-longArr>().get(index = 1).addAndGet(delta = -9223372036854775807L))
+    assertEquals<Long>(expected = -198452011965886959L, actual = <get-longArr>().get(index = 1).<get-value>())
+    assertEquals<Long>(expected = -198452011965886958L, actual = <get-longArr>().get(index = 1).incrementAndGet())
+    assertEquals<Long>(expected = -198452011965886958L, actual = <get-longArr>().get(index = 1).<get-value>())
+    assertEquals<Long>(expected = -198452011965886959L, actual = <get-longArr>().get(index = 1).decrementAndGet())
+    assertEquals<Long>(expected = -198452011965886959L, actual = <get-longArr>().get(index = 1).<get-value>())
+  }
+
+  @Suppress(names = ["UNCHECKED_CAST"])
+  fun testRefArray() {
+    val a2: ANode<BNode<CNode>> = ANode<BNode<CNode>>(b = BNode<CNode>(c = CNode(d = 2)))
+    val a3: ANode<BNode<CNode>> = ANode<BNode<CNode>>(b = BNode<CNode>(c = CNode(d = 3)))
+    <get-refArr>().get(index = 0).<set-value>(value = a2)
+    assertEquals<Int>(expected = 2, actual = CHECK_NOT_NULL<ANode<BNode<CNode>>>(arg0 = <get-refArr>().get(index = 0).<get-value>()).<get-b>().<get-c>().<get-d>())
+    assertTrue(actual = <get-refArr>().get(index = 0).compareAndSet(expect = a2, update = a3))
+    assertEquals<Int>(expected = 3, actual = CHECK_NOT_NULL<ANode<BNode<CNode>>>(arg0 = <get-refArr>().get(index = 0).<get-value>()).<get-b>().<get-c>().<get-d>())
+    val r0: ANode<BNode<CNode>>? = <get-refArr>().get(index = 0).<get-value>()
+    <get-refArr>().get(index = 3).<set-value>(value = r0)
+    assertEquals<Int>(expected = 3, actual = CHECK_NOT_NULL<ANode<BNode<CNode>>>(arg0 = <get-refArr>().get(index = 3).<get-value>()).<get-b>().<get-c>().<get-d>())
+    val a: ANode<BNode<CNode>> = <get-abcNode>().<get-value>()
+    assertTrue(actual = <get-refArr>().get(index = 3).compareAndSet(expect = a3, update = a))
+  }
+
+}
+
+class TopLevelPrimitiveTest {
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun testTopLevelArrayOfNulls() {
+    assertEquals<String?>(expected = null, actual = <get-stringAtomicNullArr>().get(index = 0).<get-value>())
+    assertTrue(actual = <get-stringAtomicNullArr>().get(index = 0).compareAndSet(expect = null, update = "aa"))
+    <get-stringAtomicNullArr>().get(index = 1).lazySet(value = "aa")
+    assertTrue(actual = EQEQ(arg0 = <get-stringAtomicNullArr>().get(index = 0).<get-value>(), arg1 = <get-stringAtomicNullArr>().get(index = 1).<get-value>()))
+  }
+
+  fun testTopLevelBoolean() {
+    assertTrue(actual = <get-c>().<get-value>())
+    <get-c>().lazySet(value = false)
+    assertFalse(actual = <get-c>().<get-value>())
+    assertTrue(actual = <get-c>().getAndSet(value = true).not())
+    assertTrue(actual = <get-c>().compareAndSet(expect = true, update = false))
+    assertFalse(actual = <get-c>().<get-value>())
+  }
+
+  fun testTopLevelInt() {
+    assertEquals<Int>(expected = 0, actual = <get-a>().<get-value>())
+    assertEquals<Int>(expected = 0, actual = <get-a>().getAndSet(value = 3))
+    assertTrue(actual = <get-a>().compareAndSet(expect = 3, update = 8))
+    <get-a>().lazySet(value = 1)
+    assertEquals<Int>(expected = 1, actual = <get-a>().<get-value>())
+    assertEquals<Int>(expected = 1, actual = <get-a>().getAndSet(value = 2))
+    assertEquals<Int>(expected = 2, actual = <get-a>().<get-value>())
+    assertEquals<Int>(expected = 2, actual = <get-a>().getAndIncrement())
+    assertEquals<Int>(expected = 3, actual = <get-a>().<get-value>())
+    assertEquals<Int>(expected = 3, actual = <get-a>().getAndDecrement())
+    assertEquals<Int>(expected = 2, actual = <get-a>().<get-value>())
+    assertEquals<Int>(expected = 2, actual = <get-a>().getAndAdd(delta = 2))
+    assertEquals<Int>(expected = 4, actual = <get-a>().<get-value>())
+    assertEquals<Int>(expected = 7, actual = <get-a>().addAndGet(delta = 3))
+    assertEquals<Int>(expected = 7, actual = <get-a>().<get-value>())
+    assertEquals<Int>(expected = 8, actual = <get-a>().incrementAndGet())
+    assertEquals<Int>(expected = 8, actual = <get-a>().<get-value>())
+    assertEquals<Int>(expected = 7, actual = <get-a>().decrementAndGet())
+    assertEquals<Int>(expected = 7, actual = <get-a>().<get-value>())
+    assertTrue(actual = <get-a>().compareAndSet(expect = 7, update = 10))
+  }
+
+  fun testTopLevelLong() {
+    assertEquals<Long>(expected = 2424920024888888848L, actual = <get-b>().<get-value>())
+    <get-b>().lazySet(value = 8424920024888888848L)
+    assertEquals<Long>(expected = 8424920024888888848L, actual = <get-b>().<get-value>())
+    assertEquals<Long>(expected = 8424920024888888848L, actual = <get-b>().getAndSet(value = 8924920024888888848L))
+    assertEquals<Long>(expected = 8924920024888888848L, actual = <get-b>().<get-value>())
+    assertEquals<Long>(expected = 8924920024888888849L, actual = <get-b>().incrementAndGet())
+    assertEquals<Long>(expected = 8924920024888888849L, actual = <get-b>().<get-value>())
+    assertEquals<Long>(expected = 8924920024888888849L, actual = <get-b>().getAndDecrement())
+    assertEquals<Long>(expected = 8924920024888888848L, actual = <get-b>().<get-value>())
+    assertEquals<Long>(expected = 8924920024888888848L, actual = <get-b>().getAndAdd(delta = 100000000000000000L))
+    assertEquals<Long>(expected = 9024920024888888848L, actual = <get-b>().<get-value>())
+    assertEquals<Long>(expected = -198452011965886959L, actual = <get-b>().addAndGet(delta = -9223372036854775807L))
+    assertEquals<Long>(expected = -198452011965886959L, actual = <get-b>().<get-value>())
+    assertEquals<Long>(expected = -198452011965886958L, actual = <get-b>().incrementAndGet())
+    assertEquals<Long>(expected = -198452011965886958L, actual = <get-b>().<get-value>())
+    assertEquals<Long>(expected = -198452011965886959L, actual = <get-b>().decrementAndGet())
+    assertEquals<Long>(expected = -198452011965886959L, actual = <get-b>().<get-value>())
+  }
+
+  fun testTopLevelRef() {
+    assertEquals<Int>(expected = 8, actual = <get-abcNode>().<get-value>().<get-b>().<get-c>().<get-d>())
+    val newNode: ANode<BNode<CNode>> = ANode<BNode<CNode>>(b = BNode<CNode>(c = CNode(d = 76)))
+    assertEquals<Int>(expected = 8, actual = <get-abcNode>().getAndSet(value = newNode).<get-b>().<get-c>().<get-d>())
+    assertEquals<Int>(expected = 76, actual = <get-abcNode>().<get-value>().<get-b>().<get-c>().<get-d>())
+    val l: IntArray = IntArray(size = 4, init = local fun <anonymous>(i: Int): Int {
+      return i
+    }
+)
+    <get-any>().lazySet(value = l)
+    assertEquals<Int>(expected = 2, actual = <get-any>().<get-value>() as IntArray.get(index = 2))
+  }
+
+}
+
+fun box(): String {
+  val primitiveTest: TopLevelPrimitiveTest = TopLevelPrimitiveTest()
+  primitiveTest.testTopLevelInt()
+  primitiveTest.testTopLevelLong()
+  primitiveTest.testTopLevelBoolean()
+  primitiveTest.testTopLevelRef()
+  primitiveTest.testTopLevelArrayOfNulls()
+  val arrayTest: TopLevelArrayTest = TopLevelArrayTest()
+  arrayTest.testIntArray()
+  arrayTest.testLongArray()
+  arrayTest.testBooleanArray()
+  arrayTest.testRefArray()
+  return "OK"
+}

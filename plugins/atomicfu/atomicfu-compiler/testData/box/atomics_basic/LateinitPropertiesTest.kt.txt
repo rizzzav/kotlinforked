@@ -1,0 +1,61 @@
+class LateinitPropertiesTest {
+  private val a: AtomicInt
+    private get
+
+  private val head: AtomicRef<String>
+    private get
+
+  private val dataRef: AtomicRef<Data>
+    private get
+
+  private val lateIntArr: AtomicIntArray
+    private get
+
+  private val lateRefArr: AtomicArray<String?>
+    private get
+
+  init {
+    <this>.#a = atomic(initial = 0)
+    <this>.#head = atomic<String>(initial = "AAA")
+    <this>.#lateIntArr = AtomicIntArray(size = 55)
+    val data: Data = Data(n = 77)
+    <this>.#dataRef = atomic<Data>(initial = data)
+    val size: Int = 10
+    <this>.#lateRefArr = atomicArrayOfNulls<String?>(size = size)
+  }
+
+  private class Data {
+    val n: Int
+      field = n
+      get
+
+    constructor(n: Int) /* primary */ {
+      super/*Any*/()
+      /* <init>() */
+
+    }
+
+  }
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun test() {
+    assertEquals<Int>(expected = 0, actual = <this>.<get-a>().<get-value>())
+    assertTrue(actual = <this>.<get-head>().compareAndSet(expect = "AAA", update = "BBB"))
+    assertEquals<String>(expected = "BBB", actual = <this>.<get-head>().<get-value>())
+    assertEquals<Int>(expected = 0, actual = <this>.<get-lateIntArr>().get(index = 35).<get-value>())
+    assertEquals<Int>(expected = 77, actual = <this>.<get-dataRef>().<get-value>().<get-n>())
+    assertEquals<String?>(expected = null, actual = <this>.<get-lateRefArr>().get(index = 5).<get-value>())
+  }
+
+}
+
+fun box(): String {
+  val testClass: LateinitPropertiesTest = LateinitPropertiesTest()
+  testClass.test()
+  return "OK"
+}

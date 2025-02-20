@@ -1,0 +1,154 @@
+FILE fqName:<root> fileName:/InitializationOrderTest.kt
+  CLASS CLASS name:AAA modality:FINAL visibility:private superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:<root>.AAA
+    PROPERTY name:_counter visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:_counter type:kotlinx.atomicfu.AtomicLong visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomic (initial: kotlin.Long): kotlinx.atomicfu.AtomicLong declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicLong origin=null
+            ARG initial: CONST Long type=kotlin.Long value=5
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-_counter> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicLong
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.AAA
+        correspondingProperty: PROPERTY name:_counter visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-_counter> (): kotlinx.atomicfu.AtomicLong declared in <root>.AAA'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:_counter type:kotlinx.atomicfu.AtomicLong visibility:private [final]' type=kotlinx.atomicfu.AtomicLong origin=null
+              receiver: GET_VAR '<this>: <root>.AAA declared in <root>.AAA.<get-_counter>' type=<root>.AAA origin=null
+    PROPERTY name:delegateCounterValue visibility:public modality:FINAL [delegated,val]
+      FIELD PROPERTY_DELEGATE name:delegateCounterValue$delegate type:kotlinx.atomicfu.AtomicLong visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'private final fun <get-_counter> (): kotlinx.atomicfu.AtomicLong declared in <root>.AAA' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.AAA declared in <root>.AAA' type=<root>.AAA origin=IMPLICIT_ARGUMENT
+      FUN DELEGATED_PROPERTY_ACCESSOR name:<get-delegateCounterValue> visibility:public modality:FINAL returnType:kotlin.Long
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.AAA
+        correspondingProperty: PROPERTY name:delegateCounterValue visibility:public modality:FINAL [delegated,val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-delegateCounterValue> (): kotlin.Long declared in <root>.AAA'
+            CALL 'public final fun getValue (thisRef: kotlin.Any?, property: kotlin.reflect.KProperty<*>): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=null
+              ARG <this>: GET_FIELD 'FIELD PROPERTY_DELEGATE name:delegateCounterValue$delegate type:kotlinx.atomicfu.AtomicLong visibility:private [final] declared in <root>.AAA' type=kotlinx.atomicfu.AtomicLong origin=null
+                receiver: GET_VAR '<this>: <root>.AAA declared in <root>.AAA.<get-delegateCounterValue>' type=<root>.AAA origin=null
+              ARG thisRef: GET_VAR '<this>: <root>.AAA declared in <root>.AAA.<get-delegateCounterValue>' type=<root>.AAA origin=null
+              ARG property: PROPERTY_REFERENCE 'public final delegateCounterValue: kotlin.Long declared in <root>.AAA' field=null getter='public final fun <get-delegateCounterValue> (): kotlin.Long declared in <root>.AAA' setter=null type=kotlin.reflect.KProperty1<<root>.AAA, kotlin.Long> origin=PROPERTY_REFERENCE_FOR_DELEGATE
+    PROPERTY name:lateInitInt visibility:public modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:lateInitInt type:kotlinx.atomicfu.AtomicInt visibility:private [final]
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-lateInitInt> visibility:public modality:FINAL returnType:kotlinx.atomicfu.AtomicInt
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.AAA
+        correspondingProperty: PROPERTY name:lateInitInt visibility:public modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-lateInitInt> (): kotlinx.atomicfu.AtomicInt declared in <root>.AAA'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:lateInitInt type:kotlinx.atomicfu.AtomicInt visibility:private [final]' type=kotlinx.atomicfu.AtomicInt origin=null
+              receiver: GET_VAR '<this>: <root>.AAA declared in <root>.AAA.<get-lateInitInt>' type=<root>.AAA origin=null
+    PROPERTY name:intArr visibility:public modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:intArr type:kotlinx.atomicfu.AtomicIntArray visibility:private [final]
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-intArr> visibility:public modality:FINAL returnType:kotlinx.atomicfu.AtomicIntArray
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.AAA
+        correspondingProperty: PROPERTY name:intArr visibility:public modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-intArr> (): kotlinx.atomicfu.AtomicIntArray declared in <root>.AAA'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:intArr type:kotlinx.atomicfu.AtomicIntArray visibility:private [final]' type=kotlinx.atomicfu.AtomicIntArray origin=null
+              receiver: GET_VAR '<this>: <root>.AAA declared in <root>.AAA.<get-intArr>' type=<root>.AAA origin=null
+    ANONYMOUS_INITIALIZER isStatic=false
+      BLOCK_BODY
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:lateInitInt type:kotlinx.atomicfu.AtomicInt visibility:private [final]' type=kotlin.Unit origin=null
+          receiver: GET_VAR '<this>: <root>.AAA declared in <root>.AAA' type=<root>.AAA origin=null
+          value: CALL 'public final fun atomic (initial: kotlin.Int): kotlinx.atomicfu.AtomicInt declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicInt origin=null
+            ARG initial: CONST Int type=kotlin.Int value=10
+        CALL 'public final fun assertTrue (actual: kotlin.Boolean, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          ARG actual: CALL 'public final fun compareAndSet (expect: kotlin.Int, update: kotlin.Int): kotlin.Boolean declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Boolean origin=null
+            ARG <this>: CALL 'public final fun <get-lateInitInt> (): kotlinx.atomicfu.AtomicInt declared in <root>.AAA' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.AAA declared in <root>.AAA' type=<root>.AAA origin=IMPLICIT_ARGUMENT
+            ARG expect: CONST Int type=kotlin.Int value=10
+            ARG update: CONST Int type=kotlin.Int value=100
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=100
+          ARG actual: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: CALL 'public final fun <get-lateInitInt> (): kotlinx.atomicfu.AtomicInt declared in <root>.AAA' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.AAA declared in <root>.AAA' type=<root>.AAA origin=IMPLICIT_ARGUMENT
+        SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:intArr type:kotlinx.atomicfu.AtomicIntArray visibility:private [final]' type=kotlin.Unit origin=null
+          receiver: GET_VAR '<this>: <root>.AAA declared in <root>.AAA' type=<root>.AAA origin=null
+          value: CONSTRUCTOR_CALL 'public constructor <init> (size: kotlin.Int) declared in kotlinx.atomicfu.AtomicIntArray' type=kotlinx.atomicfu.AtomicIntArray origin=null
+            ARG size: CONST Int type=kotlin.Int value=10
+        CALL 'public final fun <set-value> (value: kotlin.Int): kotlin.Unit declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Unit origin=EQ
+          ARG <this>: CALL 'public final fun get (index: kotlin.Int): kotlinx.atomicfu.AtomicInt declared in kotlinx.atomicfu.AtomicIntArray' type=kotlinx.atomicfu.AtomicInt origin=GET_ARRAY_ELEMENT
+            ARG <this>: CALL 'public final fun <get-intArr> (): kotlinx.atomicfu.AtomicIntArray declared in <root>.AAA' type=kotlinx.atomicfu.AtomicIntArray origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.AAA declared in <root>.AAA' type=<root>.AAA origin=IMPLICIT_ARGUMENT
+            ARG index: CONST Int type=kotlin.Int value=0
+          ARG value: CONST Int type=kotlin.Int value=10
+        CALL 'public final fun assertTrue (actual: kotlin.Boolean, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          ARG actual: CALL 'public final fun compareAndSet (expect: kotlin.Int, update: kotlin.Int): kotlin.Boolean declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Boolean origin=null
+            ARG <this>: CALL 'public final fun get (index: kotlin.Int): kotlinx.atomicfu.AtomicInt declared in kotlinx.atomicfu.AtomicIntArray' type=kotlinx.atomicfu.AtomicInt origin=GET_ARRAY_ELEMENT
+              ARG <this>: CALL 'public final fun <get-intArr> (): kotlinx.atomicfu.AtomicIntArray declared in <root>.AAA' type=kotlinx.atomicfu.AtomicIntArray origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.AAA declared in <root>.AAA' type=<root>.AAA origin=IMPLICIT_ARGUMENT
+              ARG index: CONST Int type=kotlin.Int value=0
+            ARG expect: CONST Int type=kotlin.Int value=10
+            ARG update: CONST Int type=kotlin.Int value=100
+        CALL 'public final fun <set-value> (value: kotlin.Int): kotlin.Unit declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Unit origin=EQ
+          ARG <this>: CALL 'public final fun get (index: kotlin.Int): kotlinx.atomicfu.AtomicInt declared in kotlinx.atomicfu.AtomicIntArray' type=kotlinx.atomicfu.AtomicInt origin=GET_ARRAY_ELEMENT
+            ARG <this>: CALL 'public final fun <get-intArr> (): kotlinx.atomicfu.AtomicIntArray declared in <root>.AAA' type=kotlinx.atomicfu.AtomicIntArray origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.AAA declared in <root>.AAA' type=<root>.AAA origin=IMPLICIT_ARGUMENT
+            ARG index: CONST Int type=kotlin.Int value=1
+          ARG value: CONST Int type=kotlin.Int value=20
+    ANONYMOUS_INITIALIZER isStatic=false
+      BLOCK_BODY
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=5
+          ARG actual: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-_counter> (): kotlinx.atomicfu.AtomicLong declared in <root>.AAA' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.AAA declared in <root>.AAA' type=<root>.AAA origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=5
+          ARG actual: CALL 'public final fun <get-counterValue> (): kotlin.Long declared in <root>.AAA' type=kotlin.Long origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.AAA declared in <root>.AAA' type=<root>.AAA origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=5
+          ARG actual: CALL 'public final fun <get-delegateCounterValue> (): kotlin.Long declared in <root>.AAA' type=kotlin.Long origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.AAA declared in <root>.AAA' type=<root>.AAA origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=120
+          ARG actual: CALL 'public final fun plus (other: kotlin.Int): kotlin.Int declared in kotlin.Int' type=kotlin.Int origin=PLUS
+            ARG <this>: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: CALL 'public final fun get (index: kotlin.Int): kotlinx.atomicfu.AtomicInt declared in kotlinx.atomicfu.AtomicIntArray' type=kotlinx.atomicfu.AtomicInt origin=GET_ARRAY_ELEMENT
+                ARG <this>: CALL 'public final fun <get-intArr> (): kotlinx.atomicfu.AtomicIntArray declared in <root>.AAA' type=kotlinx.atomicfu.AtomicIntArray origin=GET_PROPERTY
+                  ARG <this>: GET_VAR '<this>: <root>.AAA declared in <root>.AAA' type=<root>.AAA origin=IMPLICIT_ARGUMENT
+                ARG index: CONST Int type=kotlin.Int value=0
+            ARG other: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: CALL 'public final fun get (index: kotlin.Int): kotlinx.atomicfu.AtomicInt declared in kotlinx.atomicfu.AtomicIntArray' type=kotlinx.atomicfu.AtomicInt origin=GET_ARRAY_ELEMENT
+                ARG <this>: CALL 'public final fun <get-intArr> (): kotlinx.atomicfu.AtomicIntArray declared in <root>.AAA' type=kotlinx.atomicfu.AtomicIntArray origin=GET_PROPERTY
+                  ARG <this>: GET_VAR '<this>: <root>.AAA declared in <root>.AAA' type=<root>.AAA origin=IMPLICIT_ARGUMENT
+                ARG index: CONST Int type=kotlin.Int value=1
+    CONSTRUCTOR visibility:public returnType:<root>.AAA [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:AAA modality:FINAL visibility:private superTypes:[kotlin.Any]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+    PROPERTY name:counterValue visibility:public modality:FINAL [val]
+      FUN name:<get-counterValue> visibility:public modality:FINAL returnType:kotlin.Long
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.AAA
+        correspondingProperty: PROPERTY name:counterValue visibility:public modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-counterValue> (): kotlin.Long declared in <root>.AAA'
+            CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+              ARG <this>: CALL 'private final fun <get-_counter> (): kotlinx.atomicfu.AtomicLong declared in <root>.AAA' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.AAA declared in <root>.AAA.<get-counterValue>' type=<root>.AAA origin=IMPLICIT_ARGUMENT
+  FUN name:box visibility:public modality:FINAL returnType:kotlin.String
+    BLOCK_BODY
+      VAR name:intClass type:<root>.AAA [val]
+        CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.AAA' type=<root>.AAA origin=null
+      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK"

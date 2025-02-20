@@ -1,0 +1,247 @@
+class ArrayLoopTest {
+  private val SIZE: Int
+    field = 10
+    private get
+
+  private val intArr: AtomicIntArray
+    field = AtomicIntArray(size = 10)
+    private get
+
+  private val longArr: AtomicLongArray
+    field = AtomicLongArray(size = 10)
+    private get
+
+  private val boolArr: AtomicBooleanArray
+    field = AtomicBooleanArray(size = 10)
+    private get
+
+  private val refArr: AtomicArray<Box?>
+    field = atomicArrayOfNulls<Box?>(size = 10)
+    private get
+
+  class Box {
+    val n: Int
+      field = n
+      get
+
+    constructor(n: Int) /* primary */ {
+      super/*Any*/()
+      /* <init>() */
+
+    }
+
+  }
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  private fun action(cur: Box?): Box? {
+    return { // BLOCK
+      val tmp_0: Box? = cur
+      when {
+        EQEQ(arg0 = tmp_0, arg1 = null) -> null
+        else -> let<Box, Box>(/* <this> = tmp_0, */ block = local fun <anonymous>(it: Box): Box {
+          return Box(n = cur.<get-n>().times(other = 10))
+        }
+)
+      }
+    }
+  }
+
+  fun atomicBooleanArrLoopTest(): Boolean {
+    <this>.<get-boolArr>().get(index = 0).<set-value>(value = false)
+    loop(/* <this> = <this>.<get-boolArr>().get(index = 0), */ action = local fun <anonymous>(value: Boolean) {
+      when {
+        when {
+          value.not() -> <this>.<get-boolArr>().get(index = 0).compareAndSet(expect = value, update = true)
+          else -> false
+        } -> { // BLOCK
+          assertEquals<Boolean>(expected = true, actual = <this>.<get-boolArr>().get(index = 0).<get-value>())
+          return <this>.<get-boolArr>().get(index = 0).<get-value>()
+        }
+      }
+    }
+)
+  }
+
+  fun atomicBooleanArrUpdateTest() {
+    assertTrue(actual = <this>.atomicBooleanArrLoopTest())
+    update(/* <this> = <this>.<get-boolArr>().get(index = 5), */ function = local fun <anonymous>(it: Boolean): Boolean {
+      return true
+    }
+)
+    assertEquals<Boolean>(expected = true, actual = <this>.<get-boolArr>().get(index = 5).<get-value>())
+    assertTrue(actual = <this>.<get-boolArr>().get(index = 5).<get-value>())
+    assertFalse(actual = updateAndGet(/* <this> = <this>.<get-boolArr>().get(index = 5), */ function = local fun <anonymous>(it: Boolean): Boolean {
+      return false
+    }
+))
+    assertFalse(actual = <this>.<get-boolArr>().get(index = 5).<get-value>())
+    <this>.<get-boolArr>().get(index = 5).lazySet(value = false)
+    assertFalse(actual = getAndUpdate(/* <this> = <this>.<get-boolArr>().get(index = 5), */ function = local fun <anonymous>(it: Boolean): Boolean {
+      return true
+    }
+))
+    assertTrue(actual = <this>.<get-boolArr>().get(index = 5).<get-value>())
+    assertTrue(actual = getAndUpdate(/* <this> = <this>.<get-boolArr>().get(index = 5), */ function = local fun <anonymous>(cur: Boolean): Boolean {
+      assertTrue(actual = cur)
+      return false
+    }
+))
+    assertFalse(actual = <this>.<get-boolArr>().get(index = 5).<get-value>())
+  }
+
+  fun atomicIntArrLoopTest(): Int {
+    <this>.<get-intArr>().get(index = 0).<set-value>(value = 0)
+    loop(/* <this> = <this>.<get-intArr>().get(index = 0), */ action = local fun <anonymous>(value: Int) {
+      when {
+        <this>.<get-intArr>().get(index = 0).compareAndSet(expect = value, update = value.plus(other = 10)) -> { // BLOCK
+          assertEquals<Int>(expected = value.plus(other = 10), actual = <this>.<get-intArr>().get(index = 0).<get-value>())
+          return <this>.<get-intArr>().get(index = 0).<get-value>()
+        }
+      }
+    }
+)
+  }
+
+  fun atomicIntArrUpdateTest() {
+    assertEquals<Int>(expected = 10, actual = <this>.atomicIntArrLoopTest())
+    <this>.<get-intArr>().get(index = 5).<set-value>(value = 10)
+    update(/* <this> = <this>.<get-intArr>().get(index = 5), */ function = local fun <anonymous>(value: Int): Int {
+      val newValue: Int = value.plus(other = 1000)
+      return when {
+        greaterOrEqual(arg0 = newValue, arg1 = 0) -> Companion.<get-MAX_VALUE>()
+        else -> newValue
+      }
+    }
+)
+    assertEquals<Int>(expected = Companion.<get-MAX_VALUE>(), actual = <this>.<get-intArr>().get(index = 5).<get-value>())
+    <this>.<get-intArr>().get(index = 6).<set-value>(value = 10)
+    val res1: Int = updateAndGet(/* <this> = <this>.<get-intArr>().get(index = 6), */ function = local fun <anonymous>(value: Int): Int {
+      return when {
+        greaterOrEqual(arg0 = value, arg1 = 0) -> Companion.<get-MAX_VALUE>()
+        else -> value
+      }
+    }
+)
+    assertEquals<Int>(expected = Companion.<get-MAX_VALUE>(), actual = res1)
+    <this>.<get-intArr>().get(index = 7).lazySet(value = 50)
+    assertEquals<Int>(expected = 50, actual = getAndUpdate(/* <this> = <this>.<get-intArr>().get(index = 7), */ function = local fun <anonymous>(value: Int): Int {
+      assertEquals<Int>(expected = 50, actual = value)
+      return when {
+        greaterOrEqual(arg0 = value, arg1 = 0) -> Companion.<get-MAX_VALUE>()
+        else -> value
+      }
+    }
+))
+    assertEquals<Int>(expected = Companion.<get-MAX_VALUE>(), actual = <this>.<get-intArr>().get(index = 7).<get-value>())
+  }
+
+  fun atomicLongArrLoopTest(): Long {
+    <this>.<get-longArr>().get(index = 0).<set-value>(value = 0L)
+    loop(/* <this> = <this>.<get-longArr>().get(index = 0), */ action = local fun <anonymous>(value: Long) {
+      when {
+        <this>.<get-longArr>().get(index = 0).compareAndSet(expect = value, update = value.plus(other = 10)) -> { // BLOCK
+          assertEquals<Long>(expected = value.plus(other = 10), actual = <this>.<get-longArr>().get(index = 0).<get-value>())
+          return <this>.<get-longArr>().get(index = 0).<get-value>()
+        }
+      }
+    }
+)
+  }
+
+  fun atomicLongArrUpdateTest() {
+    assertEquals<Long>(expected = 10L, actual = <this>.atomicLongArrLoopTest())
+    <this>.<get-longArr>().get(index = 5).<set-value>(value = 0L)
+    update(/* <this> = <this>.<get-longArr>().get(index = 5), */ function = local fun <anonymous>(cur: Long): Long {
+      val newValue: Long = cur.plus(other = 1000)
+      return when {
+        greaterOrEqual(arg0 = newValue, arg1 = 0L) -> Companion.<get-MAX_VALUE>()
+        else -> newValue
+      }
+    }
+)
+    assertEquals<Long>(expected = Companion.<get-MAX_VALUE>(), actual = <this>.<get-longArr>().get(index = 5).<get-value>())
+    <this>.<get-longArr>().get(index = 6).<set-value>(value = 10L)
+    val res2: Long = updateAndGet(/* <this> = <this>.<get-longArr>().get(index = 6), */ function = local fun <anonymous>(cur: Long): Long {
+      return when {
+        greaterOrEqual(arg0 = cur, arg1 = 0L) -> Companion.<get-MAX_VALUE>()
+        else -> cur
+      }
+    }
+)
+    assertEquals<Long>(expected = Companion.<get-MAX_VALUE>(), actual = res2)
+    <this>.<get-longArr>().get(index = 7).lazySet(value = 50L)
+    assertEquals<Long>(expected = 50L, actual = getAndUpdate(/* <this> = <this>.<get-longArr>().get(index = 7), */ function = local fun <anonymous>(cur: Long): Long {
+      assertEquals<Long>(expected = 50L, actual = cur)
+      return when {
+        greaterOrEqual(arg0 = cur, arg1 = 0L) -> Companion.<get-MAX_VALUE>()
+        else -> cur
+      }
+    }
+))
+    assertEquals<Long>(expected = Companion.<get-MAX_VALUE>(), actual = <this>.<get-longArr>().get(index = 7).<get-value>())
+  }
+
+  fun atomicRefArrLoopTest(): Box? {
+    <this>.<get-refArr>().get(index = 0).<set-value>(value = Box(n = 888))
+    loop<Box?>(/* <this> = <this>.<get-refArr>().get(index = 0), */ action = local fun <anonymous>(value: Box?) {
+      when {
+        <this>.<get-refArr>().get(index = 0).compareAndSet(expect = value, update = Box(n = 777)) -> { // BLOCK
+          assertEquals<Int>(expected = 777, actual = CHECK_NOT_NULL<Box>(arg0 = <this>.<get-refArr>().get(index = 0).<get-value>()).<get-n>())
+          return <this>.<get-refArr>().get(index = 0).<get-value>()
+        }
+      }
+    }
+)
+  }
+
+  fun atomicRefArrUpdateTest() {
+    assertEquals<Int?>(expected = 777, actual = { // BLOCK
+      val tmp_1: Box? = <this>.atomicRefArrLoopTest()
+      when {
+        EQEQ(arg0 = tmp_1, arg1 = null) -> null
+        else -> tmp_1.<get-n>()
+      }
+    })
+    <this>.<get-refArr>().get(index = 0).lazySet(value = Box(n = 5))
+    update<Box?>(/* <this> = <this>.<get-refArr>().get(index = 0), */ function = local fun <anonymous>(cur: Box?): Box? {
+      return { // BLOCK
+        val tmp_2: Box? = cur
+        when {
+          EQEQ(arg0 = tmp_2, arg1 = null) -> null
+          else -> let<Box, Box>(/* <this> = tmp_2, */ block = local fun <anonymous>(it: Box): Box {
+            return Box(n = cur.<get-n>().times(other = 10))
+          }
+)
+        }
+      }
+    }
+)
+    assertEquals<Int>(expected = CHECK_NOT_NULL<Box>(arg0 = <this>.<get-refArr>().get(index = 0).<get-value>()).<get-n>(), actual = 50)
+    <this>.<get-refArr>().get(index = 0).lazySet(value = Box(n = 5))
+    assertEquals<Int>(expected = CHECK_NOT_NULL<Box>(arg0 = updateAndGet<Box?>(/* <this> = <this>.<get-refArr>().get(index = 0), */ function = local fun <anonymous>(cur: Box?): Box? {
+      return <this>.action(cur = cur)
+    }
+)).<get-n>(), actual = 50)
+    <this>.<get-refArr>().get(index = 0).lazySet(value = Box(n = 5))
+    assertEquals<Int>(expected = CHECK_NOT_NULL<Box>(arg0 = getAndUpdate<Box?>(/* <this> = <this>.<get-refArr>().get(index = 0), */ function = local fun <anonymous>(cur: Box?): Box? {
+      return <this>.action(cur = cur)
+    }
+)).<get-n>(), actual = 5)
+    assertEquals<Int>(expected = CHECK_NOT_NULL<Box>(arg0 = <this>.<get-refArr>().get(index = 0).<get-value>()).<get-n>(), actual = 50)
+  }
+
+}
+
+fun box(): String {
+  val testClass: ArrayLoopTest = ArrayLoopTest()
+  testClass.atomicIntArrUpdateTest()
+  testClass.atomicIntArrUpdateTest()
+  testClass.atomicBooleanArrUpdateTest()
+  testClass.atomicRefArrUpdateTest()
+  return "OK"
+}

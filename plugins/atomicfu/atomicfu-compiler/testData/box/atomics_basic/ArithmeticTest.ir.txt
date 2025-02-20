@@ -1,0 +1,606 @@
+FILE fqName:<root> fileName:/ArithmeticTest.kt
+  CLASS CLASS name:BooleanArithmetic modality:FINAL visibility:public superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:<root>.BooleanArithmetic
+    PROPERTY name:_x visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:_x type:kotlinx.atomicfu.AtomicBoolean visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomic (initial: kotlin.Boolean): kotlinx.atomicfu.AtomicBoolean declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicBoolean origin=null
+            ARG initial: CONST Boolean type=kotlin.Boolean value=false
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-_x> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicBoolean
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.BooleanArithmetic
+        correspondingProperty: PROPERTY name:_x visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-_x> (): kotlinx.atomicfu.AtomicBoolean declared in <root>.BooleanArithmetic'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:_x type:kotlinx.atomicfu.AtomicBoolean visibility:private [final]' type=kotlinx.atomicfu.AtomicBoolean origin=null
+              receiver: GET_VAR '<this>: <root>.BooleanArithmetic declared in <root>.BooleanArithmetic.<get-_x>' type=<root>.BooleanArithmetic origin=null
+    CONSTRUCTOR visibility:public returnType:<root>.BooleanArithmetic [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:BooleanArithmetic modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+    FUN name:testBoolean visibility:public modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.BooleanArithmetic
+      BLOCK_BODY
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Boolean
+          ARG expected: CONST Boolean type=kotlin.Boolean value=false
+          ARG actual: CALL 'public final fun <get-value> (): kotlin.Boolean declared in kotlinx.atomicfu.AtomicBoolean' type=kotlin.Boolean origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicBoolean declared in <root>.BooleanArithmetic' type=kotlinx.atomicfu.AtomicBoolean origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.BooleanArithmetic declared in <root>.BooleanArithmetic.testBoolean' type=<root>.BooleanArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertFalse (actual: kotlin.Boolean, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          ARG actual: CALL 'public final fun <get-x> (): kotlin.Boolean declared in <root>.BooleanArithmetic' type=kotlin.Boolean origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.BooleanArithmetic declared in <root>.BooleanArithmetic.testBoolean' type=<root>.BooleanArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun lazySet (value: kotlin.Boolean): kotlin.Unit declared in kotlinx.atomicfu.AtomicBoolean' type=kotlin.Unit origin=null
+          ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicBoolean declared in <root>.BooleanArithmetic' type=kotlinx.atomicfu.AtomicBoolean origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.BooleanArithmetic declared in <root>.BooleanArithmetic.testBoolean' type=<root>.BooleanArithmetic origin=IMPLICIT_ARGUMENT
+          ARG value: CONST Boolean type=kotlin.Boolean value=true
+        CALL 'public final fun assertTrue (actual: kotlin.Boolean, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          ARG actual: CALL 'public final fun <get-x> (): kotlin.Boolean declared in <root>.BooleanArithmetic' type=kotlin.Boolean origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.BooleanArithmetic declared in <root>.BooleanArithmetic.testBoolean' type=<root>.BooleanArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertTrue (actual: kotlin.Boolean, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          ARG actual: CALL 'public final fun getAndSet (value: kotlin.Boolean): kotlin.Boolean declared in kotlinx.atomicfu.AtomicBoolean' type=kotlin.Boolean origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicBoolean declared in <root>.BooleanArithmetic' type=kotlinx.atomicfu.AtomicBoolean origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.BooleanArithmetic declared in <root>.BooleanArithmetic.testBoolean' type=<root>.BooleanArithmetic origin=IMPLICIT_ARGUMENT
+            ARG value: CONST Boolean type=kotlin.Boolean value=true
+        CALL 'public final fun assertTrue (actual: kotlin.Boolean, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          ARG actual: CALL 'public final fun compareAndSet (expect: kotlin.Boolean, update: kotlin.Boolean): kotlin.Boolean declared in kotlinx.atomicfu.AtomicBoolean' type=kotlin.Boolean origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicBoolean declared in <root>.BooleanArithmetic' type=kotlinx.atomicfu.AtomicBoolean origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.BooleanArithmetic declared in <root>.BooleanArithmetic.testBoolean' type=<root>.BooleanArithmetic origin=IMPLICIT_ARGUMENT
+            ARG expect: CONST Boolean type=kotlin.Boolean value=true
+            ARG update: CONST Boolean type=kotlin.Boolean value=false
+        CALL 'public final fun assertFalse (actual: kotlin.Boolean, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          ARG actual: CALL 'public final fun <get-x> (): kotlin.Boolean declared in <root>.BooleanArithmetic' type=kotlin.Boolean origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.BooleanArithmetic declared in <root>.BooleanArithmetic.testBoolean' type=<root>.BooleanArithmetic origin=IMPLICIT_ARGUMENT
+    PROPERTY name:x visibility:public modality:FINAL [val]
+      FUN name:<get-x> visibility:public modality:FINAL returnType:kotlin.Boolean
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.BooleanArithmetic
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-x> (): kotlin.Boolean declared in <root>.BooleanArithmetic'
+            CALL 'public final fun <get-value> (): kotlin.Boolean declared in kotlinx.atomicfu.AtomicBoolean' type=kotlin.Boolean origin=GET_PROPERTY
+              ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicBoolean declared in <root>.BooleanArithmetic' type=kotlinx.atomicfu.AtomicBoolean origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.BooleanArithmetic declared in <root>.BooleanArithmetic.<get-x>' type=<root>.BooleanArithmetic origin=IMPLICIT_ARGUMENT
+  CLASS CLASS name:IntArithmetic modality:FINAL visibility:public superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:<root>.IntArithmetic
+    PROPERTY name:_x visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:_x type:kotlinx.atomicfu.AtomicInt visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomic (initial: kotlin.Int): kotlinx.atomicfu.AtomicInt declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicInt origin=null
+            ARG initial: CONST Int type=kotlin.Int value=0
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-_x> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicInt
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.IntArithmetic
+        correspondingProperty: PROPERTY name:_x visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:_x type:kotlinx.atomicfu.AtomicInt visibility:private [final]' type=kotlinx.atomicfu.AtomicInt origin=null
+              receiver: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.<get-_x>' type=<root>.IntArithmetic origin=null
+    PROPERTY name:local visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:local type:kotlinx.atomicfu.AtomicInt visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomic (initial: kotlin.Int): kotlinx.atomicfu.AtomicInt declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicInt origin=null
+            ARG initial: CONST Int type=kotlin.Int value=0
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-local> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicInt
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.IntArithmetic
+        correspondingProperty: PROPERTY name:local visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-local> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:local type:kotlinx.atomicfu.AtomicInt visibility:private [final]' type=kotlinx.atomicfu.AtomicInt origin=null
+              receiver: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.<get-local>' type=<root>.IntArithmetic origin=null
+    CONSTRUCTOR visibility:public returnType:<root>.IntArithmetic [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:IntArithmetic modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+    FUN name:test visibility:public modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.IntArithmetic
+      BLOCK_BODY
+        CALL 'private final fun testGetValue (): kotlin.Unit declared in <root>.IntArithmetic' type=kotlin.Unit origin=null
+          ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.test' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'private final fun testAtomicCallPlaces (): kotlin.Unit declared in <root>.IntArithmetic' type=kotlin.Unit origin=null
+          ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.test' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'private final fun testInt (): kotlin.Unit declared in <root>.IntArithmetic' type=kotlin.Unit origin=null
+          ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.test' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+    FUN name:testAtomicCallPlaces visibility:private modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.IntArithmetic
+      BLOCK_BODY
+        CALL 'public final fun <set-value> (value: kotlin.Int): kotlin.Unit declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Unit origin=EQ
+          ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testAtomicCallPlaces' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+          ARG value: CONST Int type=kotlin.Int value=5
+        TYPE_OP type=kotlin.Unit origin=IMPLICIT_COERCION_TO_UNIT typeOperand=kotlin.Unit
+          CALL 'public final fun compareAndSet (expect: kotlin.Int, update: kotlin.Int): kotlin.Boolean declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Boolean origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testAtomicCallPlaces' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+            ARG expect: CONST Int type=kotlin.Int value=5
+            ARG update: CONST Int type=kotlin.Int value=42
+        VAR name:res type:kotlin.Boolean [val]
+          CALL 'public final fun compareAndSet (expect: kotlin.Int, update: kotlin.Int): kotlin.Boolean declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Boolean origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testAtomicCallPlaces' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+            ARG expect: CONST Int type=kotlin.Int value=42
+            ARG update: CONST Int type=kotlin.Int value=45
+        CALL 'public final fun assertTrue (actual: kotlin.Boolean, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          ARG actual: GET_VAR 'val res: kotlin.Boolean declared in <root>.IntArithmetic.testAtomicCallPlaces' type=kotlin.Boolean origin=null
+        CALL 'public final fun assertTrue (actual: kotlin.Boolean, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          ARG actual: CALL 'public final fun compareAndSet (expect: kotlin.Int, update: kotlin.Int): kotlin.Boolean declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Boolean origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testAtomicCallPlaces' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+            ARG expect: CONST Int type=kotlin.Int value=45
+            ARG update: CONST Int type=kotlin.Int value=77
+        CALL 'public final fun assertFalse (actual: kotlin.Boolean, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          ARG actual: CALL 'public final fun compareAndSet (expect: kotlin.Int, update: kotlin.Int): kotlin.Boolean declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Boolean origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testAtomicCallPlaces' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+            ARG expect: CONST Int type=kotlin.Int value=95
+            ARG update: CONST Int type=kotlin.Int value=77
+        CALL 'public final fun assertTrue (actual: kotlin.Boolean, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          ARG actual: CALL 'public final fun compareAndSet (expect: kotlin.Int, update: kotlin.Int): kotlin.Boolean declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Boolean origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testAtomicCallPlaces' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+            ARG expect: CONST Int type=kotlin.Int value=77
+            ARG update: CONST Int type=kotlin.Int value=88
+    FUN name:testGetValue visibility:private modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.IntArithmetic
+      BLOCK_BODY
+        CALL 'public final fun <set-value> (value: kotlin.Int): kotlin.Unit declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Unit origin=EQ
+          ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testGetValue' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+          ARG value: CONST Int type=kotlin.Int value=5
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=5
+          ARG actual: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testGetValue' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        VAR name:aValue type:kotlin.Int [var]
+          CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testGetValue' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=5
+          ARG actual: GET_VAR 'var aValue: kotlin.Int declared in <root>.IntArithmetic.testGetValue' type=kotlin.Int origin=null
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=5
+          ARG actual: CALL 'public final fun <get-x> (): kotlin.Int declared in <root>.IntArithmetic' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testGetValue' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun <set-value> (value: kotlin.Int): kotlin.Unit declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Unit origin=EQ
+          ARG <this>: CALL 'private final fun <get-local> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testGetValue' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+          ARG value: CONST Int type=kotlin.Int value=555
+        SET_VAR 'var aValue: kotlin.Int declared in <root>.IntArithmetic.testGetValue' type=kotlin.Unit origin=EQ
+          CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-local> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testGetValue' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: GET_VAR 'var aValue: kotlin.Int declared in <root>.IntArithmetic.testGetValue' type=kotlin.Int origin=null
+          ARG actual: CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-local> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testGetValue' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+    FUN name:testInt visibility:private modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.IntArithmetic
+      BLOCK_BODY
+        CALL 'public final fun <set-value> (value: kotlin.Int): kotlin.Unit declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Unit origin=EQ
+          ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+          ARG value: CONST Int type=kotlin.Int value=0
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=0
+          ARG actual: CALL 'public final fun <get-x> (): kotlin.Int declared in <root>.IntArithmetic' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        VAR name:update type:kotlin.Int [val]
+          CONST Int type=kotlin.Int value=3
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=0
+          ARG actual: CALL 'public final fun getAndSet (value: kotlin.Int): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+            ARG value: GET_VAR 'val update: kotlin.Int declared in <root>.IntArithmetic.testInt' type=kotlin.Int origin=null
+        CALL 'public final fun assertTrue (actual: kotlin.Boolean, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          ARG actual: CALL 'public final fun compareAndSet (expect: kotlin.Int, update: kotlin.Int): kotlin.Boolean declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Boolean origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+            ARG expect: GET_VAR 'val update: kotlin.Int declared in <root>.IntArithmetic.testInt' type=kotlin.Int origin=null
+            ARG update: CONST Int type=kotlin.Int value=8
+        CALL 'public final fun lazySet (value: kotlin.Int): kotlin.Unit declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Unit origin=null
+          ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+          ARG value: CONST Int type=kotlin.Int value=1
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=1
+          ARG actual: CALL 'public final fun <get-x> (): kotlin.Int declared in <root>.IntArithmetic' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=1
+          ARG actual: CALL 'public final fun getAndSet (value: kotlin.Int): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+            ARG value: CONST Int type=kotlin.Int value=2
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=2
+          ARG actual: CALL 'public final fun <get-x> (): kotlin.Int declared in <root>.IntArithmetic' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=2
+          ARG actual: CALL 'public final fun getAndIncrement (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=3
+          ARG actual: CALL 'public final fun <get-x> (): kotlin.Int declared in <root>.IntArithmetic' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=3
+          ARG actual: CALL 'public final fun getAndDecrement (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=2
+          ARG actual: CALL 'public final fun <get-x> (): kotlin.Int declared in <root>.IntArithmetic' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=2
+          ARG actual: CALL 'public final fun getAndAdd (delta: kotlin.Int): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+            ARG delta: CONST Int type=kotlin.Int value=2
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=4
+          ARG actual: CALL 'public final fun <get-x> (): kotlin.Int declared in <root>.IntArithmetic' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=7
+          ARG actual: CALL 'public final fun addAndGet (delta: kotlin.Int): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+            ARG delta: CONST Int type=kotlin.Int value=3
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=7
+          ARG actual: CALL 'public final fun <get-x> (): kotlin.Int declared in <root>.IntArithmetic' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=8
+          ARG actual: CALL 'public final fun incrementAndGet (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=8
+          ARG actual: CALL 'public final fun <get-x> (): kotlin.Int declared in <root>.IntArithmetic' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=7
+          ARG actual: CALL 'public final fun decrementAndGet (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Int
+          ARG expected: CONST Int type=kotlin.Int value=7
+          ARG actual: CALL 'public final fun <get-x> (): kotlin.Int declared in <root>.IntArithmetic' type=kotlin.Int origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertTrue (actual: kotlin.Boolean, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          ARG actual: CALL 'public final fun compareAndSet (expect: kotlin.Int, update: kotlin.Int): kotlin.Boolean declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Boolean origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.testInt' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+            ARG expect: CONST Int type=kotlin.Int value=7
+            ARG update: CONST Int type=kotlin.Int value=10
+    PROPERTY name:x visibility:public modality:FINAL [val]
+      FUN name:<get-x> visibility:public modality:FINAL returnType:kotlin.Int
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.IntArithmetic
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-x> (): kotlin.Int declared in <root>.IntArithmetic'
+            CALL 'public final fun <get-value> (): kotlin.Int declared in kotlinx.atomicfu.AtomicInt' type=kotlin.Int origin=GET_PROPERTY
+              ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicInt declared in <root>.IntArithmetic' type=kotlinx.atomicfu.AtomicInt origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.IntArithmetic declared in <root>.IntArithmetic.<get-x>' type=<root>.IntArithmetic origin=IMPLICIT_ARGUMENT
+  CLASS CLASS name:LongArithmetic modality:FINAL visibility:public superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:<root>.LongArithmetic
+    PROPERTY name:_x visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:_x type:kotlinx.atomicfu.AtomicLong visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomic (initial: kotlin.Long): kotlinx.atomicfu.AtomicLong declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicLong origin=null
+            ARG initial: CONST Long type=kotlin.Long value=4294967296
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-_x> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicLong
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.LongArithmetic
+        correspondingProperty: PROPERTY name:_x visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-_x> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:_x type:kotlinx.atomicfu.AtomicLong visibility:private [final]' type=kotlinx.atomicfu.AtomicLong origin=null
+              receiver: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.<get-_x>' type=<root>.LongArithmetic origin=null
+    PROPERTY name:y visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:y type:kotlinx.atomicfu.AtomicLong visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomic (initial: kotlin.Long): kotlinx.atomicfu.AtomicLong declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicLong origin=null
+            ARG initial: CONST Long type=kotlin.Long value=5000000000
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-y> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicLong
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.LongArithmetic
+        correspondingProperty: PROPERTY name:y visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-y> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:y type:kotlinx.atomicfu.AtomicLong visibility:private [final]' type=kotlinx.atomicfu.AtomicLong origin=null
+              receiver: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.<get-y>' type=<root>.LongArithmetic origin=null
+    PROPERTY name:z visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:z type:kotlinx.atomicfu.AtomicLong visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomic (initial: kotlin.Long): kotlinx.atomicfu.AtomicLong declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicLong origin=null
+            ARG initial: CONST Long type=kotlin.Long value=2424920024888888848
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-z> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicLong
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.LongArithmetic
+        correspondingProperty: PROPERTY name:z visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:z type:kotlinx.atomicfu.AtomicLong visibility:private [final]' type=kotlinx.atomicfu.AtomicLong origin=null
+              receiver: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.<get-z>' type=<root>.LongArithmetic origin=null
+    PROPERTY name:max visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:max type:kotlinx.atomicfu.AtomicLong visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomic (initial: kotlin.Long): kotlinx.atomicfu.AtomicLong declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicLong origin=null
+            ARG initial: CONST Long type=kotlin.Long value=9223372036854775807
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-max> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicLong
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.LongArithmetic
+        correspondingProperty: PROPERTY name:max visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-max> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:max type:kotlinx.atomicfu.AtomicLong visibility:private [final]' type=kotlinx.atomicfu.AtomicLong origin=null
+              receiver: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.<get-max>' type=<root>.LongArithmetic origin=null
+    CONSTRUCTOR visibility:public returnType:<root>.LongArithmetic [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:LongArithmetic modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+    FUN name:testLong visibility:public modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.LongArithmetic
+      BLOCK_BODY
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=2424920024888888848
+          ARG actual: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun lazySet (value: kotlin.Long): kotlin.Unit declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Unit origin=null
+          ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+          ARG value: CONST Long type=kotlin.Long value=8424920024888888848
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=8424920024888888848
+          ARG actual: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=8424920024888888848
+          ARG actual: CALL 'public final fun getAndSet (value: kotlin.Long): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=null
+            ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+            ARG value: CONST Long type=kotlin.Long value=8924920024888888848
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=8924920024888888848
+          ARG actual: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=8924920024888888849
+          ARG actual: CALL 'public final fun incrementAndGet (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=null
+            ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=8924920024888888849
+          ARG actual: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=8924920024888888849
+          ARG actual: CALL 'public final fun getAndDecrement (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=null
+            ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=8924920024888888848
+          ARG actual: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=8924920024888888848
+          ARG actual: CALL 'public final fun getAndAdd (delta: kotlin.Long): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=null
+            ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+            ARG delta: CONST Long type=kotlin.Long value=100000000000000000
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=9024920024888888848
+          ARG actual: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=-198452011965886959
+          ARG actual: CALL 'public final fun addAndGet (delta: kotlin.Long): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=null
+            ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+            ARG delta: CONST Long type=kotlin.Long value=-9223372036854775807
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=-198452011965886959
+          ARG actual: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=-198452011965886958
+          ARG actual: CALL 'public final fun incrementAndGet (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=null
+            ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=-198452011965886958
+          ARG actual: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=-198452011965886959
+          ARG actual: CALL 'public final fun decrementAndGet (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=null
+            ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.Long
+          ARG expected: CONST Long type=kotlin.Long value=-198452011965886959
+          ARG actual: CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-z> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.testLong' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+    PROPERTY name:x visibility:public modality:FINAL [val]
+      FUN name:<get-x> visibility:public modality:FINAL returnType:kotlin.Long
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.LongArithmetic
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-x> (): kotlin.Long declared in <root>.LongArithmetic'
+            CALL 'public final fun <get-value> (): kotlin.Long declared in kotlinx.atomicfu.AtomicLong' type=kotlin.Long origin=GET_PROPERTY
+              ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicLong declared in <root>.LongArithmetic' type=kotlinx.atomicfu.AtomicLong origin=GET_PROPERTY
+                ARG <this>: GET_VAR '<this>: <root>.LongArithmetic declared in <root>.LongArithmetic.<get-x>' type=<root>.LongArithmetic origin=IMPLICIT_ARGUMENT
+  CLASS CLASS name:ReferenceArithmetic modality:FINAL visibility:public superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:<root>.ReferenceArithmetic
+    PROPERTY name:_x visibility:private modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:_x type:kotlinx.atomicfu.AtomicRef<kotlin.String?> visibility:private [final]
+        EXPRESSION_BODY
+          CALL 'public final fun atomic <T> (initial: T of kotlinx.atomicfu.atomic): kotlinx.atomicfu.AtomicRef<T of kotlinx.atomicfu.atomic> declared in kotlinx.atomicfu' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=null
+            TYPE_ARG T: kotlin.String?
+            ARG initial: CONST Null type=kotlin.Nothing? value=null
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-_x> visibility:private modality:FINAL returnType:kotlinx.atomicfu.AtomicRef<kotlin.String?>
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.ReferenceArithmetic
+        correspondingProperty: PROPERTY name:_x visibility:private modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='private final fun <get-_x> (): kotlinx.atomicfu.AtomicRef<kotlin.String?> declared in <root>.ReferenceArithmetic'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:_x type:kotlinx.atomicfu.AtomicRef<kotlin.String?> visibility:private [final]' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=null
+              receiver: GET_VAR '<this>: <root>.ReferenceArithmetic declared in <root>.ReferenceArithmetic.<get-_x>' type=<root>.ReferenceArithmetic origin=null
+    CONSTRUCTOR visibility:public returnType:<root>.ReferenceArithmetic [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:ReferenceArithmetic modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+    FUN name:testReference visibility:public modality:FINAL returnType:kotlin.Unit
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:<root>.ReferenceArithmetic
+      BLOCK_BODY
+        CALL 'public final fun <set-value> (value: T of kotlinx.atomicfu.AtomicRef): kotlin.Unit declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Unit origin=EQ
+          ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicRef<kotlin.String?> declared in <root>.ReferenceArithmetic' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.ReferenceArithmetic declared in <root>.ReferenceArithmetic.testReference' type=<root>.ReferenceArithmetic origin=IMPLICIT_ARGUMENT
+          ARG value: CONST String type=kotlin.String value="aaa"
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.String?
+          ARG expected: CONST String type=kotlin.String value="aaa"
+          ARG actual: CALL 'public final fun <get-value> (): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.String? origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicRef<kotlin.String?> declared in <root>.ReferenceArithmetic' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.ReferenceArithmetic declared in <root>.ReferenceArithmetic.testReference' type=<root>.ReferenceArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun lazySet (value: T of kotlinx.atomicfu.AtomicRef): kotlin.Unit declared in kotlinx.atomicfu.AtomicRef' type=kotlin.Unit origin=null
+          ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicRef<kotlin.String?> declared in <root>.ReferenceArithmetic' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=GET_PROPERTY
+            ARG <this>: GET_VAR '<this>: <root>.ReferenceArithmetic declared in <root>.ReferenceArithmetic.testReference' type=<root>.ReferenceArithmetic origin=IMPLICIT_ARGUMENT
+          ARG value: CONST String type=kotlin.String value="bb"
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.String?
+          ARG expected: CONST String type=kotlin.String value="bb"
+          ARG actual: CALL 'public final fun <get-value> (): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.String? origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicRef<kotlin.String?> declared in <root>.ReferenceArithmetic' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.ReferenceArithmetic declared in <root>.ReferenceArithmetic.testReference' type=<root>.ReferenceArithmetic origin=IMPLICIT_ARGUMENT
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.String?
+          ARG expected: CONST String type=kotlin.String value="bb"
+          ARG actual: CALL 'public final fun getAndSet (value: T of kotlinx.atomicfu.AtomicRef): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.String? origin=null
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicRef<kotlin.String?> declared in <root>.ReferenceArithmetic' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.ReferenceArithmetic declared in <root>.ReferenceArithmetic.testReference' type=<root>.ReferenceArithmetic origin=IMPLICIT_ARGUMENT
+            ARG value: CONST String type=kotlin.String value="ccc"
+        CALL 'public final fun assertEquals <T> (expected: T of kotlin.test.assertEquals, actual: T of kotlin.test.assertEquals, message: kotlin.String?): kotlin.Unit declared in kotlin.test' type=kotlin.Unit origin=null
+          TYPE_ARG T: kotlin.String?
+          ARG expected: CONST String type=kotlin.String value="ccc"
+          ARG actual: CALL 'public final fun <get-value> (): T of kotlinx.atomicfu.AtomicRef declared in kotlinx.atomicfu.AtomicRef' type=kotlin.String? origin=GET_PROPERTY
+            ARG <this>: CALL 'private final fun <get-_x> (): kotlinx.atomicfu.AtomicRef<kotlin.String?> declared in <root>.ReferenceArithmetic' type=kotlinx.atomicfu.AtomicRef<kotlin.String?> origin=GET_PROPERTY
+              ARG <this>: GET_VAR '<this>: <root>.ReferenceArithmetic declared in <root>.ReferenceArithmetic.testReference' type=<root>.ReferenceArithmetic origin=IMPLICIT_ARGUMENT
+  FUN name:box visibility:public modality:FINAL returnType:kotlin.String
+    BLOCK_BODY
+      VAR name:intClass type:<root>.IntArithmetic [val]
+        CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.IntArithmetic' type=<root>.IntArithmetic origin=null
+      CALL 'public final fun test (): kotlin.Unit declared in <root>.IntArithmetic' type=kotlin.Unit origin=null
+        ARG <this>: GET_VAR 'val intClass: <root>.IntArithmetic declared in <root>.box' type=<root>.IntArithmetic origin=null
+      VAR name:longClass type:<root>.LongArithmetic [val]
+        CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.LongArithmetic' type=<root>.LongArithmetic origin=null
+      CALL 'public final fun testLong (): kotlin.Unit declared in <root>.LongArithmetic' type=kotlin.Unit origin=null
+        ARG <this>: GET_VAR 'val longClass: <root>.LongArithmetic declared in <root>.box' type=<root>.LongArithmetic origin=null
+      VAR name:booleanClass type:<root>.BooleanArithmetic [val]
+        CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.BooleanArithmetic' type=<root>.BooleanArithmetic origin=null
+      CALL 'public final fun testBoolean (): kotlin.Unit declared in <root>.BooleanArithmetic' type=kotlin.Unit origin=null
+        ARG <this>: GET_VAR 'val booleanClass: <root>.BooleanArithmetic declared in <root>.box' type=<root>.BooleanArithmetic origin=null
+      VAR name:refClass type:<root>.ReferenceArithmetic [val]
+        CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.ReferenceArithmetic' type=<root>.ReferenceArithmetic origin=null
+      CALL 'public final fun testReference (): kotlin.Unit declared in <root>.ReferenceArithmetic' type=kotlin.Unit origin=null
+        ARG <this>: GET_VAR 'val refClass: <root>.ReferenceArithmetic declared in <root>.box' type=<root>.ReferenceArithmetic origin=null
+      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
+        CONST String type=kotlin.String value="OK"

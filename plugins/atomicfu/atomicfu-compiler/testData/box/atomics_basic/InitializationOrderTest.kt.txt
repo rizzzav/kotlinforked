@@ -1,0 +1,51 @@
+private class AAA {
+  private val _counter: AtomicLong
+    field = atomic(initial = 5L)
+    private get
+
+  val delegateCounterValue: Long /* by */
+    field = <this>.<get-_counter>()
+    get(): Long {
+      return <this>.#delegateCounterValue$delegate.getValue(thisRef = <this>, property = AAA::delegateCounterValue)
+    }
+
+  val lateInitInt: AtomicInt
+    get
+
+  val intArr: AtomicIntArray
+    get
+
+  init {
+    <this>.#lateInitInt = atomic(initial = 10)
+    assertTrue(actual = <this>.<get-lateInitInt>().compareAndSet(expect = 10, update = 100))
+    assertEquals<Int>(expected = 100, actual = <this>.<get-lateInitInt>().<get-value>())
+    <this>.#intArr = AtomicIntArray(size = 10)
+    <this>.<get-intArr>().get(index = 0).<set-value>(value = 10)
+    assertTrue(actual = <this>.<get-intArr>().get(index = 0).compareAndSet(expect = 10, update = 100))
+    <this>.<get-intArr>().get(index = 1).<set-value>(value = 20)
+  }
+
+  init {
+    assertEquals<Long>(expected = 5L, actual = <this>.<get-_counter>().<get-value>())
+    assertEquals<Long>(expected = 5L, actual = <this>.<get-counterValue>())
+    assertEquals<Long>(expected = 5L, actual = <this>.<get-delegateCounterValue>())
+    assertEquals<Int>(expected = 120, actual = <this>.<get-intArr>().get(index = 0).<get-value>().plus(other = <this>.<get-intArr>().get(index = 1).<get-value>()))
+  }
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  val counterValue: Long
+    get(): Long {
+      return <this>.<get-_counter>().<get-value>()
+    }
+
+}
+
+fun box(): String {
+  val intClass: AAA = AAA()
+  return "OK"
+}

@@ -1,0 +1,35 @@
+class ParameterizedInlineFunExtensionTest {
+  private val tail: AtomicRef<String>
+    field = atomic<String>(initial = "aaa")
+    private get
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  private inline fun <S : Any?> AtomicRef<S>.bar(res1: S, res2: S): S {
+    return res2
+  }
+
+  private inline fun <S : Any?> AtomicRef<S>.foo(res1: S, res2: S, foo: Function1<S, S>): S {
+    val res: S = <this>.bar<S>(/* <this> = <this>, */ res1 = res1, res2 = res2)
+    return res
+  }
+
+  fun testClose() {
+    val res: String = <this>.foo<String>(/* <this> = <this>.<get-tail>(), */ res1 = "bbb", res2 = "ccc", foo = local fun <anonymous>(s: String): String {
+      return s
+    }
+)
+    assertEquals<String>(expected = "ccc", actual = res)
+  }
+
+}
+
+fun box(): String {
+  val testClass: ParameterizedInlineFunExtensionTest = ParameterizedInlineFunExtensionTest()
+  testClass.testClose()
+  return "OK"
+}

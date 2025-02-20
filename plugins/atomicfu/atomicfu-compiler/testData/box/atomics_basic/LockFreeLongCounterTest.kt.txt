@@ -1,0 +1,100 @@
+class LockFreeLongCounter {
+  private val counter: AtomicLong
+    field = atomic(initial = 0L)
+    private get
+
+  private inner class Inner {
+    constructor() /* primary */ {
+      super/*Any*/()
+      /* <init>() */
+
+    }
+
+    fun getFromOuter(): Long {
+      return <this>.<get-counter>().<get-value>()
+    }
+
+  }
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun add2(): Long {
+    return <this>.<get-counter>().getAndAdd(delta = 2L)
+  }
+
+  fun get(): Long {
+    return <this>.<get-counter>().<get-value>()
+  }
+
+  fun getInner(): Long {
+    return <this>.Inner().getFromOuter()
+  }
+
+  fun increment(): Long {
+    return <this>.<get-counter>().incrementAndGet()
+  }
+
+  fun setM2() {
+    <this>.<get-counter>().<set-value>(value = -2L)
+  }
+
+}
+
+class LockFreeLongCounterTest {
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun testAdd2() {
+    val c: LockFreeLongCounter = LockFreeLongCounter()
+    c.add2() /*~> Unit */
+    assertEquals<Long>(expected = 2L, actual = c.get())
+    c.add2() /*~> Unit */
+    assertEquals<Long>(expected = 4L, actual = c.get())
+  }
+
+  fun testBasic() {
+    return <this>.testWith(g = local fun LockFreeLongCounter.<anonymous>(): Long {
+      return $this$testWith.get()
+    }
+)
+  }
+
+  fun testGetInner() {
+    return <this>.testWith(g = local fun LockFreeLongCounter.<anonymous>(): Long {
+      return $this$testWith.getInner()
+    }
+)
+  }
+
+  fun testSetM2() {
+    val c: LockFreeLongCounter = LockFreeLongCounter()
+    c.setM2()
+    assertEquals<Long>(expected = -2L, actual = c.get())
+  }
+
+  private inline fun testWith(g: @ExtensionFunctionType Function1<LockFreeLongCounter, Long>) {
+    val c: LockFreeLongCounter = LockFreeLongCounter()
+    assertEquals<Long>(expected = 0L, actual = g.invoke(p1 = c))
+    assertEquals<Long>(expected = 1L, actual = c.increment())
+    assertEquals<Long>(expected = 1L, actual = g.invoke(p1 = c))
+    assertEquals<Long>(expected = 2L, actual = c.increment())
+    assertEquals<Long>(expected = 2L, actual = g.invoke(p1 = c))
+  }
+
+}
+
+fun box(): String {
+  val testClass: LockFreeLongCounterTest = LockFreeLongCounterTest()
+  testClass.testBasic()
+  testClass.testAdd2()
+  testClass.testSetM2()
+  testClass.testGetInner()
+  return "OK"
+}

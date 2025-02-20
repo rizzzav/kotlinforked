@@ -1,0 +1,55 @@
+class InlineExtensionWithTypeParameterTest {
+  private val sref: AtomicRef<SemaphoreSegment>
+    field = atomic<SemaphoreSegment>(initial = SemaphoreSegment(id = 0))
+    private get
+
+  abstract class Segment<S : Segment<S>> {
+    val id: Int
+      field = id
+      get
+
+    constructor(id: Int) /* primary */ {
+      super/*Any*/()
+      /* <init>() */
+
+    }
+
+  }
+
+  class SemaphoreSegment : Segment<SemaphoreSegment> {
+    constructor(id: Int) /* primary */ {
+      super/*Segment*/<SemaphoreSegment>(id = id)
+      /* <init>() */
+
+    }
+
+  }
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  private inline fun <S : Segment<S>> AtomicRef<S>.foo(id: Int, startFrom: S): Int {
+    <this>.lazySet(value = startFrom)
+    return <this>.getSegmentId<S>(/* <this> = <this>.<get-value>() */)
+  }
+
+  private inline fun <S : Segment<S>> S.getSegmentId(): Int {
+    var cur: S = <this>
+    return cur.<get-id>()
+  }
+
+  fun testInlineExtensionWithTypeParameter() {
+    val s: SemaphoreSegment = SemaphoreSegment(id = 77)
+    assertEquals<Int>(expected = 77, actual = <this>.foo<SemaphoreSegment>(/* <this> = <this>.<get-sref>(), */ id = 0, startFrom = s))
+  }
+
+}
+
+fun box(): String {
+  val testClass: InlineExtensionWithTypeParameterTest = InlineExtensionWithTypeParameterTest()
+  testClass.testInlineExtensionWithTypeParameter()
+  return "OK"
+}

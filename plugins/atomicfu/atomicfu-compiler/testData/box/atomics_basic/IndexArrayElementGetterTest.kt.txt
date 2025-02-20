@@ -1,0 +1,58 @@
+class IndexArrayElementGetterTest {
+  private val clazz: AtomicArrayClass
+    field = AtomicArrayClass()
+    private get
+
+  private class AtomicArrayClass {
+    val intArr: AtomicIntArray
+      field = AtomicIntArray(size = 10)
+      get
+
+    val longArr: AtomicLongArray
+      field = AtomicLongArray(size = 10)
+      get
+
+    constructor() /* primary */ {
+      super/*Any*/()
+      /* <init>() */
+
+    }
+
+  }
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun fib(a: Int): Int {
+    return when {
+      when {
+        EQEQ(arg0 = a, arg1 = 0) -> true
+        else -> EQEQ(arg0 = a, arg1 = 1)
+      } -> a
+      else -> <this>.fib(a = a.minus(other = 1)).plus(other = <this>.fib(a = a.minus(other = 2)))
+    }
+  }
+
+  fun testIndexArrayElementGetting() {
+    <this>.<get-clazz>().<get-intArr>().get(index = 8).<set-value>(value = 3)
+    val i: Int = <this>.fib(a = 4)
+    val j: Int = <this>.fib(a = 5)
+    assertEquals<Int>(expected = 3, actual = <this>.<get-clazz>().<get-intArr>().get(index = i.plus(other = j)).<get-value>())
+    assertEquals<Int>(expected = 3, actual = <this>.<get-clazz>().<get-intArr>().get(index = <this>.fib(a = 4).plus(other = <this>.fib(a = 5))).<get-value>())
+    <this>.<get-clazz>().<get-longArr>().get(index = 3).<set-value>(value = 100L)
+    assertEquals<Long>(expected = 100L, actual = <this>.<get-clazz>().<get-longArr>().get(index = <this>.fib(a = 6).minus(other = <this>.fib(a = 5))).<get-value>())
+    assertEquals<Long>(expected = 100L, actual = <this>.<get-clazz>().<get-longArr>().get(index = <this>.fib(a = 6).plus(other = <this>.fib(a = 4)).rem(other = 8)).<get-value>())
+    assertEquals<Long>(expected = 100L, actual = <this>.<get-clazz>().<get-longArr>().get(index = <this>.fib(a = 6).plus(other = <this>.fib(a = 4)).rem(other = 8)).<get-value>())
+    assertEquals<Long>(expected = 100L, actual = <this>.<get-clazz>().<get-longArr>().get(index = <this>.fib(a = 4).plus(other = <this>.fib(a = 5)).rem(other = <this>.fib(a = 5))).<get-value>())
+  }
+
+}
+
+fun box(): String {
+  val testClass: IndexArrayElementGetterTest = IndexArrayElementGetterTest()
+  testClass.testIndexArrayElementGetting()
+  return "OK"
+}

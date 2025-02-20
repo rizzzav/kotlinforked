@@ -1,0 +1,129 @@
+class LockFreeStack<T : Any?> {
+  private val top: AtomicRef<Node<T>?>
+    field = atomic<Node<T>?>(initial = null)
+    private get
+
+  private class Node<T : Any?> {
+    val value: T
+      field = value
+      get
+
+    val next: Node<T>?
+      field = next
+      get
+
+    constructor(value: T, next: Node<T>?) /* primary */ {
+      super/*Any*/()
+      /* <init>() */
+
+    }
+
+  }
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun clear() {
+    <this>.<get-top>().<set-value>(value = null)
+  }
+
+  fun isEmpty(): Boolean {
+    return EQEQ(arg0 = <this>.<get-top>().<get-value>(), arg1 = null)
+  }
+
+  fun popLoop(): T? {
+    loop<Node<T>?>(/* <this> = <this>.<get-top>(), */ action = local fun <anonymous>(cur: Node<T>?) {
+      when {
+        EQEQ(arg0 = cur, arg1 = null) -> return null
+      }
+      when {
+        <this>.<get-top>().compareAndSet(expect = cur, update = cur.<get-next>()) -> return cur.<get-value>()
+      }
+    }
+)
+  }
+
+  fun popUpdate(): T? {
+    return { // BLOCK
+      val tmp_0: Node<T>? = getAndUpdate<Node<T>?>(/* <this> = <this>.<get-top>(), */ function = local fun <anonymous>(cur: Node<T>?): Node<T>? {
+        return { // BLOCK
+          val tmp_1: Node<T>? = cur
+          when {
+            EQEQ(arg0 = tmp_1, arg1 = null) -> null
+            else -> tmp_1.<get-next>()
+          }
+        }
+      }
+)
+      when {
+        EQEQ(arg0 = tmp_0, arg1 = null) -> null
+        else -> tmp_0.<get-value>()
+      }
+    }
+  }
+
+  fun pushLoop(value: T) {
+    loop<Node<T>?>(/* <this> = <this>.<get-top>(), */ action = local fun <anonymous>(cur: Node<T>?) {
+      val upd: Node<T> = Node<T>(value = value, next = cur)
+      when {
+        <this>.<get-top>().compareAndSet(expect = cur, update = upd) -> return Unit
+      }
+    }
+)
+  }
+
+  fun pushUpdate(value: T) {
+    update<Node<T>?>(/* <this> = <this>.<get-top>(), */ function = local fun <anonymous>(cur: Node<T>?): Node<T>? {
+      return Node<T>(value = value, next = cur)
+    }
+)
+  }
+
+}
+
+class LockFreeStackTest {
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun testClear() {
+    val s: LockFreeStack<String> = LockFreeStack<String>()
+    assertTrue(actual = s.isEmpty())
+    s.pushLoop(value = "A")
+    assertTrue(actual = s.isEmpty().not())
+    s.clear()
+    assertTrue(actual = s.isEmpty())
+  }
+
+  fun testPushPopLoop() {
+    val s: LockFreeStack<String> = LockFreeStack<String>()
+    assertTrue(actual = s.isEmpty())
+    s.pushLoop(value = "A")
+    assertTrue(actual = s.isEmpty().not())
+    assertEquals<String?>(expected = "A", actual = s.popLoop())
+    assertTrue(actual = s.isEmpty())
+  }
+
+  fun testPushPopUpdate() {
+    val s: LockFreeStack<String> = LockFreeStack<String>()
+    assertTrue(actual = s.isEmpty())
+    s.pushUpdate(value = "A")
+    assertTrue(actual = s.isEmpty().not())
+    assertEquals<String?>(expected = "A", actual = s.popUpdate())
+    assertTrue(actual = s.isEmpty())
+  }
+
+}
+
+fun box(): String {
+  val testClass: LockFreeStackTest = LockFreeStackTest()
+  testClass.testClear()
+  testClass.testPushPopLoop()
+  testClass.testPushPopUpdate()
+  return "OK"
+}

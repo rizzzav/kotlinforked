@@ -1,0 +1,185 @@
+class BooleanArithmetic {
+  private val _x: AtomicBoolean
+    field = atomic(initial = false)
+    private get
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun testBoolean() {
+    assertEquals<Boolean>(expected = false, actual = <this>.<get-_x>().<get-value>())
+    assertFalse(actual = <this>.<get-x>())
+    <this>.<get-_x>().lazySet(value = true)
+    assertTrue(actual = <this>.<get-x>())
+    assertTrue(actual = <this>.<get-_x>().getAndSet(value = true))
+    assertTrue(actual = <this>.<get-_x>().compareAndSet(expect = true, update = false))
+    assertFalse(actual = <this>.<get-x>())
+  }
+
+  val x: Boolean
+    get(): Boolean {
+      return <this>.<get-_x>().<get-value>()
+    }
+
+}
+
+class IntArithmetic {
+  private val _x: AtomicInt
+    field = atomic(initial = 0)
+    private get
+
+  private val local: AtomicInt
+    field = atomic(initial = 0)
+    private get
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun test() {
+    <this>.testGetValue()
+    <this>.testAtomicCallPlaces()
+    <this>.testInt()
+  }
+
+  private fun testAtomicCallPlaces() {
+    <this>.<get-_x>().<set-value>(value = 5)
+    <this>.<get-_x>().compareAndSet(expect = 5, update = 42) /*~> Unit */
+    val res: Boolean = <this>.<get-_x>().compareAndSet(expect = 42, update = 45)
+    assertTrue(actual = res)
+    assertTrue(actual = <this>.<get-_x>().compareAndSet(expect = 45, update = 77))
+    assertFalse(actual = <this>.<get-_x>().compareAndSet(expect = 95, update = 77))
+    assertTrue(actual = <this>.<get-_x>().compareAndSet(expect = 77, update = 88))
+  }
+
+  private fun testGetValue() {
+    <this>.<get-_x>().<set-value>(value = 5)
+    assertEquals<Int>(expected = 5, actual = <this>.<get-_x>().<get-value>())
+    var aValue: Int = <this>.<get-_x>().<get-value>()
+    assertEquals<Int>(expected = 5, actual = aValue)
+    assertEquals<Int>(expected = 5, actual = <this>.<get-x>())
+    <this>.<get-local>().<set-value>(value = 555)
+    aValue = <this>.<get-local>().<get-value>()
+    assertEquals<Int>(expected = aValue, actual = <this>.<get-local>().<get-value>())
+  }
+
+  private fun testInt() {
+    <this>.<get-_x>().<set-value>(value = 0)
+    assertEquals<Int>(expected = 0, actual = <this>.<get-x>())
+    val update: Int = 3
+    assertEquals<Int>(expected = 0, actual = <this>.<get-_x>().getAndSet(value = update))
+    assertTrue(actual = <this>.<get-_x>().compareAndSet(expect = update, update = 8))
+    <this>.<get-_x>().lazySet(value = 1)
+    assertEquals<Int>(expected = 1, actual = <this>.<get-x>())
+    assertEquals<Int>(expected = 1, actual = <this>.<get-_x>().getAndSet(value = 2))
+    assertEquals<Int>(expected = 2, actual = <this>.<get-x>())
+    assertEquals<Int>(expected = 2, actual = <this>.<get-_x>().getAndIncrement())
+    assertEquals<Int>(expected = 3, actual = <this>.<get-x>())
+    assertEquals<Int>(expected = 3, actual = <this>.<get-_x>().getAndDecrement())
+    assertEquals<Int>(expected = 2, actual = <this>.<get-x>())
+    assertEquals<Int>(expected = 2, actual = <this>.<get-_x>().getAndAdd(delta = 2))
+    assertEquals<Int>(expected = 4, actual = <this>.<get-x>())
+    assertEquals<Int>(expected = 7, actual = <this>.<get-_x>().addAndGet(delta = 3))
+    assertEquals<Int>(expected = 7, actual = <this>.<get-x>())
+    assertEquals<Int>(expected = 8, actual = <this>.<get-_x>().incrementAndGet())
+    assertEquals<Int>(expected = 8, actual = <this>.<get-x>())
+    assertEquals<Int>(expected = 7, actual = <this>.<get-_x>().decrementAndGet())
+    assertEquals<Int>(expected = 7, actual = <this>.<get-x>())
+    assertTrue(actual = <this>.<get-_x>().compareAndSet(expect = 7, update = 10))
+  }
+
+  val x: Int
+    get(): Int {
+      return <this>.<get-_x>().<get-value>()
+    }
+
+}
+
+class LongArithmetic {
+  private val _x: AtomicLong
+    field = atomic(initial = 4294967296L)
+    private get
+
+  private val y: AtomicLong
+    field = atomic(initial = 5000000000L)
+    private get
+
+  private val z: AtomicLong
+    field = atomic(initial = 2424920024888888848L)
+    private get
+
+  private val max: AtomicLong
+    field = atomic(initial = 9223372036854775807L)
+    private get
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun testLong() {
+    assertEquals<Long>(expected = 2424920024888888848L, actual = <this>.<get-z>().<get-value>())
+    <this>.<get-z>().lazySet(value = 8424920024888888848L)
+    assertEquals<Long>(expected = 8424920024888888848L, actual = <this>.<get-z>().<get-value>())
+    assertEquals<Long>(expected = 8424920024888888848L, actual = <this>.<get-z>().getAndSet(value = 8924920024888888848L))
+    assertEquals<Long>(expected = 8924920024888888848L, actual = <this>.<get-z>().<get-value>())
+    assertEquals<Long>(expected = 8924920024888888849L, actual = <this>.<get-z>().incrementAndGet())
+    assertEquals<Long>(expected = 8924920024888888849L, actual = <this>.<get-z>().<get-value>())
+    assertEquals<Long>(expected = 8924920024888888849L, actual = <this>.<get-z>().getAndDecrement())
+    assertEquals<Long>(expected = 8924920024888888848L, actual = <this>.<get-z>().<get-value>())
+    assertEquals<Long>(expected = 8924920024888888848L, actual = <this>.<get-z>().getAndAdd(delta = 100000000000000000L))
+    assertEquals<Long>(expected = 9024920024888888848L, actual = <this>.<get-z>().<get-value>())
+    assertEquals<Long>(expected = -198452011965886959L, actual = <this>.<get-z>().addAndGet(delta = -9223372036854775807L))
+    assertEquals<Long>(expected = -198452011965886959L, actual = <this>.<get-z>().<get-value>())
+    assertEquals<Long>(expected = -198452011965886958L, actual = <this>.<get-z>().incrementAndGet())
+    assertEquals<Long>(expected = -198452011965886958L, actual = <this>.<get-z>().<get-value>())
+    assertEquals<Long>(expected = -198452011965886959L, actual = <this>.<get-z>().decrementAndGet())
+    assertEquals<Long>(expected = -198452011965886959L, actual = <this>.<get-z>().<get-value>())
+  }
+
+  val x: Long
+    get(): Long {
+      return <this>.<get-_x>().<get-value>()
+    }
+
+}
+
+class ReferenceArithmetic {
+  private val _x: AtomicRef<String?>
+    field = atomic<String?>(initial = null)
+    private get
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun testReference() {
+    <this>.<get-_x>().<set-value>(value = "aaa")
+    assertEquals<String?>(expected = "aaa", actual = <this>.<get-_x>().<get-value>())
+    <this>.<get-_x>().lazySet(value = "bb")
+    assertEquals<String?>(expected = "bb", actual = <this>.<get-_x>().<get-value>())
+    assertEquals<String?>(expected = "bb", actual = <this>.<get-_x>().getAndSet(value = "ccc"))
+    assertEquals<String?>(expected = "ccc", actual = <this>.<get-_x>().<get-value>())
+  }
+
+}
+
+fun box(): String {
+  val intClass: IntArithmetic = IntArithmetic()
+  intClass.test()
+  val longClass: LongArithmetic = LongArithmetic()
+  longClass.testLong()
+  val booleanClass: BooleanArithmetic = BooleanArithmetic()
+  booleanClass.testBoolean()
+  val refClass: ReferenceArithmetic = ReferenceArithmetic()
+  refClass.testReference()
+  return "OK"
+}

@@ -1,0 +1,208 @@
+class TraceTest {
+  private val defaultTrace: TraceBase
+    field = Trace()
+    private get
+
+  private val a1: AtomicInt
+    field = atomic(initial = 5, trace = <this>.<get-defaultTrace>())
+    private get
+
+  private val traceWithSize: TraceBase
+    field = Trace(size = 30)
+    private get
+
+  private val a2: AtomicInt
+    field = atomic(initial = 1, trace = <this>.<get-traceWithSize>())
+    private get
+
+  private val traceWithFormat: TraceBase
+    field = Trace(format = TraceFormat(format = local fun <anonymous>(i: Int, text: Any): String {
+      return "[" + i + ": " + text + "]"
+    }
+))
+    private get
+
+  private val a: AtomicInt
+    field = atomic(initial = 0, trace = <this>.<get-traceWithFormat>())
+    private get
+
+  private val traceWithSizeAndFormat: TraceBase
+    field = Trace(size = 30, format = TraceFormat(format = local fun <anonymous>(id: Int, text: Any): String {
+      return id + ": " + text
+    }
+))
+    private get
+
+  private val a3: AtomicInt
+    field = atomic(initial = 2)
+    private get
+
+  private val shortTrace: TraceBase
+    field = Trace(size = 4)
+    private get
+
+  private val s: AtomicInt
+    field = atomic(initial = 0, trace = named(/* <this> = <this>.<get-shortTrace>(), */ name = "s"))
+    private get
+
+  private enum class Status : Enum<Status> {
+    START = Status()
+
+    END = Status()
+
+    private constructor() /* primary */ {
+      super/*Enum*/<Status>()
+      /* <init>() */
+
+    }
+
+    /* static */ fun valueOf(value: String): Status /* Synthetic body for ENUM_VALUEOF */
+
+    /* static */ fun values(): Array<Status> /* Synthetic body for ENUM_VALUES */
+
+    /* static */ val entries: EnumEntries<Status>
+      get(): EnumEntries<Status> /* Synthetic body for ENUM_ENTRIES */
+
+  }
+
+  constructor() /* primary */ {
+    super/*Any*/()
+    /* <init>() */
+
+  }
+
+  fun test() {
+    <this>.testDefaultTrace()
+    <this>.testTraceWithSize()
+    <this>.testTraceWithFormat()
+    <this>.testNamedTrace()
+    <this>.testMultipleAppend()
+    <this>.testTraceInBlock()
+  }
+
+  fun testDefaultTrace() {
+    val oldValue: Int = <this>.<get-a1>().<get-value>()
+    <this>.<get-defaultTrace>().invoke(event = local fun <anonymous>(): Any {
+      return "before CAS value = " + oldValue
+    }
+)
+    val res: Boolean = <this>.<get-a1>().compareAndSet(expect = oldValue, update = oldValue.times(other = 10))
+    val newValue: Int = <this>.<get-a1>().<get-value>()
+    <this>.<get-defaultTrace>().invoke(event = local fun <anonymous>(): Any {
+      return "after CAS value = " + newValue
+    }
+)
+  }
+
+  fun testMultipleAppend() {
+    val i: Int = 1
+    <this>.<get-traceWithFormat>().append(event1 = i, event2 = Status.START)
+    assertEquals<Int>(expected = 0, actual = <this>.<get-a>().<get-value>())
+    <this>.<get-a>().incrementAndGet() /*~> Unit */
+    <this>.<get-traceWithFormat>().append(event1 = i, event2 = <this>.<get-a>().<get-value>(), event3 = "incAndGet")
+    assertEquals<Int>(expected = 1, actual = <this>.<get-a>().<get-value>())
+    <this>.<get-a>().lazySet(value = 10)
+    <this>.<get-traceWithFormat>().append(event1 = i, event2 = <this>.<get-a>().<get-value>(), event3 = "lazySet")
+    assertEquals<Int>(expected = 10, actual = <this>.<get-a>().<get-value>())
+    <this>.<get-traceWithFormat>().append(event1 = i, event2 = Status.END)
+  }
+
+  fun testNamedTrace() {
+    <this>.<get-s>().<set-value>(value = 5)
+    <this>.<get-shortTrace>().invoke(event = local fun <anonymous>(): Any {
+      return "before CAS value = " + <this>.<get-s>().<get-value>()
+    }
+)
+    <this>.<get-s>().compareAndSet(expect = 5, update = -2) /*~> Unit */
+    assertEquals<Int>(expected = -2, actual = <this>.<get-s>().<get-value>())
+    <this>.<get-shortTrace>().invoke(event = local fun <anonymous>(): Any {
+      return "after CAS value = " + <this>.<get-s>().<get-value>()
+    }
+)
+  }
+
+  fun testTraceInBlock() {
+    <this>.<get-a1>().lazySet(value = 5)
+    when {
+      EQEQ(arg0 = <this>.<get-a1>().<get-value>(), arg1 = 5) -> { // BLOCK
+        <this>.<get-defaultTrace>().invoke(event = local fun <anonymous>(): Any {
+          return "Value checked"
+        }
+)
+        when {
+          <this>.<get-a1>().compareAndSet(expect = 5, update = 10) -> { // BLOCK
+            <this>.<get-defaultTrace>().invoke(event = local fun <anonymous>(): Any {
+              return "CAS succeeded"
+            }
+)
+          }
+        }
+      }
+    }
+    assertEquals<Int>(expected = 10, actual = <this>.<get-a1>().<get-value>())
+    while (true) { // BLOCK
+      when {
+        EQEQ(arg0 = <this>.<get-a1>().<get-value>(), arg1 = 10) -> { // BLOCK
+          <this>.<get-defaultTrace>().append(event1 = "Value checked", event2 = <this>.<get-a1>().<get-value>())
+          <this>.<get-a1>().<set-value>(value = 15)
+          break
+        }
+        else -> { // BLOCK
+          <this>.<get-defaultTrace>().append(event1 = "Wrong value", event2 = <this>.<get-a1>().<get-value>())
+        }
+      }
+    }
+  }
+
+  fun testTraceWithFormat() {
+    val oldValue: Int = <this>.<get-a3>().<get-value>()
+    <this>.<get-traceWithFormat>().invoke(event = local fun <anonymous>(): Any {
+      return "before CAS value = " + oldValue
+    }
+)
+    assertTrue(actual = <this>.<get-a3>().compareAndSet(expect = oldValue, update = oldValue.times(other = 10)))
+    <this>.<get-traceWithFormat>().invoke(event = local fun <anonymous>(): Any {
+      return "after CAS value = " + <this>.<get-a3>().<get-value>()
+    }
+)
+    <this>.<get-traceWithFormat>().invoke(event = local fun <anonymous>(): Any {
+      return "before getAndDecrement value = " + <this>.<get-a3>().<get-value>()
+    }
+)
+    <this>.<get-a3>().getAndDecrement() /*~> Unit */
+    assertEquals<Int>(expected = 19, actual = <this>.<get-a3>().<get-value>())
+    <this>.<get-traceWithFormat>().invoke(event = local fun <anonymous>(): Any {
+      return "after getAndDecrement value = " + <this>.<get-a3>().<get-value>()
+    }
+)
+  }
+
+  fun testTraceWithSize() {
+    val oldValue: Int = <this>.<get-a2>().<get-value>()
+    <this>.<get-traceWithSize>().invoke(event = local fun <anonymous>(): Any {
+      return "before CAS value = " + oldValue
+    }
+)
+    assertTrue(actual = <this>.<get-a2>().compareAndSet(expect = oldValue, update = oldValue.times(other = 10)))
+    <this>.<get-traceWithSize>().invoke(event = local fun <anonymous>(): Any {
+      return "after CAS value = " + <this>.<get-a2>().<get-value>()
+    }
+)
+    <this>.<get-traceWithSize>().invoke(event = local fun <anonymous>(): Any {
+      return "before getAndDecrement value = " + <this>.<get-a2>().<get-value>()
+    }
+)
+    <this>.<get-a2>().getAndDecrement() /*~> Unit */
+    assertEquals<Int>(expected = 9, actual = <this>.<get-a2>().<get-value>())
+    <this>.<get-traceWithSize>().invoke(event = local fun <anonymous>(): Any {
+      return "after getAndDecrement value = " + <this>.<get-a2>().<get-value>()
+    }
+)
+  }
+
+}
+
+fun box(): String {
+  TraceTest().test()
+  return "OK"
+}

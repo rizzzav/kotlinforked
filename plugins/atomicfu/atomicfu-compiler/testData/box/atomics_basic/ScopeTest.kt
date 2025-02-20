@@ -1,3 +1,4 @@
+// FIR_IDENTICAL
 import kotlinx.atomicfu.*
 import kotlin.test.*
 
