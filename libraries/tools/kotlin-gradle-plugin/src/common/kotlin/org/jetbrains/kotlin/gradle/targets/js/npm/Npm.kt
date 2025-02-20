@@ -73,7 +73,6 @@ class Npm internal constructor(
         cliArgs: List<String>,
     ) {
         npmExec(
-//            services = services,
             logger = logger,
             nodeJs = nodeJs,
             environment = packageManagerEnvironment,
@@ -83,8 +82,32 @@ class Npm internal constructor(
         )
     }
 
+    @Deprecated(
+        "Updated to remove ServiceRegistry. Scheduled for removal in Kotlin 2.4.",
+        ReplaceWith("npmExec(logger, nodeJs, environment, dir, description, args)"),
+    )
+    @Suppress("unused")
+    fun yarnExec(
+        @Suppress("UNUSED_PARAMETER")
+        services: ServiceRegistry,
+        logger: Logger,
+        nodeJs: NodeJsEnvironment,
+        environment: NpmEnvironment,
+        dir: Provider<File>,
+        description: String,
+        args: List<String>,
+    ) {
+        npmExec(
+            logger = logger,
+            nodeJs = nodeJs,
+            environment = environment,
+            dir = dir,
+            description = description,
+            args = args,
+        )
+    }
+
     fun npmExec(
-//        services: ServiceRegistry,
         logger: Logger,
         nodeJs: NodeJsEnvironment,
         environment: NpmEnvironment,

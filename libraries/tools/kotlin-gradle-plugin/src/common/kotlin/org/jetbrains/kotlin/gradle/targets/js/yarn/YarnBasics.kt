@@ -23,7 +23,7 @@ abstract class YarnBasics internal constructor(
 ) : NpmApiExecution<YarnEnvironment> {
 
     @Deprecated(
-        "Updated to remove ServiceRegistry.",
+        "Updated to remove ServiceRegistry. Scheduled for removal in Kotlin 2.4.",
         ReplaceWith("yarnExec(logger, nodeJs, yarn, dir, description, args)")
     )
     @Suppress("unused")

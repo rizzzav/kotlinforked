@@ -40,7 +40,8 @@ interface KotlinJsTestFramework : RequiresNpmDependencies {
     companion object {
 
         internal const val CREATE_TEST_EXEC_SPEC_DEPRECATION_MSG =
-            "Replaced with a new method that uses ProcessLaunchOptions instead of Gradle's ProcessForkOptions."
+            "Replaced with a new method that uses ProcessLaunchOptions instead of Gradle's ProcessForkOptions. " +
+                    "Scheduled for removal in Kotlin 2.4."
 
         /**
          * Adapter for the deprecated [KotlinJsTestFramework.createTestExecutionSpec].
