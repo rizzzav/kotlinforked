@@ -18,11 +18,7 @@ internal class ProblemsReporterG88 @Inject constructor(
     private val reporter by lazy { problems.forNamespace("org.jetbrains.kotlin.gradle.plugin") }
 
     override fun reportProblemDiagnostic(diagnostic: ToolingDiagnostic) {
-        if (diagnostic.throwable != null) {
-            reporter.throwing { fillSpec(it, diagnostic) }
-        } else {
-            reporter.reporting { fillSpec(it, diagnostic) }
-        }
+        reporter.report(diagnostic) { fillSpec(it, diagnostic) }
     }
 
     private fun fillSpec(spec: ProblemSpec, diagnostic: ToolingDiagnostic): ProblemSpec {
