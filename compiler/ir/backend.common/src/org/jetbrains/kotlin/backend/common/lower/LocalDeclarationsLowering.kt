@@ -798,6 +798,7 @@ open class LocalDeclarationsLowering(
                     newDeclaration,
                     type = localFunctionContext.remapType(param.type),
                     varargElementType = param.varargElementType?.let { localFunctionContext.remapType(it) },
+                    kind = IrParameterKind.Regular,
                 ).also {
                     newParameterToOld.putAbsentOrSame(it, param)
                 }
@@ -828,11 +829,8 @@ open class LocalDeclarationsLowering(
                 }
             }
 
-            return if (transformedParameters.any { it.kind == IrParameterKind.ExtensionReceiver }) {
-                transformedParameters.take(1) + parametersForCapturedValues + transformedParameters.drop(1)
-            } else {
-                parametersForCapturedValues + transformedParameters
-            }
+            val (extensionReceiver, nonExtensionParameters) = transformedParameters.partition { it.kind == IrParameterKind.ExtensionReceiver }
+            return extensionReceiver + parametersForCapturedValues + nonExtensionParameters
         }
 
         private fun IrFunction.recordTransformedValueParameters(localContext: LocalContextWithClosureAsParameters) {
