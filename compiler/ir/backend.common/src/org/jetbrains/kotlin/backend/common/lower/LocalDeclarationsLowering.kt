@@ -798,7 +798,7 @@ open class LocalDeclarationsLowering(
                     newDeclaration,
                     type = localFunctionContext.remapType(param.type),
                     varargElementType = param.varargElementType?.let { localFunctionContext.remapType(it) },
-                    kind = IrParameterKind.Regular,
+                    kind = if (param.kind == IrParameterKind.ExtensionReceiver) param.kind else IrParameterKind.Regular,
                 ).also {
                     newParameterToOld.putAbsentOrSame(it, param)
                 }
