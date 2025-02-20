@@ -99,23 +99,12 @@ open class NpmProject(@Transient val compilation: KotlinJsIrCompilation) : Seria
         exec: ExecSpec,
         tool: String,
         nodeArgs: List<String> = listOf(),
-        args: List<String>,
+        args: List<String>
     ) {
         exec.workingDir(dir)
         exec.executable(nodeExecutable)
         exec.args = nodeArgs + require(tool) + args
     }
-
-//    internal fun useTool(
-//        execHandleBuilder: ExecHandleBuilder,
-//        tool: String,
-//        nodeArgs: List<String> = listOf(),
-//        args: List<String>,
-//    ) {
-//        execHandleBuilder.launchOpts.workingDir.set(dir)
-//        execHandleBuilder.launchOpts.executable.set(nodeExecutable)
-//        execHandleBuilder.setArguments(nodeArgs + require(tool) + args)
-//    }
 
     /**
      * Require [request] nodejs module and return canonical path to it's main js file.
