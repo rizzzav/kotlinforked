@@ -3793,8 +3793,7 @@ public final class org/jetbrains/kotlin/gradle/targets/js/npm/NodeJsEnvironment 
 }
 
 public final class org/jetbrains/kotlin/gradle/targets/js/npm/Npm : org/jetbrains/kotlin/gradle/targets/js/npm/NpmApiExecution {
-	public final fun npmExec (Lorg/gradle/internal/service/ServiceRegistry;Lorg/gradle/api/logging/Logger;Lorg/jetbrains/kotlin/gradle/targets/js/npm/NodeJsEnvironment;Lorg/jetbrains/kotlin/gradle/targets/js/npm/NpmEnvironment;Ljava/io/File;Ljava/lang/String;Ljava/util/List;)V
-	public final fun npmExec (Lorg/gradle/internal/service/ServiceRegistry;Lorg/gradle/api/logging/Logger;Lorg/jetbrains/kotlin/gradle/targets/js/npm/NodeJsEnvironment;Lorg/jetbrains/kotlin/gradle/targets/js/npm/NpmEnvironment;Lorg/gradle/api/provider/Provider;Ljava/lang/String;Ljava/util/List;)V
+	public final fun npmExec (Lorg/gradle/api/logging/Logger;Lorg/jetbrains/kotlin/gradle/targets/js/npm/NodeJsEnvironment;Lorg/jetbrains/kotlin/gradle/targets/js/npm/NpmEnvironment;Lorg/gradle/api/provider/Provider;Ljava/lang/String;Ljava/util/List;)V
 	public synthetic fun prepareRootProject (Lorg/jetbrains/kotlin/gradle/targets/js/npm/NodeJsEnvironment;Lorg/jetbrains/kotlin/gradle/targets/js/nodejs/PackageManagerEnvironment;Ljava/lang/String;Ljava/lang/String;Ljava/util/Collection;)V
 	public fun prepareRootProject (Lorg/jetbrains/kotlin/gradle/targets/js/npm/NodeJsEnvironment;Lorg/jetbrains/kotlin/gradle/targets/js/npm/NpmEnvironment;Ljava/lang/String;Ljava/lang/String;Ljava/util/Collection;)V
 	public fun preparedFiles (Lorg/jetbrains/kotlin/gradle/targets/js/npm/NodeJsEnvironment;)Ljava/util/Collection;
@@ -4755,7 +4754,6 @@ public final class org/jetbrains/kotlin/gradle/targets/js/webpack/Infrastructure
 }
 
 public abstract class org/jetbrains/kotlin/gradle/targets/js/webpack/KotlinWebpack : org/gradle/api/DefaultTask, org/jetbrains/kotlin/gradle/report/UsesBuildMetricsService, org/jetbrains/kotlin/gradle/targets/js/dsl/WebpackRulesDsl, org/jetbrains/kotlin/gradle/targets/js/npm/RequiresNpmDependencies {
-	public fun <init> (Lorg/jetbrains/kotlin/gradle/targets/js/ir/KotlinJsIrCompilation;Lorg/gradle/api/model/ObjectFactory;)V
 	public fun cssSupport (Lorg/gradle/api/Action;)V
 	public final fun doExecute ()V
 	public final fun getArgs ()Ljava/util/List;
@@ -5140,6 +5138,7 @@ public final class org/jetbrains/kotlin/gradle/targets/js/yarn/Yarn : org/jetbra
 }
 
 public abstract class org/jetbrains/kotlin/gradle/targets/js/yarn/YarnBasics : org/jetbrains/kotlin/gradle/targets/js/npm/NpmApiExecution {
+	public final fun yarnExec (Lorg/gradle/api/logging/Logger;Lorg/jetbrains/kotlin/gradle/targets/js/npm/NodeJsEnvironment;Lorg/jetbrains/kotlin/gradle/targets/js/yarn/YarnEnvironment;Ljava/io/File;Ljava/lang/String;Ljava/util/List;)V
 	public final fun yarnExec (Lorg/gradle/internal/service/ServiceRegistry;Lorg/gradle/api/logging/Logger;Lorg/jetbrains/kotlin/gradle/targets/js/npm/NodeJsEnvironment;Lorg/jetbrains/kotlin/gradle/targets/js/yarn/YarnEnvironment;Ljava/io/File;Ljava/lang/String;Ljava/util/List;)V
 }
 
