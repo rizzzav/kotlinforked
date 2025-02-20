@@ -338,11 +338,10 @@ constructor(
     ) : DeploymentHandle {
         private var process: ExecAsyncHandle? = null
 
-//        private var thread: Thread? = null
-
         private val logger = Logging.getLogger(Handle::class.java)
 
-        override fun isRunning(): Boolean = process?.isAlive() == true
+        override fun isRunning(): Boolean =
+            process?.isAlive() == true
 
         override fun start(deployment: Deployment) {
             process = runner.start()
@@ -351,8 +350,6 @@ constructor(
 
         override fun stop() {
             process?.abort()
-//            process?.interrupt()
-//            process?.join()
             logger.info("[$taskPath] webpack-dev-server stopped ${process?.displayName}")
         }
     }
