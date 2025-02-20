@@ -1295,20 +1295,26 @@ private class InteropTransformerPart2(
 
     private class StaticFunctionArgument(val function: IrFunction, val defined: Boolean)
 
-    private fun unwrapStaticFunctionArgument(argument: IrExpression): StaticFunctionArgument? {
-        if (argument is IrFunctionReference) {
+    private fun unwrapStaticFunctionArgument(argument: IrExpression) = when (argument) {
+        is IrFunctionReference -> {
             require(argument.arguments.all { it == null }) {
                 renderCompilerError(argument, "Interop static function argument should not capture any values")
             }
-            return StaticFunctionArgument(argument.symbol.owner, defined = false)
+            StaticFunctionArgument(argument.symbol.owner, defined = false)
         }
-
-        if (argument !is IrFunctionExpression)
-            return null
-        if (argument.origin != IrStatementOrigin.LAMBDA && argument.origin != IrStatementOrigin.ANONYMOUS_FUNCTION)
-            return null
-        argument.function.transform(this, null)
-        return StaticFunctionArgument(argument.function, defined = true)
+        is IrRichFunctionReference -> {
+            argument.invokeFunction.transform(this, null)
+            StaticFunctionArgument(argument.invokeFunction, defined = true)
+        }
+        is IrFunctionExpression -> {
+            if (argument.origin != IrStatementOrigin.LAMBDA && argument.origin != IrStatementOrigin.ANONYMOUS_FUNCTION)
+                null
+            else {
+                argument.function.transform(this, null)
+                StaticFunctionArgument(argument.function, defined = true)
+            }
+        }
+        else -> null
     }
 
     val IrValueParameter.isDispatchReceiver: Boolean
