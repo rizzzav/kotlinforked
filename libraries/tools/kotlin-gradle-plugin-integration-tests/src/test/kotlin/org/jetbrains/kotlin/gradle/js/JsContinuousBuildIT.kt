@@ -80,8 +80,10 @@ class JsContinuousBuildIT : KGPDaemonsBaseTest() {
 
             build(
                 "jsBrowserDevelopmentRun",
-                "--continuous",
-                buildOptions = defaultBuildOptions.copy(verboseVfsLogging = true),
+                buildOptions = defaultBuildOptions.copy(
+                    verboseVfsLogging = true,
+                    continuousBuild = true,
+                ),
                 inputStream = daemonStdin,
             ) {
                 // trigger the Gradle build kill-switch
@@ -99,43 +101,27 @@ class JsContinuousBuildIT : KGPDaemonsBaseTest() {
                     """.trimMargin()
                 )
 
-                // verify yarn dependency resolution starts and stops successfully
-                assertEquals(
-                    // language=text
-                    """
-                    |[ExecHandle Resolving NPM dependencies using yarn] Changing state from Starting to Started
-                    |[ExecHandle Resolving NPM dependencies using yarn] Started. Waiting until streams are handled...
-                    |[ExecHandle Resolving NPM dependencies using yarn] Starting process 'Resolving NPM dependencies using yarn'.
-                    |[ExecHandle Resolving NPM dependencies using yarn] Changing state from Initial to Starting
-                    |[ExecHandle Resolving NPM dependencies using yarn] Waiting until process started
-                    |[ExecHandle Resolving NPM dependencies using yarn] Successfully started process
-                    |[ExecHandle Resolving NPM dependencies using yarn] Changing state from Started to Succeeded
-                    |[ExecHandle Resolving NPM dependencies using yarn] finished with exit value 0 (state: Succeeded)
-                    """.trimMargin(),
-                    output.filterLinesStartingWith("[ExecHandle Resolving NPM dependencies using yarn]"),
-                )
+                // verify yarn dependency resolution can run
+                assertTasksExecuted(":kotlinStoreYarnLock")
+
+                // verify there's no error in
+                assertOutputDoesNotContain("Exception in thread")
 
                 // Verify webpack starts and is aborted.
-                // (Webpack is launched using DeploymentHandle and runs continuously, so Gradle will always abort it.)
+                // (Webpack is launched using DeploymentHandle and runs continuously until Gradle stops the handle.)
                 assertEquals(
                     // language=text
                     """
-                    |[ExecHandle webpack webpack/bin/webpack.js jsmain] Changing state from Starting to Started
-                    |[ExecHandle webpack webpack/bin/webpack.js jsmain] Started. Waiting until streams are handled...
-                    |[ExecHandle webpack webpack/bin/webpack.js jsmain] Starting process 'webpack webpack/bin/webpack.js jsmain'.
-                    |[ExecHandle webpack webpack/bin/webpack.js jsmain] Changing state from Initial to Starting
-                    |[ExecHandle webpack webpack/bin/webpack.js jsmain] Waiting until process started
-                    |[ExecHandle webpack webpack/bin/webpack.js jsmain] Successfully started process
-                    |[ExecHandle webpack webpack/bin/webpack.js jsmain] Abort requested. Destroying process.
-                    |[ExecHandle webpack webpack/bin/webpack.js jsmain] Changing state from Started to Aborted
-                    |[ExecHandle webpack webpack/bin/webpack.js jsmain] finished with exit value ? (state: Aborted)
+                    |[ExecAsyncHandle webpack webpack/bin/webpack.js jsmain] started
+                    |[ExecAsyncHandle webpack webpack/bin/webpack.js jsmain] finished {exitValue=?, failure=null}
+                    |[ExecAsyncHandle webpack webpack/bin/webpack.js jsmain] aborted
                     """.trimMargin(),
                     output
-                        .filterLinesStartingWith("[ExecHandle webpack webpack/bin/webpack.js jsmain]")
+                        .filterLinesStartingWith("[ExecAsyncHandle webpack webpack/bin/webpack.js jsmain]")
                         // For some reason webpack doesn't close with a consistent exit code.
                         // We don't really care about the exit code, only that it _does_ exit.
                         // So, replace the exit code with a '?' to make the assertion stable.
-                        .replace(Regex("finished with exit value -?\\d+ "), "finished with exit value ? "),
+                        .replace(Regex("\\{exitValue=-?\\d+"), "\\{exitValue=?"),
                 )
 
                 // verify the DeploymentHandle that manages webpack starts and stops successfully
