@@ -19,11 +19,12 @@ internal fun execWithProgress(
     execOps: ExecOperations,
     configureExec: (execSpec: ExecSpec) -> Unit,
 ): ExecResult {
-    val stdout = StringBuilder()
-    val stdInPipe = PipedInputStream()
-
     return logger.operation(description) {
         this.progress(description)
+
+        val stdout = StringBuilder()
+        val stdInPipe = PipedInputStream()
+        val stdOutPipe = PipedOutputStream(stdInPipe)
 
         val outputReaderThread = createOutputReaderThread(
             description = description,
@@ -33,12 +34,14 @@ internal fun execWithProgress(
         )
 
         val result = execOps.exec { exec ->
-            exec.standardOutput = PipedOutputStream(stdInPipe)
+            exec.standardOutput = stdOutPipe
             exec.isIgnoreExitValue = true
             configureExec(exec)
         }
 
         outputReaderThread.join()
+
+        result.rethrowFailure()
 
         if (result.exitValue != 0) {
             error(
@@ -67,7 +70,7 @@ internal fun execWithProgress(
  * Sometimes cli tools use the backspace char modify the console to do things like display progress bars.
  * We want to forward the logs to the Gradle console, so remove backspace chars to prevent disrupting the Gradle logs.
  *
- * The captured output will be returned
+ * All stdout will be appended to [stdout].
  */
 private fun createOutputReaderThread(
     description: String,
