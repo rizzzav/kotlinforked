@@ -75,7 +75,7 @@ internal class SirProtocolFromKtSymbol(
  *
  * @property targetProtocol Protocol declaration this extension belongs to.
  */
-public class SirBridgedProtocolImplementationFromKtSymbol(
+internal class SirBridgedProtocolImplementationFromKtSymbol(
     override val ktSymbol: KaNamedClassSymbol,
     override val ktModule: KaModule,
     override val sirSession: SirSession,

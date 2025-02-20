@@ -14,7 +14,6 @@ import org.jetbrains.kotlin.sir.providers.source.kaSymbolOrNull
 import org.jetbrains.kotlin.sir.providers.utils.isAbstract
 import org.jetbrains.kotlin.sir.util.*
 import org.jetbrains.kotlin.utils.addIfNotNull
-import org.jetbrains.sir.lightclasses.nodes.SirBridgedProtocolImplementationFromKtSymbol
 
 internal fun SirFunction.constructFunctionBridgeRequests(generator: BridgeGenerator): List<FunctionBridgeRequest> {
     val fqName = kaSymbolOrNull<KaFunctionSymbol>()
@@ -92,7 +91,7 @@ private fun SirCallable.patchCallableBodyAndGenerateRequest(
         return null
     if (allParameters.any { it.type.isNever })
         return null // If any of the parameters is never - there should be no ability to call this function - therefor we can skip the bridge generation
-    if (parent is SirBridgedProtocolImplementationFromKtSymbol) {
+    if (parent is SirProtocol) {
         return null
     }
     val suffix = bridgeSuffix
