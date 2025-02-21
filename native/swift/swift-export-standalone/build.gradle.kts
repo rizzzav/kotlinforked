@@ -23,7 +23,6 @@ dependencies {
     implementation(project(":analysis:analysis-api-standalone"))
 
     implementation(project(":native:analysis-api-klib-reader"))
-    implementation(project(":native:analysis-api-based-export-common"))
 
     testApi(platform(libs.junit.bom))
     testRuntimeOnly(libs.junit.jupiter.engine)
