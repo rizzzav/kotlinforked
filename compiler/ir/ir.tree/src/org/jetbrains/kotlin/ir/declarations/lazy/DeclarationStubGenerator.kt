@@ -33,7 +33,7 @@ abstract class DeclarationStubGenerator(
     val irBuiltIns: IrBuiltIns,
     val extensions: StubGeneratorExtensions = StubGeneratorExtensions.Companion.EMPTY,
 ) : IrProvider {
-    protected val lazyTable = symbolTable.lazyWrapper
+    protected val lazyTable = IrLazySymbolTable(symbolTable)
 
     val lock: IrLock
         get() = symbolTable.lock
