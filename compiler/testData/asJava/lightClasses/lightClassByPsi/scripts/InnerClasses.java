@@ -6,7 +6,7 @@ public final class InnerClasses /* InnerClasses*/ extends kotlin.script.template
   class Bar ...
 }
 
-public static final class Bar /* InnerClasses.Bar*/ {
+public final class Bar /* InnerClasses.Bar*/ {
   private final int a;
 
   private final int b;

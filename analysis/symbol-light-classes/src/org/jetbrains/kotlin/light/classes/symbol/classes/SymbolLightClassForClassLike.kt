@@ -62,9 +62,7 @@ internal abstract class SymbolLightClassForClassLike<SType : KaClassSymbol> prot
     internal inline fun <T> withClassSymbol(crossinline action: KaSession.(SType) -> T): T =
         classSymbolPointer.withSymbol(ktModule, action)
 
-    override val isTopLevel: Boolean by lazyPub {
-        classOrObjectDeclaration?.isTopLevel() ?: withClassSymbol { it.isTopLevel }
-    }
+    override val isTopLevel: Boolean get() = withClassSymbol { it.isTopLevel }
 
     private val _isDeprecated: Boolean by lazyPub {
         withClassSymbol { it.hasDeprecatedAnnotation() }
