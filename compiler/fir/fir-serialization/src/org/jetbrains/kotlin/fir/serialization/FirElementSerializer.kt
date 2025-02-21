@@ -1547,7 +1547,7 @@ class FirElementSerializer private constructor(
         }
     }
 
-    private inline fun <M : GeneratedMessageLite.ExtendableMessage<M>, B : GeneratedMessageLite.Builder<M, B>> B.serializeCompilerPluginMetadata(
+    private inline fun <M : GeneratedMessageLite.ExtendableMessage<M, B>, B : GeneratedMessageLite.Builder<M, B>> B.serializeCompilerPluginMetadata(
         declaration: FirDeclaration,
         addCompilerPluginData: B.(ProtoBuf.CompilerPluginData.Builder) -> B
     ) {
