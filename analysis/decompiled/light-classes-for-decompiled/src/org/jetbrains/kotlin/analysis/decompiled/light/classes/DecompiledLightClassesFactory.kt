@@ -160,12 +160,21 @@ object DecompiledLightClassesFactory {
             override fun isPhysical() = false
         }
         javaFileStub.psi = fakeFile
-        val customizationService = ApplicationManager.getApplication().getService(DecompiledClassCustomization::class.java)
+        val customizationService = DecompiledClassCustomization.getInstance()
         customizationService?.customizeFakeClsFile(fakeFile, mirrorFile)
         return fakeFile.classes.single() as ClsClassImpl
     }
 }
 
+/**
+ * IntelliJ needs to set up additional properties for the fake file to power shared source support.
+ */
 interface DecompiledClassCustomization {
     fun customizeFakeClsFile(fakeFile: ClsFileImpl, originalKtFile: KtFile)
+
+    companion object {
+        @JvmStatic
+        fun getInstance(): DecompiledClassCustomization? =
+            ApplicationManager.getApplication().getService(DecompiledClassCustomization::class.java)
+    }
 }
