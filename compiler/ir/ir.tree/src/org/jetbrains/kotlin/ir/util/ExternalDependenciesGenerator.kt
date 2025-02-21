@@ -16,7 +16,7 @@
 package org.jetbrains.kotlin.ir.util
 
 import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
-import org.jetbrains.kotlin.ir.declarations.lazy.DeclarationStubGenerator
+//import org.jetbrains.kotlin.ir.declarations.lazy.DeclarationStubGenerator
 import org.jetbrains.kotlin.ir.linkage.IrProvider
 import org.jetbrains.kotlin.ir.symbols.IrSymbol
 
@@ -27,7 +27,7 @@ class ExternalDependenciesGenerator(
     @OptIn(ObsoleteDescriptorBasedAPI::class)
     fun generateUnboundSymbolsAsDependencies() {
         // There should be at most one DeclarationStubGenerator (none in closed world?)
-        irProviders.filterIsInstance<DeclarationStubGenerator>().singleOrNull()?.run { unboundSymbolGeneration = true }
+//        irProviders.filterIsInstance<DeclarationStubGenerator>().singleOrNull()?.run { unboundSymbolGeneration = true }
 
         // Deserializing a reference may lead to new unbound references, so we loop until none are left.
         var unbound = emptySet<IrSymbol>()
