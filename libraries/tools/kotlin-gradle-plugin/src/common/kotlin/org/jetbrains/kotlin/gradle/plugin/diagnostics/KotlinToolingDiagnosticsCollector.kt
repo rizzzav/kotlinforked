@@ -42,9 +42,6 @@ internal abstract class KotlinToolingDiagnosticsCollector : BuildService<BuildSe
         if (reportedIds.add(key) || !reportOnce) {
             handleDiagnostic(project, diagnostic)
         }
-
-//        val problems = parameters.problemsReporter
-//        problems.reportProblemDiagnostic(diagnostic)
     }
 
     fun report(
@@ -69,9 +66,6 @@ internal abstract class KotlinToolingDiagnosticsCollector : BuildService<BuildSe
                 renderReportedDiagnostic(diagnostic, logger, options)
             }
         }
-
-//        val problems = parameters.problemsReporter
-//        problems.reportProblemDiagnostic(diagnostic)
     }
 
     fun switchToTransparentMode() {
@@ -83,6 +77,7 @@ internal abstract class KotlinToolingDiagnosticsCollector : BuildService<BuildSe
         if (diagnostic.isSuppressed(options)) return
 
         if (isTransparent) {
+            project.problemsReporter.reportProblemDiagnostic(diagnostic)
             renderReportedDiagnostic(diagnostic, project.logger, options)
             return
         }

@@ -5,6 +5,7 @@
 
 package org.jetbrains.kotlin.gradle.plugin.diagnostics
 
+import org.gradle.api.InvalidUserCodeException
 import org.gradle.api.Project
 import org.gradle.api.problems.*
 import org.gradle.api.problems.internal.DefaultProblemGroup
@@ -72,7 +73,7 @@ internal fun ToolingDiagnostic.configureProblemSpec(spec: ProblemSpec): ProblemS
     }
 
     throwable?.let {
-        mSpec = mSpec.withException(RuntimeException(it))
+        mSpec = mSpec.withException(InvalidUserCodeException(identifier.displayName, it))
     }
 
     return mSpec
