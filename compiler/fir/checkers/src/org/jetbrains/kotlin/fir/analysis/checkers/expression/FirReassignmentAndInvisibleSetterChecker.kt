@@ -146,8 +146,8 @@ object FirReassignmentAndInvisibleSetterChecker : FirVariableAssignmentChecker(M
             && property.requiresInitialization(isForInitialization = false)
         ) return
         if (
-            isInOwnersInitializer(expression.dispatchReceiver?.unwrapSmartcastExpression(), property, context)
-            && property.requiresInitialization(isForInitialization = true)
+            property.requiresInitialization(isForInitialization = true)
+            && isInOwnersInitializer(expression.dispatchReceiver?.unwrapSmartcastExpression(), property, context)
         ) return
 
         reporter.reportOn(expression.lValue.source, FirErrors.VAL_REASSIGNMENT, property, context)
