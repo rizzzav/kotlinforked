@@ -653,6 +653,7 @@ open class CommonizerIT : KGPBaseTest() {
 
     @DisplayName("KT-74442: commonization of non-platform CInterop should work only for suppoted targets")
     @TestMetadata("emptyKts")
+    @OsCondition(enabledOnCI = [OS.LINUX, OS.WINDOWS, OS.MAC])
     @GradleTest
     fun testCommonizationOfNonPlatformShouldWorkOnlyForSupportedTargets(gradleVersion: GradleVersion) {
         nativeProject("emptyKts", gradleVersion) {
@@ -701,26 +702,51 @@ open class CommonizerIT : KGPBaseTest() {
                 """.trimMargin()
             )
 
+            if (HostManager.hostIsMac) {
+                // It is expected to not fail here because non-platform cinterop now work only for supported targets.
+                // The behavior of these checks must change when KT-74073 is done.
+                buildAndFail(
+                    ":compileNativeMainKotlinMetadata",
+                    buildOptions = defaultBuildOptions.copy(
+                        nativeOptions = defaultBuildOptions.nativeOptions.copy(
+                            enableKlibsCrossCompilation = false
+                        )
+                    )
+                ) {
+                    assertOutputContains("Unresolved reference 'linux_only_api'")
+                }
 
-            // It is expected to not fail here because non-platform cinterop now work only for supported targets.
-            // The behavior of these checks must change when KT-74073 is done.
-            build(
-                ":compileNativeMainKotlinMetadata",
-                buildOptions = defaultBuildOptions.copy(
-                    nativeOptions = defaultBuildOptions.nativeOptions.copy(
-                        enableKlibsCrossCompilation = false
+                buildAndFail(
+                    ":compileNativeMainKotlinMetadata",
+                    buildOptions = defaultBuildOptions.copy(
+                        nativeOptions = defaultBuildOptions.nativeOptions.copy(
+                            enableKlibsCrossCompilation = true
+                        )
+                    )
+                ) {
+                    assertOutputContains("Unresolved reference 'linux_only_api'")
+                }
+            } else {
+                // It is expected to not fail here because non-platform cinterop now work only for supported targets.
+                // The behavior of these checks must change when KT-74073 is done.
+                build(
+                    ":compileNativeMainKotlinMetadata",
+                    buildOptions = defaultBuildOptions.copy(
+                        nativeOptions = defaultBuildOptions.nativeOptions.copy(
+                            enableKlibsCrossCompilation = false
+                        )
                     )
                 )
-            )
 
-            build(
-                ":compileNativeMainKotlinMetadata",
-                buildOptions = defaultBuildOptions.copy(
-                    nativeOptions = defaultBuildOptions.nativeOptions.copy(
-                        enableKlibsCrossCompilation = true
+                build(
+                    ":compileNativeMainKotlinMetadata",
+                    buildOptions = defaultBuildOptions.copy(
+                        nativeOptions = defaultBuildOptions.nativeOptions.copy(
+                            enableKlibsCrossCompilation = true
+                        )
                     )
                 )
-            )
+            }
         }
     }
 
