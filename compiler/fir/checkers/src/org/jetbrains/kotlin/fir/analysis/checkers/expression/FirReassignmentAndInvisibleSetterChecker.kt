@@ -169,6 +169,10 @@ object FirReassignmentAndInvisibleSetterChecker : FirVariableAssignmentChecker(M
 
     private fun isInOwnersInitializer(receiver: FirExpression?, property: FirPropertySymbol, context: CheckerContext): Boolean {
         val uninitializedThisSymbol = (receiver as? FirThisReceiverExpression)?.calleeReference?.boundSymbol ?: return false
+
+        // For a property substitution override, while they may be considered in their owner's initializer, they do not require
+        // initialization. The `requiresInitialization(isForInitialization = true)` check correctly handles this case since substitution
+        // overrides never have backing fields.
         if (uninitializedThisSymbol != property.getContainingSymbol(context.session)) return false
 
         val containingDeclarations = context.containingDeclarations
