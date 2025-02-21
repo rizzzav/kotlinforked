@@ -1231,7 +1231,11 @@ open class FirDeclarationsResolveTransformer(
                     !resolvedLambdaAtom.coerceFirstParameterToExtensionReceiver
                 }?.let { coneKotlinType ->
                     lambda.receiverParameter?.apply {
-                        replaceTypeRef(typeRef.resolvedTypeFromPrototype(coneKotlinType))
+                        replaceTypeRef(
+                            typeRef.resolvedTypeFromPrototype(
+                                coneKotlinType, fallbackSource = lambda.source?.fakeElement(KtFakeSourceElementKind.LambdaContextParameter)
+                            )
+                        )
                     }
                 })
 
@@ -1473,7 +1477,7 @@ open class FirDeclarationsResolveTransformer(
         val inferredType = if (backingField is FirDefaultPropertyBackingField) {
             (data as? ResolutionMode.WithExpectedType)?.expectedTypeRef
         } else {
-            backingField.initializer?.unwrapSmartcastExpression()?.resolvedType?.toFirResolvedTypeRef()
+            backingField.initializer?.unwrapSmartcastExpression()?.resolvedType?.toFirResolvedTypeRef(source = backingField.source)
         }
         val resultType = inferredType
             ?: return backingField.transformReturnTypeRef(
@@ -1484,10 +1488,11 @@ open class FirDeclarationsResolveTransformer(
                             "Cannot infer variable type without an initializer",
                             DiagnosticKind.InferenceError,
                         )
+                        source = backingField.source
                     },
                 )
             )
-        val expectedType = resultType.toExpectedTypeRef()
+        val expectedType = resultType.toExpectedTypeRef(fallbackSource = backingField.source)
         return backingField.transformReturnTypeRef(
             transformer,
             withExpectedType(
@@ -1514,7 +1519,7 @@ open class FirDeclarationsResolveTransformer(
                 transformer,
                 withExpectedType(
                     resultType?.let {
-                        val expectedType = it.toExpectedTypeRef()
+                        val expectedType = it.toExpectedTypeRef(fallbackSource = variable.source)
                         expectedType.approximateDeclarationType(session, variable.visibilityForApproximation(), variable.isLocal)
                     } ?: buildErrorTypeRef {
                         diagnostic = ConeLocalVariableNoTypeOrInitializer(variable)
@@ -1535,21 +1540,25 @@ open class FirDeclarationsResolveTransformer(
             else -> false
         }
 
-    private fun FirTypeRef.toExpectedTypeRef(): FirResolvedTypeRef {
+    private fun FirTypeRef.toExpectedTypeRef(fallbackSource: KtSourceElement?): FirResolvedTypeRef {
+        val typeRefSource = (this@toExpectedTypeRef.source ?: fallbackSource)?.fakeElement(KtFakeSourceElementKind.ImplicitTypeRef)
         return when (this) {
-            is FirImplicitTypeRef -> buildErrorTypeRef {
-                diagnostic = ConeSimpleDiagnostic("No result type for initializer", DiagnosticKind.InferenceError)
-                annotations.addAll(this@toExpectedTypeRef.annotations)
+            is FirImplicitTypeRef -> {
+                buildErrorTypeRef {
+                    diagnostic = ConeSimpleDiagnostic("No result type for initializer", DiagnosticKind.InferenceError)
+                    source = typeRefSource
+                    annotations.addAll(this@toExpectedTypeRef.annotations)
+                }
             }
             is FirErrorTypeRef -> buildErrorTypeRef {
                 diagnostic = this@toExpectedTypeRef.diagnostic
-                source = this@toExpectedTypeRef.source?.fakeElement(KtFakeSourceElementKind.ImplicitTypeRef)
+                source = typeRefSource
                 annotations.addAll(this@toExpectedTypeRef.annotations)
             }
             else -> {
                 buildResolvedTypeRef {
                     coneType = this@toExpectedTypeRef.coneType
-                    source = this@toExpectedTypeRef.source?.fakeElement(KtFakeSourceElementKind.ImplicitTypeRef)
+                    source = typeRefSource
                     annotations.addAll(this@toExpectedTypeRef.annotations)
                 }
             }

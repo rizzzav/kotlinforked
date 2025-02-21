@@ -351,7 +351,7 @@ fun FirTypeRef.withReplacedConeType(
     return withReplacedSourceAndType(newSource, newType)
 }
 
-internal fun FirResolvedTypeRef.withReplacedSourceAndType(newSource: KtSourceElement?, newType: ConeKotlinType): FirResolvedTypeRef {
+fun FirResolvedTypeRef.withReplacedSourceAndType(newSource: KtSourceElement?, newType: ConeKotlinType): FirResolvedTypeRef {
     return when {
         newType is ConeErrorType -> {
             buildErrorTypeRef {

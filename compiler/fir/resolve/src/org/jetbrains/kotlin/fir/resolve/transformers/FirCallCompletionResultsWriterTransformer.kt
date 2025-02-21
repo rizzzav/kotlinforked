@@ -1040,7 +1040,7 @@ class FirCallCompletionResultsWriterTransformer(
                 data: Any?,
             ): FirTypeRef =
                 buildErrorTypeRef {
-                    source = implicitTypeRef.source
+                    source = anonymousFunction.source?.fakeElement(KtFakeSourceElementKind.ImplicitTypeRef)
                     // NB: this error message assumes that it is used only if CFG for the anonymous function is not available
                     diagnostic = ConeSimpleDiagnostic("Cannot infer type w/o CFG", DiagnosticKind.InferenceError)
                 }

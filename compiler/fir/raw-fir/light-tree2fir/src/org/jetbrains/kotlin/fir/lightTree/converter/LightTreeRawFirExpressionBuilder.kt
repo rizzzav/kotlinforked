@@ -1055,7 +1055,10 @@ class LightTreeRawFirExpressionBuilder(
         val result = buildTypeOperatorCall {
             source = whenCondition.toFirSourceElement()
             operation = firOperation
-            conversionTypeRef = firType ?: buildErrorTypeRef { diagnostic = ConeSyntaxDiagnostic("Incomplete code") }
+            conversionTypeRef = firType ?: buildErrorTypeRef {
+                diagnostic = ConeSyntaxDiagnostic("Incomplete code")
+                source = whenCondition.toFirSourceElement()
+            }
             argumentList = buildUnaryArgumentList(subjectExpression)
         }
 
