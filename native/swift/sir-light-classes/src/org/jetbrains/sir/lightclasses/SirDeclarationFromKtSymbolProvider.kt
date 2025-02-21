@@ -31,10 +31,7 @@ public class SirDeclarationFromKtSymbolProvider(
                     SirTranslationResult.RegularInterface(
                         declaration = protocol,
                         bridgedImplementation = SirBridgedProtocolImplementationFromKtSymbol(
-                            ktSymbol = ktSymbol,
-                            ktModule = ktModule,
-                            sirSession = sirSession,
-                            targetProtocol = protocol,
+                            protocol = protocol,
                         )
                     )
                 } else {

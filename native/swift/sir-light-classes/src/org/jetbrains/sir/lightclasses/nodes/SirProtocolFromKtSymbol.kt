@@ -79,8 +79,10 @@ internal class SirBridgedProtocolImplementationFromKtSymbol(
     override val ktSymbol: KaNamedClassSymbol,
     override val ktModule: KaModule,
     override val sirSession: SirSession,
-    public val targetProtocol: SirProtocol,
+    val targetProtocol: SirProtocol,
 ) : SirExtension(), SirFromKtSymbol<KaNamedClassSymbol> {
+    constructor(protocol: SirProtocolFromKtSymbol) : this(protocol.ktSymbol, protocol.ktModule, protocol.sirSession, protocol)
+
     override val origin: SirOrigin = KotlinSource(ktSymbol)
 
     override val visibility: SirVisibility = SirVisibility.PUBLIC
