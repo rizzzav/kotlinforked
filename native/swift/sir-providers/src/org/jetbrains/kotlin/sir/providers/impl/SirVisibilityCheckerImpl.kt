@@ -28,7 +28,7 @@ public class SirVisibilityCheckerImpl(
 
         val isHidden = ktSymbol.deprecatedAnnotation?.level == DeprecationLevel.HIDDEN
 
-        val isConsumable = isPublic() && when (ktSymbol) {
+        val isExported = isPublic() && when (ktSymbol) {
             is KaNamedClassSymbol -> {
                 ktSymbol.isExported(ktAnalysisSession) && !ktSymbol.hasHiddenAncestors(ktAnalysisSession)
             }
@@ -53,7 +53,7 @@ public class SirVisibilityCheckerImpl(
             else -> false
         }
 
-        return if (isConsumable && !isHidden) SirVisibility.PUBLIC else SirVisibility.PRIVATE
+        return if (isExported && !isHidden) SirVisibility.PUBLIC else SirVisibility.PRIVATE
     }
 
     private fun KaNamedFunctionSymbol.isExported(parent: KaClassSymbol?): Boolean {
