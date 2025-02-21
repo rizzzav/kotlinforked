@@ -11,6 +11,7 @@ import org.jetbrains.kotlin.builtins.functions.FunctionClassDescriptor
 import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.incremental.components.NoLookupLocation
 import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
+import org.jetbrains.kotlin.ir.UNDEFINED_OFFSET
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrPropertySymbol
@@ -32,6 +33,7 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyExternal
 import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.Variance
+import org.jetbrains.kotlin.util.OperatorNameConventions
 import org.jetbrains.kotlin.utils.filterIsInstanceAnd
 import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
@@ -308,10 +310,10 @@ class IrDescriptorBasedFunctionFactory(
                 }
 
                 irFactory.createSimpleFunction(
-                    startOffset = offset,
-                    endOffset = offset,
-                    origin = memberOrigin,
-                    name = Name.identifier("invoke"),
+                    startOffset = UNDEFINED_OFFSET,
+                    endOffset = UNDEFINED_OFFSET,
+                    origin = IrDeclarationOrigin.DEFINED,
+                    name = OperatorNameConventions.INVOKE,
                     visibility = DescriptorVisibilities.PUBLIC,
                     isInline = false,
                     isExpect = false,
