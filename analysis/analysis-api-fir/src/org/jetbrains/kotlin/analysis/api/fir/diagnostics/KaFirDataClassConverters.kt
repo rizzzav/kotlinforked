@@ -4565,7 +4565,6 @@ internal val KT_DIAGNOSTIC_CONVERTER = KaDiagnosticConverterBuilder.buildConvert
     }
     add(FirErrors.RETURN_VALUE_NOT_USED) { firDiagnostic ->
         ReturnValueNotUsedImpl(
-            firDiagnostic.a,
             firDiagnostic as KtPsiDiagnostic,
             token,
         )

@@ -60,7 +60,6 @@ object FirUnusedReturnValueChecker : FirUnusedCheckerBase() {
         reporter.reportOn(
             expression.source,
             FirErrors.RETURN_VALUE_NOT_USED,
-            resolvedSymbol?.callableId?.toString() ?: "<${expression.render()}>",
             context
         )
         return true
