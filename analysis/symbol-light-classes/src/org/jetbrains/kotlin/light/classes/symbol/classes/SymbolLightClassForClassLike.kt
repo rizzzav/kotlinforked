@@ -145,12 +145,7 @@ internal abstract class SymbolLightClassForClassLike<SType : KaClassSymbol> prot
 
     override val originKind: LightClassOriginKind get() = LightClassOriginKind.SOURCE
 
-    override fun getQualifiedName(): String? {
-        val classOrObjectFqName = classOrObjectDeclaration?.fqName
-            ?: withClassSymbol { s -> s.classId?.asSingleFqName() }
-
-        return classOrObjectFqName?.toString()
-    }
+    override fun getQualifiedName(): String? = withClassSymbol { it.classId?.asFqNameString() }
 
     override fun getInterfaces(): Array<PsiClass> = PsiClassImplUtil.getInterfaces(this)
     override fun getSuperClass(): PsiClass? = PsiClassImplUtil.getSuperClass(this)

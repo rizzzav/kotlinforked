@@ -1,12 +1,4 @@
-public final class InnerClasses /* InnerClasses*/ extends kotlin.script.templates.standard.ScriptTemplateWithArgs {
-  public  InnerClasses(java.lang.String[]);//  .ctor(java.lang.String[])
-
-  public static final void main(java.lang.String[]);//  main(java.lang.String[])
-
-  class Bar ...
-}
-
-public final class Bar /* InnerClasses.Bar*/ {
+public final class Bar /* Bar*/ {
   private final int a;
 
   private final int b;
@@ -22,8 +14,16 @@ public final class Bar /* InnerClasses.Bar*/ {
   class Baz ...
 }
 
-public static final class Baz /* InnerClasses.Bar.Baz*/ {
+public static final class Baz /* Bar.Baz*/ {
   public  Baz();//  .ctor()
 
   public final void doSomething();//  doSomething()
+}
+
+public final class InnerClasses /* InnerClasses*/ extends kotlin.script.templates.standard.ScriptTemplateWithArgs {
+  public  InnerClasses(java.lang.String[]);//  .ctor(java.lang.String[])
+
+  public static final void main(java.lang.String[]);//  main(java.lang.String[])
+
+  class Bar ...
 }
