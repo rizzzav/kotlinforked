@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.gradle.plugin.diagnostics
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.utils.newInstance
 
-internal class ProblemsReporterG80 : ProblemsReporter {
+internal abstract class ProblemsReporterG80 : ProblemsReporter {
     override fun reportProblemDiagnostic(diagnostic: ToolingDiagnostic) {
         // no-op
     }

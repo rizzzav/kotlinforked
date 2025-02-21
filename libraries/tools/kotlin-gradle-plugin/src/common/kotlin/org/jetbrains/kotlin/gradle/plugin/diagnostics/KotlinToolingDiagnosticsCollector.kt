@@ -18,11 +18,7 @@ import java.util.concurrent.ConcurrentHashMap
 private typealias ToolingDiagnosticId = String
 private typealias GradleProjectPath = String
 
-internal interface KotlinToolingDiagnosticsCollectorParameters : BuildServiceParameters {
-    val problemsReporter: Property<ProblemsReporter>
-}
-
-internal abstract class KotlinToolingDiagnosticsCollector : BuildService<KotlinToolingDiagnosticsCollectorParameters> {
+internal abstract class KotlinToolingDiagnosticsCollector : BuildService<BuildServiceParameters.None> {
     /**
      * When collector is in transparent mode, any diagnostics received will be immediately rendered
      * instead of collected
@@ -47,8 +43,8 @@ internal abstract class KotlinToolingDiagnosticsCollector : BuildService<KotlinT
             handleDiagnostic(project, diagnostic)
         }
 
-        val problems = parameters.problemsReporter.get()
-        problems.reportProblemDiagnostic(diagnostic)
+//        val problems = parameters.problemsReporter
+//        problems.reportProblemDiagnostic(diagnostic)
     }
 
     fun report(
@@ -74,8 +70,8 @@ internal abstract class KotlinToolingDiagnosticsCollector : BuildService<KotlinT
             }
         }
 
-        val problems = parameters.problemsReporter.get()
-        problems.reportProblemDiagnostic(diagnostic)
+//        val problems = parameters.problemsReporter
+//        problems.reportProblemDiagnostic(diagnostic)
     }
 
     fun switchToTransparentMode() {
@@ -102,9 +98,7 @@ internal abstract class KotlinToolingDiagnosticsCollector : BuildService<KotlinT
 }
 
 internal val Project.kotlinToolingDiagnosticsCollectorProvider: Provider<KotlinToolingDiagnosticsCollector>
-    get() = gradle.registerClassLoaderScopedBuildService(KotlinToolingDiagnosticsCollector::class) {
-        it.parameters.problemsReporter.set(problemsReporter)
-    }
+    get() = gradle.registerClassLoaderScopedBuildService(KotlinToolingDiagnosticsCollector::class)
 
 internal val Project.kotlinToolingDiagnosticsCollector: KotlinToolingDiagnosticsCollector
     get() = kotlinToolingDiagnosticsCollectorProvider.get()

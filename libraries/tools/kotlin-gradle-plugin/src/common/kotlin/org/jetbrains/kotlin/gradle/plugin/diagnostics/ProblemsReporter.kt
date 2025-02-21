@@ -29,7 +29,7 @@ internal fun ProblemReporter.report(diagnostic: ToolingDiagnostic, fillSpec: (Pr
     }
 }
 
-internal class DefaultProblemsReporter @Inject constructor(
+internal abstract class DefaultProblemsReporter @Inject constructor(
     private val problems: Problems,
 ) : ProblemsReporter {
     override fun reportProblemDiagnostic(diagnostic: ToolingDiagnostic) {

@@ -11,7 +11,7 @@ import org.gradle.api.problems.Problems
 import org.jetbrains.kotlin.gradle.utils.newInstance
 import javax.inject.Inject
 
-internal class ProblemsReporterG86 @Inject constructor(
+internal abstract class ProblemsReporterG86 @Inject constructor(
     private val problems: Problems,
 ) : ProblemsReporter {
 
