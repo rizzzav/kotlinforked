@@ -298,8 +298,8 @@ abstract class AbstractAtomicfuIrBuilder(
         val receiversCount = if (isInstanceProperty && classReceiver == null) 1 else 0
         val kPropertyClass = irBuiltIns.getKPropertyClass(property.isVar, receiversCount).owner
         val substitutionMap = mutableMapOf<IrTypeParameterSymbol, IrType>()
-        if (classReceiver != null)
-            substitutionMap[kPropertyClass.typeParameters[0].symbol] = classReceiver.type
+        if (receiversCount == 1)
+            substitutionMap[kPropertyClass.typeParameters[0].symbol] = property.parentAsClass.defaultType
         substitutionMap[kPropertyClass.typeParameters.last().symbol] = backingField.type
         return IrPropertyReferenceImpl(
             UNDEFINED_OFFSET, UNDEFINED_OFFSET,
