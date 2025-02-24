@@ -176,17 +176,17 @@ private abstract class BaseInteropIrTransformer(
     override fun visitFunctionReference(expression: IrFunctionReference): IrExpression {
         expression.transformChildrenVoid()
 
-        val boundArguments = expression.arguments.filterNotNull()
         val callee = expression.symbol.owner
-        val functionType = expression.type as? IrSimpleType ?: error("Expected an IrSimpleType: ${expression.type.render()}")
-        val expectedTypeArgumentsSize = callee.parameters.size - boundArguments.size + 1
-        check(functionType.arguments.size == expectedTypeArgumentsSize) {
-            "Expected $expectedTypeArgumentsSize arguments: ${functionType.render()}"
+        val functionType = expression.type as? IrSimpleType
+        var indexInTypeArguments = 0
+        val parameterTypes = callee.parameters.mapIndexed { index, parameter ->
+            expression.arguments[index]?.type
+            // Circumvent bugs in compiler plugins (function reference types might be wrong).
+                    ?: functionType?.arguments?.getOrNull(indexInTypeArguments++)?.typeOrNull
+                    ?: parameter.type.erasedUpperBound.defaultType
         }
-        val parameterTypes = boundArguments.map { it.type } + functionType.arguments.dropLast(1).mapIndexed { index, typeArgument ->
-            typeArgument.typeOrNull ?: callee.parameters[index + boundArguments.size].type.erasedUpperBound.defaultType
-        }
-        val returnType = functionType.arguments.last().typeOrNull ?: callee.returnType.erasedUpperBound.defaultType
+        val returnType = functionType?.arguments?.getOrNull(indexInTypeArguments)?.typeOrNull
+                ?: callee.returnType.erasedUpperBound.defaultType
 
         builder.at(expression)
         val trampoline = tryBuildTrampoline(callee, parameterTypes, returnType, expression)
@@ -205,24 +205,18 @@ private abstract class BaseInteropIrTransformer(
     override fun visitPropertyReference(expression: IrPropertyReference): IrExpression {
         expression.transformChildrenVoid()
 
-        val boundArguments = expression.arguments.filterNotNull()
         val getter = expression.getter?.owner
         val setter = expression.setter?.owner
-        val setterParametersSize = getter?.parameters?.size?.plus(1) // fun receiver.<get-prop>(): R
-                ?: setter?.parameters?.size // fun receiver.<set-prop>(value: R): Unit
-                ?: return expression // No accessors - nothing to change.
-        val functionType = expression.type as? IrSimpleType ?: error("Expected an IrSimpleType: ${expression.type.render()}")
-        val expectedTypeArgumentsSize = setterParametersSize - boundArguments.size
-        check(functionType.arguments.size == expectedTypeArgumentsSize) {
-            "Expected $expectedTypeArgumentsSize arguments: ${functionType.render()}"
+        val calleeParameters = getter?.parameters ?: setter!!.parameters // No accessors - nothing to change.
+        val functionType = expression.type as? IrSimpleType
+        var indexInTypeArguments = 0
+        val parameterTypes = calleeParameters.mapIndexed { index, parameter ->
+            expression.arguments[index]?.type
+            // Circumvent bugs in compiler plugins (property types might be wrong).
+                    ?: functionType?.arguments?.getOrNull(indexInTypeArguments++)?.typeOrNull
+                    ?: parameter.type.erasedUpperBound.defaultType
         }
-        val calleeParameters = getter?.parameters ?: setter!!.parameters
-        val parameterTypes = boundArguments.map { it.type } + functionType.arguments
-                .dropLast(1)
-                .mapIndexed { index, typeArgument ->
-                    typeArgument.typeOrNull ?: calleeParameters[index + boundArguments.size].type.erasedUpperBound.defaultType
-                }
-        val propertyType = functionType.arguments.last().typeOrNull
+        val propertyType = functionType?.arguments?.getOrNull(indexInTypeArguments)?.typeOrNull
                 ?: (getter?.returnType ?: setter!!.parameters.last().type).erasedUpperBound.defaultType
 
         builder.at(expression)
