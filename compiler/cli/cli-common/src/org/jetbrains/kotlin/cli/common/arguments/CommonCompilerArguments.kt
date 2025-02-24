@@ -832,8 +832,11 @@ The corresponding calls' declarations may not be marked with @BuilderInference."
 
     @Argument(
         value = "-Xwarning-level",
-        valueDescription = "<WARNING_NAME>:(error|warning|disable)",
-        description = "Set the severity of the given warning."
+        valueDescription = "<WARNING_NAME>:(error|warning|disabled)",
+        description = """Set the severity of the given warning.
+- `error` level raises the severity of a warning to error level (similar to -Werror but more granular)
+- `disabled` level suppresses reporting of a warning (similar to -nowarn but more granular)
+- `warning` level overrides -nowarn and -Werror for this specific warning (the warning will be reported/won't be considered as an error)"""
     )
     var warningLevels: Array<String>? = null
         set(value) {
